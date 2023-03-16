@@ -22,10 +22,27 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
+        Me.Graafik1 = New GraafikControl.Graafik()
+        Me.SuspendLayout()
+        '
+        'Graafik1
+        '
+        Me.Graafik1.Location = New System.Drawing.Point(0, 243)
+        Me.Graafik1.Name = "Graafik1"
+        Me.Graafik1.Size = New System.Drawing.Size(797, 310)
+        Me.Graafik1.TabIndex = 0
+        '
+        'Form1
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(800, 548)
+        Me.Controls.Add(Me.Graafik1)
+        Me.Name = "Form1"
         Me.Text = "Form1"
+        Me.ResumeLayout(False)
+
     End Sub
 
+    Friend WithEvents Graafik1 As GraafikControl.Graafik
 End Class

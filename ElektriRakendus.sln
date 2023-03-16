@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ElektriRakendus", "ElektriRakendus\ElektriRakendus.vbproj", "{ABDEA896-3C52-419E-A769-E829D22ED393}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "GraafikControl", "GraafikControl\GraafikControl.vbproj", "{775C52B3-03C0-4D8F-A6C2-3D4B9301E579}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{ABDEA896-3C52-419E-A769-E829D22ED393}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABDEA896-3C52-419E-A769-E829D22ED393}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABDEA896-3C52-419E-A769-E829D22ED393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{775C52B3-03C0-4D8F-A6C2-3D4B9301E579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{775C52B3-03C0-4D8F-A6C2-3D4B9301E579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{775C52B3-03C0-4D8F-A6C2-3D4B9301E579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{775C52B3-03C0-4D8F-A6C2-3D4B9301E579}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
