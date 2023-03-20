@@ -10,7 +10,4 @@
         HinnaGraafik.Series("Pakett 2").Points.AddXY(Time, hind)
     End Sub
 
-    'Public Sub Init_Chart()
-    '    HinnaGraafik.ChartArea
-    'End Sub
 End Class

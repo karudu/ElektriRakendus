@@ -32,7 +32,12 @@ Partial Class Graafik
         '
         'HinnaGraafik
         '
+        ChartArea1.AxisX.Interval = 1.0R
+        ChartArea1.AxisX.IsMarginVisible = False
+        ChartArea1.BackColor = System.Drawing.Color.White
+        ChartArea1.BackSecondaryColor = System.Drawing.Color.White
         ChartArea1.Name = "ChartArea1"
+        ChartArea1.ShadowColor = System.Drawing.Color.White
         Me.HinnaGraafik.ChartAreas.Add(ChartArea1)
         Me.HinnaGraafik.Cursor = System.Windows.Forms.Cursors.Arrow
         Legend1.Name = "Legend1"
@@ -47,6 +52,7 @@ Partial Class Graafik
         Series1.IsXValueIndexed = True
         Series1.Legend = "Legend1"
         Series1.Name = "Pakett 1"
+        Series1.YValuesPerPoint = 2
         Series2.BorderWidth = 3
         Series2.ChartArea = "ChartArea1"
         Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine
@@ -56,7 +62,7 @@ Partial Class Graafik
         Series2.Name = "Pakett 2"
         Me.HinnaGraafik.Series.Add(Series1)
         Me.HinnaGraafik.Series.Add(Series2)
-        Me.HinnaGraafik.Size = New System.Drawing.Size(797, 309)
+        Me.HinnaGraafik.Size = New System.Drawing.Size(1277, 360)
         Me.HinnaGraafik.TabIndex = 0
         Me.HinnaGraafik.Text = "Chart1"
         '
@@ -66,7 +72,7 @@ Partial Class Graafik
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.HinnaGraafik)
         Me.Name = "Graafik"
-        Me.Size = New System.Drawing.Size(800, 312)
+        Me.Size = New System.Drawing.Size(1280, 360)
         CType(Me.HinnaGraafik, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

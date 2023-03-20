@@ -8,7 +8,7 @@ Public Class CGraafikInfo
         Dim EndTime = CurrTime.AddDays(-1)
         Dim RandInt As Random = New Random
         For Index = 0 To 24
-            Info(Index, 0) = CurrTime.AddHours(-Index).ToShortTimeString
+            Info(Index, 0) = CurrTime.AddHours(-Index).ToString("t")
             Info(Index, 1) = RandInt.Next(30, 130).ToString
         Next
         Return Info
@@ -18,6 +18,11 @@ Public Class CGraafikInfo
         Dim Info(30, 1) As String
         Dim CurrTime As Date = DateTime.Now()
         Dim EndTime = CurrTime.AddMonths(-1)
+        Dim RandInt As Random = New Random
+        For Index = 0 To 30
+            Info(Index, 0) = CurrTime.AddDays(-Index).ToString("M")
+            Info(Index, 1) = RandInt.Next(30, 130).ToString
+        Next
         Return Info
     End Function
 
@@ -25,6 +30,11 @@ Public Class CGraafikInfo
         Dim Info(12, 1) As String
         Dim CurrTime As Date = DateTime.Now()
         Dim EndTime = CurrTime.AddYears(-1)
+        Dim RandInt As Random = New Random
+        For Index = 0 To 12
+            Info(Index, 0) = CurrTime.AddMonths(-Index).ToString("MMM")
+            Info(Index, 1) = RandInt.Next(30, 130).ToString
+        Next
         Return Info
     End Function
 End Class
