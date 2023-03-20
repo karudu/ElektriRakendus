@@ -49,9 +49,9 @@ Public Class CAndmebaas
                                        "VALUES (@p1, @p2, @p3, @p4);"
 
                     .Parameters.Add(New OleDbParameter("@p1", OleDbType.VarChar, 255)).Value = Nimi
-                    .Parameters.Add(New OleDbParameter("@p2", OleDbType.Decimal)).Value = PTariif
-                    .Parameters.Add(New OleDbParameter("@p3", OleDbType.Decimal)).Value = OTariif
-                    .Parameters.Add(New OleDbParameter("@p4", OleDbType.Decimal)).Value = Kuutasu
+                    .Parameters.Add(New OleDbParameter("@p2", OleDbType.Currency)).Value = PTariif
+                    .Parameters.Add(New OleDbParameter("@p3", OleDbType.Currency)).Value = OTariif
+                    .Parameters.Add(New OleDbParameter("@p4", OleDbType.Currency)).Value = Kuutasu
 
                     .ExecuteNonQuery()
                 End With
@@ -81,9 +81,9 @@ Public Class CAndmebaas
                                        "VALUES (@p1, @p2, @p3, @p4);"
 
                     .Parameters.Add(New OleDbParameter("@p1", OleDbType.VarChar, 255)).Value = Nimi
-                    .Parameters.Add(New OleDbParameter("@p2", OleDbType.Decimal)).Value = Baashind
-                    .Parameters.Add(New OleDbParameter("@p3", OleDbType.Decimal)).Value = Marginaal
-                    .Parameters.Add(New OleDbParameter("@p4", OleDbType.Decimal)).Value = Kuutasu
+                    .Parameters.Add(New OleDbParameter("@p2", OleDbType.Currency)).Value = Baashind
+                    .Parameters.Add(New OleDbParameter("@p3", OleDbType.Currency)).Value = Marginaal
+                    .Parameters.Add(New OleDbParameter("@p4", OleDbType.Currency)).Value = Kuutasu
 
                     .ExecuteNonQuery()
                 End With

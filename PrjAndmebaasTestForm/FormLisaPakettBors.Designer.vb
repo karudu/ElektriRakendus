@@ -45,21 +45,21 @@ Partial Class FormLisaPakettBors
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(27, 93)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(186, 20)
+        Me.Label1.Size = New System.Drawing.Size(247, 20)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Börsihinna juurdetasu (€)"
+        Me.Label1.Text = "Börsihinna juurdetasu (senti/kWh)"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TxtJuurdetasu
         '
-        Me.TxtJuurdetasu.Location = New System.Drawing.Point(228, 90)
+        Me.TxtJuurdetasu.Location = New System.Drawing.Point(284, 90)
         Me.TxtJuurdetasu.Name = "TxtJuurdetasu"
         Me.TxtJuurdetasu.Size = New System.Drawing.Size(245, 26)
         Me.TxtJuurdetasu.TabIndex = 2
         '
         'TxtKuutasu
         '
-        Me.TxtKuutasu.Location = New System.Drawing.Point(228, 141)
+        Me.TxtKuutasu.Location = New System.Drawing.Point(284, 141)
         Me.TxtKuutasu.Name = "TxtKuutasu"
         Me.TxtKuutasu.Size = New System.Drawing.Size(245, 26)
         Me.TxtKuutasu.TabIndex = 4
@@ -67,7 +67,7 @@ Partial Class FormLisaPakettBors
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(122, 144)
+        Me.Label2.Location = New System.Drawing.Point(183, 144)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(91, 20)
         Me.Label2.TabIndex = 3
@@ -76,7 +76,7 @@ Partial Class FormLisaPakettBors
         '
         'TxtNimi
         '
-        Me.TxtNimi.Location = New System.Drawing.Point(228, 40)
+        Me.TxtNimi.Location = New System.Drawing.Point(284, 40)
         Me.TxtNimi.Name = "TxtNimi"
         Me.TxtNimi.Size = New System.Drawing.Size(245, 26)
         Me.TxtNimi.TabIndex = 6
@@ -84,7 +84,7 @@ Partial Class FormLisaPakettBors
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(174, 43)
+        Me.Label3.Location = New System.Drawing.Point(235, 43)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(39, 20)
         Me.Label3.TabIndex = 5
@@ -95,7 +95,7 @@ Partial Class FormLisaPakettBors
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(528, 278)
+        Me.ClientSize = New System.Drawing.Size(582, 278)
         Me.Controls.Add(Me.TxtNimi)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.TxtKuutasu)
