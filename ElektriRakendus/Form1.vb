@@ -6,11 +6,17 @@ Public Class Form1
     Dim lisaHind As Double = 0.684 'senti/kWh
     Dim kindelHind As Double = 30.23 'senti/kWh
     Dim marginaalHind As Double = 15.21
-    Dim kuutasu As Double = 11.47
+    Dim kuutasu As Double
     Dim baasHind As Double = 32.98
 
     Private Sub btnArvuta_Click(sender As Object, e As EventArgs) Handles btnArvuta.Click
-        loppHind = 0 'Lõpphinna algväärtustamine
+        loppHind = 0 'algväärtustamine
+        If IsNumeric(txtKuuTasu.Text) = True Then
+            kuutasu = txtKuuTasu.Text
+        Else
+            txtKuuTasu.Text = "Sisestage ainult numbriline väärtus"
+        End If
+
         Select Case cboxPakett1.SelectedIndex
             Case 0
                 'Kontroll, et kasutaja ei valiks algus aega hilem kui lõpp aeg

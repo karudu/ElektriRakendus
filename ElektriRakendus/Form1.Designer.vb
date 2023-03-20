@@ -34,6 +34,8 @@ Partial Class Form1
         Me.lblAjavAlgus = New System.Windows.Forms.Label()
         Me.lblAjavLopp = New System.Windows.Forms.Label()
         Me.btnArvuta = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtKuuTasu = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'txtLoppHind
@@ -149,11 +151,31 @@ Partial Class Form1
         Me.btnArvuta.Text = "Arvuta"
         Me.btnArvuta.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(282, 101)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(57, 16)
+        Me.Label1.TabIndex = 13
+        Me.Label1.Text = "Kuu tasu"
+        '
+        'txtKuuTasu
+        '
+        Me.txtKuuTasu.Location = New System.Drawing.Point(285, 120)
+        Me.txtKuuTasu.Name = "txtKuuTasu"
+        Me.txtKuuTasu.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
+        Me.txtKuuTasu.Size = New System.Drawing.Size(116, 22)
+        Me.txtKuuTasu.TabIndex = 14
+        Me.txtKuuTasu.Text = "Empty"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(782, 553)
+        Me.Controls.Add(Me.txtKuuTasu)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnArvuta)
         Me.Controls.Add(Me.lblAjavLopp)
         Me.Controls.Add(Me.lblAjavAlgus)
@@ -185,4 +207,6 @@ Partial Class Form1
     Friend WithEvents lblAjavAlgus As Label
     Friend WithEvents lblAjavLopp As Label
     Friend WithEvents btnArvuta As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtKuuTasu As TextBox
 End Class
