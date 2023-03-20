@@ -31,7 +31,7 @@ Partial Class Form1
         '
         Me.BtnLisaBors.Location = New System.Drawing.Point(36, 33)
         Me.BtnLisaBors.Name = "BtnLisaBors"
-        Me.BtnLisaBors.Size = New System.Drawing.Size(167, 37)
+        Me.BtnLisaBors.Size = New System.Drawing.Size(195, 37)
         Me.BtnLisaBors.TabIndex = 0
         Me.BtnLisaBors.Text = "Lisa börsipakett"
         Me.BtnLisaBors.UseVisualStyleBackColor = True
@@ -40,7 +40,7 @@ Partial Class Form1
         '
         Me.BtnLisaUniv.Location = New System.Drawing.Point(36, 147)
         Me.BtnLisaUniv.Name = "BtnLisaUniv"
-        Me.BtnLisaUniv.Size = New System.Drawing.Size(167, 37)
+        Me.BtnLisaUniv.Size = New System.Drawing.Size(195, 37)
         Me.BtnLisaUniv.TabIndex = 1
         Me.BtnLisaUniv.Text = "Lisa universaalpakett"
         Me.BtnLisaUniv.UseVisualStyleBackColor = True
@@ -49,7 +49,7 @@ Partial Class Form1
         '
         Me.BtnLisaFix.Location = New System.Drawing.Point(36, 91)
         Me.BtnLisaFix.Name = "BtnLisaFix"
-        Me.BtnLisaFix.Size = New System.Drawing.Size(167, 37)
+        Me.BtnLisaFix.Size = New System.Drawing.Size(195, 37)
         Me.BtnLisaFix.TabIndex = 2
         Me.BtnLisaFix.Text = "Lisa fiks. pakett"
         Me.BtnLisaFix.UseVisualStyleBackColor = True

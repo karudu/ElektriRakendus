@@ -8,4 +8,9 @@
         Dim FormLisaFix As New FormLisaPakettFix
         FormLisaFix.Show()
     End Sub
+
+    Private Sub BtnLisaUniv_Click(sender As Object, e As EventArgs) Handles BtnLisaUniv.Click
+        Dim FormLisaUniv As New FormLisaPakettUniv
+        FormLisaUniv.Show()
+    End Sub
 End Class
