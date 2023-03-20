@@ -25,6 +25,7 @@ Partial Class Graafik
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.HinnaGraafik = New System.Windows.Forms.DataVisualization.Charting.Chart()
         CType(Me.HinnaGraafik, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -33,17 +34,28 @@ Partial Class Graafik
         '
         ChartArea1.Name = "ChartArea1"
         Me.HinnaGraafik.ChartAreas.Add(ChartArea1)
+        Me.HinnaGraafik.Cursor = System.Windows.Forms.Cursors.Arrow
         Legend1.Name = "Legend1"
         Me.HinnaGraafik.Legends.Add(Legend1)
         Me.HinnaGraafik.Location = New System.Drawing.Point(3, 0)
         Me.HinnaGraafik.Name = "HinnaGraafik"
+        Me.HinnaGraafik.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Series1.BorderWidth = 3
         Series1.ChartArea = "ChartArea1"
         Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine
         Series1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Series1.IsXValueIndexed = True
         Series1.Legend = "Legend1"
-        Series1.Name = "hind"
+        Series1.Name = "Pakett 1"
+        Series2.BorderWidth = 3
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine
+        Series2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Series2.IsXValueIndexed = True
+        Series2.Legend = "Legend1"
+        Series2.Name = "Pakett 2"
         Me.HinnaGraafik.Series.Add(Series1)
+        Me.HinnaGraafik.Series.Add(Series2)
         Me.HinnaGraafik.Size = New System.Drawing.Size(797, 309)
         Me.HinnaGraafik.TabIndex = 0
         Me.HinnaGraafik.Text = "Chart1"
