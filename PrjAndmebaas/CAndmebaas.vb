@@ -166,6 +166,122 @@ Public Class CAndmebaas
             Return Paketid
         End Try
     End Function
+    Function LoePakettBors(ID As Integer) As IAndmebaas.PkBors Implements IAndmebaas.LoePakettBors
+        Dim Pakett As New IAndmebaas.PkBors
+        Try
+            Dim Connection As New OleDbConnection
+            With Connection
+                .ConnectionString = LoeConnectionString()
+                .Open()
+
+                Dim Cmd As New OleDbCommand
+                Dim Reader As OleDbDataReader
+
+                With Cmd
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = "SELECT * FROM paketid_bors " &
+                                   "WHERE ID = " &
+                                   ID.ToString
+                    Reader = .ExecuteReader
+                End With
+                Cmd.Dispose()
+
+                Reader.Read()
+                Pakett.Nimi = Reader("nimi").ToString
+                Pakett.Juurdetasu = Reader("juurdetasu")
+                Pakett.Kuutasu = Reader("kuutasu")
+                Reader.Close()
+
+                .Close()
+            End With
+            Connection.Dispose()
+
+            Return Pakett
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            Return Pakett
+        End Try
+    End Function
+
+    Public Function LoePakettFix(ID As Integer) As IAndmebaas.PkFix Implements IAndmebaas.LoePakettFix
+        Dim Pakett As New IAndmebaas.PkFix
+        Try
+            Dim Connection As New OleDbConnection
+            With Connection
+                .ConnectionString = LoeConnectionString()
+                .Open()
+
+                Dim Cmd As New OleDbCommand
+                Dim Reader As OleDbDataReader
+
+                With Cmd
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = "SELECT * FROM paketid_fix " &
+                                   "WHERE ID = " &
+                                   ID.ToString
+                    Reader = .ExecuteReader
+                End With
+                Cmd.Dispose()
+
+                Reader.Read()
+                Pakett.Nimi = Reader("nimi").ToString
+                Pakett.PTariif = Reader("ptariif")
+                Pakett.OTariif = Reader("otariif")
+                Pakett.Kuutasu = Reader("kuutasu")
+                Reader.Close()
+
+                .Close()
+            End With
+            Connection.Dispose()
+
+            Return Pakett
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            Return Pakett
+        End Try
+    End Function
+
+    Public Function LoePakettUniv(ID As Integer) As IAndmebaas.PkUniv Implements IAndmebaas.LoePakettUniv
+        Dim Pakett As New IAndmebaas.PkUniv
+        Try
+            Dim Connection As New OleDbConnection
+            With Connection
+                .ConnectionString = LoeConnectionString()
+                .Open()
+
+                Dim Cmd As New OleDbCommand
+                Dim Reader As OleDbDataReader
+
+                With Cmd
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = "SELECT * FROM paketid_univ " &
+                                   "WHERE ID = " &
+                                   ID.ToString
+                    Reader = .ExecuteReader
+                End With
+                Cmd.Dispose()
+
+                Reader.Read()
+                Pakett.Nimi = Reader("nimi").ToString
+                Pakett.Baas = Reader("baas")
+                Pakett.Marginaal = Reader("marginaal")
+                Pakett.Kuutasu = Reader("kuutasu")
+                Reader.Close()
+
+                .Close()
+            End With
+            Connection.Dispose()
+
+            Return Pakett
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            Return Pakett
+        End Try
+    End Function
+
     Private Function LoeConnectionString() As String
         Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Environment.CurrentDirectory & "\andmebaas.accdb"
     End Function

@@ -5,6 +5,10 @@ Public Class Form1
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         Dim Andmebaas As New CAndmebaas
         Paketid = Andmebaas.LoePakettideNimekiri
+
+        Dim Pakett As New IAndmebaas.PkUniv
+        Pakett = Andmebaas.LoePakettUniv(2)
+
         Dim sadasd As Integer = 0
     End Sub
     Private Sub BtnLisaBors_Click(sender As Object, e As EventArgs) Handles BtnLisaBors.Click
