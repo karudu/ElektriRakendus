@@ -117,9 +117,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PrjAndmebaas\PrjAndmebaas.vbproj">
+    <ProjectReference Include="..\PrjAndmebaas\Andmebaas.vbproj">
       <Project>{8c256670-32e2-4aa1-8452-cb5af3f5d5bc}</Project>
-      <Name>PrjAndmebaas</Name>
+      <Name>Andmebaas</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

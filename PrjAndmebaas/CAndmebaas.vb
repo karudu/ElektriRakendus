@@ -98,7 +98,73 @@ Public Class CAndmebaas
     End Sub
 
     Public Function LoePakettideNimekiri() As List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)) Implements IAndmebaas.LoePakettideNimekiri
-        Throw New NotImplementedException()
+        Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
+        Try
+            Dim Connection As New OleDbConnection
+            With Connection
+                .ConnectionString = LoeConnectionString()
+                .Open()
+
+                Dim Cmd As New OleDbCommand
+                Dim Reader As OleDbDataReader
+
+                With Cmd
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = "SELECT * FROM paketid_bors "
+                    Reader = .ExecuteReader
+                End With
+                Cmd.Dispose()
+                While Reader.Read()
+                    Dim Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)
+                    Pakett.ID = Reader("ID")
+                    Pakett.Nimi = Reader("nimi").ToString
+                    Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_BORS
+                    Paketid.Add(Pakett)
+                End While
+                Reader.Close()
+
+                With Cmd
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = "SELECT * FROM paketid_fix "
+                    Reader = .ExecuteReader
+                End With
+                Cmd.Dispose()
+                While Reader.Read()
+                    Dim Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)
+                    Pakett.ID = Reader("ID")
+                    Pakett.Nimi = Reader("nimi").ToString
+                    Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_FIX
+                    Paketid.Add(Pakett)
+                End While
+                Reader.Close()
+
+                With Cmd
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = "SELECT * FROM paketid_univ "
+                    Reader = .ExecuteReader
+                End With
+                Cmd.Dispose()
+                While Reader.Read()
+                    Dim Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)
+                    Pakett.ID = Reader("ID")
+                    Pakett.Nimi = Reader("nimi").ToString
+                    Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_UNIV
+                    Paketid.Add(Pakett)
+                End While
+                Reader.Close()
+
+                .Close()
+            End With
+            Connection.Dispose()
+
+            Return Paketid
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            Return Paketid
+        End Try
     End Function
     Private Function LoeConnectionString() As String
         Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Environment.CurrentDirectory & "\andmebaas.accdb"
