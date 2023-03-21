@@ -6,10 +6,27 @@ Public Class Form1
         Dim Andmebaas As New CAndmebaas
         Paketid = Andmebaas.LoePakettideNimekiri
 
-        Dim Pakett As New IAndmebaas.PkUniv
-        Pakett = Andmebaas.LoePakettUniv(2)
+        ListBors.Items.Clear()
+
+        For Each Pakett In Paketid
+            Select Case Pakett.Tyyp
+                Case IAndmebaas.PaketiTyyp.PAKETT_BORS
+                    Dim PakettBors As New IAndmebaas.PkBors
+                    PakettBors = Andmebaas.LoePakettBors(Pakett.ID)
+                    Dim Item As New ListViewItem(PakettBors.Nimi)
+                    Item.SubItems.Add(PakettBors.Juurdetasu.ToString)
+                    Item.SubItems.Add(PakettBors.Kuutasu.ToString)
+                    ' ID on subitem 3
+                    ' CInt(ListBors.Items(i).SubItems(3).Text)
+                    Item.SubItems.Add(Pakett.ID)
+                    ListBors.Items.Add(Item)
+            End Select
+        Next
 
         Dim sadasd As Integer = 0
+    End Sub
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        UuendaPaketid()
     End Sub
     Private Sub BtnLisaBors_Click(sender As Object, e As EventArgs) Handles BtnLisaBors.Click
         Dim FormLisaBors As New FormLisaPakettBors
@@ -26,7 +43,7 @@ Public Class Form1
         FormLisaUniv.Show()
     End Sub
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles BtnRefresh.Click
         UuendaPaketid()
     End Sub
 End Class
