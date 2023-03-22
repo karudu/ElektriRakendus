@@ -2,14 +2,25 @@
 Public Class CGraafikInfo
     Implements IGraafikInfo
 
+    Private Function DBQueryPrice() As String
+        Dim result As String
+
+
+        Return result
+    End Function
+
+    Private Function DBQueryTime() As String
+        Dim result As String
+
+        Return result
+    End Function
     Public Function GetPaev(pakett As String) As String(,) Implements IGraafikInfo.GetPaev
         Dim Info(24, 1) As String
-        Dim CurrTime As Date = DateTime.Now()
+        Dim CurrTime As Date = New DateTime(2023, 3, 20, 14, 0, 0)
         Dim EndTime = CurrTime.AddDays(-1)
         Dim RandInt As Random = New Random
         For Index = 0 To 24
-            Info(Index, 0) = CurrTime.AddHours(-Index).ToString("t")
-            Info(Index, 1) = RandInt.Next(30, 130).ToString
+
         Next
         Return Info
     End Function
