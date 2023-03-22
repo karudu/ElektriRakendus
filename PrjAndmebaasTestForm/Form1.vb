@@ -4,6 +4,8 @@ Public Class Form1
     Private Sub UuendaPaketid()
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         Dim Andmebaas As New CAndmebaas
+        Andmebaas.KustutaPakettFix(4)
+        Andmebaas.KustutaPakettUniv(3)
         Paketid = Andmebaas.LoePakettideNimekiri
 
         ListBors.Items.Clear()

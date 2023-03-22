@@ -1,12 +1,18 @@
 ﻿Public Interface IAndmebaas
-    Sub LisaPakettBors(ByVal Nimi As String, ByVal JuurdeTasu As Decimal, ByVal Kuutasu As Decimal)
-    Sub LisaPakettFix(ByVal Nimi As String, ByVal PTariif As Decimal, ByVal OTariif As Decimal, ByVal Kuutasu As Decimal)
-    Sub LisaPakettUniv(ByVal Nimi As String, ByVal Baashind As Decimal, ByVal Marginaal As Decimal, ByVal Kuutasu As Decimal)
 
     Function LoePakettideNimekiri() As List(Of (ID As Integer, Nimi As String, Tyyp As PaketiTyyp))
     Function LoePakettBors(ID As Integer) As PkBors
     Function LoePakettFix(ID As Integer) As PkFix
     Function LoePakettUniv(ID As Integer) As PkUniv
+    Sub LisaPakettBors(Nimi As String, JuurdeTasu As Decimal, Kuutasu As Decimal)
+    Sub LisaPakettFix(Nimi As String, PTariif As Decimal, OTariif As Decimal, Kuutasu As Decimal)
+    Sub LisaPakettUniv(Nimi As String, Baashind As Decimal, Marginaal As Decimal, Kuutasu As Decimal)
+    Sub MuudaPakettBors(ID As Integer, Nimi As String, JuurdeTasu As Decimal, Kuutasu As Decimal)
+    Sub MuudaPakettFix(ID As Integer, Nimi As String, PTariif As Decimal, OTariif As Decimal, Kuutasu As Decimal)
+    Sub MuudaPakettUniv(ID As Integer, Nimi As String, Baashind As Decimal, Marginaal As Decimal, Kuutasu As Decimal)
+    Sub KustutaPakettBors(ID As Integer)
+    Sub KustutaPakettFix(ID As Integer)
+    Sub KustutaPakettUniv(ID As Integer)
 
     Enum PaketiTyyp
         PAKETT_BORS
