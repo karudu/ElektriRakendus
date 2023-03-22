@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+Partial Class FormRedaktorPaketid
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -247,7 +247,7 @@ Partial Class Form1
         Me.BtnMuudaUniv.Text = "Muuda"
         Me.BtnMuudaUniv.UseVisualStyleBackColor = True
         '
-        'Form1
+        'FormRedaktorPaketid
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -267,8 +267,8 @@ Partial Class Form1
         Me.Controls.Add(Me.BtnLisaFix)
         Me.Controls.Add(Me.BtnLisaUniv)
         Me.Controls.Add(Me.BtnLisaBors)
-        Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Name = "FormRedaktorPaketid"
+        Me.Text = "Elektripaketid"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

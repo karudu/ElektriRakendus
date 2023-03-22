@@ -73,11 +73,29 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="FormLisaKodumasin.Designer.vb">
+      <DependentUpon>FormLisaKodumasin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLisaKodumasin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="FormMuudaKodumasin.Designer.vb">
+      <DependentUpon>FormMuudaKodumasin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMuudaKodumasin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRedaktorKodumasinad.Designer.vb">
+      <DependentUpon>FormRedaktorKodumasinad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormRedaktorKodumasinad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRedaktorPaketid.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRedaktorPaketid.Designer.vb">
+      <DependentUpon>FormRedaktorPaketid.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMuudaPakettBors.Designer.vb">
@@ -120,6 +138,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -133,8 +152,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="FormLisaKodumasin.resx">
+      <DependentUpon>FormLisaKodumasin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMuudaKodumasin.resx">
+      <DependentUpon>FormMuudaKodumasin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRedaktorKodumasinad.resx">
+      <DependentUpon>FormRedaktorKodumasinad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRedaktorPaketid.resx">
+      <DependentUpon>FormRedaktorPaketid.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLisaPakettBors.resx">
       <DependentUpon>FormLisaPakettBors.vb</DependentUpon>

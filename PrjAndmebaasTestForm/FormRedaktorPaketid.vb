@@ -1,6 +1,6 @@
 ﻿Imports PrjAndmebaas
 
-Public Class Form1
+Public Class FormRedaktorPaketid
     Private Sub UuendaPaketid()
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         Dim Andmebaas As New CAndmebaas
