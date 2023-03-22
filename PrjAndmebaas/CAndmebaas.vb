@@ -94,6 +94,7 @@ Public Class CAndmebaas
                 Cmd.Dispose()
 
                 Reader.Read()
+                Pakett.ID = Reader("ID")
                 Pakett.Nimi = Reader("nimi").ToString
                 Pakett.Juurdetasu = Reader("juurdetasu")
                 Pakett.Kuutasu = Reader("kuutasu")
@@ -132,6 +133,7 @@ Public Class CAndmebaas
                 Cmd.Dispose()
 
                 Reader.Read()
+                Pakett.ID = Reader("ID")
                 Pakett.Nimi = Reader("nimi").ToString
                 Pakett.PTariif = Reader("ptariif")
                 Pakett.OTariif = Reader("otariif")
@@ -171,6 +173,7 @@ Public Class CAndmebaas
                 Cmd.Dispose()
 
                 Reader.Read()
+                Pakett.ID = Reader("ID")
                 Pakett.Nimi = Reader("nimi").ToString
                 Pakett.Baas = Reader("baas")
                 Pakett.Marginaal = Reader("marginaal")
@@ -185,6 +188,45 @@ Public Class CAndmebaas
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Return Pakett
+        End Try
+    End Function
+
+    Public Function LoeKodumasinad() As List(Of IAndmebaas.Kodumasin) Implements IAndmebaas.LoeKodumasinad
+        Dim Kodumasinad As New List(Of IAndmebaas.Kodumasin)
+        Try
+            Dim Connection As New OleDbConnection
+            With Connection
+                .ConnectionString = LoeConnectionString()
+                .Open()
+
+                Dim Cmd As New OleDbCommand
+                Dim Reader As OleDbDataReader
+
+                With Cmd
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = "SELECT * FROM kodumasinad "
+                    Reader = .ExecuteReader
+                End With
+                Cmd.Dispose()
+                While Reader.Read()
+                    Dim Kodumasin As IAndmebaas.Kodumasin
+                    Kodumasin.ID = Reader("ID")
+                    Kodumasin.Nimi = Reader("nimi").ToString
+                    Kodumasin.Voimsus = Reader("voimsus")
+                    Kodumasin.Aeg = Reader("aeg")
+                    Kodumasinad.Add(Kodumasin)
+                End While
+                Reader.Close()
+
+                .Close()
+            End With
+            Connection.Dispose()
+
+            Return Kodumasinad
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            Return Kodumasinad
         End Try
     End Function
 
@@ -270,6 +312,37 @@ Public Class CAndmebaas
                     .Parameters.Add(New OleDbParameter("@p2", OleDbType.Currency)).Value = Baashind
                     .Parameters.Add(New OleDbParameter("@p3", OleDbType.Currency)).Value = Marginaal
                     .Parameters.Add(New OleDbParameter("@p4", OleDbType.Currency)).Value = Kuutasu
+
+                    .ExecuteNonQuery()
+                End With
+                Cmd.Dispose()
+
+                .Close()
+            End With
+            Connection.Dispose()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Public Sub LisaKodumasin(Nimi As String, Voimsus As Double, Aeg As Double) Implements IAndmebaas.LisaKodumasin
+        Try
+            Dim Connection As New OleDbConnection
+            With Connection
+                .ConnectionString = LoeConnectionString()
+                .Open()
+
+                Dim Cmd As New OleDbCommand
+                With Cmd
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = "INSERT INTO kodumasinad " &
+                                       "(nimi, voimsus, aeg) " &
+                                       "VALUES (@p1, @p2, @p3);"
+
+                    .Parameters.Add(New OleDbParameter("@p1", OleDbType.VarChar, 255)).Value = Nimi
+                    .Parameters.Add(New OleDbParameter("@p2", OleDbType.Double)).Value = Voimsus
+                    .Parameters.Add(New OleDbParameter("@p3", OleDbType.Double)).Value = Aeg
 
                     .ExecuteNonQuery()
                 End With
@@ -392,6 +465,41 @@ Public Class CAndmebaas
         End Try
     End Sub
 
+    Public Sub MuudaKodumasin(ID As Integer, Nimi As String, Voimsus As Double, Aeg As Double) Implements IAndmebaas.MuudaKodumasin
+        Try
+            Dim Connection As New OleDbConnection
+            With Connection
+                .ConnectionString = LoeConnectionString()
+                .Open()
+
+                Dim Cmd As New OleDbCommand
+                With Cmd
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = "UPDATE kodumasinad " &
+                                   "SET nimi = @p1, " &
+                                   "voimsus = @p2, " &
+                                   "aeg = @p3 " &
+                                   "WHERE ID = " &
+                                   ID.ToString &
+                                   ";"
+
+                    .Parameters.Add(New OleDbParameter("@p1", OleDbType.VarChar, 255)).Value = Nimi
+                    .Parameters.Add(New OleDbParameter("@p2", OleDbType.Double)).Value = Voimsus
+                    .Parameters.Add(New OleDbParameter("@p3", OleDbType.Double)).Value = Aeg
+
+                    .ExecuteNonQuery()
+                End With
+                Cmd.Dispose()
+
+                .Close()
+            End With
+            Connection.Dispose()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
     Public Sub KustutaPakettBors(ID As Integer) Implements IAndmebaas.KustutaPakettBors
         Try
             Dim Connection As New OleDbConnection
@@ -460,6 +568,34 @@ Public Class CAndmebaas
                     .Connection = Connection
                     .CommandType = CommandType.Text
                     .CommandText = "DELETE FROM paketid_univ " &
+                                   "WHERE ID = " &
+                                   ID.ToString &
+                                   ";"
+
+                    .ExecuteNonQuery()
+                End With
+                Cmd.Dispose()
+
+                .Close()
+            End With
+            Connection.Dispose()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Public Sub KustutaKodumasin(ID As Integer) Implements IAndmebaas.KustutaKodumasin
+        Try
+            Dim Connection As New OleDbConnection
+            With Connection
+                .ConnectionString = LoeConnectionString()
+                .Open()
+
+                Dim Cmd As New OleDbCommand
+                With Cmd
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = "DELETE FROM kodumasinad " &
                                    "WHERE ID = " &
                                    ID.ToString &
                                    ";"

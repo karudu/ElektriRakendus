@@ -44,11 +44,14 @@ Public Class Form1
             End Select
         Next
 
+        Dim masinad As New List(Of IAndmebaas.Kodumasin)
+        masinad = Andmebaas.LoeKodumasinad()
         Dim sadasd As Integer = 0
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UuendaPaketid()
     End Sub
+    ' TODO Parem valideerimine sisestatud andmete jaoks
     Private Sub BtnLisaBors_Click(sender As Object, e As EventArgs) Handles BtnLisaBors.Click
         Dim FormLisaBors As New FormLisaPakettBors
         FormLisaBors.ShowDialog()
