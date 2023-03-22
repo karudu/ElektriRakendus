@@ -1,6 +1,6 @@
 ﻿Public Interface IGraafikInfo
-    Function GetPaev(ByVal pakett As String) As String(,)
-    Function GetKuu(ByVal pakett As String) As String(,)
-    Function GetAasta(ByVal pakett As String) As String(,)
+    Function GetPaev(ByVal PakettID As Integer) As String(,)
+    Function GetKuu(ByVal PakettID As Integer) As String(,)
+    Function GetAasta(ByVal PakettID As Integer) As String(,)
 
 End Interface

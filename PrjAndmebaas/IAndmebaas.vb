@@ -1,6 +1,8 @@
 ﻿Public Interface IAndmebaas
 
     Function LoePakettideNimekiri() As List(Of (ID As Integer, Nimi As String, Tyyp As PaketiTyyp))
+
+    Function LoeHind(Aeg As Date) As Double
     Function LoePakettBors(ID As Integer) As PkBors
     Function LoePakettFix(ID As Integer) As PkFix
     Function LoePakettUniv(ID As Integer) As PkUniv
