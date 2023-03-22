@@ -80,6 +80,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormMuudaPakettBors.Designer.vb">
+      <DependentUpon>FormMuudaPakettBors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMuudaPakettBors.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormLisaPakettBors.Designer.vb">
       <DependentUpon>FormLisaPakettBors.vb</DependentUpon>
     </Compile>
@@ -96,6 +102,18 @@
       <DependentUpon>FormLisaPakettUniv.vb</DependentUpon>
     </Compile>
     <Compile Include="FormLisaPakettUniv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMuudaPakettFix.Designer.vb">
+      <DependentUpon>FormMuudaPakettFix.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMuudaPakettFix.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMuudaPakettUniv.Designer.vb">
+      <DependentUpon>FormMuudaPakettUniv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMuudaPakettUniv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -126,6 +144,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormLisaPakettUniv.resx">
       <DependentUpon>FormLisaPakettUniv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMuudaPakettBors.resx">
+      <DependentUpon>FormMuudaPakettBors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMuudaPakettFix.resx">
+      <DependentUpon>FormMuudaPakettFix.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMuudaPakettUniv.resx">
+      <DependentUpon>FormMuudaPakettUniv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

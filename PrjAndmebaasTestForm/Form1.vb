@@ -4,8 +4,6 @@ Public Class Form1
     Private Sub UuendaPaketid()
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         Dim Andmebaas As New CAndmebaas
-        Andmebaas.KustutaPakettFix(4)
-        Andmebaas.KustutaPakettUniv(3)
         Paketid = Andmebaas.LoePakettideNimekiri
 
         ListBors.Items.Clear()
@@ -66,6 +64,65 @@ Public Class Form1
     Private Sub BtnLisaUniv_Click(sender As Object, e As EventArgs) Handles BtnLisaUniv.Click
         Dim FormLisaUniv As New FormLisaPakettUniv
         FormLisaUniv.ShowDialog()
+        UuendaPaketid()
+    End Sub
+
+    Private Sub BtnMuudaBors_Click(sender As Object, e As EventArgs) Handles BtnMuudaBors.Click
+        If ListBors.SelectedItems.Count = 0 Then
+            Exit Sub
+        End If
+
+        Dim Andmebaas As New CAndmebaas
+        Dim Pakett As New IAndmebaas.PkBors
+        Dim ID As Integer
+        ID = CInt(ListBors.SelectedItems(0).SubItems(4).Text) ' ID on subitem 4
+        Pakett = Andmebaas.LoePakettBors(ID)
+
+        Dim FormMuudaBors As New FormMuudaPakettBors(ID)
+        FormMuudaBors.TxtNimi.Text = Pakett.Nimi
+        FormMuudaBors.TxtJuurdetasu.Text = Pakett.Juurdetasu.ToString
+        FormMuudaBors.TxtKuutasu.Text = Pakett.Kuutasu.ToString
+        FormMuudaBors.ShowDialog()
+        UuendaPaketid()
+    End Sub
+
+    Private Sub BtnMuudaFix_Click(sender As Object, e As EventArgs) Handles BtnMuudaFix.Click
+        If ListFix.SelectedItems.Count = 0 Then
+            Exit Sub
+        End If
+
+        Dim Andmebaas As New CAndmebaas
+        Dim Pakett As New IAndmebaas.PkFix
+        Dim ID As Integer
+        ID = CInt(ListFix.SelectedItems(0).SubItems(4).Text) ' ID on subitem 4
+        Pakett = Andmebaas.LoePakettFix(ID)
+
+        Dim FormMuudaFix As New FormMuudaPakettFix(ID)
+        FormMuudaFix.TxtNimi.Text = Pakett.Nimi
+        FormMuudaFix.TxtPTariif.Text = Pakett.PTariif.ToString
+        FormMuudaFix.TxtOTariif.Text = Pakett.OTariif.ToString
+        FormMuudaFix.TxtKuutasu.Text = Pakett.Kuutasu.ToString
+        FormMuudaFix.ShowDialog()
+        UuendaPaketid()
+    End Sub
+
+    Private Sub BtnMuudaUniv_Click(sender As Object, e As EventArgs) Handles BtnMuudaUniv.Click
+        If ListUniv.SelectedItems.Count = 0 Then
+            Exit Sub
+        End If
+
+        Dim Andmebaas As New CAndmebaas
+        Dim Pakett As New IAndmebaas.PkUniv
+        Dim ID As Integer
+        ID = CInt(ListUniv.SelectedItems(0).SubItems(4).Text) ' ID on subitem 4
+        Pakett = Andmebaas.LoePakettUniv(ID)
+
+        Dim FormMuudaUniv As New FormMuudaPakettUniv(ID)
+        FormMuudaUniv.TxtNimi.Text = Pakett.Nimi
+        FormMuudaUniv.TxtBaas.Text = Pakett.Baas.ToString
+        FormMuudaUniv.TxtMarginaal.Text = Pakett.Marginaal.ToString
+        FormMuudaUniv.TxtKuutasu.Text = Pakett.Kuutasu.ToString
+        FormMuudaUniv.ShowDialog()
         UuendaPaketid()
     End Sub
 End Class
