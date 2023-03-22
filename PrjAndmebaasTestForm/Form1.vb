@@ -43,10 +43,6 @@ Public Class Form1
                     ListUniv.Items.Add(Item)
             End Select
         Next
-
-        Dim masinad As New List(Of IAndmebaas.Kodumasin)
-        masinad = Andmebaas.LoeKodumasinad()
-        Dim sadasd As Integer = 0
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UuendaPaketid()
