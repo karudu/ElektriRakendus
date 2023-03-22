@@ -125,4 +125,64 @@ Public Class Form1
         FormMuudaUniv.ShowDialog()
         UuendaPaketid()
     End Sub
+
+    Private Sub BtnKustutaBors_Click(sender As Object, e As EventArgs) Handles BtnKustutaBors.Click
+        If ListBors.SelectedItems.Count = 0 Then
+            Exit Sub
+        End If
+
+        ' MessageBox'i nuppude teksti muuta ei saa
+        Dim Tulemus As DialogResult = MessageBox.Show("Kustuta valitud pakett?",
+                                                      "Kustuta",
+                                                      MessageBoxButtons.YesNo)
+        If Not Tulemus = DialogResult.Yes Then
+            Exit Sub
+        End If
+
+        Dim Andmebaas As New CAndmebaas
+        Dim ID As Integer
+        ID = CInt(ListBors.SelectedItems(0).SubItems(4).Text) ' ID on subitem 4
+        Andmebaas.KustutaPakettBors(ID)
+        UuendaPaketid()
+    End Sub
+
+    Private Sub BtnKustutaFix_Click(sender As Object, e As EventArgs) Handles BtnKustutaFix.Click
+        If ListFix.SelectedItems.Count = 0 Then
+            Exit Sub
+        End If
+
+        ' MessageBox'i nuppude teksti muuta ei saa
+        Dim Tulemus As DialogResult = MessageBox.Show("Kustuta valitud pakett?",
+                                                      "Kustuta",
+                                                      MessageBoxButtons.YesNo)
+        If Not Tulemus = DialogResult.Yes Then
+            Exit Sub
+        End If
+
+        Dim Andmebaas As New CAndmebaas
+        Dim ID As Integer
+        ID = CInt(ListFix.SelectedItems(0).SubItems(4).Text) ' ID on subitem 4
+        Andmebaas.KustutaPakettFix(ID)
+        UuendaPaketid()
+    End Sub
+
+    Private Sub BtnKustutaUniv_Click(sender As Object, e As EventArgs) Handles BtnKustutaUniv.Click
+        If ListUniv.SelectedItems.Count = 0 Then
+            Exit Sub
+        End If
+
+        ' MessageBox'i nuppude teksti muuta ei saa
+        Dim Tulemus As DialogResult = MessageBox.Show("Kustuta valitud pakett?",
+                                                      "Kustuta",
+                                                      MessageBoxButtons.YesNo)
+        If Not Tulemus = DialogResult.Yes Then
+            Exit Sub
+        End If
+
+        Dim Andmebaas As New CAndmebaas
+        Dim ID As Integer
+        ID = CInt(ListUniv.SelectedItems(0).SubItems(4).Text) ' ID on subitem 4
+        Andmebaas.KustutaPakettUniv(ID)
+        UuendaPaketid()
+    End Sub
 End Class
