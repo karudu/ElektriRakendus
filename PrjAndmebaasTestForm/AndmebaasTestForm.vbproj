@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ABDEA896-3C52-419E-A769-E829D22ED393}</ProjectGuid>
+    <ProjectGuid>{BBA7BC69-F601-47E6-ACED-5CB7C2BB9981}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>ElektriRakendus.My.MyApplication</StartupObject>
-    <RootNamespace>ElektriRakendus</RootNamespace>
-    <AssemblyName>ElektriRakendus</AssemblyName>
+    <StartupObject>PrjAndmebaasTestForm.My.MyApplication</StartupObject>
+    <RootNamespace>PrjAndmebaasTestForm</RootNamespace>
+    <AssemblyName>PrjAndmebaasTestForm</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -22,7 +22,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>ElektriRakendus.xml</DocumentationFile>
+    <DocumentationFile>PrjAndmebaasTestForm.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,7 +32,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>ElektriRakendus.xml</DocumentationFile>
+    <DocumentationFile>PrjAndmebaasTestForm.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -45,7 +45,7 @@
     <OptionStrict>Off</OptionStrict>
   </PropertyGroup>
   <PropertyGroup>
-    <OptionInfer>Off</OptionInfer>
+    <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -73,25 +73,47 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form2.Designer.vb">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form2.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form3.Designer.vb">
-      <DependentUpon>Form3.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form3.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="KodumasinaKasutus.vb" />
-    <Compile Include="Kalkulaator.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMuudaPakettBors.Designer.vb">
+      <DependentUpon>FormMuudaPakettBors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMuudaPakettBors.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLisaPakettBors.Designer.vb">
+      <DependentUpon>FormLisaPakettBors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLisaPakettBors.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLisaPakettFix.Designer.vb">
+      <DependentUpon>FormLisaPakettFix.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLisaPakettFix.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLisaPakettUniv.Designer.vb">
+      <DependentUpon>FormLisaPakettUniv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLisaPakettUniv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMuudaPakettFix.Designer.vb">
+      <DependentUpon>FormMuudaPakettFix.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMuudaPakettFix.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMuudaPakettUniv.Designer.vb">
+      <DependentUpon>FormMuudaPakettUniv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMuudaPakettUniv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -114,11 +136,23 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.vb</DependentUpon>
+    <EmbeddedResource Include="FormLisaPakettBors.resx">
+      <DependentUpon>FormLisaPakettBors.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.vb</DependentUpon>
+    <EmbeddedResource Include="FormLisaPakettFix.resx">
+      <DependentUpon>FormLisaPakettFix.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLisaPakettUniv.resx">
+      <DependentUpon>FormLisaPakettUniv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMuudaPakettBors.resx">
+      <DependentUpon>FormMuudaPakettBors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMuudaPakettFix.resx">
+      <DependentUpon>FormMuudaPakettFix.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMuudaPakettUniv.resx">
+      <DependentUpon>FormMuudaPakettUniv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
