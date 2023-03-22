@@ -44,9 +44,9 @@ Public Class Form1
             End Select
         Next
 
-        Dim masinad As New List(Of IAndmebaas.Kodumasin)
-        masinad = Andmebaas.LoeKodumasinad()
-        Dim sadasd As Integer = 0
+        Dim test As List(Of Decimal)
+        test = Andmebaas.LoeBorsihinnad(DateTime.Now.AddHours(4), 2)
+        Dim fuck As Integer = 0
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UuendaPaketid()
