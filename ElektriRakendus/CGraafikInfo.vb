@@ -2,43 +2,46 @@
 
 Public Class CGraafikInfo
     Implements IGraafikInfo
+
     Public StructBors As New PrjAndmebaas.IAndmebaas.PkBors
     Public StructFix As New PrjAndmebaas.IAndmebaas.PkFix
     Public StructUniv As New PrjAndmebaas.IAndmebaas.PkUniv
 
-    Public Function GetPaev(PakettID As Integer, PaketiTyyp As Integer) As String(,) Implements IGraafikInfo.GetPaev
+    Private Function GetPaev(PakettID As Integer, PaketiTyyp As Integer) As List(Of (Aeg As String, Hind As Double)) Implements IGraafikInfo.GetPaev
+        Dim InfoList As New List(Of (Aeg As String, Hind As Double))
         Dim AndmedConnect As PrjAndmebaas.IAndmebaas
         AndmedConnect = New PrjAndmebaas.CAndmebaas
         Dim I As Integer
-        Dim Info(24, 1) As String
         Dim CurrTime As Date = New DateTime(2023, 3, 20, 14, 0, 0)
-        Dim EndTime = CurrTime.AddDays(-1)
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
             For I = 0 To 24
-                Info(I, 0) = CurrTime.ToString("HH")
-                Info(I, 1) = ((AndmedConnect.LoeHind(CurrTime)) + (StructBors.Juurdetasu / 100)).ToString
+                Dim Info As (Aeg As String, Hind As Double)
+                Info.Aeg = CurrTime.ToString("HH")
+                Info.Hind = (AndmedConnect.LoeHind(CurrTime)) + (StructBors.Juurdetasu / 100)
+                'Info.Hind = (StructBors.Juurdetasu / 100)
+                InfoList.Add(Info)
                 CurrTime = CurrTime.AddHours(-1)
             Next
-        ElseIf PaketiTyyp = 1 Then
-            Me.StructFix = AndmedConnect.LoePakettFix(1)
-            For I = 0 To 24
-                Info(I, 0) = CurrTime.ToString("HH")
-                Info(I, 1) = StructFix.PTariif
-                CurrTime = CurrTime.AddHours(-1)
-            Next
-        Else
-            Me.StructUniv = AndmedConnect.LoePakettUniv(1)
-            For I = 0 To 24
-                Info(I, 0) = CurrTime.ToString("HH")
-                Info(I, 1) = (StructUniv.Baas + (StructUniv.Marginaal / 100)).ToString
-                CurrTime = CurrTime.AddHours(-1)
-            Next
+            'ElseIf PaketiTyyp = 1 Then
+            '    Me.StructFix = AndmedConnect.LoePakettFix(1)
+            '    For I = 0 To 24
+            '        Info(I, 0) = CurrTime.ToString("HH")
+            '        Info(I, 1) = StructFix.PTariif
+            '        CurrTime = CurrTime.AddHours(-1)
+            '    Next
+            'Else
+            '    Me.StructUniv = AndmedConnect.LoePakettUniv(1)
+            '    For I = 0 To 24
+            '        Info(I, 0) = CurrTime.ToString("HH")
+            '        Info(I, 1) = (StructUniv.Baas + (StructUniv.Marginaal / 100)).ToString
+            '        CurrTime = CurrTime.AddHours(-1)
+            '    Next
         End If
-        Return Info
+        Return InfoList
     End Function
 
-    Public Function GetKuu(PakettID As Integer, PaketiTypp As Integer) As String(,) Implements IGraafikInfo.GetKuu
+    Public Function GetKuu(PakettID As Integer, PaketiTyyp As Integer) As String(,) Implements IGraafikInfo.GetKuu
         Dim Info(30, 1) As String
         Dim I As Integer
         Dim CurrTime As Date = DateTime.Now()

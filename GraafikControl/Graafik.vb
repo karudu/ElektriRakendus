@@ -2,7 +2,7 @@
     Public Sub ClearPoints()
         HinnaGraafik.Series("Pakett 1").Points.Clear()
     End Sub
-    Public Sub setPoint1(ByVal Time As String, ByVal hind As Integer)
+    Public Sub setPoint1(ByVal Time As String, ByVal hind As Double)
         HinnaGraafik.Series("Pakett 1").Points.AddXY(Time, hind)
     End Sub
 
