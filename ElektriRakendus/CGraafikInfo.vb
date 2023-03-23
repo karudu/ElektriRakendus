@@ -1,49 +1,44 @@
 ﻿Imports System.DateTime
+
 Public Class CGraafikInfo
     Implements IGraafikInfo
+    Public StructBors As New PrjAndmebaas.IAndmebaas.PkBors
+    Public StructFix As New PrjAndmebaas.IAndmebaas.PkFix
+    Public StructUniv As New PrjAndmebaas.IAndmebaas.PkUniv
 
-    Private Function DBQueryTime_Price(ByVal PaketiTyyp As Integer, ByVal PakettID As Integer, ByVal CurrTime As Date) As String
+    Public Function GetPaev(PakettID As Integer, PaketiTyyp As Integer) As String(,) Implements IGraafikInfo.GetPaev
         Dim AndmedConnect As PrjAndmebaas.IAndmebaas
         AndmedConnect = New PrjAndmebaas.CAndmebaas
-        If CurrTime.Minute > 0 Then
-            CurrTime = CurrTime.AddHours(-1)
-            CurrTime = CurrTime.AddMinutes((CurrTime.Minute))
-        End If
-
-        If PaketiTyyp = 0 Then
-            Dim StructResult As New PrjAndmebaas.IAndmebaas.PkBors
-            StructResult = AndmedConnect.LoePakettBors(15)
-            Dim Price As Double = AndmedConnect.LoeHind(CurrTime) + (StructResult.Juurdetasu / 100)
-            Console.WriteLine(Price)
-            Return Price
-        ElseIf PaketiTyyp = 1 Then
-            Dim StructResult As New PrjAndmebaas.IAndmebaas.PkFix
-            StructResult = AndmedConnect.LoePakettFix(1)
-            Return StructResult.PTariif
-        Else
-            Dim StructResult As New PrjAndmebaas.IAndmebaas.PkUniv
-            StructResult = AndmedConnect.LoePakettUniv(1)
-            Dim Price As Double = AndmedConnect.LoeHind(CurrTime) + (StructResult.Marginaal / 100)
-            Return Price
-        End If
-    End Function
-
-    Public Function GetPaev(PakettID As Integer) As String(,) Implements IGraafikInfo.GetPaev
+        Dim I As Integer
         Dim Info(24, 1) As String
         Dim CurrTime As Date = New DateTime(2023, 3, 20, 14, 0, 0)
         Dim EndTime = CurrTime.AddDays(-1)
-        Dim RandInt As Random = New Random
-        Dim TempInfo(1, 1) As String
-        Dim I As Integer
-        For I = 0 To 24
-            Info(I, 0) = CurrTime.ToString("HH")
-            Info(I, 1) = DBQueryTime_Price(0, 15, CurrTime).ToString
-            CurrTime = CurrTime.AddHours(-1)
-        Next
+        If PaketiTyyp = 0 Then
+            Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
+            For I = 0 To 24
+                Info(I, 0) = CurrTime.ToString("HH")
+                Info(I, 1) = ((AndmedConnect.LoeHind(CurrTime)) + (StructBors.Juurdetasu / 100)).ToString
+                CurrTime = CurrTime.AddHours(-1)
+            Next
+        ElseIf PaketiTyyp = 1 Then
+            Me.StructFix = AndmedConnect.LoePakettFix(1)
+            For I = 0 To 24
+                Info(I, 0) = CurrTime.ToString("HH")
+                Info(I, 1) = StructFix.PTariif
+                CurrTime = CurrTime.AddHours(-1)
+            Next
+        Else
+            Me.StructUniv = AndmedConnect.LoePakettUniv(1)
+            For I = 0 To 24
+                Info(I, 0) = CurrTime.ToString("HH")
+                Info(I, 1) = (StructUniv.Baas + (StructUniv.Marginaal / 100)).ToString
+                CurrTime = CurrTime.AddHours(-1)
+            Next
+        End If
         Return Info
     End Function
 
-    Public Function GetKuu(PakettID As Integer) As String(,) Implements IGraafikInfo.GetKuu
+    Public Function GetKuu(PakettID As Integer, PaketiTypp As Integer) As String(,) Implements IGraafikInfo.GetKuu
         Dim Info(30, 1) As String
         Dim I As Integer
         Dim CurrTime As Date = DateTime.Now()
@@ -56,7 +51,7 @@ Public Class CGraafikInfo
         Return Info
     End Function
 
-    Public Function GetAasta(PakettID As Integer) As String(,) Implements IGraafikInfo.GetAasta
+    Public Function GetAasta(PakettID As Integer, PaketiTyyp As Integer) As String(,) Implements IGraafikInfo.GetAasta
         Dim Info(12, 1) As String
         Dim I As Integer
         Dim CurrTime As Date = DateTime.Now()
@@ -68,4 +63,5 @@ Public Class CGraafikInfo
         Next
         Return Info
     End Function
+
 End Class
