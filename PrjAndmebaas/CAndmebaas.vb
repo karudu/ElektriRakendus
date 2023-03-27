@@ -257,7 +257,6 @@ Public Class CAndmebaas
         Public Timestamp As Integer
         Public Price As Decimal
     End Class
-    ' TODO Ei tööta, kui tulevikust küsitakse ja andmed puuduvad
     Private Function LoeBorsihind(Aeg As Date, Tunnid As Integer) As Decimal
         Dim Timestamp As String
         Timestamp = (Aeg - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString
@@ -359,6 +358,9 @@ Public Class CAndmebaas
         End Using
         Dim Andmed = JsonConvert.DeserializeObject(Of JsonJuur)(JsonStr)
         Dim Hinnad = Andmed.data.ee
+
+        ' Kui andmed puuduvad (küsiti tulevikust), siis tagasta 0
+        If Hinnad.Length = 0 Then Return 0
 
         ' Lisa loetud hinnad andmebaasi
         For i As Integer = 0 To Hinnad.Length - 1
