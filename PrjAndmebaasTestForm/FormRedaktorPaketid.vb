@@ -1,6 +1,6 @@
 ﻿Imports PrjAndmebaas
 
-Public Class Form1
+Public Class FormRedaktorPaketid
     Private Sub UuendaPaketid()
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         Dim Andmebaas As New CAndmebaas
@@ -43,12 +43,11 @@ Public Class Form1
                     ListUniv.Items.Add(Item)
             End Select
         Next
-
-        Dim sadasd As Integer = 0
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UuendaPaketid()
     End Sub
+    ' TODO Parem valideerimine sisestatud andmete jaoks
     Private Sub BtnLisaBors_Click(sender As Object, e As EventArgs) Handles BtnLisaBors.Click
         Dim FormLisaBors As New FormLisaPakettBors
         FormLisaBors.ShowDialog()
