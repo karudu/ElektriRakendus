@@ -6,13 +6,15 @@
 
         TextBox4.Text = Kalkulaator.Rahalinekulu
 
+
+
     End Sub
     Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
 
     End Sub
 
     Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
-        If ComboBox1.Text = Nothing Or ComboBox3.SelectedIndex = 0 Then
+        If ComboBox3.Text = Nothing Or ComboBox3.SelectedIndex = 0 Then
             d = 0
         End If
         If ComboBox3.SelectedIndex = 1 Then
@@ -30,9 +32,12 @@
     End Sub
 
     Private Sub Arvuta_Click(sender As Object, e As EventArgs) Handles Arvuta.Click
-        If IsNumeric(SeadmeV.Text) = True And IsNumeric(TextBox1.Text) = True Then
-            Dim KodumasinaKasutus As New KodumasinaKasutus(TextBox1.Text, SeadmeV.Text, d)
-            tootle(KodumasinaKasutus)
+        If (IsNumeric(SeadmeV.Text) = True And IsNumeric(TextBox1.Text) = True) And Not d = 0 Then
+            Dim Hkalkulaator As New Hinnakalkulaator(TextBox1.Text, SeadmeV.Text, d)
+            tootle(Hkalkulaator)
+        Else
+
+            TextBox4.Text = "Plaun valige ajavahemik"
         End If
     End Sub
 
@@ -41,6 +46,14 @@
     End Sub
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+    End Sub
+
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
 
     End Sub
 End Class

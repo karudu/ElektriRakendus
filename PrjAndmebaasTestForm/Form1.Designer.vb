@@ -52,27 +52,30 @@ Partial Class Form1
         '
         'BtnLisaBors
         '
-        Me.BtnLisaBors.Location = New System.Drawing.Point(677, 38)
+        Me.BtnLisaBors.Location = New System.Drawing.Point(602, 30)
+        Me.BtnLisaBors.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnLisaBors.Name = "BtnLisaBors"
-        Me.BtnLisaBors.Size = New System.Drawing.Size(130, 37)
+        Me.BtnLisaBors.Size = New System.Drawing.Size(116, 30)
         Me.BtnLisaBors.TabIndex = 0
         Me.BtnLisaBors.Text = "Uus"
         Me.BtnLisaBors.UseVisualStyleBackColor = True
         '
         'BtnLisaUniv
         '
-        Me.BtnLisaUniv.Location = New System.Drawing.Point(677, 415)
+        Me.BtnLisaUniv.Location = New System.Drawing.Point(602, 332)
+        Me.BtnLisaUniv.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnLisaUniv.Name = "BtnLisaUniv"
-        Me.BtnLisaUniv.Size = New System.Drawing.Size(130, 37)
+        Me.BtnLisaUniv.Size = New System.Drawing.Size(116, 30)
         Me.BtnLisaUniv.TabIndex = 1
         Me.BtnLisaUniv.Text = "Uus"
         Me.BtnLisaUniv.UseVisualStyleBackColor = True
         '
         'BtnLisaFix
         '
-        Me.BtnLisaFix.Location = New System.Drawing.Point(677, 226)
+        Me.BtnLisaFix.Location = New System.Drawing.Point(602, 181)
+        Me.BtnLisaFix.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnLisaFix.Name = "BtnLisaFix"
-        Me.BtnLisaFix.Size = New System.Drawing.Size(130, 37)
+        Me.BtnLisaFix.Size = New System.Drawing.Size(116, 30)
         Me.BtnLisaFix.TabIndex = 2
         Me.BtnLisaFix.Text = "Uus"
         Me.BtnLisaFix.UseVisualStyleBackColor = True
@@ -81,10 +84,11 @@ Partial Class Form1
         '
         Me.ListBors.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Nimi, Me.Juurdetasu, Me.Kuutasu})
         Me.ListBors.HideSelection = False
-        Me.ListBors.Location = New System.Drawing.Point(28, 38)
+        Me.ListBors.Location = New System.Drawing.Point(25, 30)
+        Me.ListBors.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListBors.MultiSelect = False
         Me.ListBors.Name = "ListBors"
-        Me.ListBors.Size = New System.Drawing.Size(629, 149)
+        Me.ListBors.Size = New System.Drawing.Size(560, 120)
         Me.ListBors.TabIndex = 3
         Me.ListBors.UseCompatibleStateImageBehavior = False
         Me.ListBors.View = System.Windows.Forms.View.Details
@@ -108,10 +112,11 @@ Partial Class Form1
         '
         Me.ListFix.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader7})
         Me.ListFix.HideSelection = False
-        Me.ListFix.Location = New System.Drawing.Point(28, 226)
+        Me.ListFix.Location = New System.Drawing.Point(25, 181)
+        Me.ListFix.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListFix.MultiSelect = False
         Me.ListFix.Name = "ListFix"
-        Me.ListFix.Size = New System.Drawing.Size(629, 149)
+        Me.ListFix.Size = New System.Drawing.Size(560, 120)
         Me.ListFix.TabIndex = 5
         Me.ListFix.UseCompatibleStateImageBehavior = False
         Me.ListFix.View = System.Windows.Forms.View.Details
@@ -139,10 +144,11 @@ Partial Class Form1
         '
         Me.ListUniv.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader8})
         Me.ListUniv.HideSelection = False
-        Me.ListUniv.Location = New System.Drawing.Point(28, 415)
+        Me.ListUniv.Location = New System.Drawing.Point(25, 332)
+        Me.ListUniv.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListUniv.MultiSelect = False
         Me.ListUniv.Name = "ListUniv"
-        Me.ListUniv.Size = New System.Drawing.Size(629, 149)
+        Me.ListUniv.Size = New System.Drawing.Size(560, 120)
         Me.ListUniv.TabIndex = 6
         Me.ListUniv.UseCompatibleStateImageBehavior = False
         Me.ListUniv.View = System.Windows.Forms.View.Details
@@ -169,89 +175,95 @@ Partial Class Form1
         'Universaalpaketid
         '
         Me.Universaalpaketid.AutoSize = True
-        Me.Universaalpaketid.Location = New System.Drawing.Point(24, 392)
+        Me.Universaalpaketid.Location = New System.Drawing.Point(21, 314)
         Me.Universaalpaketid.Name = "Universaalpaketid"
-        Me.Universaalpaketid.Size = New System.Drawing.Size(135, 20)
+        Me.Universaalpaketid.Size = New System.Drawing.Size(117, 16)
         Me.Universaalpaketid.TabIndex = 7
         Me.Universaalpaketid.Text = "Universaalpaketid"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(24, 202)
+        Me.Label2.Location = New System.Drawing.Point(21, 162)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(143, 20)
+        Me.Label2.Size = New System.Drawing.Size(121, 16)
         Me.Label2.TabIndex = 8
         Me.Label2.Text = "Fikseeritud paketid"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(24, 12)
+        Me.Label3.Location = New System.Drawing.Point(21, 10)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(97, 20)
+        Me.Label3.Size = New System.Drawing.Size(83, 16)
         Me.Label3.TabIndex = 9
         Me.Label3.Text = "Börsipaketid"
         '
         'BtnMuudaBors
         '
-        Me.BtnMuudaBors.Location = New System.Drawing.Point(677, 81)
+        Me.BtnMuudaBors.Location = New System.Drawing.Point(602, 65)
+        Me.BtnMuudaBors.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnMuudaBors.Name = "BtnMuudaBors"
-        Me.BtnMuudaBors.Size = New System.Drawing.Size(130, 37)
+        Me.BtnMuudaBors.Size = New System.Drawing.Size(116, 30)
         Me.BtnMuudaBors.TabIndex = 10
         Me.BtnMuudaBors.Text = "Muuda"
         Me.BtnMuudaBors.UseVisualStyleBackColor = True
         '
         'BtnKustutaBors
         '
-        Me.BtnKustutaBors.Location = New System.Drawing.Point(677, 124)
+        Me.BtnKustutaBors.Location = New System.Drawing.Point(602, 99)
+        Me.BtnKustutaBors.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnKustutaBors.Name = "BtnKustutaBors"
-        Me.BtnKustutaBors.Size = New System.Drawing.Size(130, 37)
+        Me.BtnKustutaBors.Size = New System.Drawing.Size(116, 30)
         Me.BtnKustutaBors.TabIndex = 11
         Me.BtnKustutaBors.Text = "Kustuta"
         Me.BtnKustutaBors.UseVisualStyleBackColor = True
         '
         'BtnKustutaFix
         '
-        Me.BtnKustutaFix.Location = New System.Drawing.Point(677, 312)
+        Me.BtnKustutaFix.Location = New System.Drawing.Point(602, 250)
+        Me.BtnKustutaFix.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnKustutaFix.Name = "BtnKustutaFix"
-        Me.BtnKustutaFix.Size = New System.Drawing.Size(130, 37)
+        Me.BtnKustutaFix.Size = New System.Drawing.Size(116, 30)
         Me.BtnKustutaFix.TabIndex = 13
         Me.BtnKustutaFix.Text = "Kustuta"
         Me.BtnKustutaFix.UseVisualStyleBackColor = True
         '
         'BtnMuudaFix
         '
-        Me.BtnMuudaFix.Location = New System.Drawing.Point(677, 269)
+        Me.BtnMuudaFix.Location = New System.Drawing.Point(602, 215)
+        Me.BtnMuudaFix.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnMuudaFix.Name = "BtnMuudaFix"
-        Me.BtnMuudaFix.Size = New System.Drawing.Size(130, 37)
+        Me.BtnMuudaFix.Size = New System.Drawing.Size(116, 30)
         Me.BtnMuudaFix.TabIndex = 12
         Me.BtnMuudaFix.Text = "Muuda"
         Me.BtnMuudaFix.UseVisualStyleBackColor = True
         '
         'BtnKustutaUniv
         '
-        Me.BtnKustutaUniv.Location = New System.Drawing.Point(677, 501)
+        Me.BtnKustutaUniv.Location = New System.Drawing.Point(602, 401)
+        Me.BtnKustutaUniv.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnKustutaUniv.Name = "BtnKustutaUniv"
-        Me.BtnKustutaUniv.Size = New System.Drawing.Size(130, 37)
+        Me.BtnKustutaUniv.Size = New System.Drawing.Size(116, 30)
         Me.BtnKustutaUniv.TabIndex = 15
         Me.BtnKustutaUniv.Text = "Kustuta"
         Me.BtnKustutaUniv.UseVisualStyleBackColor = True
         '
         'BtnMuudaUniv
         '
-        Me.BtnMuudaUniv.Location = New System.Drawing.Point(677, 458)
+        Me.BtnMuudaUniv.Location = New System.Drawing.Point(602, 366)
+        Me.BtnMuudaUniv.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnMuudaUniv.Name = "BtnMuudaUniv"
-        Me.BtnMuudaUniv.Size = New System.Drawing.Size(130, 37)
+        Me.BtnMuudaUniv.Size = New System.Drawing.Size(116, 30)
         Me.BtnMuudaUniv.TabIndex = 14
         Me.BtnMuudaUniv.Text = "Muuda"
         Me.BtnMuudaUniv.UseVisualStyleBackColor = True
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(829, 576)
+        Me.ClientSize = New System.Drawing.Size(737, 461)
         Me.Controls.Add(Me.BtnKustutaUniv)
         Me.Controls.Add(Me.BtnMuudaUniv)
         Me.Controls.Add(Me.BtnKustutaFix)
@@ -267,6 +279,7 @@ Partial Class Form1
         Me.Controls.Add(Me.BtnLisaFix)
         Me.Controls.Add(Me.BtnLisaUniv)
         Me.Controls.Add(Me.BtnLisaBors)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.ResumeLayout(False)

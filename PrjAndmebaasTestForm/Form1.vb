@@ -185,4 +185,8 @@ Public Class Form1
         Andmebaas.KustutaPakettUniv(ID)
         UuendaPaketid()
     End Sub
+
+    Private Sub ListBors_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBors.SelectedIndexChanged
+
+    End Sub
 End Class

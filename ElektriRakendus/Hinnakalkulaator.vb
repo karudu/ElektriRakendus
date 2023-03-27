@@ -1,8 +1,8 @@
-﻿Imports System.Security.Cryptography
+﻿
 
-
-Public Class KodumasinaKasutus
+Public Class Hinnakalkulaator
     Inherits Kalkulaator
+
     Dim Elktrikogus As Double
     Dim Kulu As Double
     Public Sub New(ByVal PaketHind As Double, ByVal kasutus As Double, ByVal Aeg As Double)
@@ -16,7 +16,7 @@ Public Class KodumasinaKasutus
     End Function
 
     Public Overrides Function Rahalinekulu() As Double
-        Kulu = Elktrikasutus * KasutusAeg * dblElektriPaket
+        Kulu = (Elktrikasutus / KasutusAeg) * dblElektriPaket
         Return Kulu
     End Function
 End Class
