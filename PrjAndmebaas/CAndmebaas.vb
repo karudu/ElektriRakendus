@@ -241,8 +241,15 @@ Public Class CAndmebaas
         Aeg = New Date(Aeg.Year, Aeg.Month, Aeg.Day, Aeg.Hour, 0, 0)
 
         For i As Integer = 0 To Tunnid - 1
-            Ajad.Add(LoeBorsihind(Aeg, Tunnid - i) * KAIBEMAKS)
+            Dim Hind As Decimal = LoeBorsihind(Aeg, Tunnid - i) * KAIBEMAKS
+            Ajad.Add(Hind)
             Aeg = Aeg.AddHours(1)
+            If Hind = 0 Then ' Kui hindasid pole, siis ära neid edasi küsi
+                For j As Integer = 0 To Tunnid - i - 2
+                    Ajad.Add(0)
+                Next
+                Exit For
+            End If
         Next
 
         Return Ajad
