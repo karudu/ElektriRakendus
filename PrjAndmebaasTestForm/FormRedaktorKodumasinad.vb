@@ -19,6 +19,15 @@ Public Class FormRedaktorKodumasinad
             ListMasinad.Items.Add(Item)
             i += 1
         Next
+
+        Dim CurrTime As Date = Date.Now()
+        If CurrTime.Minute > 0 Then
+            CurrTime = CurrTime.AddHours(-1)
+            CurrTime = CurrTime.AddMinutes(60 - CurrTime.Minute)
+        End If
+        Dim Hinnad As New List(Of Decimal)
+        Hinnad = Andmebaas.LoeBorsihinnad(CurrTime.AddHours(24), 24)
+        Hinnad = Nothing
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UuendaMasinad()
