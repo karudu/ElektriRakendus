@@ -5,6 +5,8 @@ Imports Newtonsoft.Json
 Public Class CAndmebaas
     Implements IAndmebaas
 
+    Private GConnection As OleDbConnection
+
     Public Function LoePakettideNimekiri() As List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)) Implements IAndmebaas.LoePakettideNimekiri
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         Try
@@ -240,17 +242,26 @@ Public Class CAndmebaas
         Aeg = Aeg.ToUniversalTime()
         Aeg = New Date(Aeg.Year, Aeg.Month, Aeg.Day, Aeg.Hour, 0, 0)
 
-        For i As Integer = 0 To Tunnid - 1
-            Dim Hind As Decimal = LoeBorsihind(Aeg, Tunnid - i) * KAIBEMAKS
-            Ajad.Add(Hind)
-            Aeg = Aeg.AddHours(1)
-            If Hind = 0 Then ' Kui hindasid pole, siis ära neid edasi küsi
-                For j As Integer = 0 To Tunnid - i - 2
-                    Ajad.Add(0)
-                Next
-                Exit For
-            End If
-        Next
+        GConnection = New OleDbConnection
+        With GConnection
+            .ConnectionString = LoeConnectionString()
+            .Open()
+
+            For i As Integer = 0 To Tunnid - 1
+                Dim Hind As Decimal = LoeBorsihind(Aeg, Tunnid - i) * KAIBEMAKS
+                Ajad.Add(Hind)
+                Aeg = Aeg.AddHours(1)
+                If Hind = 0 Then ' Kui hindasid pole, siis ära neid edasi küsi
+                    For j As Integer = 0 To Tunnid - i - 2
+                        Ajad.Add(0)
+                    Next
+                    Exit For
+                End If
+            Next
+
+            .Close()
+        End With
+        GConnection.Dispose()
 
         Return Ajad
     End Function
@@ -270,39 +281,30 @@ Public Class CAndmebaas
 
         ' Vaata, kas selle tunni hind on juba andmebaasis olemas
         Try
-            Dim Connection As New OleDbConnection
-            With Connection
-                .ConnectionString = LoeConnectionString()
-                .Open()
+            Dim Cmd As New OleDbCommand
+            Dim Reader As OleDbDataReader
 
-                Dim Cmd As New OleDbCommand
-                Dim Reader As OleDbDataReader
-
-                With Cmd
-                    .Connection = Connection
-                    .CommandType = CommandType.Text
-                    .CommandText = "SELECT * FROM borsihinnad " &
-                                   "WHERE [timestamp] = " &
-                                   """" &
-                                   Timestamp &
-                                   """" &
-                                   ";"
-                    Reader = .ExecuteReader
-                End With
-                Cmd.Dispose()
-
-                Reader.Read()
-                If Reader.HasRows Then
-                    ' Andmebaasis olemas
-                    Dim HindReturn As Decimal = Reader("hind")
-                    Reader.Close()
-                    Return HindReturn
-                End If
-                Reader.Close()
-
-                .Close()
+            With Cmd
+                .Connection = GConnection
+                .CommandType = CommandType.Text
+                .CommandText = "SELECT * FROM borsihinnad " &
+                               "WHERE [timestamp] = " &
+                               """" &
+                               Timestamp &
+                               """" &
+                               ";"
+                Reader = .ExecuteReader
             End With
-            Connection.Dispose()
+            Cmd.Dispose()
+
+            Reader.Read()
+            If Reader.HasRows Then
+                ' Andmebaasis olemas
+                Dim HindReturn As Decimal = Reader("hind")
+                Reader.Close()
+                Return HindReturn
+            End If
+            Reader.Close()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
@@ -312,38 +314,29 @@ Public Class CAndmebaas
             Dim TimestampKontroll As String
             TimestampKontroll = (Aeg.AddHours(i - 1) - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString
             Try
-                Dim Connection As New OleDbConnection
-                With Connection
-                    .ConnectionString = LoeConnectionString()
-                    .Open()
+                Dim Cmd As New OleDbCommand
+                Dim Reader As OleDbDataReader
 
-                    Dim Cmd As New OleDbCommand
-                    Dim Reader As OleDbDataReader
-
-                    With Cmd
-                        .Connection = Connection
-                        .CommandType = CommandType.Text
-                        .CommandText = "SELECT * FROM borsihinnad " &
-                                   "WHERE [timestamp] = " &
-                                   """" &
-                                   TimestampKontroll &
-                                   """" &
-                                   ";"
-                        Reader = .ExecuteReader
-                    End With
-                    Cmd.Dispose()
-
-                    Reader.Read()
-                    If Reader.HasRows Then
-                        Tunnid = i - 1
-                        Reader.Close()
-                        Exit For
-                    End If
-                    Reader.Close()
-
-                    .Close()
+                With Cmd
+                    .Connection = GConnection
+                    .CommandType = CommandType.Text
+                    .CommandText = "SELECT * FROM borsihinnad " &
+                               "WHERE [timestamp] = " &
+                               """" &
+                               TimestampKontroll &
+                               """" &
+                               ";"
+                    Reader = .ExecuteReader
                 End With
-                Connection.Dispose()
+                Cmd.Dispose()
+
+                Reader.Read()
+                If Reader.HasRows Then
+                    Tunnid = i - 1
+                    Reader.Close()
+                    Exit For
+                End If
+                Reader.Close()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
             End Try
@@ -372,29 +365,20 @@ Public Class CAndmebaas
         ' Lisa loetud hinnad andmebaasi
         For i As Integer = 0 To Hinnad.Length - 1
             Try
-                Dim Connection As New OleDbConnection
-                With Connection
-                    .ConnectionString = LoeConnectionString()
-                    .Open()
+                Dim Cmd As New OleDbCommand
+                With Cmd
+                    .Connection = GConnection
+                    .CommandType = CommandType.Text
+                    .CommandText = "INSERT INTO borsihinnad " &
+                                       "([timestamp], hind) " &
+                                       "VALUES (@p1, @p2);"
 
-                    Dim Cmd As New OleDbCommand
-                    With Cmd
-                        .Connection = Connection
-                        .CommandType = CommandType.Text
-                        .CommandText = "INSERT INTO borsihinnad " &
-                                           "([timestamp], hind) " &
-                                           "VALUES (@p1, @p2);"
+                    .Parameters.Add(New OleDbParameter("@p1", OleDbType.VarChar, 255)).Value = Hinnad(i).Timestamp
+                    .Parameters.Add(New OleDbParameter("@p2", OleDbType.Currency)).Value = Hinnad(i).Price
 
-                        .Parameters.Add(New OleDbParameter("@p1", OleDbType.VarChar, 255)).Value = Hinnad(i).Timestamp
-                        .Parameters.Add(New OleDbParameter("@p2", OleDbType.Currency)).Value = Hinnad(i).Price
-
-                        .ExecuteNonQuery()
-                    End With
-                    Cmd.Dispose()
-
-                    .Close()
+                    .ExecuteNonQuery()
                 End With
-                Connection.Dispose()
+                Cmd.Dispose()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
             End Try
