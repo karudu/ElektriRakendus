@@ -73,44 +73,6 @@ Public Class CAndmebaas
         End Try
     End Function
 
-    Function LoeHind(Aeg As Date) As Double Implements IAndmebaas.LoeHind
-        Dim Hind As Double
-        Console.WriteLine("------------------")
-        Console.WriteLine(Aeg)
-        Console.WriteLine("------------------")
-        Try
-            Dim Connection As New OleDbConnection
-            With Connection
-                .ConnectionString = LoeConnectionString()
-                .Open()
-
-                Dim Cmd As New OleDbCommand
-                Dim Reader As OleDbDataReader
-
-                With Cmd
-                    .Connection = Connection
-                    .CommandType = CommandType.Text
-                    .CommandText = "SELECT * FROM hinna_ajalugu " &
-                                   "WHERE aeg = " &
-                                    """" &
-                                    Aeg.ToString &
-                                    """" &
-                                    ";"
-                    Reader = .ExecuteReader
-                End With
-                Cmd.Dispose()
-                Reader.Read()
-                Hind = Reader("hind").ToString
-                Reader.Close()
-                .Close()
-            End With
-            Connection.Dispose()
-            Return Hind
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical)
-            Return Hind
-        End Try
-    End Function
     Function LoePakettBors(ID As Integer) As IAndmebaas.PkBors Implements IAndmebaas.LoePakettBors
         Dim Pakett As New IAndmebaas.PkBors
         Try
@@ -518,4 +480,5 @@ Public Class CAndmebaas
     Private Function LoeConnectionString() As String
         Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Environment.CurrentDirectory & "\andmebaas.accdb"
     End Function
+
 End Class

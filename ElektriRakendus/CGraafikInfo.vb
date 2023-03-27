@@ -11,18 +11,11 @@ Public Class CGraafikInfo
         Dim InfoList As New List(Of (Aeg As String, Hind As Double))
         Dim AndmedConnect As PrjAndmebaas.IAndmebaas
         AndmedConnect = New PrjAndmebaas.CAndmebaas
-        Dim I As Integer
+        'Dim I As Integer
         Dim CurrTime As Date = New DateTime(2023, 3, 20, 14, 0, 0)
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
-            For I = 0 To 24
-                Dim Info As (Aeg As String, Hind As Double)
-                Info.Aeg = CurrTime.ToString("HH")
-                Info.Hind = (AndmedConnect.LoeHind(CurrTime)) + (StructBors.Juurdetasu / 100)
-                'Info.Hind = (StructBors.Juurdetasu / 100)
-                InfoList.Add(Info)
-                CurrTime = CurrTime.AddHours(-1)
-            Next
+            InfoList = AndmedConnect.LoeHind(CurrTime, CurrTime.AddDays(-1))
             'ElseIf PaketiTyyp = 1 Then
             '    Me.StructFix = AndmedConnect.LoePakettFix(1)
             '    For I = 0 To 24

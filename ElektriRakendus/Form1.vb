@@ -15,7 +15,7 @@
                 Dim GetInfo As ElektriRakendus.IGraafikInfo
                 GetInfo = New ElektriRakendus.CGraafikInfo
                 GInfo = GetInfo.GetPaev(15, 0)
-                For I = 24 To 0 Step -1
+                For I = 0 To GInfo.Count
                     Graafik1.setPoint1(GInfo.Item(I).Xval, GInfo.Item(I).Yval)
                 Next
                 'Case 1
