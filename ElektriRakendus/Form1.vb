@@ -7,7 +7,7 @@
 
 
     Private Sub cmbPeriood_DropDownClosed(sender As Object, e As EventArgs) Handles cmbPeriood.DropDownClosed
-        Dim GInfo As List(Of (Xval As String, Yval As Double))
+        Dim GInfo As List(Of (Xval As String, Yval As Decimal))
         Graafik1.ClearPoints()
         Dim I As Integer
         Select Case cmbPeriood.SelectedIndex
@@ -15,7 +15,7 @@
                 Dim GetInfo As ElektriRakendus.IGraafikInfo
                 GetInfo = New ElektriRakendus.CGraafikInfo
                 GInfo = GetInfo.GetPaev(15, 0)
-                For I = 0 To GInfo.Count
+                For I = 0 To GInfo.Count - 1
                     Graafik1.setPoint1(GInfo.Item(I).Xval, GInfo.Item(I).Yval)
                 Next
                 'Case 1

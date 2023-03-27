@@ -7,15 +7,29 @@ Public Class CGraafikInfo
     Public StructFix As New PrjAndmebaas.IAndmebaas.PkFix
     Public StructUniv As New PrjAndmebaas.IAndmebaas.PkUniv
 
-    Private Function GetPaev(PakettID As Integer, PaketiTyyp As Integer) As List(Of (Aeg As String, Hind As Double)) Implements IGraafikInfo.GetPaev
-        Dim InfoList As New List(Of (Aeg As String, Hind As Double))
+
+
+    Private Function GetPaev(PakettID As Integer, PaketiTyyp As Integer) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetPaev
+        Dim InfoList As New List(Of (Aeg As String, Hind As Decimal))
+        Dim Hinnad As New List(Of Decimal)
         Dim AndmedConnect As PrjAndmebaas.IAndmebaas
         AndmedConnect = New PrjAndmebaas.CAndmebaas
-        'Dim I As Integer
-        Dim CurrTime As Date = New DateTime(2023, 3, 20, 14, 0, 0)
+        Dim I As Integer
+        Dim CurrTime As Date = Date.Now()
+        Dim EndTime As Date = CurrTime.AddDays(-1)
+        Dim TS As New TimeSpan
+        TS = CurrTime.Subtract(EndTime)
+        Dim Tunnid As Integer = TS.TotalHours
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
-            InfoList = AndmedConnect.LoeHind(CurrTime, CurrTime.AddDays(-1))
+            Hinnad = AndmedConnect.LoeBorsihinnad(CurrTime, Tunnid)
+            For I = 0 To Hinnad.Count - 1
+                Dim Info As (Aeg As String, Hind As Decimal)
+                Info.Aeg = CurrTime.ToString("HH")
+                Info.Hind = Hinnad.Item(I) + (StructBors.Juurdetasu / 100)
+                InfoList.Add(Info)
+                CurrTime = CurrTime.AddHours(-1)
+            Next
             'ElseIf PaketiTyyp = 1 Then
             '    Me.StructFix = AndmedConnect.LoePakettFix(1)
             '    For I = 0 To 24
@@ -33,31 +47,21 @@ Public Class CGraafikInfo
         End If
         Return InfoList
     End Function
-
-    Public Function GetKuu(PakettID As Integer, PaketiTyyp As Integer) As String(,) Implements IGraafikInfo.GetKuu
-        Dim Info(30, 1) As String
+    Public Function GetKuu(PakettID As Integer, PaketiTyyp As Integer) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetKuu
+        Dim InfoList As New List(Of (Aeg As String, Hind As Decimal))
+        Dim Hinnad As New List(Of Decimal)
+        Dim AndmedConnect As PrjAndmebaas.IAndmebaas
+        AndmedConnect = New PrjAndmebaas.CAndmebaas
         Dim I As Integer
-        Dim CurrTime As Date = DateTime.Now()
-        Dim EndTime = CurrTime.AddMonths(-1)
-        Dim RandInt As Random = New Random
-        For I = 0 To 30
-            Info(I, 0) = CurrTime.AddDays(-I).ToString("H")
-            Info(I, 1) = RandInt.Next(30, 130).ToString
-        Next
-        Return Info
+        Dim CurrTime As Date = Date.Now()
+        Dim EndTime As Date = CurrTime.AddDays(-1)
+        Dim TS As New TimeSpan
+        TS = CurrTime.Subtract(EndTime)
+        Dim Tunnid As Integer = TS.TotalHours
+
+        Return InfoList
     End Function
 
-    Public Function GetAasta(PakettID As Integer, PaketiTyyp As Integer) As String(,) Implements IGraafikInfo.GetAasta
-        Dim Info(12, 1) As String
-        Dim I As Integer
-        Dim CurrTime As Date = DateTime.Now()
-        Dim EndTime = CurrTime.AddYears(-1)
-        Dim RandInt As Random = New Random
-        For I = 0 To 12
-            Info(I, 0) = CurrTime.AddMonths(-I).ToString("MMM")
-            Info(I, 1) = RandInt.Next(30, 130).ToString
-        Next
-        Return Info
+    Public Function GetAasta(PakettID As Integer, PaketiTyyp As Integer) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetAasta
     End Function
-
 End Class
