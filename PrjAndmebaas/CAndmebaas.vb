@@ -310,9 +310,9 @@ Public Class CAndmebaas
         End Try
 
         ' Ei ole, otsusta, mitu tundi tuleb lugeda
-        For i As Integer = Tunnid To 2 Step -1
+        For i As Integer = 1 To Tunnid - 1
             Dim TimestampKontroll As String
-            TimestampKontroll = (Aeg.AddHours(i - 1) - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString
+            TimestampKontroll = (Aeg.AddHours(i) - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString
             Try
                 Dim Cmd As New OleDbCommand
                 Dim Reader As OleDbDataReader
@@ -324,16 +324,15 @@ Public Class CAndmebaas
                                "WHERE [timestamp] = " &
                                """" &
                                TimestampKontroll &
-                               """" &
-                               ";"
+                               """;"
                     Reader = .ExecuteReader
                 End With
                 Cmd.Dispose()
 
                 Reader.Read()
                 If Reader.HasRows Then
-                    Tunnid = i - 1
                     Reader.Close()
+                    Tunnid = i
                     Exit For
                 End If
                 Reader.Close()
