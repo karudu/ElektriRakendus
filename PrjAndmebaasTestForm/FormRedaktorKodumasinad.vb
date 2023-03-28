@@ -19,6 +19,14 @@ Public Class FormRedaktorKodumasinad
             ListMasinad.Items.Add(Item)
             i += 1
         Next
+
+        Dim Hinnad As New List(Of Decimal)
+        Hinnad = Andmebaas.LoeBorsihinnad(Date.Now.AddDays(-30), 10)
+        Hinnad = Andmebaas.LoeBorsihinnad(Date.Now.AddDays(-20), 10)
+        Hinnad = Andmebaas.LoeBorsihinnad(Date.Now.AddDays(-10), 10)
+        Hinnad = Andmebaas.LoeBorsihinnad(Date.Now.AddDays(-1), 24)
+        Hinnad = Andmebaas.LoeBorsihinnad(Date.Now.AddDays(-30), 24 * 30)
+        Hinnad = Nothing
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UuendaMasinad()
