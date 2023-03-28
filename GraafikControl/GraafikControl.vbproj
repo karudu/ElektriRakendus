@@ -71,6 +71,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CGraafikInfo.vb" />
+    <Compile Include="IGraafikInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -117,6 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrjAndmebaas\Andmebaas.vbproj">
+      <Project>{8c256670-32e2-4aa1-8452-cb5af3f5d5bc}</Project>
+      <Name>Andmebaas</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

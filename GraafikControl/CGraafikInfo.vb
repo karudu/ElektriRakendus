@@ -50,7 +50,8 @@ Public Class CGraafikInfo
         Dim Hinnad As New List(Of Decimal)
         Dim AndmedConnect As PrjAndmebaas.IAndmebaas
         AndmedConnect = New PrjAndmebaas.CAndmebaas
-        Dim I As Integer
+        Dim I As Integer = 0
+        Dim J As Integer = 0
         Dim CurrTime As Date = Date.Now().AddHours(-2)
         Dim EndTime As Date = CurrTime.AddMonths(-1)
         Dim TS As New TimeSpan
@@ -59,17 +60,24 @@ Public Class CGraafikInfo
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
             Hinnad = AndmedConnect.LoeBorsihinnad(CurrTime, Tunnid)
-            For I = 0 To Hinnad.Count - 1
+            While I < Hinnad.Count - 1
                 Dim Info As (Aeg As String, Hind As Decimal)
-                Info.Aeg = CurrTime.ToString("HH")
-                Info.Hind = Hinnad.Item(I) + (StructBors.Juurdetasu / 100)
+                Dim TodayHours As Integer = CurrTime.Hour
+                While CurrTime.Hour > CurrTime.AddHours(-CurrTime.Hour).Hour And I < Hinnad.Count
+                    Info.Hind += Hinnad.Item(I) + (StructBors.Juurdetasu / 100)
+                    I += 1
+                    CurrTime = CurrTime.AddHours(-1)
+                End While
+                Info.Hind = Info.Hind / TodayHours
+                Info.Aeg = CurrTime.ToString("d")
                 InfoList.Add(Info)
                 CurrTime = CurrTime.AddHours(-1)
-            Next
+            End While
         End If
         Return InfoList
     End Function
 
     Public Function GetAasta(PakettID As Integer, PaketiTyyp As Integer) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetAasta
+
     End Function
 End Class
