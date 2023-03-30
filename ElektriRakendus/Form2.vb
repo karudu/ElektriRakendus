@@ -10,30 +10,41 @@ Public Class Form2
         Dim Andmebaas As New CAndmebaas
         Paketid = Andmebaas.LoePakettideNimekiri
         ListUniv.Items.Clear()
-
-        For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
-            Select Case Pakett.Tyyp
-                Case IAndmebaas.PaketiTyyp.PAKETT_BORS
-                    Dim PakettBors As New IAndmebaas.PkBors
-                    PakettBors = Andmebaas.LoePakettBors(Pakett.ID)
-                    Dim Item As New ListViewItem(PakettBors.Nimi)
-
+        Select Case ComboBox2.SelectedIndex
+            Case 0
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    Select Case Pakett.Tyyp
+                        Case IAndmebaas.PaketiTyyp.PAKETT_BORS
+                            Dim PakettBors As New IAndmebaas.PkBors
+                            PakettBors = Andmebaas.LoePakettBors(Pakett.ID)
+                            Dim Item As New ListViewItem(PakettBors.Nimi)
+                            ListUniv.Items.Add(Item)
+                    End Select
                     ' ID on subitem 4
                     ' CInt(ListBors.Items(i).SubItems(4).Text)
-                Case IAndmebaas.PaketiTyyp.PAKETT_FIX
-                    Dim PakettFix As New IAndmebaas.PkFix
+                Next
+            Case 1
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    Select Case Pakett.Tyyp
+                        Case IAndmebaas.PaketiTyyp.PAKETT_FIX
+                            Dim PakettFix As New IAndmebaas.PkFix
                     PakettFix = Andmebaas.LoePakettFix(Pakett.ID)
                     Dim Item As New ListViewItem(PakettFix.Nimi)
                     ListUniv.Items.Add(Item)
-                Case IAndmebaas.PaketiTyyp.PAKETT_UNIV
-                    Dim PakettUniv As New IAndmebaas.PkUniv
-                    PakettUniv = Andmebaas.LoePakettUniv(Pakett.ID)
-                    Dim Item As New ListViewItem(PakettUniv.Nimi)
-
-
-            End Select
+                    End Select
         Next
+            Case 2
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    Select Case Pakett.Tyyp
+                        Case IAndmebaas.PaketiTyyp.PAKETT_UNIV
+                            Dim PakettUniv As New IAndmebaas.PkUniv
+                            PakettUniv = Andmebaas.LoePakettUniv(Pakett.ID)
+                            Dim Item As New ListViewItem(PakettUniv.Nimi)
+                            ListUniv.Items.Add(Item)
+                    End Select
+                Next
 
+        End Select
         Dim sadasd As Integer = 0
     End Sub
 
