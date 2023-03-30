@@ -33,18 +33,20 @@ Partial Class FormRedaktorKodumasinad
         '
         'BtnKustutaMasin
         '
-        Me.BtnKustutaMasin.Location = New System.Drawing.Point(544, 98)
+        Me.BtnKustutaMasin.Location = New System.Drawing.Point(484, 78)
+        Me.BtnKustutaMasin.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnKustutaMasin.Name = "BtnKustutaMasin"
-        Me.BtnKustutaMasin.Size = New System.Drawing.Size(130, 37)
+        Me.BtnKustutaMasin.Size = New System.Drawing.Size(116, 30)
         Me.BtnKustutaMasin.TabIndex = 15
         Me.BtnKustutaMasin.Text = "Kustuta"
         Me.BtnKustutaMasin.UseVisualStyleBackColor = True
         '
         'BtnMuudaMasin
         '
-        Me.BtnMuudaMasin.Location = New System.Drawing.Point(544, 55)
+        Me.BtnMuudaMasin.Location = New System.Drawing.Point(484, 44)
+        Me.BtnMuudaMasin.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnMuudaMasin.Name = "BtnMuudaMasin"
-        Me.BtnMuudaMasin.Size = New System.Drawing.Size(130, 37)
+        Me.BtnMuudaMasin.Size = New System.Drawing.Size(116, 30)
         Me.BtnMuudaMasin.TabIndex = 14
         Me.BtnMuudaMasin.Text = "Muuda"
         Me.BtnMuudaMasin.UseVisualStyleBackColor = True
@@ -53,10 +55,11 @@ Partial Class FormRedaktorKodumasinad
         '
         Me.ListMasinad.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Nimi, Me.Voimsus, Me.Aeg})
         Me.ListMasinad.HideSelection = False
-        Me.ListMasinad.Location = New System.Drawing.Point(12, 12)
+        Me.ListMasinad.Location = New System.Drawing.Point(11, 10)
+        Me.ListMasinad.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListMasinad.MultiSelect = False
         Me.ListMasinad.Name = "ListMasinad"
-        Me.ListMasinad.Size = New System.Drawing.Size(526, 149)
+        Me.ListMasinad.Size = New System.Drawing.Size(468, 120)
         Me.ListMasinad.TabIndex = 13
         Me.ListMasinad.UseCompatibleStateImageBehavior = False
         Me.ListMasinad.View = System.Windows.Forms.View.Details
@@ -78,22 +81,24 @@ Partial Class FormRedaktorKodumasinad
         '
         'BtnLisaMasin
         '
-        Me.BtnLisaMasin.Location = New System.Drawing.Point(544, 12)
+        Me.BtnLisaMasin.Location = New System.Drawing.Point(484, 10)
+        Me.BtnLisaMasin.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnLisaMasin.Name = "BtnLisaMasin"
-        Me.BtnLisaMasin.Size = New System.Drawing.Size(130, 37)
+        Me.BtnLisaMasin.Size = New System.Drawing.Size(116, 30)
         Me.BtnLisaMasin.TabIndex = 12
         Me.BtnLisaMasin.Text = "Uus"
         Me.BtnLisaMasin.UseVisualStyleBackColor = True
         '
         'FormRedaktorKodumasinad
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(694, 176)
+        Me.ClientSize = New System.Drawing.Size(617, 141)
         Me.Controls.Add(Me.BtnKustutaMasin)
         Me.Controls.Add(Me.BtnMuudaMasin)
         Me.Controls.Add(Me.ListMasinad)
         Me.Controls.Add(Me.BtnLisaMasin)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "FormRedaktorKodumasinad"
         Me.Text = "Kodumasinad"
         Me.ResumeLayout(False)
