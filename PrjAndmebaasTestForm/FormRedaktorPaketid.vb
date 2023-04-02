@@ -192,4 +192,8 @@ Public Class FormRedaktorPaketid
     Private Sub ListUniv_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListUniv.SelectedIndexChanged
 
     End Sub
+
+    Private Sub ListFix_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListFix.SelectedIndexChanged
+
+    End Sub
 End Class

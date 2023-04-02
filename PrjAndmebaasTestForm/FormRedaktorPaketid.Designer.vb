@@ -111,6 +111,7 @@ Partial Class FormRedaktorPaketid
         'ListFix
         '
         Me.ListFix.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader7})
+        Me.ListFix.Enabled = False
         Me.ListFix.HideSelection = False
         Me.ListFix.Location = New System.Drawing.Point(24, 181)
         Me.ListFix.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)

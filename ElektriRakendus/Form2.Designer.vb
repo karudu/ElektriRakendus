@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form2
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form2
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.SeadmeV = New System.Windows.Forms.TextBox()
         Me.KasutusAeg = New System.Windows.Forms.TextBox()
@@ -28,12 +28,9 @@ Partial Class Form2
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Arvuta = New System.Windows.Forms.Button()
+        Me.ListBors = New System.Windows.Forms.ListView()
+        Me.Nimi = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.ListUniv = New System.Windows.Forms.ListView()
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -78,8 +75,9 @@ Partial Class Form2
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Arvuta)
+        Me.GroupBox1.Controls.Add(Me.ListBors)
         Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.ListUniv)
         Me.GroupBox1.Controls.Add(Me.ComboBox2)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.SeadmeV)
@@ -88,19 +86,37 @@ Partial Class Form2
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(22, 35)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(514, 359)
+        Me.GroupBox1.Size = New System.Drawing.Size(371, 359)
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "GroupBox1"
         '
         'Arvuta
         '
-        Me.Arvuta.Location = New System.Drawing.Point(461, 485)
+        Me.Arvuta.Location = New System.Drawing.Point(258, 304)
         Me.Arvuta.Name = "Arvuta"
         Me.Arvuta.Size = New System.Drawing.Size(75, 23)
         Me.Arvuta.TabIndex = 9
         Me.Arvuta.Text = "Arvuta"
         Me.Arvuta.UseVisualStyleBackColor = True
+        '
+        'ListBors
+        '
+        Me.ListBors.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Nimi})
+        Me.ListBors.HideSelection = False
+        Me.ListBors.Location = New System.Drawing.Point(16, 236)
+        Me.ListBors.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.ListBors.MultiSelect = False
+        Me.ListBors.Name = "ListBors"
+        Me.ListBors.Size = New System.Drawing.Size(203, 109)
+        Me.ListBors.TabIndex = 12
+        Me.ListBors.UseCompatibleStateImageBehavior = False
+        Me.ListBors.View = System.Windows.Forms.View.Details
+        '
+        'Nimi
+        '
+        Me.Nimi.Text = "Nimi"
+        Me.Nimi.Width = 145
         '
         'Label6
         '
@@ -110,38 +126,6 @@ Partial Class Form2
         Me.Label6.Size = New System.Drawing.Size(150, 16)
         Me.Label6.TabIndex = 8
         Me.Label6.Text = "Elektripaket Hinna Tüüp"
-        '
-        'ListUniv
-        '
-        Me.ListUniv.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader8})
-        Me.ListUniv.HideSelection = False
-        Me.ListUniv.Location = New System.Drawing.Point(25, 222)
-        Me.ListUniv.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.ListUniv.MultiSelect = False
-        Me.ListUniv.Name = "ListUniv"
-        Me.ListUniv.Size = New System.Drawing.Size(416, 120)
-        Me.ListUniv.TabIndex = 10
-        Me.ListUniv.UseCompatibleStateImageBehavior = False
-        Me.ListUniv.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "Nimi"
-        Me.ColumnHeader4.Width = 140
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Text = "Baashind"
-        Me.ColumnHeader5.Width = 100
-        '
-        'ColumnHeader6
-        '
-        Me.ColumnHeader6.Text = "Marginaal"
-        Me.ColumnHeader6.Width = 100
-        '
-        'ColumnHeader8
-        '
-        Me.ColumnHeader8.Text = "Kuutasu"
         '
         'ComboBox2
         '
@@ -201,7 +185,6 @@ Partial Class Form2
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(803, 552)
-        Me.Controls.Add(Me.Arvuta)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -229,9 +212,6 @@ Partial Class Form2
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Arvuta As Button
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents ListUniv As ListView
-    Friend WithEvents ColumnHeader4 As ColumnHeader
-    Friend WithEvents ColumnHeader5 As ColumnHeader
-    Friend WithEvents ColumnHeader6 As ColumnHeader
-    Friend WithEvents ColumnHeader8 As ColumnHeader
+    Friend WithEvents ListBors As ListView
+    Friend WithEvents Nimi As ColumnHeader
 End Class
