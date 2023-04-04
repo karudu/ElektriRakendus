@@ -22,12 +22,10 @@
                     Graafik1.setPoint1(GInfo.Item(I).Xval, GInfo.Item(I).Yval)
                 Next
             Case 2
-                '    Dim GetInfo As ElektriRakendus.IGraafikInfo
-                '    GetInfo = New ElektriRakendus.CGraafikInfo
-                '    GInfo = GetInfo.GetAasta(0, 0)
-                '    For I = 12 To 0 Step -1
-                '        Graafik1.setPoint1(GInfo(I, 0), GInfo(I, 1))
-                '    Next
+                GInfo = GraafikConnect.GetAasta(15, 0)
+                For I = 0 To GInfo.Count - 1
+                    Graafik1.setPoint1(GInfo.Item(I).Xval, GInfo.Item(I).Yval)
+                Next
         End Select
     End Sub
 End Class
