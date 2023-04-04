@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
 Imports System.Net
+Imports Microsoft.VisualBasic.FileIO
 Imports Newtonsoft.Json
 
 Public Class CAndmebaas
@@ -769,6 +770,7 @@ Public Class CAndmebaas
     End Sub
 
     Private Function LoeConnectionString() As String
-        Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Environment.CurrentDirectory & "\andmebaas.accdb"
+        'Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Environment.CurrentDirectory & "\andmebaas.accdb"
+        Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SpecialDirectories.Desktop & "\andmebaas.accdb"
     End Function
 End Class
