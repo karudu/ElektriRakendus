@@ -236,6 +236,7 @@ Public Class CAndmebaas
     End Function
 
     Private Const KAIBEMAKS = 1.2 ' 20%
+    Private LugemineOK As Boolean
     Public Function LoeBorsihinnad(AlgusAeg As Date, Tunnid As Integer) As List(Of Decimal) Implements IAndmebaas.LoeBorsihinnad
         Dim Ajad As New List(Of Decimal)
 
@@ -252,7 +253,7 @@ Public Class CAndmebaas
                 Dim Hind As Decimal = LoeBorsihind(Aeg, Tunnid - i) * KAIBEMAKS
                 Ajad.Add(Hind)
                 Aeg = Aeg.AddHours(1)
-                If Hind = 0 Then ' Kui hindasid pole, siis ära neid edasi küsi
+                If Hind = 0 And LugemineOK = False Then ' Kui hindasid pole, siis ära neid edasi küsi
                     For j As Integer = 0 To Tunnid - i - 2
                         Ajad.Add(0)
                     Next
@@ -303,6 +304,7 @@ Public Class CAndmebaas
                 ' Andmebaasis olemas
                 Dim HindReturn As Decimal = Reader("hind")
                 Reader.Close()
+                LugemineOK = True
                 Return HindReturn
             End If
             Reader.Close()
@@ -360,7 +362,10 @@ Public Class CAndmebaas
         Dim Hinnad = Andmed.data.ee
 
         ' Kui andmed puuduvad (küsiti tulevikust), siis tagasta 0
-        If Hinnad.Length = 0 Then Return 0
+        If Hinnad.Length = 0 Then
+            LugemineOK = False
+            Return 0
+        End If
 
         ' Lisa loetud hinnad andmebaasi
         For i As Integer = 0 To Hinnad.Length - 1
@@ -384,6 +389,7 @@ Public Class CAndmebaas
             End Try
         Next
 
+        LugemineOK = True
         Return Hinnad(0).Price
     End Function
 
