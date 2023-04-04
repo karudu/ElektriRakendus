@@ -23,8 +23,4 @@
 
         Me.Close()
     End Sub
-
-    Private Sub TxtNimi_TextChanged(sender As Object, e As EventArgs) Handles TxtNimi.TextChanged
-
-    End Sub
 End Class
