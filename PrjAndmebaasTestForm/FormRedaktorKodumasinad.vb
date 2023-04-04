@@ -75,8 +75,4 @@ Public Class FormRedaktorKodumasinad
         Andmebaas.KustutaKodumasin(Masin.ID)
         UuendaMasinad()
     End Sub
-
-    Private Sub ListMasinad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListMasinad.SelectedIndexChanged
-
-    End Sub
 End Class

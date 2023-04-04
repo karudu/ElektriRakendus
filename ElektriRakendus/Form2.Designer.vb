@@ -29,13 +29,9 @@ Partial Class Form2
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Arvuta = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.ListUniv = New System.Windows.Forms.ListView()
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -78,24 +74,25 @@ Partial Class Form2
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Arvuta)
         Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.ListUniv)
         Me.GroupBox1.Controls.Add(Me.ComboBox2)
         Me.GroupBox1.Controls.Add(Me.Label4)
+        Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.SeadmeV)
         Me.GroupBox1.Controls.Add(Me.KasutusAeg)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(22, 35)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(514, 359)
+        Me.GroupBox1.Size = New System.Drawing.Size(355, 256)
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "GroupBox1"
         '
         'Arvuta
         '
-        Me.Arvuta.Location = New System.Drawing.Point(461, 485)
+        Me.Arvuta.Location = New System.Drawing.Point(199, 215)
         Me.Arvuta.Name = "Arvuta"
         Me.Arvuta.Size = New System.Drawing.Size(75, 23)
         Me.Arvuta.TabIndex = 9
@@ -110,38 +107,6 @@ Partial Class Form2
         Me.Label6.Size = New System.Drawing.Size(150, 16)
         Me.Label6.TabIndex = 8
         Me.Label6.Text = "Elektripaket Hinna Tüüp"
-        '
-        'ListUniv
-        '
-        Me.ListUniv.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader8})
-        Me.ListUniv.HideSelection = False
-        Me.ListUniv.Location = New System.Drawing.Point(25, 222)
-        Me.ListUniv.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.ListUniv.MultiSelect = False
-        Me.ListUniv.Name = "ListUniv"
-        Me.ListUniv.Size = New System.Drawing.Size(416, 120)
-        Me.ListUniv.TabIndex = 10
-        Me.ListUniv.UseCompatibleStateImageBehavior = False
-        Me.ListUniv.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "Nimi"
-        Me.ColumnHeader4.Width = 140
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Text = "Baashind"
-        Me.ColumnHeader5.Width = 100
-        '
-        'ColumnHeader6
-        '
-        Me.ColumnHeader6.Text = "Marginaal"
-        Me.ColumnHeader6.Width = 100
-        '
-        'ColumnHeader8
-        '
-        Me.ColumnHeader8.Text = "Kuutasu"
         '
         'ComboBox2
         '
@@ -161,6 +126,15 @@ Partial Class Form2
         Me.Label4.Size = New System.Drawing.Size(78, 16)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Elektripaket"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(178, 185)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(121, 24)
+        Me.ComboBox1.TabIndex = 5
         '
         'Label5
         '
@@ -182,7 +156,7 @@ Partial Class Form2
         '
         Me.GroupBox2.Controls.Add(Me.TextBox4)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Location = New System.Drawing.Point(38, 430)
+        Me.GroupBox2.Location = New System.Drawing.Point(22, 297)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(355, 114)
         Me.GroupBox2.TabIndex = 10
@@ -191,7 +165,7 @@ Partial Class Form2
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(694, 35)
+        Me.TextBox1.Location = New System.Drawing.Point(431, 79)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(100, 22)
         Me.TextBox1.TabIndex = 11
@@ -200,8 +174,7 @@ Partial Class Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(803, 552)
-        Me.Controls.Add(Me.Arvuta)
+        Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -222,6 +195,7 @@ Partial Class Form2
     Friend WithEvents Label2 As Label
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Label5 As Label
     Friend WithEvents TextBox4 As TextBox
     Friend WithEvents Label6 As Label
@@ -229,9 +203,4 @@ Partial Class Form2
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Arvuta As Button
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents ListUniv As ListView
-    Friend WithEvents ColumnHeader4 As ColumnHeader
-    Friend WithEvents ColumnHeader5 As ColumnHeader
-    Friend WithEvents ColumnHeader6 As ColumnHeader
-    Friend WithEvents ColumnHeader8 As ColumnHeader
 End Class
