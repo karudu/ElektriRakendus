@@ -14,19 +14,20 @@ Public Class CGraafikInfo
         AndmedConnect = New PrjAndmebaas.CAndmebaas
         Dim I As Integer
         Dim CurrTime As Date = Date.Now()
-        Dim EndTime As Date = CurrTime.AddDays(-1)
+        Dim EndTime As DateTime = New DateTime(CurrTime.Year, CurrTime.Month, CurrTime.Day, 0, 0, 0)
+        Dim BeginTime As Date = EndTime.AddDays(-1)
         Dim TS As New TimeSpan
-        TS = CurrTime.Subtract(EndTime)
+        TS = EndTime.Subtract(BeginTime)
         Dim Tunnid As Integer = TS.TotalHours
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
-            Hinnad = AndmedConnect.LoeBorsihinnad(CurrTime, Tunnid)
+            Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
             For I = 0 To Hinnad.Count - 1
                 Dim Info As (Aeg As String, Hind As Decimal)
-                Info.Aeg = CurrTime.ToString("HH")
-                Info.Hind = Hinnad.Item(I) + (StructBors.Juurdetasu / 100)
+                Info.Aeg = EndTime.ToString("HH")
+                Info.Hind = Hinnad.Item(I) + (StructBors.Juurdetasu / (100 * 1000))
                 InfoList.Add(Info)
-                CurrTime = CurrTime.AddHours(-1)
+                EndTime = EndTime.AddHours(1)
             Next
             'ElseIf PaketiTyyp = 1 Then
             '    Me.StructFix = AndmedConnect.LoePakettFix(1)
@@ -52,26 +53,28 @@ Public Class CGraafikInfo
         AndmedConnect = New PrjAndmebaas.CAndmebaas
         Dim I As Integer = 0
         Dim J As Integer = 0
-        Dim CurrTime As Date = Date.Now().AddHours(-2)
-        Dim EndTime As Date = CurrTime.AddMonths(-1)
+        Dim CurrTime As Date = Date.Now()
+        Dim EndTime As DateTime = New DateTime(CurrTime.Year, CurrTime.Month, CurrTime.Day, 0, 0, 0)
+        Dim BeginTime As Date = EndTime.AddMonths(-1)
         Dim TS As New TimeSpan
-        TS = CurrTime.Subtract(EndTime)
+        TS = EndTime.Subtract(BeginTime)
         Dim Tunnid As Integer = TS.TotalHours
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
-            Hinnad = AndmedConnect.LoeBorsihinnad(CurrTime, Tunnid)
+            Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
             While I < Hinnad.Count - 1
                 Dim Info As (Aeg As String, Hind As Decimal)
-                Dim TodayHours As Integer = CurrTime.Hour
-                While CurrTime.Hour > CurrTime.AddHours(-CurrTime.Hour).Hour And I < Hinnad.Count
-                    Info.Hind += Hinnad.Item(I) + (StructBors.Juurdetasu / 100)
+                Info.Aeg = BeginTime.ToString("M")
+                Dim TempTime = EndTime
+                While J <= 24 And I < Hinnad.Count
+                    Info.Hind += Hinnad.Item(I) + (StructBors.Juurdetasu / (100 * 1000))
                     I += 1
-                    CurrTime = CurrTime.AddHours(-1)
+                    J += 1
+                    BeginTime = BeginTime.AddHours(1)
                 End While
-                Info.Hind = Info.Hind / TodayHours
-                Info.Aeg = CurrTime.ToString("d")
+                J = 0
+                Info.Hind = Info.Hind / 24
                 InfoList.Add(Info)
-                CurrTime = CurrTime.AddHours(-1)
             End While
         End If
         Return InfoList

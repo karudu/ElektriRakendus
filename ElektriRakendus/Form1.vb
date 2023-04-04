@@ -18,7 +18,7 @@
                 Next
             Case 1
                 GInfo = GraafikConnect.GetKuu(15, 0)
-                For I = GInfo.Count - 1 To 0 Step -1
+                For I = 0 To GInfo.Count - 1
                     Graafik1.setPoint1(GInfo.Item(I).Xval, GInfo.Item(I).Yval)
                 Next
             Case 2
