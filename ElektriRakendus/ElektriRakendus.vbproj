@@ -73,23 +73,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
-    <Compile Include="Form2.Designer.vb">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form2.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form3.Designer.vb">
-      <DependentUpon>Form3.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form3.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="KodumasinaKasutus.vb" />
-    <Compile Include="Kalkulaator.vb" />
->>>>>>> parent of e93bfd1 (ei saa aru kuidas saada strucktist comboboox itemid)
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
