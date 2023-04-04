@@ -27,6 +27,7 @@ Partial Class Form2
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.comboMasin = New System.Windows.Forms.ComboBox()
         Me.Arvuta = New System.Windows.Forms.Button()
         Me.ListBors = New System.Windows.Forms.ListView()
         Me.Nimi = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -36,14 +37,13 @@ Partial Class Form2
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'SeadmeV
         '
-        Me.SeadmeV.Location = New System.Drawing.Point(199, 55)
+        Me.SeadmeV.Location = New System.Drawing.Point(495, 130)
         Me.SeadmeV.Name = "SeadmeV"
         Me.SeadmeV.Size = New System.Drawing.Size(100, 22)
         Me.SeadmeV.TabIndex = 0
@@ -75,12 +75,12 @@ Partial Class Form2
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.comboMasin)
         Me.GroupBox1.Controls.Add(Me.Arvuta)
         Me.GroupBox1.Controls.Add(Me.ListBors)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.ComboBox2)
         Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.SeadmeV)
         Me.GroupBox1.Controls.Add(Me.KasutusAeg)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
@@ -90,6 +90,16 @@ Partial Class Form2
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "GroupBox1"
+        '
+        'comboMasin
+        '
+        Me.comboMasin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.comboMasin.FormattingEnabled = True
+        Me.comboMasin.Items.AddRange(New Object() {"1", "2", "3"})
+        Me.comboMasin.Location = New System.Drawing.Point(178, 61)
+        Me.comboMasin.Name = "comboMasin"
+        Me.comboMasin.Size = New System.Drawing.Size(121, 24)
+        Me.comboMasin.TabIndex = 13
         '
         'Arvuta
         '
@@ -173,21 +183,14 @@ Partial Class Form2
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "GroupBox2"
         '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(694, 35)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 22)
-        Me.TextBox1.TabIndex = 11
-        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(803, 552)
-        Me.Controls.Add(Me.TextBox1)
+        Me.ClientSize = New System.Drawing.Size(706, 552)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.SeadmeV)
         Me.Name = "Form2"
         Me.Text = "Form2"
         Me.GroupBox1.ResumeLayout(False)
@@ -211,7 +214,7 @@ Partial Class Form2
     Friend WithEvents ComboBox2 As ComboBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Arvuta As Button
-    Friend WithEvents TextBox1 As TextBox
     Friend WithEvents ListBors As ListView
     Friend WithEvents Nimi As ColumnHeader
+    Friend WithEvents comboMasin As ComboBox
 End Class
