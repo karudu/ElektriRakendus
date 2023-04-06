@@ -22,6 +22,7 @@ Public Class FormRedaktorKodumasinad
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UuendaMasinad()
+        FormRedaktorPaketid.Show()
     End Sub
     ' TODO Parem valideerimine sisestatud andmete jaoks
     Private Sub BtnLisaMasin_Click(sender As Object, e As EventArgs) Handles BtnLisaMasin.Click
