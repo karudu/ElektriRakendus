@@ -1,10 +1,15 @@
-﻿Imports PrjAndmebaas
+﻿Imports System.Net
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports PrjAndmebaas
 
 Public Class Form2
+
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UuendaPaketid()
         UuendaPaketid2()
+
     End Sub
 
     Private Sub UuendaPaketid2()
@@ -15,23 +20,15 @@ Public Class Form2
         Dim Masin As IAndmebaas.Kodumasin
         Dim i = 0
         For Each Masin In Masinad
-            Dim Item As New ListViewItem(Masin.Nimi)
-            Item.SubItems.Add(Math.Round(Masin.Voimsus, 1).ToString & " W")
-            Item.SubItems.Add(Math.Round(Masin.Aeg, 1).ToString & " min")
-            ' Indeks on subitem 3
-            ' CInt(ListMasinad.Items(i).SubItems(3).Text)
-            Item.SubItems.Add(i)
+
             comboMasin.Items.Add(Masin.Nimi)
+
+
             i += 1
+
+
         Next
 
-        Dim Hinnad As New List(Of Decimal)
-        Hinnad = Andmebaas.LoeBorsihinnad(Date.Now.AddDays(-30), 10)
-        Hinnad = Andmebaas.LoeBorsihinnad(Date.Now.AddDays(-20), 10)
-        Hinnad = Andmebaas.LoeBorsihinnad(Date.Now.AddDays(-10), 10)
-        Hinnad = Andmebaas.LoeBorsihinnad(Date.Now.AddDays(-1), 24)
-        Hinnad = Andmebaas.LoeBorsihinnad(Date.Now.AddDays(-30), 24 * 30)
-        Hinnad = Nothing
     End Sub
     Private Sub UuendaPaketid()
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
@@ -85,7 +82,7 @@ Public Class Form2
                 Next
 
         End Select
-        Dim sadasd As Integer = 0
+
     End Sub
 
 
@@ -94,10 +91,37 @@ Public Class Form2
 
     End Sub
     Private Sub Arvuta_Click(sender As Object, e As EventArgs) Handles Arvuta.Click
+        If comboMasin.SelectedItem = Nothing Then
+            Exit Sub
+        End If
+        Dim Masinad As New List(Of IAndmebaas.Kodumasin)
+        Dim Andmebas As New CAndmebaas
+        Masinad = Andmebas.LoeKodumasinad
+        Dim Masin As IAndmebaas.Kodumasin
+        Dim i = 0
+        Dim energia As Double
+        Dim aeg As Double
+
+
+        For Each Masin In Masinad  'loop selleks et leida cboxPakett1 valitud paketti indexi listist
+
+            If comboMasin.Text = Masin.Nimi Then
+                energia = Masin.Voimsus
+                aeg = Masin.Aeg / 60 'muudame minutid tundideks
+                Exit For
+            End If
+        Next
+
+
+
+
         If ListBors.SelectedItems.Count = 0 Then
             Exit Sub
         End If
+
+
         Select Case ComboBox2.SelectedIndex
+
             Case 0
                 Dim Andmebaas As New CAndmebaas
                 Dim Pakett As New IAndmebaas.PkBors
@@ -108,7 +132,7 @@ Public Class Form2
                 Pakett = Andmebaas.LoePakettBors(ID)
                 kuutasu = CDec(Pakett.Kuutasu) + CDec(Pakett.Juurdetasu)
 
-                Dim KodumasinaKasutus As New KodumasinaKasutus(kuutasu, SeadmeV.Text, KasutusAeg.Text)
+                Dim KodumasinaKasutus As New KodumasinaKasutus(kuutasu, energia, aeg)
 
                 tootle(KodumasinaKasutus)
             Case 1
@@ -126,7 +150,7 @@ Public Class Form2
                     kuutasu = CDec(Pakett.Kuutasu) + CDec(Pakett.PTariif)
                 End If
 
-                Dim KodumasinaKasutus As New KodumasinaKasutus(kuutasu, SeadmeV.Text, KasutusAeg.Text)
+                Dim KodumasinaKasutus As New KodumasinaKasutus(kuutasu, energia, aeg)
                 tootle(KodumasinaKasutus)
             Case 2
 
@@ -136,9 +160,10 @@ Public Class Form2
                 Dim ID As Integer
                 ID = CInt(ListBors.SelectedItems(0).SubItems(4).Text) ' ID on subitem 4
                 Pakett = Andmebaas.LoePakettUniv(ID)
-                Dim KodumasinaKasutus As New KodumasinaKasutus(Pakett.Kuutasu, SeadmeV.Text, KasutusAeg.Text)
+                Dim KodumasinaKasutus As New KodumasinaKasutus(Pakett.Kuutasu, energia, aeg)
                 tootle(KodumasinaKasutus)
         End Select
+
 
 
         'If IsNumeric(SeadmeV.Text) = True And IsNumeric(KasutusAeg.Text) = True Then
@@ -153,7 +178,4 @@ Public Class Form2
         UuendaPaketid()
     End Sub
 
-    Private Sub comboMasin_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboMasin.SelectedIndexChanged
-        UuendaPaketid2()
-    End Sub
 End Class

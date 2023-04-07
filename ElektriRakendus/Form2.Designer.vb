@@ -22,10 +22,7 @@ Partial Class Form2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.SeadmeV = New System.Windows.Forms.TextBox()
-        Me.KasutusAeg = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.comboMasin = New System.Windows.Forms.ComboBox()
         Me.Arvuta = New System.Windows.Forms.Button()
@@ -41,20 +38,6 @@ Partial Class Form2
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'SeadmeV
-        '
-        Me.SeadmeV.Location = New System.Drawing.Point(495, 130)
-        Me.SeadmeV.Name = "SeadmeV"
-        Me.SeadmeV.Size = New System.Drawing.Size(100, 22)
-        Me.SeadmeV.TabIndex = 0
-        '
-        'KasutusAeg
-        '
-        Me.KasutusAeg.Location = New System.Drawing.Point(199, 98)
-        Me.KasutusAeg.Name = "KasutusAeg"
-        Me.KasutusAeg.Size = New System.Drawing.Size(100, 22)
-        Me.KasutusAeg.TabIndex = 2
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -64,15 +47,6 @@ Partial Class Form2
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Sedamevõimsus(KWh)"
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(13, 101)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(137, 16)
-        Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Kasutusaeg(tundides)"
-        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.comboMasin)
@@ -81,12 +55,10 @@ Partial Class Form2
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.ComboBox2)
         Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.KasutusAeg)
-        Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(22, 35)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(371, 359)
+        Me.GroupBox1.Size = New System.Drawing.Size(371, 319)
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "GroupBox1"
@@ -95,15 +67,14 @@ Partial Class Form2
         '
         Me.comboMasin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.comboMasin.FormattingEnabled = True
-        Me.comboMasin.Items.AddRange(New Object() {"1", "2", "3"})
         Me.comboMasin.Location = New System.Drawing.Point(178, 61)
         Me.comboMasin.Name = "comboMasin"
-        Me.comboMasin.Size = New System.Drawing.Size(121, 24)
+        Me.comboMasin.Size = New System.Drawing.Size(155, 24)
         Me.comboMasin.TabIndex = 13
         '
         'Arvuta
         '
-        Me.Arvuta.Location = New System.Drawing.Point(258, 304)
+        Me.Arvuta.Location = New System.Drawing.Point(258, 268)
         Me.Arvuta.Name = "Arvuta"
         Me.Arvuta.Size = New System.Drawing.Size(75, 23)
         Me.Arvuta.TabIndex = 9
@@ -114,7 +85,7 @@ Partial Class Form2
         '
         Me.ListBors.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Nimi})
         Me.ListBors.HideSelection = False
-        Me.ListBors.Location = New System.Drawing.Point(16, 236)
+        Me.ListBors.Location = New System.Drawing.Point(6, 182)
         Me.ListBors.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListBors.MultiSelect = False
         Me.ListBors.Name = "ListBors"
@@ -131,7 +102,7 @@ Partial Class Form2
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(13, 152)
+        Me.Label6.Location = New System.Drawing.Point(13, 115)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(150, 16)
         Me.Label6.TabIndex = 8
@@ -142,15 +113,15 @@ Partial Class Form2
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Items.AddRange(New Object() {"1", "2", "3"})
-        Me.ComboBox2.Location = New System.Drawing.Point(178, 144)
+        Me.ComboBox2.Location = New System.Drawing.Point(178, 107)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 24)
+        Me.ComboBox2.Size = New System.Drawing.Size(155, 24)
         Me.ComboBox2.TabIndex = 7
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(13, 193)
+        Me.Label4.Location = New System.Drawing.Point(6, 150)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(78, 16)
         Me.Label4.TabIndex = 6
@@ -176,9 +147,9 @@ Partial Class Form2
         '
         Me.GroupBox2.Controls.Add(Me.TextBox4)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Location = New System.Drawing.Point(38, 430)
+        Me.GroupBox2.Location = New System.Drawing.Point(22, 360)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(355, 114)
+        Me.GroupBox2.Size = New System.Drawing.Size(371, 114)
         Me.GroupBox2.TabIndex = 10
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "GroupBox2"
@@ -190,7 +161,6 @@ Partial Class Form2
         Me.ClientSize = New System.Drawing.Size(706, 552)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.SeadmeV)
         Me.Name = "Form2"
         Me.Text = "Form2"
         Me.GroupBox1.ResumeLayout(False)
@@ -198,14 +168,9 @@ Partial Class Form2
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents SeadmeV As TextBox
-    Friend WithEvents KasutusAeg As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
