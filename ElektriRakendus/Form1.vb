@@ -6,6 +6,7 @@ Public Class Form1
         cmbPeriood.Items.Add("Kuu")
         cmbPeriood.Items.Add("Aasta")
         AddPaketiTyybid()
+        Graafik1.InitGraph()
     End Sub
 
     Private Sub AddPaketiTyybid()
@@ -40,18 +41,22 @@ Public Class Form1
                 Next
             Case 1
                 GInfo1 = GraafikConnect.GetKuu(PakettID1, cmbPkt1Tyyp.SelectedIndex)
-                GInfo2 = GraafikConnect.GetKuu(PakettID2, cmbPkt1Tyyp.SelectedIndex)
-                For I = 0 To GInfo1.Count - 1
+                GInfo2 = GraafikConnect.GetKuu(PakettID2, cmbPkt2Tyyp.SelectedIndex)
+                I = 0
+                While I < GInfo1.Count - 1 And I < GInfo2.Count - 1
                     Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
-                    Graafik1.setPoint2(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
-                Next
+                    Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                    I += 1
+                End While
             Case 2
                 GInfo1 = GraafikConnect.GetAasta(PakettID1, cmbPkt1Tyyp.SelectedIndex)
-                GInfo2 = GraafikConnect.GetAasta(PakettID2, cmbPkt1Tyyp.SelectedIndex)
-                For I = 0 To GInfo1.Count - 1
+                GInfo2 = GraafikConnect.GetAasta(PakettID2, cmbPkt2Tyyp.SelectedIndex)
+                I = 0
+                While I < GInfo1.Count - 1 And I < GInfo2.Count - 1
                     Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
-                    Graafik1.setPoint2(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
-                Next
+                    Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                    I += 1
+                End While
         End Select
     End Sub
 

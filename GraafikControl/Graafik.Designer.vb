@@ -40,7 +40,7 @@ Partial Class Graafik
         ChartArea1.ShadowColor = System.Drawing.Color.White
         Me.HinnaGraafik.ChartAreas.Add(ChartArea1)
         Me.HinnaGraafik.Cursor = System.Windows.Forms.Cursors.Arrow
-        Legend1.Name = "Legend1"
+        Legend1.Name = "Hind(s/kWh)"
         Me.HinnaGraafik.Legends.Add(Legend1)
         Me.HinnaGraafik.Location = New System.Drawing.Point(3, 0)
         Me.HinnaGraafik.Name = "HinnaGraafik"
@@ -50,7 +50,7 @@ Partial Class Graafik
         Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine
         Series1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
         Series1.IsXValueIndexed = True
-        Series1.Legend = "Legend1"
+        Series1.Legend = "Hind(s/kWh)"
         Series1.Name = "Pakett 1"
         Series1.YValuesPerPoint = 2
         Series2.BorderWidth = 3
@@ -58,7 +58,7 @@ Partial Class Graafik
         Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine
         Series2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Series2.IsXValueIndexed = True
-        Series2.Legend = "Legend1"
+        Series2.Legend = "Hind(s/kWh)"
         Series2.Name = "Pakett 2"
         Me.HinnaGraafik.Series.Add(Series1)
         Me.HinnaGraafik.Series.Add(Series2)

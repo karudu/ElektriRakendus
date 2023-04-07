@@ -70,12 +70,11 @@ Public Class CGraafikInfo
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
             Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
-            While I < Hinnad.Count - 1
+            While I < Tunnid - 1
                 Dim Info As (Aeg As String, Hind As Decimal)
                 Info.Aeg = BeginTime.ToString("M")
-                Dim TempTime = EndTime
-                While J <= 24 And I < Hinnad.Count
-                    Info.Hind += Hinnad.Item(I) + (StructBors.Juurdetasu / (100 * 1000))
+                While J <= 24 And I < Hinnad.Count - 1
+                    Info.Hind += (Hinnad.Item(I) / 10) + StructBors.Juurdetasu
                     I += 1
                     J += 1
                     BeginTime = BeginTime.AddHours(1)
@@ -85,9 +84,23 @@ Public Class CGraafikInfo
                 InfoList.Add(Info)
             End While
         ElseIf PaketiTyyp = 1 Then
-
+            Me.StructFix = AndmedConnect.LoePakettFix(PakettID)
+            For I = 0 To Tunnid - 1
+                Dim Info As (Aeg As String, Hind As Decimal)
+                Info.Aeg = BeginTime.ToString("M")
+                Info.Hind = ((8 * StructFix.OTariif) + (16 * StructFix.PTariif)) / 24
+                BeginTime = BeginTime.AddHours(1)
+                InfoList.Add(Info)
+            Next
         Else
-
+            Me.StructUniv = AndmedConnect.LoePakettUniv(PakettID)
+            For I = 0 To Tunnid - 1
+                Dim Info As (Aeg As String, Hind As Decimal)
+                Info.Aeg = BeginTime.ToString("M")
+                Info.Hind = StructUniv.Baas + StructUniv.Marginaal
+                BeginTime = BeginTime.AddHours(1)
+                InfoList.Add(Info)
+            Next
         End If
         Return InfoList
     End Function
@@ -108,12 +121,12 @@ Public Class CGraafikInfo
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
             Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
-            For I = 0 To Hinnad.Count - 1
+            While I < Hinnad.Count - 1
                 Dim Info As (Aeg As String, Hind As Decimal)
                 Info.Aeg = BeginTime.ToString("y")
                 Dim PaevaArvKuus = DaysInMonth(BeginTime.Year, BeginTime.Month)
                 While J < (PaevaArvKuus * 24) And I < Hinnad.Count
-                    Info.Hind += Hinnad.Item(I) + (StructBors.Juurdetasu / (100 * 1000))
+                    Info.Hind += (Hinnad.Item(I) / 10) + StructBors.Juurdetasu
                     I += 1
                     J += 1
                     BeginTime = BeginTime.AddHours(1)
@@ -121,7 +134,43 @@ Public Class CGraafikInfo
                 J = 0
                 Info.Hind = Info.Hind / (PaevaArvKuus * 24)
                 InfoList.Add(Info)
-            Next
+            End While
+        ElseIf PaketiTyyp = 1 Then
+            Me.StructFix = AndmedConnect.LoePakettFix(PakettID)
+            While I < Tunnid - 1
+                Dim Info As (Aeg As String, Hind As Decimal)
+                Info.Aeg = BeginTime.ToString("y")
+                Dim PaevaArvKuus = DaysInMonth(BeginTime.Year, BeginTime.Month)
+                While J < (PaevaArvKuus * 24)
+                    If BeginTime.Hour > 22 Or BeginTime.Hour < 7 Then
+                        Info.Hind += StructFix.OTariif
+                    Else
+                        Info.Hind += StructFix.PTariif
+                    End If
+                    J += 1
+                    I += 1
+                    BeginTime = BeginTime.AddHours(1)
+                End While
+                J = 0
+                Info.Hind = (Info.Hind / (PaevaArvKuus * 24)) + StructFix.Kuutasu
+                InfoList.Add(Info)
+            End While
+        Else
+            Me.StructUniv = AndmedConnect.LoePakettUniv(PakettID)
+            While I < Tunnid - 1
+                Dim Info As (Aeg As String, Hind As Decimal)
+                Info.Aeg = BeginTime.ToString("y")
+                Dim PaevaArvKuus = DaysInMonth(BeginTime.Year, BeginTime.Month)
+                While J < (PaevaArvKuus * 24)
+                    Info.Hind += StructUniv.Baas + StructUniv.Marginaal
+                    I += 1
+                    BeginTime = BeginTime.AddHours(1)
+                    J += 1
+                End While
+                J = 0
+                Info.Hind = (Info.Hind / (PaevaArvKuus * 24)) + StructUniv.Kuutasu
+                InfoList.Add(Info)
+            End While
         End If
         Return InfoList
     End Function
