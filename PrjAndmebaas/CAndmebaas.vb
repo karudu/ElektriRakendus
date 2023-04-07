@@ -267,6 +267,17 @@ Public Class CAndmebaas
 
         Return Ajad
     End Function
+    ' Loe alates mingist ajast N tunni jagu börsihindasid
+    ' Hindade ühik on sent/kWh
+    Public Function LoeBorsihinnadSentkWh(AlgusAeg As Date, Tunnid As Integer) As List(Of Decimal) Implements IAndmebaas.LoeBorsihinnadSentkWh
+        Dim Hinnad As List(Of Decimal) = LoeBorsihinnad(AlgusAeg, Tunnid)
+
+        For i As Integer = 0 To Hinnad.Count - 1
+            Hinnad(i) *= 0.1
+        Next
+
+        Return Hinnad
+    End Function
     Private Class JsonJuur
         Public data As JsonHinnad
     End Class
