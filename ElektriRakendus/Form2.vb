@@ -3,7 +3,7 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports PrjAndmebaas
 
 Public Class Form2
-
+    Private GMasinad As New List(Of IAndmebaas.Kodumasin)
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -17,12 +17,12 @@ Public Class Form2
         Dim Andmebaas As New CAndmebaas
         Masinad = Andmebaas.LoeKodumasinad
         comboMasin.Items.Clear()
+        GMasinad.Clear()
         Dim Masin As IAndmebaas.Kodumasin
         Dim i = 0
         For Each Masin In Masinad
-
             comboMasin.Items.Add(Masin.Nimi)
-
+            GMasinad.Add(Masin)
 
             i += 1
 
@@ -87,7 +87,8 @@ Public Class Form2
 
 
     Private Sub tootle(ByRef Kalkulaator As Kalkulaator)
-        TextBox4.Text = Kalkulaator.Rahalinekulu
+        TextBox4.Text = Math.Round(Kalkulaator.Rahalinekulu, 2) & " €"
+        TextBox1.Text = Math.Round(Kalkulaator.Rahalinekulu * 30, 2) & " €"
 
     End Sub
     Private Sub Arvuta_Click(sender As Object, e As EventArgs) Handles Arvuta.Click
@@ -127,12 +128,23 @@ Public Class Form2
                 Dim Pakett As New IAndmebaas.PkBors
                 Dim ID As Integer
                 Dim kuutasu As Decimal
+                Dim Borsihinnad As List(Of Decimal)
+                Dim Kuupaev As Date = Date.Now
+                Kuupaev = Kuupaev.AddHours(-Kuupaev.Hour)
+                Kuupaev = Kuupaev.AddMinutes(-Kuupaev.Minute)
+                Kuupaev = Kuupaev.AddSeconds(-Kuupaev.Second)
 
                 ID = CInt(ListBors.SelectedItems(0).SubItems(4).Text) ' ID on subitem 4
                 Pakett = Andmebaas.LoePakettBors(ID)
-                kuutasu = CDec(Pakett.Kuutasu) + CDec(Pakett.Juurdetasu)
+                Borsihinnad = Andmebaas.LoeBorsihinnad(Kuupaev, 24)
 
-                Dim KodumasinaKasutus As New KodumasinaKasutus(kuutasu, energia, aeg)
+                Dim Keskmine As Decimal = 0
+                For j As Integer = 0 To 23
+                    Keskmine += Borsihinnad(j) / 10
+                Next
+                Keskmine /= 24
+
+                Dim KodumasinaKasutus As New KodumasinaKasutus(Keskmine, energia, aeg)
 
                 tootle(KodumasinaKasutus)
             Case 1
@@ -145,9 +157,9 @@ Public Class Form2
                 Pakett = Andmebaas.LoePakettFix(ID)
                 Dim kuutasu As Decimal
                 If Tund <= 7 Or Tund >= 22 Then
-                    kuutasu = CDec(Pakett.Kuutasu) + CDec(Pakett.OTariif)
+                    kuutasu = CDec(Pakett.OTariif)
                 Else
-                    kuutasu = CDec(Pakett.Kuutasu) + CDec(Pakett.PTariif)
+                    kuutasu = CDec(Pakett.PTariif)
                 End If
 
                 Dim KodumasinaKasutus As New KodumasinaKasutus(kuutasu, energia, aeg)
@@ -160,7 +172,7 @@ Public Class Form2
                 Dim ID As Integer
                 ID = CInt(ListBors.SelectedItems(0).SubItems(4).Text) ' ID on subitem 4
                 Pakett = Andmebaas.LoePakettUniv(ID)
-                Dim KodumasinaKasutus As New KodumasinaKasutus(Pakett.Kuutasu, energia, aeg)
+                Dim KodumasinaKasutus As New KodumasinaKasutus(Pakett.Baas + Pakett.Marginaal, energia, aeg)
                 tootle(KodumasinaKasutus)
         End Select
 
@@ -178,4 +190,8 @@ Public Class Form2
         UuendaPaketid()
     End Sub
 
+    Private Sub comboMasin_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboMasin.SelectedIndexChanged
+        LblVoimsus.Text = GMasinad(comboMasin.SelectedIndex).Voimsus.ToString & " W"
+        LblAeg.Text = GMasinad(comboMasin.SelectedIndex).Aeg.ToString & " min"
+    End Sub
 End Class

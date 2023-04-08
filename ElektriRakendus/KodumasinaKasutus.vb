@@ -16,7 +16,7 @@ Public Class KodumasinaKasutus
     End Function
 
     Public Overrides Function Rahalinekulu() As Double
-        Kulu = Elktrikasutus * KasutusAeg * dblElektriPaket
+        Kulu = (Elktrikasutus / 1000) * KasutusAeg * (dblElektriPaket / 100)
         Return Kulu
     End Function
 End Class
