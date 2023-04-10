@@ -26,37 +26,59 @@ Public Class FormGraafik
         Graafik1.ClearPoints()
         Dim PakettID1 As Integer
         Dim PakettID2 As Integer
-        PakettID1 = GetPakettInfo(cmbPkt1Pkt.SelectedItem.ToString, cmbPkt1Tyyp.SelectedIndex)
-        PakettID2 = GetPakettInfo(cmbPkt2Pkt.SelectedItem.ToString, cmbPkt2Tyyp.SelectedIndex)
-        Console.WriteLine(PakettID1)
-        Console.WriteLine(PakettID2)
+        If String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) Then
+            PakettID1 = Nothing
+        Else
+            PakettID1 = GetPakettInfo(cmbPkt1Pkt.SelectedItem.ToString, cmbPkt1Tyyp.SelectedIndex)
+        End If
+        If String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Then
+            PakettID2 = Nothing
+        Else
+            PakettID2 = GetPakettInfo(cmbPkt2Pkt.SelectedItem.ToString, cmbPkt2Tyyp.SelectedIndex)
+        End If
         Dim I As Integer
         Select Case cmbPeriood.SelectedIndex
             Case 0
-                GInfo1 = GraafikConnect.GetPaev(PakettID1, cmbPkt1Tyyp.SelectedIndex)
-                GInfo2 = GraafikConnect.GetPaev(PakettID2, cmbPkt2Tyyp.SelectedIndex)
-                For I = 0 To GInfo1.Count - 1
-                    Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
-                    Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
-                Next
+                If PakettID1 <> Nothing Then
+                    GInfo1 = GraafikConnect.GetPaev(PakettID1, cmbPkt1Tyyp.SelectedIndex)
+                    For I = 0 To GInfo1.Count - 1
+                        Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                    Next
+                End If
+                If PakettID2 <> Nothing Then
+                    GInfo2 = GraafikConnect.GetPaev(PakettID2, cmbPkt2Tyyp.SelectedIndex)
+                    For I = 0 To GInfo2.Count - 1
+                        Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                    Next
+                End If
             Case 1
-                GInfo1 = GraafikConnect.GetKuu(PakettID1, cmbPkt1Tyyp.SelectedIndex)
-                GInfo2 = GraafikConnect.GetKuu(PakettID2, cmbPkt2Tyyp.SelectedIndex)
-                I = 0
-                While I < GInfo1.Count - 1 And I < GInfo2.Count - 1
-                    Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
-                    Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
-                    I += 1
-                End While
+                If PakettID1 <> Nothing Then
+                    GInfo1 = GraafikConnect.GetKuu(PakettID1, cmbPkt1Tyyp.SelectedIndex)
+                    Console.WriteLine(GInfo1.Count)
+                    For I = 0 To GInfo1.Count - 1
+                        Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                    Next
+                End If
+                If PakettID2 <> Nothing Then
+                    GInfo2 = GraafikConnect.GetKuu(PakettID2, cmbPkt2Tyyp.SelectedIndex)
+                    Console.WriteLine(GInfo2.Count)
+                    For I = 0 To GInfo2.Count - 1
+                        Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                    Next
+                End If
             Case 2
-                GInfo1 = GraafikConnect.GetAasta(PakettID1, cmbPkt1Tyyp.SelectedIndex)
-                GInfo2 = GraafikConnect.GetAasta(PakettID2, cmbPkt2Tyyp.SelectedIndex)
-                I = 0
-                While I < GInfo1.Count - 1 And I < GInfo2.Count - 1
-                    Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
-                    Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
-                    I += 1
-                End While
+                If PakettID1 <> Nothing Then
+                    GInfo1 = GraafikConnect.GetAasta(PakettID1, cmbPkt1Tyyp.SelectedIndex)
+                    For I = 0 To GInfo1.Count - 1
+                        Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                    Next
+                End If
+                If PakettID2 <> Nothing Then
+                    GInfo2 = GraafikConnect.GetAasta(PakettID2, cmbPkt2Tyyp.SelectedIndex)
+                    For I = 0 To GInfo2.Count - 1
+                        Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                    Next
+                End If
         End Select
     End Sub
 

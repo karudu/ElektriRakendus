@@ -73,7 +73,7 @@ Public Class CGraafikInfo
             While I < Tunnid - 1
                 Dim Info As (Aeg As String, Hind As Decimal)
                 Info.Aeg = BeginTime.ToString("M")
-                While J <= 24 And I < Hinnad.Count - 1
+                While J < 24
                     Info.Hind += (Hinnad.Item(I) / 10) + StructBors.Juurdetasu
                     I += 1
                     J += 1
@@ -85,7 +85,7 @@ Public Class CGraafikInfo
             End While
         ElseIf PaketiTyyp = 1 Then
             Me.StructFix = AndmedConnect.LoePakettFix(PakettID)
-            For I = 0 To Tunnid - 1
+            For I = 0 To Tunnid - 1 Step 24
                 Dim Info As (Aeg As String, Hind As Decimal)
                 Info.Aeg = BeginTime.ToString("M")
                 Info.Hind = ((8 * StructFix.OTariif) + (16 * StructFix.PTariif)) / 24
@@ -94,7 +94,7 @@ Public Class CGraafikInfo
             Next
         Else
             Me.StructUniv = AndmedConnect.LoePakettUniv(PakettID)
-            For I = 0 To Tunnid - 1
+            For I = 0 To Tunnid - 1 Step 24
                 Dim Info As (Aeg As String, Hind As Decimal)
                 Info.Aeg = BeginTime.ToString("M")
                 Info.Hind = StructUniv.Baas + StructUniv.Marginaal
