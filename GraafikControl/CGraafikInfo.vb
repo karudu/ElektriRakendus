@@ -44,7 +44,7 @@ Public Class CGraafikInfo
             Next
         Else
             Me.StructUniv = AndmedConnect.LoePakettUniv(PakettID)
-            For I = 0 To 24
+            For I = 0 To 23
                 Dim Info As (Aeg As String, Hind As Decimal)
                 Info.Aeg = BeginTime.ToString("HH")
                 Info.Hind = StructUniv.Baas + StructUniv.Marginaal

@@ -1,6 +1,6 @@
 ﻿Imports PrjAndmebaas
 
-Public Class FormGraafik
+Public Class FormMain
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmbPeriood.Items.Add("Päev")
         cmbPeriood.Items.Add("Kuu")
@@ -168,7 +168,7 @@ Public Class FormGraafik
                 Next
             Case IAndmebaas.PaketiTyyp.PAKETT_UNIV
                 For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
-                    If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_FIX Then
+                    If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_UNIV Then
                         Dim PakettUniv As New IAndmebaas.PkUniv
                         PakettUniv = Andmebaas.LoePakettUniv(Pakett.ID)
                         If String.IsNullOrEmpty(PakettUniv.Nimi) Then
@@ -224,4 +224,14 @@ Public Class FormGraafik
 
         Return ID
     End Function
+
+    Private Sub BtnPaketid_Click(sender As Object, e As EventArgs) Handles BtnPaketid.Click
+        Dim Form As New PrjAndmebaasTestForm.FormRedaktorPaketid
+        Form.Show()
+    End Sub
+
+    Private Sub BtnMasinad_Click(sender As Object, e As EventArgs) Handles BtnMasinad.Click
+        Dim Form As New PrjAndmebaasTestForm.FormRedaktorKodumasinad
+        Form.Show()
+    End Sub
 End Class

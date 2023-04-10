@@ -74,17 +74,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormGraafik.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormGraafik.Designer.vb">
-      <DependentUpon>FormGraafik.vb</DependentUpon>
+    <Compile Include="FormMain.Designer.vb">
+      <DependentUpon>FormMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -104,11 +98,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormGraafik.resx">
-      <DependentUpon>FormGraafik.vb</DependentUpon>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -130,6 +121,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PrjAndmebaasTestForm\AndmebaasFormid.vbproj">
+      <Project>{bba7bc69-f601-47e6-aced-5cb7c2bb9981}</Project>
+      <Name>AndmebaasFormid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PrjAndmebaas\Andmebaas.vbproj">
       <Project>{8c256670-32e2-4aa1-8452-cb5af3f5d5bc}</Project>
       <Name>Andmebaas</Name>

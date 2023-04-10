@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class FormGraafik
+Partial Class FormMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -35,8 +35,12 @@ Partial Class FormGraafik
         Me.cmbPkt2Pkt = New System.Windows.Forms.ComboBox()
         Me.cmbPkt2Tyyp = New System.Windows.Forms.ComboBox()
         Me.Graafik1 = New GraafikControl.Graafik()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.BtnMasinad = New System.Windows.Forms.Button()
+        Me.BtnPaketid = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmbPeriood
@@ -158,27 +162,58 @@ Partial Class FormGraafik
         'Graafik1
         '
         Me.Graafik1.AutoSize = True
-        Me.Graafik1.Location = New System.Drawing.Point(-11, 316)
+        Me.Graafik1.Location = New System.Drawing.Point(-16, 311)
         Me.Graafik1.Name = "Graafik1"
         Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
         Me.Graafik1.TabIndex = 0
         '
-        'FormGraafik
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.BtnMasinad)
+        Me.GroupBox3.Controls.Add(Me.BtnPaketid)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 26)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(152, 261)
+        Me.GroupBox3.TabIndex = 7
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Seaded"
+        '
+        'BtnMasinad
+        '
+        Me.BtnMasinad.Location = New System.Drawing.Point(15, 63)
+        Me.BtnMasinad.Name = "BtnMasinad"
+        Me.BtnMasinad.Size = New System.Drawing.Size(131, 29)
+        Me.BtnMasinad.TabIndex = 9
+        Me.BtnMasinad.Text = "Kodumasinad"
+        Me.BtnMasinad.UseVisualStyleBackColor = True
+        '
+        'BtnPaketid
+        '
+        Me.BtnPaketid.Location = New System.Drawing.Point(15, 29)
+        Me.BtnPaketid.Name = "BtnPaketid"
+        Me.BtnPaketid.Size = New System.Drawing.Size(131, 28)
+        Me.BtnPaketid.TabIndex = 8
+        Me.BtnPaketid.Text = "Elektripaketid"
+        Me.BtnPaketid.UseVisualStyleBackColor = True
+        '
+        'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1262, 673)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cmbPeriood)
         Me.Controls.Add(Me.Graafik1)
-        Me.Name = "FormGraafik"
+        Me.Name = "FormMain"
         Me.Text = "Form1"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -197,4 +232,7 @@ Partial Class FormGraafik
     Friend WithEvents Label5 As Label
     Friend WithEvents cmbPkt2Pkt As ComboBox
     Friend WithEvents cmbPkt2Tyyp As ComboBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents BtnPaketid As Button
+    Friend WithEvents BtnMasinad As Button
 End Class
