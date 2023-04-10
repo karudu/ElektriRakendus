@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
 Imports System.Net
+Imports Microsoft.VisualBasic.FileIO
 Imports Newtonsoft.Json
 
 Public Class CAndmebaas
@@ -235,6 +236,7 @@ Public Class CAndmebaas
     End Function
 
     Private Const KAIBEMAKS = 1.2 ' 20%
+    Private LugemineOK As Boolean
     Public Function LoeBorsihinnad(AlgusAeg As Date, Tunnid As Integer) As List(Of Decimal) Implements IAndmebaas.LoeBorsihinnad
         Dim Ajad As New List(Of Decimal)
 
@@ -251,7 +253,7 @@ Public Class CAndmebaas
                 Dim Hind As Decimal = LoeBorsihind(Aeg, Tunnid - i) * KAIBEMAKS
                 Ajad.Add(Hind)
                 Aeg = Aeg.AddHours(1)
-                If Hind = 0 Then ' Kui hindasid pole, siis ära neid edasi küsi
+                If Hind = 0 And LugemineOK = False Then ' Kui hindasid pole, siis ära neid edasi küsi
                     For j As Integer = 0 To Tunnid - i - 2
                         Ajad.Add(0)
                     Next
@@ -264,6 +266,17 @@ Public Class CAndmebaas
         GConnection.Dispose()
 
         Return Ajad
+    End Function
+    ' Loe alates mingist ajast N tunni jagu börsihindasid
+    ' Hindade ühik on sent/kWh
+    Public Function LoeBorsihinnadSentkWh(AlgusAeg As Date, Tunnid As Integer) As List(Of Decimal) Implements IAndmebaas.LoeBorsihinnadSentkWh
+        Dim Hinnad As List(Of Decimal) = LoeBorsihinnad(AlgusAeg, Tunnid)
+
+        For i As Integer = 0 To Hinnad.Count - 1
+            Hinnad(i) *= 0.1
+        Next
+
+        Return Hinnad
     End Function
     Private Class JsonJuur
         Public data As JsonHinnad
@@ -302,6 +315,7 @@ Public Class CAndmebaas
                 ' Andmebaasis olemas
                 Dim HindReturn As Decimal = Reader("hind")
                 Reader.Close()
+                LugemineOK = True
                 Return HindReturn
             End If
             Reader.Close()
@@ -359,7 +373,10 @@ Public Class CAndmebaas
         Dim Hinnad = Andmed.data.ee
 
         ' Kui andmed puuduvad (küsiti tulevikust), siis tagasta 0
-        If Hinnad.Length = 0 Then Return 0
+        If Hinnad.Length = 0 Then
+            LugemineOK = False
+            Return 0
+        End If
 
         ' Lisa loetud hinnad andmebaasi
         For i As Integer = 0 To Hinnad.Length - 1
@@ -383,6 +400,7 @@ Public Class CAndmebaas
             End Try
         Next
 
+        LugemineOK = True
         Return Hinnad(0).Price
     End Function
 
@@ -769,6 +787,7 @@ Public Class CAndmebaas
     End Sub
 
     Private Function LoeConnectionString() As String
-        Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Environment.CurrentDirectory & "\andmebaas.accdb"
+        'Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Environment.CurrentDirectory & "\andmebaas.accdb"
+        Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SpecialDirectories.Desktop & "\andmebaas.accdb"
     End Function
 End Class
