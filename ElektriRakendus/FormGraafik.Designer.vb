@@ -163,7 +163,7 @@ Partial Class FormGraafik
         Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
         Me.Graafik1.TabIndex = 0
         '
-        'Form1
+        'FormGraafik
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -173,7 +173,7 @@ Partial Class FormGraafik
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cmbPeriood)
         Me.Controls.Add(Me.Graafik1)
-        Me.Name = "Form1"
+        Me.Name = "FormGraafik"
         Me.Text = "Form1"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()

@@ -89,51 +89,45 @@ Public Class FormGraafik
 
     Private Sub AddPaketid1(ByVal Tyyp As Integer)
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
-        Dim Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)
         Dim Andmebaas As New CAndmebaas
         Paketid = Andmebaas.LoePakettideNimekiri
         Select Case Tyyp
-            Case 0
-                Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_BORS
-            Case 1
-                Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_FIX
-            Case 2
-                Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_UNIV
-        End Select
-        Select Case Pakett.Tyyp
             Case IAndmebaas.PaketiTyyp.PAKETT_BORS
-                For Each Pakett In Paketid
-                    Dim PakettBors As New IAndmebaas.PkBors
-                    PakettBors = Andmebaas.LoePakettBors(Pakett.ID)
-                    If String.IsNullOrEmpty(PakettBors.Nimi) Then
-                        Continue For
-                    Else
-                        cmbPkt1Pkt.Items.Add(PakettBors.Nimi)
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_BORS Then
+                        Dim PakettBors As New IAndmebaas.PkBors
+                        PakettBors = Andmebaas.LoePakettBors(Pakett.ID)
+                        If String.IsNullOrEmpty(PakettBors.Nimi) Then
+                            Continue For
+                        Else
+                            cmbPkt1Pkt.Items.Add(PakettBors.Nimi)
+                        End If
                     End If
-
                 Next
             Case IAndmebaas.PaketiTyyp.PAKETT_FIX
-                For Each Pakett In Paketid
-                    Dim PakettFix As New IAndmebaas.PkFix
-                    PakettFix = Andmebaas.LoePakettFix(Pakett.ID)
-                    If String.IsNullOrEmpty(PakettFix.Nimi) Then
-                        Continue For
-                    Else
-                        cmbPkt1Pkt.Items.Add(PakettFix.Nimi)
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_FIX Then
+                        Dim PakettFix As New IAndmebaas.PkFix
+                        PakettFix = Andmebaas.LoePakettFix(Pakett.ID)
+                        If String.IsNullOrEmpty(PakettFix.Nimi) Then
+                            Continue For
+                        Else
+                            cmbPkt1Pkt.Items.Add(PakettFix.Nimi)
+                        End If
                     End If
                 Next
             Case IAndmebaas.PaketiTyyp.PAKETT_UNIV
-                For Each Pakett In Paketid
-                    Dim PakettUniv As New IAndmebaas.PkUniv
-                    PakettUniv = Andmebaas.LoePakettUniv(Pakett.ID)
-                    If String.IsNullOrEmpty(PakettUniv.Nimi) Then
-                        Continue For
-                    Else
-                        cmbPkt1Pkt.Items.Add(PakettUniv.Nimi)
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_UNIV Then
+                        Dim PakettUniv As New IAndmebaas.PkUniv
+                        PakettUniv = Andmebaas.LoePakettUniv(Pakett.ID)
+                        If String.IsNullOrEmpty(PakettUniv.Nimi) Then
+                            Continue For
+                        Else
+                            cmbPkt1Pkt.Items.Add(PakettUniv.Nimi)
+                        End If
                     End If
                 Next
-
-
         End Select
     End Sub
 
@@ -144,48 +138,44 @@ Public Class FormGraafik
 
     Private Sub AddPaketid2(ByVal Tyyp As Integer)
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
-        Dim Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)
         Dim Andmebaas As New CAndmebaas
         Paketid = Andmebaas.LoePakettideNimekiri
         Console.WriteLine(Tyyp)
         Select Case Tyyp
-            Case 0
-                Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_BORS
-            Case 1
-                Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_FIX
-            Case 2
-                Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_UNIV
-        End Select
-        Select Case Pakett.Tyyp
             Case IAndmebaas.PaketiTyyp.PAKETT_BORS
-                For Each Pakett In Paketid
-                    Dim PakettBors As New IAndmebaas.PkBors
-                    PakettBors = Andmebaas.LoePakettBors(Pakett.ID)
-                    If String.IsNullOrEmpty(PakettBors.Nimi) Then
-                        Continue For
-                    Else
-                        cmbPkt2Pkt.Items.Add(PakettBors.Nimi)
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_BORS Then
+                        Dim PakettBors As New IAndmebaas.PkBors
+                        PakettBors = Andmebaas.LoePakettBors(Pakett.ID)
+                        If String.IsNullOrEmpty(PakettBors.Nimi) Then
+                            Continue For
+                        Else
+                            cmbPkt2Pkt.Items.Add(PakettBors.Nimi)
+                        End If
                     End If
-
                 Next
             Case IAndmebaas.PaketiTyyp.PAKETT_FIX
-                For Each Pakett In Paketid
-                    Dim PakettFix As New IAndmebaas.PkFix
-                    PakettFix = Andmebaas.LoePakettFix(Pakett.ID)
-                    If String.IsNullOrEmpty(PakettFix.Nimi) Then
-                        Continue For
-                    Else
-                        cmbPkt2Pkt.Items.Add(PakettFix.Nimi)
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_FIX Then
+                        Dim PakettFix As New IAndmebaas.PkFix
+                        PakettFix = Andmebaas.LoePakettFix(Pakett.ID)
+                        If String.IsNullOrEmpty(PakettFix.Nimi) Then
+                            Continue For
+                        Else
+                            cmbPkt2Pkt.Items.Add(PakettFix.Nimi)
+                        End If
                     End If
                 Next
             Case IAndmebaas.PaketiTyyp.PAKETT_UNIV
-                For Each Pakett In Paketid
-                    Dim PakettUniv As New IAndmebaas.PkUniv
-                    PakettUniv = Andmebaas.LoePakettUniv(Pakett.ID)
-                    If String.IsNullOrEmpty(PakettUniv.Nimi) Then
-                        Continue For
-                    Else
-                        cmbPkt2Pkt.Items.Add(PakettUniv.Nimi)
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_FIX Then
+                        Dim PakettUniv As New IAndmebaas.PkUniv
+                        PakettUniv = Andmebaas.LoePakettUniv(Pakett.ID)
+                        If String.IsNullOrEmpty(PakettUniv.Nimi) Then
+                            Continue For
+                        Else
+                            cmbPkt2Pkt.Items.Add(PakettUniv.Nimi)
+                        End If
                     End If
                 Next
         End Select
@@ -193,44 +183,41 @@ Public Class FormGraafik
     Private Function GetPakettInfo(ByVal Nimi As String, Tyyp As Integer) As Integer
         Dim ID As Integer
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
-        Dim Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)
         Dim Andmebaas As New CAndmebaas
         Paketid = Andmebaas.LoePakettideNimekiri
         Console.WriteLine(Tyyp)
         Select Case Tyyp
-            Case 0
-                Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_BORS
-            Case 1
-                Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_FIX
-            Case 2
-                Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_UNIV
-        End Select
-        Select Case Pakett.Tyyp
             Case IAndmebaas.PaketiTyyp.PAKETT_BORS
-                For Each Pakett In Paketid
-                    Dim PakettBors As New IAndmebaas.PkBors
-                    PakettBors = Andmebaas.LoePakettBors(Pakett.ID)
-                    If Nimi = PakettBors.Nimi Then
-                        ID = PakettBors.ID
-                        Return ID
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_BORS Then
+                        Dim PakettBors As New IAndmebaas.PkBors
+                        PakettBors = Andmebaas.LoePakettBors(Pakett.ID)
+                        If Nimi = PakettBors.Nimi Then
+                            ID = PakettBors.ID
+                            Return ID
+                        End If
                     End If
                 Next
             Case IAndmebaas.PaketiTyyp.PAKETT_FIX
-                For Each Pakett In Paketid
-                    Dim PakettFix As New IAndmebaas.PkFix
-                    PakettFix = Andmebaas.LoePakettFix(Pakett.ID)
-                    If Nimi = PakettFix.Nimi Then
-                        ID = PakettFix.ID
-                        Return ID
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_FIX Then
+                        Dim PakettFix As New IAndmebaas.PkFix
+                        PakettFix = Andmebaas.LoePakettFix(Pakett.ID)
+                        If Nimi = PakettFix.Nimi Then
+                            ID = PakettFix.ID
+                            Return ID
+                        End If
                     End If
                 Next
             Case IAndmebaas.PaketiTyyp.PAKETT_UNIV
-                For Each Pakett In Paketid
-                    Dim PakettUniv As New IAndmebaas.PkUniv
-                    PakettUniv = Andmebaas.LoePakettUniv(Pakett.ID)
-                    If Nimi = PakettUniv.Nimi Then
-                        ID = PakettUniv.ID
-                        Return ID
+                For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+                    If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_UNIV Then
+                        Dim PakettUniv As New IAndmebaas.PkUniv
+                        PakettUniv = Andmebaas.LoePakettUniv(Pakett.ID)
+                        If Nimi = PakettUniv.Nimi Then
+                            ID = PakettUniv.ID
+                            Return ID
+                        End If
                     End If
                 Next
         End Select
