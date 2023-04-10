@@ -121,6 +121,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KodumasinKalkulaator\KodumasinKalkulaator.vbproj">
+      <Project>{3b50051f-1966-40f3-83f5-c5261c48e558}</Project>
+      <Name>KodumasinKalkulaator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PrjAndmebaasTestForm\AndmebaasFormid.vbproj">
       <Project>{bba7bc69-f601-47e6-aced-5cb7c2bb9981}</Project>
       <Name>AndmebaasFormid</Name>

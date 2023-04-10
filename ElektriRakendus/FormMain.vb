@@ -234,4 +234,9 @@ Public Class FormMain
         Dim Form As New PrjAndmebaasTestForm.FormRedaktorKodumasinad
         Form.Show()
     End Sub
+
+    Private Sub BtnKalkKodumasinad_Click(sender As Object, e As EventArgs) Handles BtnKalkKodumasinad.Click
+        Dim Form As New KodumasinKalkulaator.FormKodumasinKalkulaator
+        Form.Show()
+    End Sub
 End Class

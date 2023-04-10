@@ -34,20 +34,23 @@ Partial Class FormMain
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cmbPkt2Pkt = New System.Windows.Forms.ComboBox()
         Me.cmbPkt2Tyyp = New System.Windows.Forms.ComboBox()
-        Me.Graafik1 = New GraafikControl.Graafik()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.BtnMasinad = New System.Windows.Forms.Button()
         Me.BtnPaketid = New System.Windows.Forms.Button()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.BtnKalkKodumasinad = New System.Windows.Forms.Button()
+        Me.Graafik1 = New GraafikControl.Graafik()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmbPeriood
         '
         Me.cmbPeriood.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPeriood.FormattingEnabled = True
-        Me.cmbPeriood.Location = New System.Drawing.Point(1085, 222)
+        Me.cmbPeriood.Location = New System.Drawing.Point(83, 236)
         Me.cmbPeriood.Name = "cmbPeriood"
         Me.cmbPeriood.Size = New System.Drawing.Size(121, 24)
         Me.cmbPeriood.TabIndex = 1
@@ -55,7 +58,7 @@ Partial Class FormMain
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(1024, 225)
+        Me.Label1.Location = New System.Drawing.Point(22, 239)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 16)
         Me.Label1.TabIndex = 2
@@ -85,7 +88,7 @@ Partial Class FormMain
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.cmbPkt1Pkt)
         Me.GroupBox1.Controls.Add(Me.cmbPkt1Tyyp)
-        Me.GroupBox1.Location = New System.Drawing.Point(660, 26)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 26)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(279, 169)
         Me.GroupBox1.TabIndex = 5
@@ -116,7 +119,7 @@ Partial Class FormMain
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.cmbPkt2Pkt)
         Me.GroupBox2.Controls.Add(Me.cmbPkt2Tyyp)
-        Me.GroupBox2.Location = New System.Drawing.Point(971, 26)
+        Me.GroupBox2.Location = New System.Drawing.Point(311, 26)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(279, 169)
         Me.GroupBox2.TabIndex = 7
@@ -159,24 +162,16 @@ Partial Class FormMain
         Me.cmbPkt2Tyyp.Size = New System.Drawing.Size(121, 24)
         Me.cmbPkt2Tyyp.TabIndex = 3
         '
-        'Graafik1
-        '
-        Me.Graafik1.AutoSize = True
-        Me.Graafik1.Location = New System.Drawing.Point(-16, 311)
-        Me.Graafik1.Name = "Graafik1"
-        Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
-        Me.Graafik1.TabIndex = 0
-        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.BtnMasinad)
         Me.GroupBox3.Controls.Add(Me.BtnPaketid)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 26)
+        Me.GroupBox3.Location = New System.Drawing.Point(1087, 26)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(152, 261)
         Me.GroupBox3.TabIndex = 7
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Seaded"
+        Me.GroupBox3.Text = "Seadistamine"
         '
         'BtnMasinad
         '
@@ -196,11 +191,39 @@ Partial Class FormMain
         Me.BtnPaketid.Text = "Elektripaketid"
         Me.BtnPaketid.UseVisualStyleBackColor = True
         '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.BtnKalkKodumasinad)
+        Me.GroupBox4.Location = New System.Drawing.Point(759, 26)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(298, 261)
+        Me.GroupBox4.TabIndex = 10
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Kalkulaatorid"
+        '
+        'BtnKalkKodumasinad
+        '
+        Me.BtnKalkKodumasinad.Location = New System.Drawing.Point(6, 30)
+        Me.BtnKalkKodumasinad.Name = "BtnKalkKodumasinad"
+        Me.BtnKalkKodumasinad.Size = New System.Drawing.Size(286, 28)
+        Me.BtnKalkKodumasinad.TabIndex = 10
+        Me.BtnKalkKodumasinad.Text = "Arvuta kodumasina tarbimise hind"
+        Me.BtnKalkKodumasinad.UseVisualStyleBackColor = True
+        '
+        'Graafik1
+        '
+        Me.Graafik1.AutoSize = True
+        Me.Graafik1.Location = New System.Drawing.Point(-16, 311)
+        Me.Graafik1.Name = "Graafik1"
+        Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
+        Me.Graafik1.TabIndex = 0
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1262, 673)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -208,12 +231,13 @@ Partial Class FormMain
         Me.Controls.Add(Me.cmbPeriood)
         Me.Controls.Add(Me.Graafik1)
         Me.Name = "FormMain"
-        Me.Text = "Form1"
+        Me.Text = "Elektri rakenduse pealkiri"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -235,4 +259,6 @@ Partial Class FormMain
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents BtnPaketid As Button
     Friend WithEvents BtnMasinad As Button
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents BtnKalkKodumasinad As Button
 End Class
