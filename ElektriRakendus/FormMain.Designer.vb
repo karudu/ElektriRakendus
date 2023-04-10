@@ -34,10 +34,14 @@ Partial Class FormMain
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cmbPkt2Pkt = New System.Windows.Forms.ComboBox()
         Me.cmbPkt2Tyyp = New System.Windows.Forms.ComboBox()
-        Me.Graafik1 = New GraafikControl.Graafik()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.BtnMasinad = New System.Windows.Forms.Button()
         Me.BtnPaketid = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblPkt1Kesk = New System.Windows.Forms.Label()
+        Me.lblPkt2Kesk = New System.Windows.Forms.Label()
+        Me.Graafik1 = New GraafikControl.Graafik()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -159,14 +163,6 @@ Partial Class FormMain
         Me.cmbPkt2Tyyp.Size = New System.Drawing.Size(121, 24)
         Me.cmbPkt2Tyyp.TabIndex = 3
         '
-        'Graafik1
-        '
-        Me.Graafik1.AutoSize = True
-        Me.Graafik1.Location = New System.Drawing.Point(-16, 311)
-        Me.Graafik1.Name = "Graafik1"
-        Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
-        Me.Graafik1.TabIndex = 0
-        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.BtnMasinad)
@@ -196,11 +192,57 @@ Partial Class FormMain
         Me.BtnPaketid.Text = "Elektripaketid"
         Me.BtnPaketid.UseVisualStyleBackColor = True
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(671, 230)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(147, 16)
+        Me.Label6.TabIndex = 8
+        Me.Label6.Text = "Pakett 1 keskmine hind:"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(671, 271)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(147, 16)
+        Me.Label7.TabIndex = 9
+        Me.Label7.Text = "Pakett 2 keskmine hind:"
+        '
+        'lblPkt1Kesk
+        '
+        Me.lblPkt1Kesk.AutoSize = True
+        Me.lblPkt1Kesk.Location = New System.Drawing.Point(825, 230)
+        Me.lblPkt1Kesk.Name = "lblPkt1Kesk"
+        Me.lblPkt1Kesk.Size = New System.Drawing.Size(0, 16)
+        Me.lblPkt1Kesk.TabIndex = 10
+        '
+        'lblPkt2Kesk
+        '
+        Me.lblPkt2Kesk.AutoSize = True
+        Me.lblPkt2Kesk.Location = New System.Drawing.Point(825, 271)
+        Me.lblPkt2Kesk.Name = "lblPkt2Kesk"
+        Me.lblPkt2Kesk.Size = New System.Drawing.Size(0, 16)
+        Me.lblPkt2Kesk.TabIndex = 11
+        '
+        'Graafik1
+        '
+        Me.Graafik1.AutoSize = True
+        Me.Graafik1.Location = New System.Drawing.Point(-16, 311)
+        Me.Graafik1.Name = "Graafik1"
+        Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
+        Me.Graafik1.TabIndex = 0
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1262, 673)
+        Me.Controls.Add(Me.lblPkt2Kesk)
+        Me.Controls.Add(Me.lblPkt1Kesk)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -235,4 +277,8 @@ Partial Class FormMain
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents BtnPaketid As Button
     Friend WithEvents BtnMasinad As Button
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents lblPkt1Kesk As Label
+    Friend WithEvents lblPkt2Kesk As Label
 End Class
