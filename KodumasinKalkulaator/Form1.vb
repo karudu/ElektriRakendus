@@ -3,7 +3,7 @@
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) 
-        Form2.Show()
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        FormKodumasinKalkulaator.Show()
     End Sub
 End Class

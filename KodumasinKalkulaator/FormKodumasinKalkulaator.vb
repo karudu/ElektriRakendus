@@ -2,7 +2,7 @@
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports PrjAndmebaas
 
-Public Class Form2
+Public Class FormKodumasinKalkulaator
     Private GMasinad As New List(Of IAndmebaas.Kodumasin)
 
 
