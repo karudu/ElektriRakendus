@@ -278,4 +278,9 @@ Public Class FormMain
         Dim Form As New PakettideVordlus.FormPakettideVordlus
         Form.Show()
     End Sub
+
+    Private Sub BtnElektriauto_Click(sender As Object, e As EventArgs) Handles BtnElektriauto.Click
+        Dim Form As New PrjLaadijaKalkulaator.Form1
+        Form.Show()
+    End Sub
 End Class

@@ -38,14 +38,15 @@ Partial Class FormMain
         Me.BtnMasinad = New System.Windows.Forms.Button()
         Me.BtnPaketid = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.BtnVordleja = New System.Windows.Forms.Button()
         Me.BtnLopphind = New System.Windows.Forms.Button()
         Me.BtnKalkKodumasinad = New System.Windows.Forms.Button()
         Me.Graafik1 = New GraafikControl.Graafik()
-        Me.BtnVordleja = New System.Windows.Forms.Button()
         Me.lblPkt2Kesk = New System.Windows.Forms.Label()
         Me.lblPkt1Kesk = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.BtnElektriauto = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -212,6 +213,7 @@ Partial Class FormMain
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.BtnElektriauto)
         Me.GroupBox4.Controls.Add(Me.BtnVordleja)
         Me.GroupBox4.Controls.Add(Me.BtnLopphind)
         Me.GroupBox4.Controls.Add(Me.BtnKalkKodumasinad)
@@ -223,6 +225,16 @@ Partial Class FormMain
         Me.GroupBox4.TabIndex = 10
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Kalkulaatorid"
+        '
+        'BtnVordleja
+        '
+        Me.BtnVordleja.Location = New System.Drawing.Point(6, 124)
+        Me.BtnVordleja.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.BtnVordleja.Name = "BtnVordleja"
+        Me.BtnVordleja.Size = New System.Drawing.Size(322, 35)
+        Me.BtnVordleja.TabIndex = 12
+        Me.BtnVordleja.Text = "Pakettide võrdleja"
+        Me.BtnVordleja.UseVisualStyleBackColor = True
         '
         'BtnLopphind
         '
@@ -252,16 +264,6 @@ Partial Class FormMain
         Me.Graafik1.Name = "Graafik1"
         Me.Graafik1.Size = New System.Drawing.Size(1443, 454)
         Me.Graafik1.TabIndex = 0
-        '
-        'BtnVordleja
-        '
-        Me.BtnVordleja.Location = New System.Drawing.Point(6, 124)
-        Me.BtnVordleja.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.BtnVordleja.Name = "BtnVordleja"
-        Me.BtnVordleja.Size = New System.Drawing.Size(322, 35)
-        Me.BtnVordleja.TabIndex = 12
-        Me.BtnVordleja.Text = "Pakettide võrdleja"
-        Me.BtnVordleja.UseVisualStyleBackColor = True
         '
         'lblPkt2Kesk
         '
@@ -296,6 +298,16 @@ Partial Class FormMain
         Me.Label6.Size = New System.Drawing.Size(177, 20)
         Me.Label6.TabIndex = 12
         Me.Label6.Text = "Pakett 1 keskmine hind:"
+        '
+        'BtnElektriauto
+        '
+        Me.BtnElektriauto.Location = New System.Drawing.Point(6, 167)
+        Me.BtnElektriauto.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.BtnElektriauto.Name = "BtnElektriauto"
+        Me.BtnElektriauto.Size = New System.Drawing.Size(322, 35)
+        Me.BtnElektriauto.TabIndex = 13
+        Me.BtnElektriauto.Text = "Elektriauto laadimise kalkulaator"
+        Me.BtnElektriauto.UseVisualStyleBackColor = True
         '
         'FormMain
         '
@@ -351,4 +363,5 @@ Partial Class FormMain
     Friend WithEvents lblPkt1Kesk As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents BtnElektriauto As Button
 End Class
