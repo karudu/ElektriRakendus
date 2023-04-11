@@ -86,7 +86,7 @@ Public Class FormLopphind
         End If
     End Sub
 
-    Private Sub btnVordlus_Click(sender As Object, e As EventArgs) Handles btnVordlus.Click
+    Private Sub btnVordlus_Click(sender As Object, e As EventArgs)
         Dim FormVordlus As New FormPakettideVordlus
         FormVordlus.ShowDialog()
     End Sub

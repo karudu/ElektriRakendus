@@ -22,7 +22,6 @@ Partial Class FormLopphind
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnVordlus = New System.Windows.Forms.Button()
         Me.Graafik1 = New GraafikControl.Graafik()
         Me.btnArvuta = New System.Windows.Forms.Button()
         Me.lblAjavLopp = New System.Windows.Forms.Label()
@@ -31,16 +30,9 @@ Partial Class FormLopphind
         Me.lblPakett1 = New System.Windows.Forms.Label()
         Me.lblLoppHind = New System.Windows.Forms.Label()
         Me.txtLoppHind = New System.Windows.Forms.TextBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'btnVordlus
-        '
-        Me.btnVordlus.Location = New System.Drawing.Point(849, 201)
-        Me.btnVordlus.Name = "btnVordlus"
-        Me.btnVordlus.Size = New System.Drawing.Size(75, 23)
-        Me.btnVordlus.TabIndex = 54
-        Me.btnVordlus.Text = "ava võrdlus"
-        Me.btnVordlus.UseVisualStyleBackColor = True
         '
         'Graafik1
         '
@@ -51,7 +43,7 @@ Partial Class FormLopphind
         '
         'btnArvuta
         '
-        Me.btnArvuta.Location = New System.Drawing.Point(902, 57)
+        Me.btnArvuta.Location = New System.Drawing.Point(20, 79)
         Me.btnArvuta.Name = "btnArvuta"
         Me.btnArvuta.Size = New System.Drawing.Size(75, 23)
         Me.btnArvuta.TabIndex = 52
@@ -61,7 +53,7 @@ Partial Class FormLopphind
         'lblAjavLopp
         '
         Me.lblAjavLopp.AutoSize = True
-        Me.lblAjavLopp.Location = New System.Drawing.Point(1036, 6)
+        Me.lblAjavLopp.Location = New System.Drawing.Point(154, 28)
         Me.lblAjavLopp.Name = "lblAjavLopp"
         Me.lblAjavLopp.Size = New System.Drawing.Size(135, 16)
         Me.lblAjavLopp.TabIndex = 51
@@ -71,7 +63,7 @@ Partial Class FormLopphind
         '
         Me.cboxALTund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboxALTund.FormattingEnabled = True
-        Me.cboxALTund.Location = New System.Drawing.Point(1039, 25)
+        Me.cboxALTund.Location = New System.Drawing.Point(157, 47)
         Me.cboxALTund.Name = "cboxALTund"
         Me.cboxALTund.Size = New System.Drawing.Size(75, 24)
         Me.cboxALTund.TabIndex = 50
@@ -81,7 +73,7 @@ Partial Class FormLopphind
         Me.cboxPakett1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboxPakett1.FormattingEnabled = True
         Me.cboxPakett1.Items.AddRange(New Object() {"Börsihind", "Fikseeritud hind", "Universaalteenus", "Universaalteenusega seotud pakett"})
-        Me.cboxPakett1.Location = New System.Drawing.Point(902, 25)
+        Me.cboxPakett1.Location = New System.Drawing.Point(20, 47)
         Me.cboxPakett1.Name = "cboxPakett1"
         Me.cboxPakett1.Size = New System.Drawing.Size(121, 24)
         Me.cboxPakett1.TabIndex = 49
@@ -89,7 +81,7 @@ Partial Class FormLopphind
         'lblPakett1
         '
         Me.lblPakett1.AutoSize = True
-        Me.lblPakett1.Location = New System.Drawing.Point(899, 6)
+        Me.lblPakett1.Location = New System.Drawing.Point(17, 28)
         Me.lblPakett1.Name = "lblPakett1"
         Me.lblPakett1.Size = New System.Drawing.Size(55, 16)
         Me.lblPakett1.TabIndex = 48
@@ -98,7 +90,7 @@ Partial Class FormLopphind
         'lblLoppHind
         '
         Me.lblLoppHind.AutoSize = True
-        Me.lblLoppHind.Location = New System.Drawing.Point(899, 90)
+        Me.lblLoppHind.Location = New System.Drawing.Point(17, 112)
         Me.lblLoppHind.Name = "lblLoppHind"
         Me.lblLoppHind.Size = New System.Drawing.Size(63, 16)
         Me.lblLoppHind.TabIndex = 47
@@ -106,7 +98,7 @@ Partial Class FormLopphind
         '
         'txtLoppHind
         '
-        Me.txtLoppHind.Location = New System.Drawing.Point(902, 114)
+        Me.txtLoppHind.Location = New System.Drawing.Point(20, 136)
         Me.txtLoppHind.Name = "txtLoppHind"
         Me.txtLoppHind.ReadOnly = True
         Me.txtLoppHind.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
@@ -114,28 +106,36 @@ Partial Class FormLopphind
         Me.txtLoppHind.TabIndex = 46
         Me.txtLoppHind.Text = "Empty"
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.lblPakett1)
+        Me.GroupBox1.Controls.Add(Me.txtLoppHind)
+        Me.GroupBox1.Controls.Add(Me.lblLoppHind)
+        Me.GroupBox1.Controls.Add(Me.btnArvuta)
+        Me.GroupBox1.Controls.Add(Me.cboxPakett1)
+        Me.GroupBox1.Controls.Add(Me.lblAjavLopp)
+        Me.GroupBox1.Controls.Add(Me.cboxALTund)
+        Me.GroupBox1.Location = New System.Drawing.Point(26, 16)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(334, 190)
+        Me.GroupBox1.TabIndex = 55
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "GroupBox1"
+        '
         'FormLopphind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1262, 673)
-        Me.Controls.Add(Me.btnVordlus)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Graafik1)
-        Me.Controls.Add(Me.btnArvuta)
-        Me.Controls.Add(Me.lblAjavLopp)
-        Me.Controls.Add(Me.cboxALTund)
-        Me.Controls.Add(Me.cboxPakett1)
-        Me.Controls.Add(Me.lblPakett1)
-        Me.Controls.Add(Me.lblLoppHind)
-        Me.Controls.Add(Me.txtLoppHind)
         Me.Name = "FormLopphind"
         Me.Text = "Lõpphinna kakulaator"
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents btnVordlus As Button
     Friend WithEvents Graafik1 As GraafikControl.Graafik
     Friend WithEvents btnArvuta As Button
     Friend WithEvents lblAjavLopp As Label
@@ -144,4 +144,5 @@ Partial Class FormLopphind
     Friend WithEvents lblPakett1 As Label
     Friend WithEvents lblLoppHind As Label
     Friend WithEvents txtLoppHind As TextBox
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

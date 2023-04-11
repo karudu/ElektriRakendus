@@ -29,9 +29,15 @@ Partial Class FormPakettideVordlus
         Me.lblPTariif = New System.Windows.Forms.Label()
         Me.lblOTariif = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblError = New System.Windows.Forms.Label()
+        Me.lblLopp = New System.Windows.Forms.Label()
+        Me.lblAlgus = New System.Windows.Forms.Label()
+        Me.cboxLopp = New System.Windows.Forms.ComboBox()
+        Me.cboxAlgus = New System.Windows.Forms.ComboBox()
         Me.lblPeriood1 = New System.Windows.Forms.Label()
         Me.cBoxPeriood = New System.Windows.Forms.ComboBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblError2 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboxLopp2 = New System.Windows.Forms.ComboBox()
@@ -42,12 +48,21 @@ Partial Class FormPakettideVordlus
         Me.lblBaas = New System.Windows.Forms.Label()
         Me.btnArvuta2 = New System.Windows.Forms.Button()
         Me.Graafik1 = New GraafikControl.Graafik()
-        Me.cboxLopp = New System.Windows.Forms.ComboBox()
-        Me.cboxAlgus = New System.Windows.Forms.ComboBox()
-        Me.lblLopp = New System.Windows.Forms.Label()
-        Me.lblAlgus = New System.Windows.Forms.Label()
-        Me.lblError = New System.Windows.Forms.Label()
-        Me.lblError2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblKeskHindB = New System.Windows.Forms.Label()
+        Me.lblKeskHindF = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblKorgePeriood = New System.Windows.Forms.Label()
+        Me.lblKorgeHind = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.lblMadalPeriood = New System.Windows.Forms.Label()
+        Me.lblMadalHind = New System.Windows.Forms.Label()
+        Me.lblProtsentKallim = New System.Windows.Forms.Label()
+        Me.lblProtsentOdavam = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.lblProK = New System.Windows.Forms.Label()
+        Me.lblProO = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -126,6 +141,53 @@ Partial Class FormPakettideVordlus
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Börsi- ja fikseeritudhinna võrdlus"
         '
+        'lblError
+        '
+        Me.lblError.AutoSize = True
+        Me.lblError.Location = New System.Drawing.Point(8, 239)
+        Me.lblError.Name = "lblError"
+        Me.lblError.Size = New System.Drawing.Size(73, 16)
+        Me.lblError.TabIndex = 59
+        Me.lblError.Text = "Error Label"
+        '
+        'lblLopp
+        '
+        Me.lblLopp.AutoSize = True
+        Me.lblLopp.Location = New System.Drawing.Point(133, 164)
+        Me.lblLopp.Name = "lblLopp"
+        Me.lblLopp.Size = New System.Drawing.Size(38, 16)
+        Me.lblLopp.TabIndex = 58
+        Me.lblLopp.Text = "Lopp"
+        '
+        'lblAlgus
+        '
+        Me.lblAlgus.AutoSize = True
+        Me.lblAlgus.Location = New System.Drawing.Point(6, 164)
+        Me.lblAlgus.Name = "lblAlgus"
+        Me.lblAlgus.Size = New System.Drawing.Size(41, 16)
+        Me.lblAlgus.TabIndex = 57
+        Me.lblAlgus.Text = "Algus"
+        '
+        'cboxLopp
+        '
+        Me.cboxLopp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboxLopp.FormattingEnabled = True
+        Me.cboxLopp.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.cboxLopp.Location = New System.Drawing.Point(136, 183)
+        Me.cboxLopp.Name = "cboxLopp"
+        Me.cboxLopp.Size = New System.Drawing.Size(121, 24)
+        Me.cboxLopp.TabIndex = 56
+        '
+        'cboxAlgus
+        '
+        Me.cboxAlgus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboxAlgus.FormattingEnabled = True
+        Me.cboxAlgus.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.cboxAlgus.Location = New System.Drawing.Point(9, 183)
+        Me.cboxAlgus.Name = "cboxAlgus"
+        Me.cboxAlgus.Size = New System.Drawing.Size(121, 24)
+        Me.cboxAlgus.TabIndex = 55
+        '
         'lblPeriood1
         '
         Me.lblPeriood1.AutoSize = True
@@ -157,12 +219,21 @@ Partial Class FormPakettideVordlus
         Me.GroupBox2.Controls.Add(Me.txtBaas)
         Me.GroupBox2.Controls.Add(Me.lblBaas)
         Me.GroupBox2.Controls.Add(Me.btnArvuta2)
-        Me.GroupBox2.Location = New System.Drawing.Point(338, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(950, 12)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(300, 290)
         Me.GroupBox2.TabIndex = 54
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Börsi- ja universaalhinna võrdlus"
+        '
+        'lblError2
+        '
+        Me.lblError2.AutoSize = True
+        Me.lblError2.Location = New System.Drawing.Point(8, 239)
+        Me.lblError2.Name = "lblError2"
+        Me.lblError2.Size = New System.Drawing.Size(73, 16)
+        Me.lblError2.TabIndex = 57
+        Me.lblError2.Text = "Error Label"
         '
         'Label2
         '
@@ -253,67 +324,161 @@ Partial Class FormPakettideVordlus
         Me.Graafik1.Size = New System.Drawing.Size(1262, 363)
         Me.Graafik1.TabIndex = 40
         '
-        'cboxLopp
+        'Label3
         '
-        Me.cboxLopp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboxLopp.FormattingEnabled = True
-        Me.cboxLopp.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.cboxLopp.Location = New System.Drawing.Point(136, 183)
-        Me.cboxLopp.Name = "cboxLopp"
-        Me.cboxLopp.Size = New System.Drawing.Size(121, 24)
-        Me.cboxLopp.TabIndex = 56
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(325, 52)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(94, 16)
+        Me.Label3.TabIndex = 55
+        Me.Label3.Text = "Keskmine hind"
         '
-        'cboxAlgus
+        'lblKeskHindB
         '
-        Me.cboxAlgus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboxAlgus.FormattingEnabled = True
-        Me.cboxAlgus.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.cboxAlgus.Location = New System.Drawing.Point(9, 183)
-        Me.cboxAlgus.Name = "cboxAlgus"
-        Me.cboxAlgus.Size = New System.Drawing.Size(121, 24)
-        Me.cboxAlgus.TabIndex = 55
+        Me.lblKeskHindB.AutoSize = True
+        Me.lblKeskHindB.Location = New System.Drawing.Point(407, 79)
+        Me.lblKeskHindB.Name = "lblKeskHindB"
+        Me.lblKeskHindB.Size = New System.Drawing.Size(48, 16)
+        Me.lblKeskHindB.TabIndex = 56
+        Me.lblKeskHindB.Text = "Label4"
         '
-        'lblLopp
+        'lblKeskHindF
         '
-        Me.lblLopp.AutoSize = True
-        Me.lblLopp.Location = New System.Drawing.Point(133, 164)
-        Me.lblLopp.Name = "lblLopp"
-        Me.lblLopp.Size = New System.Drawing.Size(38, 16)
-        Me.lblLopp.TabIndex = 58
-        Me.lblLopp.Text = "Lopp"
+        Me.lblKeskHindF.AutoSize = True
+        Me.lblKeskHindF.Location = New System.Drawing.Point(407, 104)
+        Me.lblKeskHindF.Name = "lblKeskHindF"
+        Me.lblKeskHindF.Size = New System.Drawing.Size(48, 16)
+        Me.lblKeskHindF.TabIndex = 57
+        Me.lblKeskHindF.Text = "Label5"
         '
-        'lblAlgus
+        'Label6
         '
-        Me.lblAlgus.AutoSize = True
-        Me.lblAlgus.Location = New System.Drawing.Point(6, 164)
-        Me.lblAlgus.Name = "lblAlgus"
-        Me.lblAlgus.Size = New System.Drawing.Size(41, 16)
-        Me.lblAlgus.TabIndex = 57
-        Me.lblAlgus.Text = "Algus"
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(325, 139)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(195, 16)
+        Me.Label6.TabIndex = 58
+        Me.Label6.Text = "Börsi kõrgeim ja madalaim hind"
         '
-        'lblError
+        'lblKorgePeriood
         '
-        Me.lblError.AutoSize = True
-        Me.lblError.Location = New System.Drawing.Point(8, 239)
-        Me.lblError.Name = "lblError"
-        Me.lblError.Size = New System.Drawing.Size(73, 16)
-        Me.lblError.TabIndex = 59
-        Me.lblError.Text = "Error Label"
+        Me.lblKorgePeriood.AutoSize = True
+        Me.lblKorgePeriood.Location = New System.Drawing.Point(325, 167)
+        Me.lblKorgePeriood.Name = "lblKorgePeriood"
+        Me.lblKorgePeriood.Size = New System.Drawing.Size(48, 16)
+        Me.lblKorgePeriood.TabIndex = 59
+        Me.lblKorgePeriood.Text = "Label7"
         '
-        'lblError2
+        'lblKorgeHind
         '
-        Me.lblError2.AutoSize = True
-        Me.lblError2.Location = New System.Drawing.Point(8, 239)
-        Me.lblError2.Name = "lblError2"
-        Me.lblError2.Size = New System.Drawing.Size(73, 16)
-        Me.lblError2.TabIndex = 57
-        Me.lblError2.Text = "Error Label"
+        Me.lblKorgeHind.AutoSize = True
+        Me.lblKorgeHind.Location = New System.Drawing.Point(325, 194)
+        Me.lblKorgeHind.Name = "lblKorgeHind"
+        Me.lblKorgeHind.Size = New System.Drawing.Size(48, 16)
+        Me.lblKorgeHind.TabIndex = 60
+        Me.lblKorgeHind.Text = "Label8"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(325, 225)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(305, 16)
+        Me.Label9.TabIndex = 61
+        Me.Label9.Text = "Mitu protsenti ajast on börsi hind fikseeritud hinnast"
+        '
+        'lblMadalPeriood
+        '
+        Me.lblMadalPeriood.AutoSize = True
+        Me.lblMadalPeriood.Location = New System.Drawing.Point(407, 167)
+        Me.lblMadalPeriood.Name = "lblMadalPeriood"
+        Me.lblMadalPeriood.Size = New System.Drawing.Size(55, 16)
+        Me.lblMadalPeriood.TabIndex = 62
+        Me.lblMadalPeriood.Text = "Label10"
+        '
+        'lblMadalHind
+        '
+        Me.lblMadalHind.AutoSize = True
+        Me.lblMadalHind.Location = New System.Drawing.Point(407, 194)
+        Me.lblMadalHind.Name = "lblMadalHind"
+        Me.lblMadalHind.Size = New System.Drawing.Size(55, 16)
+        Me.lblMadalHind.TabIndex = 63
+        Me.lblMadalHind.Text = "Label11"
+        '
+        'lblProtsentKallim
+        '
+        Me.lblProtsentKallim.AutoSize = True
+        Me.lblProtsentKallim.Location = New System.Drawing.Point(407, 250)
+        Me.lblProtsentKallim.Name = "lblProtsentKallim"
+        Me.lblProtsentKallim.Size = New System.Drawing.Size(55, 16)
+        Me.lblProtsentKallim.TabIndex = 64
+        Me.lblProtsentKallim.Text = "Label12"
+        '
+        'lblProtsentOdavam
+        '
+        Me.lblProtsentOdavam.AutoSize = True
+        Me.lblProtsentOdavam.Location = New System.Drawing.Point(407, 275)
+        Me.lblProtsentOdavam.Name = "lblProtsentOdavam"
+        Me.lblProtsentOdavam.Size = New System.Drawing.Size(55, 16)
+        Me.lblProtsentOdavam.TabIndex = 65
+        Me.lblProtsentOdavam.Text = "Label13"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(325, 79)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(44, 16)
+        Me.Label14.TabIndex = 66
+        Me.Label14.Text = "Börsil:"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(325, 104)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(76, 16)
+        Me.Label15.TabIndex = 67
+        Me.Label15.Text = "Fikseeritud:"
+        '
+        'lblProK
+        '
+        Me.lblProK.AutoSize = True
+        Me.lblProK.Location = New System.Drawing.Point(325, 250)
+        Me.lblProK.Name = "lblProK"
+        Me.lblProK.Size = New System.Drawing.Size(43, 16)
+        Me.lblProK.TabIndex = 68
+        Me.lblProK.Text = "Kallim"
+        '
+        'lblProO
+        '
+        Me.lblProO.AutoSize = True
+        Me.lblProO.Location = New System.Drawing.Point(325, 275)
+        Me.lblProO.Name = "lblProO"
+        Me.lblProO.Size = New System.Drawing.Size(59, 16)
+        Me.lblProO.TabIndex = 69
+        Me.lblProO.Text = "Odavam"
         '
         'FormPakettideVordlus
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1262, 673)
+        Me.Controls.Add(Me.lblProO)
+        Me.Controls.Add(Me.lblProK)
+        Me.Controls.Add(Me.Label15)
+        Me.Controls.Add(Me.Label14)
+        Me.Controls.Add(Me.lblProtsentOdavam)
+        Me.Controls.Add(Me.lblProtsentKallim)
+        Me.Controls.Add(Me.lblMadalHind)
+        Me.Controls.Add(Me.lblMadalPeriood)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.lblKorgeHind)
+        Me.Controls.Add(Me.lblKorgePeriood)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.lblKeskHindF)
+        Me.Controls.Add(Me.lblKeskHindB)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Graafik1)
@@ -324,6 +489,7 @@ Partial Class FormPakettideVordlus
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -353,4 +519,19 @@ Partial Class FormPakettideVordlus
     Friend WithEvents cboxAlgus As ComboBox
     Friend WithEvents lblError As Label
     Friend WithEvents lblError2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents lblKeskHindB As Label
+    Friend WithEvents lblKeskHindF As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents lblKorgePeriood As Label
+    Friend WithEvents lblKorgeHind As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents lblMadalPeriood As Label
+    Friend WithEvents lblMadalHind As Label
+    Friend WithEvents lblProtsentKallim As Label
+    Friend WithEvents lblProtsentOdavam As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents lblProK As Label
+    Friend WithEvents lblProO As Label
 End Class

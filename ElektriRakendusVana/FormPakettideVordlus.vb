@@ -1,4 +1,5 @@
-﻿Imports PrjAndmebaas
+﻿Imports System.Net.Security
+Imports PrjAndmebaas
 Public Class FormPakettideVordlus
     Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
     Dim ConnectDb As New CAndmebaas
@@ -55,11 +56,33 @@ Public Class FormPakettideVordlus
                 Exit Sub
         End Select
         Dim Index As Integer = 0
+        Dim GInfo1Kesk As Decimal
+        Dim GInfo2Kesk As Decimal
+        Dim GInfo1Korge As Decimal = 0
+        Dim GInfo1Madal As Decimal = GInfo.Item(Index).Yval
+        Dim kellaaegKorge As String
+        Dim kellaaegMadal As String
+        Dim ajaperioodKallim As Decimal = 0
+        Dim ajaperioodOdavam As Decimal
+
         If periood = 0 Then
             While Index < GInfo.Count And Index < GInfo2.Count
                 If Index >= cboxAlgus.SelectedIndex And Index <= cboxLopp.SelectedIndex Then
                     Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
                     Graafik1.setPoint2(GInfo2.Item(Index).Xval, GInfo2.Item(Index).Yval)
+                    GInfo1Kesk += GInfo.Item(Index).Yval
+                    GInfo2Kesk += GInfo2.Item(Index).Yval
+                    If GInfo1Korge < GInfo.Item(Index).Yval Then
+                        GInfo1Korge = Math.Round(GInfo.Item(Index).Yval, 2)
+                        kellaaegKorge = GInfo.Item(Index).Xval
+                    End If
+                    If GInfo1Madal > GInfo.Item(Index).Yval Then
+                        GInfo1Madal = Math.Round(GInfo.Item(Index).Yval, 2)
+                        kellaaegMadal = GInfo.Item(Index).Xval
+                    End If
+                    If GInfo.Item(Index).Yval > GInfo2.Item(Index).Yval Then
+                        ajaperioodKallim += 1
+                    End If
                 End If
                 Index += 1
             End While
@@ -67,9 +90,46 @@ Public Class FormPakettideVordlus
             While Index < GInfo.Count And Index < GInfo2.Count
                 Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
                 Graafik1.setPoint2(GInfo2.Item(Index).Xval, GInfo2.Item(Index).Yval)
+                GInfo1Kesk += GInfo.Item(Index).Yval
+                GInfo2Kesk += GInfo2.Item(Index).Yval
+                If GInfo1Korge < GInfo.Item(Index).Yval Then
+                    GInfo1Korge = Math.Round(GInfo.Item(Index).Yval, 2)
+                    kellaaegKorge = GInfo.Item(Index).Xval
+                End If
+                If GInfo1Madal > GInfo.Item(Index).Yval Then
+                    GInfo1Madal = Math.Round(GInfo.Item(Index).Yval, 2)
+                    kellaaegMadal = GInfo.Item(Index).Xval
+                End If
+                If GInfo.Item(Index).Yval > GInfo2.Item(Index).Yval Then
+                    ajaperioodKallim += 1
+                End If
                 Index += 1
-            End While
+        End While
         End If
+        GInfo1Kesk = GInfo1Kesk / GInfo.Count
+        GInfo2Kesk = GInfo2Kesk / GInfo2.Count
+        ajaperioodKallim = Math.Round((ajaperioodKallim / GInfo.Count) * 100, 2)
+        ajaperioodOdavam = Math.Round(100 - ajaperioodKallim, 2)
+
+        lblKeskHindB.Text = Math.Round(GInfo1Kesk, 2)
+        lblKeskHindF.Text = Math.Round(GInfo2Kesk, 2)
+        If GInfo1Kesk < GInfo2Kesk Then
+            lblKeskHindB.BackColor = Color.Green
+            lblKeskHindF.BackColor = Color.Red
+        ElseIf GInfo1Kesk > GInfo2Kesk Then
+            lblKeskHindB.BackColor = Color.Red
+            lblKeskHindF.BackColor = Color.Green
+        End If
+        lblKorgePeriood.Text = kellaaegKorge
+        lblKorgeHind.Text = GInfo1Korge
+        lblMadalPeriood.Text = kellaaegMadal
+        lblMadalHind.Text = GInfo1Madal
+        lblKorgeHind.BackColor = Color.Red
+        lblMadalHind.BackColor = Color.Green
+        lblProtsentKallim.Text = ajaperioodKallim
+        lblProtsentOdavam.Text = ajaperioodOdavam
+        lblProtsentKallim.BackColor = Color.Red
+        lblProtsentOdavam.BackColor = Color.Green
     End Sub
     Private Sub joonistaGraafikBU(pktTypeB As IAndmebaas.PaketiTyyp, pktTypeU As IAndmebaas.PaketiTyyp, AegAlgus As Integer, AegLopp As Integer)
         Dim GInfo As List(Of (Xval As String, Yval As Decimal))
