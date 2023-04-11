@@ -89,7 +89,7 @@ Public Class CGraafikInfo
                 Dim Info As (Aeg As String, Hind As Decimal)
                 Info.Aeg = BeginTime.ToString("M")
                 Info.Hind = ((8 * StructFix.OTariif) + (16 * StructFix.PTariif)) / 24
-                BeginTime = BeginTime.AddHours(1)
+                BeginTime = BeginTime.AddDays(1)
                 InfoList.Add(Info)
             Next
         Else
