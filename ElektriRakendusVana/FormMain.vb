@@ -1,7 +1,7 @@
 ﻿Imports System.Security.Cryptography
 Imports PrjAndmebaas
 
-Public Class FormMain2
+Public Class FormMain
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmbPeriood.Items.Add("Päev")
         cmbPeriood.Items.Add("Kuu")

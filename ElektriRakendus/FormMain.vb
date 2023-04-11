@@ -23,6 +23,8 @@ Public Class FormMain
         Dim GInfo2 As List(Of (Xval As String, Yval As Decimal))
         Dim GraafikConnect As GraafikControl.IGraafikInfo
         GraafikConnect = New GraafikControl.CGraafikInfo
+        Dim GInfo1Kesk As Decimal
+        Dim GInfo2Kesk As Decimal
         Graafik1.ClearPoints()
         Dim PakettID1 As Integer
         Dim PakettID2 As Integer
@@ -43,13 +45,19 @@ Public Class FormMain
                     GInfo1 = GraafikConnect.GetPaev(PakettID1, cmbPkt1Tyyp.SelectedIndex)
                     For I = 0 To GInfo1.Count - 1
                         Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                        GInfo1Kesk += GInfo1.Item(I).Yval
                     Next
+                    GInfo1Kesk = GInfo1Kesk / GInfo1.Count
+                    lblPkt1Kesk.Text = GInfo1Kesk.ToString("N2") + " s/kWh"
                 End If
                 If PakettID2 <> Nothing Then
                     GInfo2 = GraafikConnect.GetPaev(PakettID2, cmbPkt2Tyyp.SelectedIndex)
                     For I = 0 To GInfo2.Count - 1
                         Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                        GInfo2Kesk += GInfo2.Item(I).Yval
                     Next
+                    GInfo2Kesk = GInfo2Kesk / GInfo2.Count
+                    lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " s/kWh"
                 End If
             Case 1
                 If PakettID1 <> Nothing Then
@@ -57,29 +65,50 @@ Public Class FormMain
                     Console.WriteLine(GInfo1.Count)
                     For I = 0 To GInfo1.Count - 1
                         Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                        GInfo1Kesk += GInfo1.Item(I).Yval
                     Next
+                    GInfo1Kesk = GInfo1Kesk / GInfo1.Count
+                    lblPkt1Kesk.Text = GInfo1Kesk.ToString("N2") + " s/kWh"
                 End If
                 If PakettID2 <> Nothing Then
                     GInfo2 = GraafikConnect.GetKuu(PakettID2, cmbPkt2Tyyp.SelectedIndex)
                     Console.WriteLine(GInfo2.Count)
                     For I = 0 To GInfo2.Count - 1
                         Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                        GInfo2Kesk += GInfo2.Item(I).Yval
                     Next
+                    GInfo2Kesk = GInfo2Kesk / GInfo2.Count
+                    lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " s/kWh"
                 End If
             Case 2
                 If PakettID1 <> Nothing Then
                     GInfo1 = GraafikConnect.GetAasta(PakettID1, cmbPkt1Tyyp.SelectedIndex)
                     For I = 0 To GInfo1.Count - 1
                         Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                        GInfo1Kesk += GInfo1.Item(I).Yval
                     Next
+                    GInfo1Kesk = GInfo1Kesk / GInfo1.Count
+                    lblPkt1Kesk.Text = GInfo1Kesk.ToString("N2") + " s/kWh"
                 End If
                 If PakettID2 <> Nothing Then
                     GInfo2 = GraafikConnect.GetAasta(PakettID2, cmbPkt2Tyyp.SelectedIndex)
                     For I = 0 To GInfo2.Count - 1
                         Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                        GInfo2Kesk += GInfo2.Item(I).Yval
                     Next
+                    GInfo2Kesk = GInfo2Kesk / GInfo2.Count
+                    lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " s/kWh"
                 End If
         End Select
+        If PakettID1 <> Nothing And PakettID2 <> Nothing Then
+            If GInfo1Kesk < GInfo2Kesk Then
+                lblPkt1Kesk.BackColor = Color.Green
+                lblPkt2Kesk.BackColor = Color.Red
+            Else
+                lblPkt2Kesk.BackColor = Color.Green
+                lblPkt1Kesk.BackColor = Color.Red
+            End If
+        End If
     End Sub
 
     Private Sub cmbPkt1Tyyp_DropDownClosed(sender As Object, e As EventArgs) Handles cmbPkt1Tyyp.DropDownClosed
@@ -237,6 +266,16 @@ Public Class FormMain
 
     Private Sub BtnKalkKodumasinad_Click(sender As Object, e As EventArgs) Handles BtnKalkKodumasinad.Click
         Dim Form As New KodumasinKalkulaator.FormKodumasinKalkulaator
+        Form.Show()
+    End Sub
+
+    Private Sub BtnLopphind_Click(sender As Object, e As EventArgs) Handles BtnLopphind.Click
+        Dim Form As New PakettideVordlus.FormLopphind
+        Form.Show()
+    End Sub
+
+    Private Sub BtnVordleja_Click(sender As Object, e As EventArgs) Handles BtnVordleja.Click
+        Dim Form As New PakettideVordlus.FormPakettideVordlus
         Form.Show()
     End Sub
 End Class

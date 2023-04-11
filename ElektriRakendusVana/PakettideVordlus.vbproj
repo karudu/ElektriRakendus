@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CADD79C8-6880-4998-BD5A-97CCEB617F0B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>ElektriRakendus.My.MyApplication</StartupObject>
-    <RootNamespace>ElektriRakendus</RootNamespace>
-    <AssemblyName>ElektriRakendus</AssemblyName>
+    <StartupObject>PakettideVordlus.My.MyApplication</StartupObject>
+    <RootNamespace>PakettideVordlus</RootNamespace>
+    <AssemblyName>PakettideVordlus</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -22,7 +22,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>ElektriRakendus.xml</DocumentationFile>
+    <DocumentationFile>PakettideVordlus.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,7 +32,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>ElektriRakendus.xml</DocumentationFile>
+    <DocumentationFile>PakettideVordlus.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -83,11 +83,11 @@
     <Compile Include="FormLopphind.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain2.vb">
+    <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain2.Designer.vb">
-      <DependentUpon>FormMain2.vb</DependentUpon>
+    <Compile Include="FormMain.Designer.vb">
+      <DependentUpon>FormMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPakettideVordlus.Designer.vb">
@@ -117,8 +117,8 @@
     <EmbeddedResource Include="FormLopphind.resx">
       <DependentUpon>FormLopphind.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMain2.resx">
-      <DependentUpon>FormMain2.vb</DependentUpon>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPakettideVordlus.resx">
       <DependentUpon>FormPakettideVordlus.vb</DependentUpon>

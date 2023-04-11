@@ -5,9 +5,6 @@ Public Class FormPakettideVordlus
     Public StructBors As New PrjAndmebaas.IAndmebaas.PkBors
     Public StructFix As New PrjAndmebaas.IAndmebaas.PkFix
     Public StructUniv As New PrjAndmebaas.IAndmebaas.PkUniv
-    Private Sub FormPakettideVordlus_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 
     Private Sub joonistaGraafik(pktTypeB As IAndmebaas.PaketiTyyp, pktTypeF As IAndmebaas.PaketiTyyp, periood As Integer)
         Dim GInfo As List(Of (Xval As String, Yval As Decimal))

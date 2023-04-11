@@ -121,6 +121,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ElektriRakendusVana\PakettideVordlus.vbproj">
+      <Project>{cadd79c8-6880-4998-bd5a-97cceb617f0b}</Project>
+      <Name>PakettideVordlus</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KodumasinKalkulaator\KodumasinKalkulaator.vbproj">
       <Project>{3b50051f-1966-40f3-83f5-c5261c48e558}</Project>
       <Name>KodumasinKalkulaator</Name>
