@@ -98,7 +98,7 @@ Public Class CGraafikInfo
                 Dim Info As (Aeg As String, Hind As Decimal)
                 Info.Aeg = BeginTime.ToString("M")
                 Info.Hind = StructUniv.Baas + StructUniv.Marginaal
-                BeginTime = BeginTime.AddHours(1)
+                BeginTime = BeginTime.AddDays(1)
                 InfoList.Add(Info)
             Next
         End If
