@@ -5,8 +5,29 @@ Public Class FormPakettideVordlus
     Public StructBors As New PrjAndmebaas.IAndmebaas.PkBors
     Public StructFix As New PrjAndmebaas.IAndmebaas.PkFix
     Public StructUniv As New PrjAndmebaas.IAndmebaas.PkUniv
-
-    Private Sub joonistaGraafik(pktTypeB As IAndmebaas.PaketiTyyp, pktTypeF As IAndmebaas.PaketiTyyp, periood As Integer)
+    Private Sub FormPakettideVordlus_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        cboxAlgus.Visible = False
+        cboxLopp.Visible = False
+        lblAlgus.Visible = False
+        lblLopp.Visible = False
+        lblError.Visible = False
+        lblError2.Visible = False
+    End Sub
+    Private Sub cBoxPeriood_DropDownClosed(sender As Object, e As EventArgs) Handles cBoxPeriood.DropDownClosed
+        Select Case cBoxPeriood.SelectedIndex
+            Case 0
+                cboxAlgus.Visible = True
+                cboxLopp.Visible = True
+                lblAlgus.Visible = True
+                lblLopp.Visible = True
+            Case Else
+                cboxAlgus.Visible = False
+                cboxLopp.Visible = False
+                lblAlgus.Visible = False
+                lblLopp.Visible = False
+        End Select
+    End Sub
+    Private Sub joonistaGraafikBF(pktTypeB As IAndmebaas.PaketiTyyp, pktTypeF As IAndmebaas.PaketiTyyp, periood As Integer)
         Dim GInfo As List(Of (Xval As String, Yval As Decimal))
         Dim GInfo2 As List(Of (Xval As String, Yval As Decimal))
         Dim GetInfo As GraafikControl.IGraafikInfo
@@ -14,36 +35,62 @@ Public Class FormPakettideVordlus
 
         Select Case periood
             Case 0
+                If cboxAlgus.SelectedIndex = -1 And cboxLopp.SelectedIndex = -1 Then
+                    cBoxPeriood.Text = "Valige aja algus ja lopp"
+                    Exit Sub
+                End If
                 GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
                 GInfo2 = GetInfo.GetPaev(StructFix.ID, pktTypeF)
             Case 1
+                GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
+                GInfo2 = GetInfo.GetPaev(StructFix.ID, pktTypeF)
+            Case 2
                 GInfo = GetInfo.GetKuu(StructBors.ID, pktTypeB)
                 GInfo2 = GetInfo.GetKuu(StructFix.ID, pktTypeF)
-            Case 2
+            Case 3
                 GInfo = GetInfo.GetAasta(StructBors.ID, pktTypeB)
                 GInfo2 = GetInfo.GetAasta(StructFix.ID, pktTypeF)
             Case Else
                 cBoxPeriood.Text = "Valige periood!"
                 Exit Sub
         End Select
-        'Select Case periood
-        '    Case 0
-        '        GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
-        '        GInfo2 = GetInfo.GetPaev(StructUniv.ID, pktTypeF)
-        '    Case 1
-        '        GInfo = GetInfo.GetKuu(StructBors.ID, pktTypeB)
-        '        GInfo2 = GetInfo.GetKuu(StructFix.ID, pktTypeF)
-        '    Case 2
-        '        GInfo = GetInfo.GetAasta(StructBors.ID, pktTypeB)
-        '        GInfo2 = GetInfo.GetAasta(StructFix.ID, pktTypeF)
-        '    Case Else
-        '        cBoxPeriood.Text = "Valige periood!"
-        '        Exit Sub
-        'End Select
         Dim Index As Integer = 0
-        While Index < GInfo.Count - 1 And Index < GInfo2.Count - 1
-            Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
-            Graafik1.setPoint2(GInfo2.Item(Index).Xval, GInfo2.Item(Index).Yval)
+        If periood = 0 Then
+            While Index < GInfo.Count And Index < GInfo2.Count
+                If Index >= cboxAlgus.SelectedIndex And Index <= cboxLopp.SelectedIndex Then
+                    Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
+                    Graafik1.setPoint2(GInfo2.Item(Index).Xval, GInfo2.Item(Index).Yval)
+                End If
+                Index += 1
+            End While
+        Else
+            While Index < GInfo.Count And Index < GInfo2.Count
+                Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
+                Graafik1.setPoint2(GInfo2.Item(Index).Xval, GInfo2.Item(Index).Yval)
+                Index += 1
+            End While
+        End If
+    End Sub
+    Private Sub joonistaGraafikBU(pktTypeB As IAndmebaas.PaketiTyyp, pktTypeU As IAndmebaas.PaketiTyyp, AegAlgus As Integer, AegLopp As Integer)
+        Dim GInfo As List(Of (Xval As String, Yval As Decimal))
+        Dim GInfo2 As List(Of (Xval As String, Yval As Decimal))
+        Dim GetInfo As GraafikControl.IGraafikInfo
+        GetInfo = New GraafikControl.CGraafikInfo
+
+        If cboxAlgus2.SelectedIndex <> -1 And cboxLopp2.SelectedIndex <> -1 Then
+            GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
+            GInfo2 = GetInfo.GetPaev(StructUniv.ID, pktTypeU)
+        Else
+            cboxAlgus2.Text = "Valige perioodi algus ja lopp ajad!"
+            Exit Sub
+        End If
+
+        Dim Index As Integer = 0
+        While Index < GInfo.Count And Index < GInfo2.Count
+            If Index >= cboxAlgus2.SelectedIndex And Index <= cboxLopp2.SelectedIndex Then
+                Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
+                Graafik1.setPoint2(GInfo2.Item(Index).Xval, GInfo2.Item(Index).Yval)
+            End If
             Index += 1
         End While
     End Sub
@@ -59,7 +106,7 @@ Public Class FormPakettideVordlus
         Me.StructFix.Kuutasu = 0
 
         If Not IsNumeric(txtFixP.Text) And Not IsNumeric(txtFixO.Text) Then
-            cBoxPeriood.Text = "Sisestage ainult number päeva ja öö tariifidesse"
+            cboxAlgus2.Text = "Sisestage ainult numbrid päeva ja öö tariifidesse"
             Exit Sub
         End If
 
@@ -78,8 +125,6 @@ Public Class FormPakettideVordlus
                 I = index
             End If
         Next
-        Dim periood As Integer
-        periood = cBoxPeriood.SelectedIndex
         For index = 0 To nimekiri.Count - 1
             If nimekiri(index).Tyyp = IAndmebaas.PaketiTyyp.PAKETT_FIX Then
                 Me.StructFix.ID = nimekiri(index).ID
@@ -87,11 +132,13 @@ Public Class FormPakettideVordlus
                 I = index
             End If
         Next
-        joonistaGraafik(pktTypeB, pktTypeF, periood)
+        Dim periood As Integer
+        periood = cBoxPeriood.SelectedIndex
+        joonistaGraafikBF(pktTypeB, pktTypeF, periood)
         ConnectDb.KustutaPakettBors(StructBors.ID)
         ConnectDb.KustutaPakettFix(StructFix.ID)
     End Sub
-
+    'börsi ja univ pakettide võrdlus
     Private Sub btnArvuta2_Click(sender As Object, e As EventArgs) Handles btnArvuta2.Click
         Graafik1.ClearPoints()
         Me.StructBors.Nimi = "Temp"
@@ -129,9 +176,11 @@ Public Class FormPakettideVordlus
                 I = index
             End If
         Next
-        Dim periood As Integer
-        periood = cBoxPeriood.SelectedIndex
-        joonistaGraafik(pktTypeB, pktTypeB, periood)
+        Dim AegAlgus As Integer
+        AegAlgus = cboxAlgus2.SelectedIndex
+        Dim AegLopp As Integer
+        AegLopp = cboxLopp2.SelectedIndex
+        joonistaGraafikBU(pktTypeB, pktTypeU, AegAlgus, AegLopp)
         ConnectDb.KustutaPakettBors(StructBors.ID)
         ConnectDb.KustutaPakettUniv(StructUniv.ID)
     End Sub
