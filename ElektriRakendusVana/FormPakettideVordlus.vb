@@ -112,7 +112,9 @@ Public Class FormPakettideVordlus
         ajaperioodOdavam = Math.Round(100 - ajaperioodKallim, 2)
 
         lblKeskHindB.Text = Math.Round(GInfo1Kesk, 2)
+        lblKeskHindB.Text += " s/kWh"
         lblKeskHindF.Text = Math.Round(GInfo2Kesk, 2)
+        lblKeskHindF.Text += " s/kWh"
         If GInfo1Kesk < GInfo2Kesk Then
             lblKeskHindB.BackColor = Color.Green
             lblKeskHindF.BackColor = Color.Red
@@ -122,12 +124,16 @@ Public Class FormPakettideVordlus
         End If
         lblKorgePeriood.Text = kellaaegKorge
         lblKorgeHind.Text = GInfo1Korge
+        lblKorgeHind.Text += " s/kWh"
         lblMadalPeriood.Text = kellaaegMadal
         lblMadalHind.Text = GInfo1Madal
+        lblMadalHind.Text += " s/kWh"
         lblKorgeHind.BackColor = Color.Red
         lblMadalHind.BackColor = Color.Green
         lblProtsentKallim.Text = ajaperioodKallim
+        lblProtsentKallim.Text += " s/kWh"
         lblProtsentOdavam.Text = ajaperioodOdavam
+        lblProtsentOdavam.Text += " s/kWh"
         lblProtsentKallim.BackColor = Color.Red
         lblProtsentOdavam.BackColor = Color.Green
     End Sub

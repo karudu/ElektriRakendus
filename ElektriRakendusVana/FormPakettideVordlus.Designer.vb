@@ -475,7 +475,7 @@ Partial Class FormPakettideVordlus
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Graafik1)
         Me.Name = "FormPakettideVordlus"
-        Me.Text = "Pakettide võrdlus"
+        Me.Text = "Hinna võrdleja"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
