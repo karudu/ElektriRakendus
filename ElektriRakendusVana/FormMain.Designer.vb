@@ -37,16 +37,13 @@ Partial Class FormMain
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.BtnMasinad = New System.Windows.Forms.Button()
         Me.BtnPaketid = New System.Windows.Forms.Button()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.BtnVordleja = New System.Windows.Forms.Button()
-        Me.BtnLopphind = New System.Windows.Forms.Button()
-        Me.BtnKalkKodumasinad = New System.Windows.Forms.Button()
-        Me.Graafik1 = New GraafikControl.Graafik()
-        Me.lblPkt2Kesk = New System.Windows.Forms.Label()
-        Me.lblPkt1Kesk = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.BtnElektriauto = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblPkt1Kesk = New System.Windows.Forms.Label()
+        Me.lblPkt2Kesk = New System.Windows.Forms.Label()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.btnLoppHind = New System.Windows.Forms.Button()
+        Me.Graafik1 = New GraafikControl.Graafik()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -57,7 +54,7 @@ Partial Class FormMain
         '
         Me.cmbPeriood.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPeriood.FormattingEnabled = True
-        Me.cmbPeriood.Location = New System.Drawing.Point(93, 295)
+        Me.cmbPeriood.Location = New System.Drawing.Point(1221, 278)
         Me.cmbPeriood.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmbPeriood.Name = "cmbPeriood"
         Me.cmbPeriood.Size = New System.Drawing.Size(136, 28)
@@ -66,7 +63,7 @@ Partial Class FormMain
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(25, 299)
+        Me.Label1.Location = New System.Drawing.Point(1152, 281)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(67, 20)
         Me.Label1.TabIndex = 2
@@ -98,7 +95,7 @@ Partial Class FormMain
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.cmbPkt1Pkt)
         Me.GroupBox1.Controls.Add(Me.cmbPkt1Tyyp)
-        Me.GroupBox1.Location = New System.Drawing.Point(14, 32)
+        Me.GroupBox1.Location = New System.Drawing.Point(742, 32)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -131,7 +128,7 @@ Partial Class FormMain
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.cmbPkt2Pkt)
         Me.GroupBox2.Controls.Add(Me.cmbPkt2Tyyp)
-        Me.GroupBox2.Location = New System.Drawing.Point(350, 32)
+        Me.GroupBox2.Location = New System.Drawing.Point(1092, 32)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -182,14 +179,14 @@ Partial Class FormMain
         '
         Me.GroupBox3.Controls.Add(Me.BtnMasinad)
         Me.GroupBox3.Controls.Add(Me.BtnPaketid)
-        Me.GroupBox3.Location = New System.Drawing.Point(1223, 32)
+        Me.GroupBox3.Location = New System.Drawing.Point(14, 32)
         Me.GroupBox3.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox3.Size = New System.Drawing.Size(171, 326)
         Me.GroupBox3.TabIndex = 7
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Seadistamine"
+        Me.GroupBox3.Text = "Seaded"
         '
         'BtnMasinad
         '
@@ -211,50 +208,61 @@ Partial Class FormMain
         Me.BtnPaketid.Text = "Elektripaketid"
         Me.BtnPaketid.UseVisualStyleBackColor = True
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(755, 288)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(177, 20)
+        Me.Label6.TabIndex = 8
+        Me.Label6.Text = "Pakett 1 keskmine hind:"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(755, 339)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(177, 20)
+        Me.Label7.TabIndex = 9
+        Me.Label7.Text = "Pakett 2 keskmine hind:"
+        '
+        'lblPkt1Kesk
+        '
+        Me.lblPkt1Kesk.AutoSize = True
+        Me.lblPkt1Kesk.Location = New System.Drawing.Point(928, 288)
+        Me.lblPkt1Kesk.Name = "lblPkt1Kesk"
+        Me.lblPkt1Kesk.Size = New System.Drawing.Size(0, 20)
+        Me.lblPkt1Kesk.TabIndex = 10
+        '
+        'lblPkt2Kesk
+        '
+        Me.lblPkt2Kesk.AutoSize = True
+        Me.lblPkt2Kesk.Location = New System.Drawing.Point(928, 339)
+        Me.lblPkt2Kesk.Name = "lblPkt2Kesk"
+        Me.lblPkt2Kesk.Size = New System.Drawing.Size(0, 20)
+        Me.lblPkt2Kesk.TabIndex = 11
+        '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.BtnElektriauto)
-        Me.GroupBox4.Controls.Add(Me.BtnVordleja)
-        Me.GroupBox4.Controls.Add(Me.BtnLopphind)
-        Me.GroupBox4.Controls.Add(Me.BtnKalkKodumasinad)
-        Me.GroupBox4.Location = New System.Drawing.Point(854, 32)
+        Me.GroupBox4.Controls.Add(Me.btnLoppHind)
+        Me.GroupBox4.Location = New System.Drawing.Point(225, 32)
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.GroupBox4.Size = New System.Drawing.Size(335, 326)
-        Me.GroupBox4.TabIndex = 10
+        Me.GroupBox4.Size = New System.Drawing.Size(246, 125)
+        Me.GroupBox4.TabIndex = 12
         Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Kalkulaatorid"
+        Me.GroupBox4.Text = "PlaceHolderForLopphindCalc"
         '
-        'BtnVordleja
+        'btnLoppHind
         '
-        Me.BtnVordleja.Location = New System.Drawing.Point(6, 124)
-        Me.BtnVordleja.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.BtnVordleja.Name = "BtnVordleja"
-        Me.BtnVordleja.Size = New System.Drawing.Size(322, 35)
-        Me.BtnVordleja.TabIndex = 12
-        Me.BtnVordleja.Text = "Pakettide võrdleja"
-        Me.BtnVordleja.UseVisualStyleBackColor = True
-        '
-        'BtnLopphind
-        '
-        Me.BtnLopphind.Location = New System.Drawing.Point(6, 81)
-        Me.BtnLopphind.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.BtnLopphind.Name = "BtnLopphind"
-        Me.BtnLopphind.Size = New System.Drawing.Size(322, 35)
-        Me.BtnLopphind.TabIndex = 11
-        Me.BtnLopphind.Text = "Lõpphinna leidja"
-        Me.BtnLopphind.UseVisualStyleBackColor = True
-        '
-        'BtnKalkKodumasinad
-        '
-        Me.BtnKalkKodumasinad.Location = New System.Drawing.Point(7, 38)
-        Me.BtnKalkKodumasinad.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.BtnKalkKodumasinad.Name = "BtnKalkKodumasinad"
-        Me.BtnKalkKodumasinad.Size = New System.Drawing.Size(322, 35)
-        Me.BtnKalkKodumasinad.TabIndex = 10
-        Me.BtnKalkKodumasinad.Text = "Arvuta kodumasina tarbimise hind"
-        Me.BtnKalkKodumasinad.UseVisualStyleBackColor = True
+        Me.btnLoppHind.Location = New System.Drawing.Point(7, 35)
+        Me.btnLoppHind.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnLoppHind.Name = "btnLoppHind"
+        Me.btnLoppHind.Size = New System.Drawing.Size(147, 36)
+        Me.btnLoppHind.TabIndex = 0
+        Me.btnLoppHind.Text = "Lõpp hind"
+        Me.btnLoppHind.UseVisualStyleBackColor = True
         '
         'Graafik1
         '
@@ -265,60 +273,16 @@ Partial Class FormMain
         Me.Graafik1.Size = New System.Drawing.Size(1443, 454)
         Me.Graafik1.TabIndex = 0
         '
-        'lblPkt2Kesk
-        '
-        Me.lblPkt2Kesk.AutoSize = True
-        Me.lblPkt2Kesk.Location = New System.Drawing.Point(519, 346)
-        Me.lblPkt2Kesk.Name = "lblPkt2Kesk"
-        Me.lblPkt2Kesk.Size = New System.Drawing.Size(0, 20)
-        Me.lblPkt2Kesk.TabIndex = 15
-        '
-        'lblPkt1Kesk
-        '
-        Me.lblPkt1Kesk.AutoSize = True
-        Me.lblPkt1Kesk.Location = New System.Drawing.Point(519, 295)
-        Me.lblPkt1Kesk.Name = "lblPkt1Kesk"
-        Me.lblPkt1Kesk.Size = New System.Drawing.Size(0, 20)
-        Me.lblPkt1Kesk.TabIndex = 14
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(346, 346)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(177, 20)
-        Me.Label7.TabIndex = 13
-        Me.Label7.Text = "Pakett 2 keskmine hind:"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(346, 295)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(177, 20)
-        Me.Label6.TabIndex = 12
-        Me.Label6.Text = "Pakett 1 keskmine hind:"
-        '
-        'BtnElektriauto
-        '
-        Me.BtnElektriauto.Location = New System.Drawing.Point(6, 167)
-        Me.BtnElektriauto.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.BtnElektriauto.Name = "BtnElektriauto"
-        Me.BtnElektriauto.Size = New System.Drawing.Size(322, 35)
-        Me.BtnElektriauto.TabIndex = 13
-        Me.BtnElektriauto.Text = "Elektriauto laadimise kalkulaator"
-        Me.BtnElektriauto.UseVisualStyleBackColor = True
-        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1420, 841)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.lblPkt2Kesk)
         Me.Controls.Add(Me.lblPkt1Kesk)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -327,7 +291,7 @@ Partial Class FormMain
         Me.Controls.Add(Me.Graafik1)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FormMain"
-        Me.Text = "Elektri rakenduse pealkiri"
+        Me.Text = "Form1"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -355,13 +319,10 @@ Partial Class FormMain
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents BtnPaketid As Button
     Friend WithEvents BtnMasinad As Button
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents BtnKalkKodumasinad As Button
-    Friend WithEvents BtnLopphind As Button
-    Friend WithEvents BtnVordleja As Button
-    Friend WithEvents lblPkt2Kesk As Label
-    Friend WithEvents lblPkt1Kesk As Label
-    Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents BtnElektriauto As Button
+    Friend WithEvents Label7 As Label
+    Friend WithEvents lblPkt1Kesk As Label
+    Friend WithEvents lblPkt2Kesk As Label
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents btnLoppHind As Button
 End Class

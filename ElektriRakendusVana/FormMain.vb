@@ -1,4 +1,5 @@
-﻿Imports PrjAndmebaas
+﻿Imports System.Security.Cryptography
+Imports PrjAndmebaas
 
 Public Class FormMain
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -264,23 +265,8 @@ Public Class FormMain
         Form.Show()
     End Sub
 
-    Private Sub BtnKalkKodumasinad_Click(sender As Object, e As EventArgs) Handles BtnKalkKodumasinad.Click
-        Dim Form As New KodumasinKalkulaator.FormKodumasinKalkulaator
-        Form.Show()
-    End Sub
-
-    Private Sub BtnLopphind_Click(sender As Object, e As EventArgs) Handles BtnLopphind.Click
-        Dim Form As New PakettideVordlus.FormLopphind
-        Form.Show()
-    End Sub
-
-    Private Sub BtnVordleja_Click(sender As Object, e As EventArgs) Handles BtnVordleja.Click
-        Dim Form As New PakettideVordlus.FormPakettideVordlus
-        Form.Show()
-    End Sub
-
-    Private Sub BtnElektriauto_Click(sender As Object, e As EventArgs) Handles BtnElektriauto.Click
-        Dim Form As New PrjLaadijaKalkulaator.Form1
+    Private Sub btnLoppHind_Click(sender As Object, e As EventArgs) Handles btnLoppHind.Click
+        Dim Form As New FormLopphind
         Form.Show()
     End Sub
 End Class
