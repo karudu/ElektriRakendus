@@ -338,18 +338,16 @@ Partial Class FormPakettideVordlus
         Me.lblKeskHindB.AutoSize = True
         Me.lblKeskHindB.Location = New System.Drawing.Point(407, 79)
         Me.lblKeskHindB.Name = "lblKeskHindB"
-        Me.lblKeskHindB.Size = New System.Drawing.Size(48, 16)
+        Me.lblKeskHindB.Size = New System.Drawing.Size(0, 16)
         Me.lblKeskHindB.TabIndex = 56
-        Me.lblKeskHindB.Text = "Label4"
         '
         'lblKeskHindF
         '
         Me.lblKeskHindF.AutoSize = True
         Me.lblKeskHindF.Location = New System.Drawing.Point(407, 104)
         Me.lblKeskHindF.Name = "lblKeskHindF"
-        Me.lblKeskHindF.Size = New System.Drawing.Size(48, 16)
+        Me.lblKeskHindF.Size = New System.Drawing.Size(0, 16)
         Me.lblKeskHindF.TabIndex = 57
-        Me.lblKeskHindF.Text = "Label5"
         '
         'Label6
         '
@@ -365,18 +363,16 @@ Partial Class FormPakettideVordlus
         Me.lblKorgePeriood.AutoSize = True
         Me.lblKorgePeriood.Location = New System.Drawing.Point(325, 167)
         Me.lblKorgePeriood.Name = "lblKorgePeriood"
-        Me.lblKorgePeriood.Size = New System.Drawing.Size(48, 16)
+        Me.lblKorgePeriood.Size = New System.Drawing.Size(0, 16)
         Me.lblKorgePeriood.TabIndex = 59
-        Me.lblKorgePeriood.Text = "Label7"
         '
         'lblKorgeHind
         '
         Me.lblKorgeHind.AutoSize = True
         Me.lblKorgeHind.Location = New System.Drawing.Point(325, 194)
         Me.lblKorgeHind.Name = "lblKorgeHind"
-        Me.lblKorgeHind.Size = New System.Drawing.Size(48, 16)
+        Me.lblKorgeHind.Size = New System.Drawing.Size(0, 16)
         Me.lblKorgeHind.TabIndex = 60
-        Me.lblKorgeHind.Text = "Label8"
         '
         'Label9
         '
@@ -392,36 +388,32 @@ Partial Class FormPakettideVordlus
         Me.lblMadalPeriood.AutoSize = True
         Me.lblMadalPeriood.Location = New System.Drawing.Point(407, 167)
         Me.lblMadalPeriood.Name = "lblMadalPeriood"
-        Me.lblMadalPeriood.Size = New System.Drawing.Size(55, 16)
+        Me.lblMadalPeriood.Size = New System.Drawing.Size(0, 16)
         Me.lblMadalPeriood.TabIndex = 62
-        Me.lblMadalPeriood.Text = "Label10"
         '
         'lblMadalHind
         '
         Me.lblMadalHind.AutoSize = True
         Me.lblMadalHind.Location = New System.Drawing.Point(407, 194)
         Me.lblMadalHind.Name = "lblMadalHind"
-        Me.lblMadalHind.Size = New System.Drawing.Size(55, 16)
+        Me.lblMadalHind.Size = New System.Drawing.Size(0, 16)
         Me.lblMadalHind.TabIndex = 63
-        Me.lblMadalHind.Text = "Label11"
         '
         'lblProtsentKallim
         '
         Me.lblProtsentKallim.AutoSize = True
         Me.lblProtsentKallim.Location = New System.Drawing.Point(407, 250)
         Me.lblProtsentKallim.Name = "lblProtsentKallim"
-        Me.lblProtsentKallim.Size = New System.Drawing.Size(55, 16)
+        Me.lblProtsentKallim.Size = New System.Drawing.Size(0, 16)
         Me.lblProtsentKallim.TabIndex = 64
-        Me.lblProtsentKallim.Text = "Label12"
         '
         'lblProtsentOdavam
         '
         Me.lblProtsentOdavam.AutoSize = True
         Me.lblProtsentOdavam.Location = New System.Drawing.Point(407, 275)
         Me.lblProtsentOdavam.Name = "lblProtsentOdavam"
-        Me.lblProtsentOdavam.Size = New System.Drawing.Size(55, 16)
+        Me.lblProtsentOdavam.Size = New System.Drawing.Size(0, 16)
         Me.lblProtsentOdavam.TabIndex = 65
-        Me.lblProtsentOdavam.Text = "Label13"
         '
         'Label14
         '
