@@ -38,6 +38,7 @@ Partial Class FormMain
         Me.BtnMasinad = New System.Windows.Forms.Button()
         Me.BtnPaketid = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.BtnHinnaKalkulaator = New System.Windows.Forms.Button()
         Me.BtnElektriauto = New System.Windows.Forms.Button()
         Me.BtnVordleja = New System.Windows.Forms.Button()
         Me.BtnLopphind = New System.Windows.Forms.Button()
@@ -200,6 +201,7 @@ Partial Class FormMain
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.BtnHinnaKalkulaator)
         Me.GroupBox4.Controls.Add(Me.BtnElektriauto)
         Me.GroupBox4.Controls.Add(Me.BtnVordleja)
         Me.GroupBox4.Controls.Add(Me.BtnLopphind)
@@ -210,6 +212,15 @@ Partial Class FormMain
         Me.GroupBox4.TabIndex = 10
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Kalkulaatorid"
+        '
+        'BtnHinnaKalkulaator
+        '
+        Me.BtnHinnaKalkulaator.Location = New System.Drawing.Point(5, 168)
+        Me.BtnHinnaKalkulaator.Name = "BtnHinnaKalkulaator"
+        Me.BtnHinnaKalkulaator.Size = New System.Drawing.Size(286, 28)
+        Me.BtnHinnaKalkulaator.TabIndex = 14
+        Me.BtnHinnaKalkulaator.Text = "Tarbimise hinna kalkulaator"
+        Me.BtnHinnaKalkulaator.UseVisualStyleBackColor = True
         '
         'BtnElektriauto
         '
@@ -226,7 +237,7 @@ Partial Class FormMain
         Me.BtnVordleja.Name = "BtnVordleja"
         Me.BtnVordleja.Size = New System.Drawing.Size(286, 28)
         Me.BtnVordleja.TabIndex = 12
-        Me.BtnVordleja.Text = "Hinna võrdleja"
+        Me.BtnVordleja.Text = "Hindade võrdleja"
         Me.BtnVordleja.UseVisualStyleBackColor = True
         '
         'BtnLopphind
@@ -344,4 +355,5 @@ Partial Class FormMain
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents BtnElektriauto As Button
+    Friend WithEvents BtnHinnaKalkulaator As Button
 End Class

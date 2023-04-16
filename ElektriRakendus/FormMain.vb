@@ -283,4 +283,9 @@ Public Class FormMain
         Dim Form As New PrjLaadijaKalkulaator.Form1
         Form.Show()
     End Sub
+
+    Private Sub BtnHinnaKalkulaator_Click(sender As Object, e As EventArgs) Handles BtnHinnaKalkulaator.Click
+        Dim Form As New KodumasinKalkulaator.FormHinnaKalkulaator
+        Form.Show()
+    End Sub
 End Class
