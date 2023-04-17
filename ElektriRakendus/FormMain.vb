@@ -18,7 +18,7 @@ Public Class FormMain
         cmbPkt2Tyyp.Items.Add("Universaal")
     End Sub
 
-    Private Sub cmbPeriood_DropDownClosed(sender As Object, e As EventArgs) Handles cmbPeriood.DropDownClosed
+    Private Sub Uuenda_Graafik()
         Dim GInfo1 As List(Of (Xval As String, Yval As Decimal))
         Dim GInfo2 As List(Of (Xval As String, Yval As Decimal))
         Dim GraafikConnect As GraafikControl.IGraafikInfo
@@ -287,5 +287,32 @@ Public Class FormMain
     Private Sub BtnHinnaKalkulaator_Click(sender As Object, e As EventArgs) Handles BtnHinnaKalkulaator.Click
         Dim Form As New KodumasinKalkulaator.FormHinnaKalkulaator
         Form.Show()
+    End Sub
+
+    Private Sub cmbPkt1Pkt_DropDownClosed(sender As Object, e As EventArgs) Handles cmbPkt1Pkt.DropDownClosed
+        If String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) Or String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Or
+                String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
+            Return
+        Else
+            Uuenda_Graafik()
+        End If
+    End Sub
+
+    Private Sub cmbPeriood_DropDownClosed(sender As Object, e As EventArgs) Handles cmbPeriood.DropDownClosed
+        If String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) Or String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Or
+                String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
+            Return
+        Else
+            Uuenda_Graafik()
+        End If
+    End Sub
+
+    Private Sub cmbPkt2Pkt_DropDownClosed(sender As Object, e As EventArgs) Handles cmbPkt2Pkt.DropDownClosed
+        If String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) Or String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Or
+              String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
+            Return
+        Else
+            Uuenda_Graafik()
+        End If
     End Sub
 End Class
