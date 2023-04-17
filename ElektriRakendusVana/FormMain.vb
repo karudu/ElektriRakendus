@@ -269,4 +269,8 @@ Public Class FormMain
         Dim Form As New FormLopphind
         Form.Show()
     End Sub
+
+    Private Sub Graafik1_Load(sender As Object, e As EventArgs) Handles Graafik1.Load
+
+    End Sub
 End Class

@@ -90,5 +90,9 @@ Public Class FormLopphind
         Dim FormVordlus As New FormPakettideVordlus
         FormVordlus.ShowDialog()
     End Sub
+
+    Private Sub Graafik1_Load(sender As Object, e As EventArgs) Handles Graafik1.Load
+
+    End Sub
 End Class
 
