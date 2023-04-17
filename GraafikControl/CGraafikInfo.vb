@@ -174,4 +174,61 @@ Public Class CGraafikInfo
         End If
         Return InfoList
     End Function
+
+    Public Function GetCustom(PakettID As Integer, PaketiTyyp As Integer, AlgAeg As Date, LoppAeg As Date) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetCustom
+        Dim InfoList As New List(Of (Aeg As String, Hind As Decimal))
+        Dim Hinnad As New List(Of Decimal)
+        Dim AndmedConnect As PrjAndmebaas.IAndmebaas
+        AndmedConnect = New PrjAndmebaas.CAndmebaas
+        Dim I As Integer = 0
+        Dim J As Integer = 0
+        Dim TS As New TimeSpan
+        If AlgAeg = LoppAeg Then
+            AlgAeg = New DateTime(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day, 0, 0, 0)
+            LoppAeg = New DateTime(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day + 1, 0, 0, 0)
+        End If
+        'Console.WriteLine("AJAD")
+        'Console.WriteLine(AlgAeg)
+        'Console.WriteLine(LoppAeg)
+        TS = LoppAeg.Subtract(AlgAeg)
+        Dim Tunnid As Integer = TS.TotalHours
+        'Console.WriteLine("TUNNID")
+        'Console.WriteLine(Tunnid)
+        If Tunnid = 24 Then
+            If PaketiTyyp = 0 Then
+                Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
+                Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
+                For I = 0 To 23
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("HH")
+                    Info.Hind = (Hinnad.Item(I) / 10) + (StructBors.Juurdetasu)
+                    InfoList.Add(Info)
+                    AlgAeg = AlgAeg.AddHours(1)
+                Next
+            ElseIf PaketiTyyp = 1 Then
+                Me.StructFix = AndmedConnect.LoePakettFix(PakettID)
+                For I = 0 To 23
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("HH")
+                    If AlgAeg.Hour > 22 Or AlgAeg.Hour < 7 Then
+                        Info.Hind = StructFix.OTariif
+                    Else
+                        Info.Hind = StructFix.PTariif
+                    End If
+                    InfoList.Add(Info)
+                    AlgAeg = AlgAeg.AddHours(1)
+                Next
+            Else
+                Me.StructUniv = AndmedConnect.LoePakettUniv(PakettID)
+                For I = 0 To 23
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("HH")
+                    Info.Hind = StructUniv.Baas + StructUniv.Marginaal
+                    InfoList.Add(Info)
+                    AlgAeg = AlgAeg.AddHours(1)
+                Next
+            End If
+        End If
+        Return InfoList
+    End Function
 End Class

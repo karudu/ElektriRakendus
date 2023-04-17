@@ -5,6 +5,7 @@ Public Class FormMain
         cmbPeriood.Items.Add("Päev")
         cmbPeriood.Items.Add("Kuu")
         cmbPeriood.Items.Add("Aasta")
+        cmbPeriood.Items.Add("Otsi")
         AddPaketiTyybid()
         Graafik1.InitGraph()
     End Sub
@@ -92,6 +93,27 @@ Public Class FormMain
                 End If
                 If PakettID2 <> Nothing Then
                     GInfo2 = GraafikConnect.GetAasta(PakettID2, cmbPkt2Tyyp.SelectedIndex)
+                    For I = 0 To GInfo2.Count - 1
+                        Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                        GInfo2Kesk += GInfo2.Item(I).Yval
+                    Next
+                    GInfo2Kesk = GInfo2Kesk / GInfo2.Count
+                    lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " s/kWh"
+                End If
+            Case 3
+                If PakettID1 <> Nothing Then
+                    GInfo1 = GraafikConnect.GetCustom(PakettID1, cmbPkt1Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value)
+                    Console.WriteLine(GInfo1.Count)
+                    For I = 0 To GInfo1.Count - 1
+                        Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                        GInfo1Kesk += GInfo1.Item(I).Yval
+                    Next
+                    GInfo1Kesk = GInfo1Kesk / GInfo1.Count
+                    lblPkt1Kesk.Text = GInfo1Kesk.ToString("N2") + " s/kWh"
+                End If
+                If PakettID2 <> Nothing Then
+                    GInfo2 = GraafikConnect.GetCustom(PakettID2, cmbPkt2Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value)
+                    Console.WriteLine(GInfo2.Count)
                     For I = 0 To GInfo2.Count - 1
                         Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
                         GInfo2Kesk += GInfo2.Item(I).Yval
@@ -299,6 +321,16 @@ Public Class FormMain
     End Sub
 
     Private Sub cmbPeriood_DropDownClosed(sender As Object, e As EventArgs) Handles cmbPeriood.DropDownClosed
+        If cmbPeriood.SelectedIndex = 3 Then
+            dtpAlgus.Show()
+            dtpLopp.Show()
+            lblDtpVahe.Show()
+        Else
+            dtpAlgus.Hide()
+            dtpLopp.Hide()
+            lblDtpVahe.Hide()
+        End If
+
         If String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) Or String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Or
                 String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
             Return
