@@ -46,16 +46,24 @@ Public Class FormPakettideVordlus
         Dim GInfo1Kesk As Decimal
         Dim GInfo2Kesk As Decimal
         Dim GInfo1Korge As Decimal = 0
-        Dim GInfo1Madal As Decimal
+        Dim GInfo1Madal As Decimal = 1000
         Dim kellaaegKorge As String
         Dim kellaaegMadal As String
         Dim ajaperioodKallim As Decimal = 0
         Dim ajaperioodOdavam As Decimal
+        Dim ajavahemik As Integer
+        lblError.Visible = True
 
         Select Case periood
             Case 0
                 If cboxAlgus.SelectedIndex = -1 And cboxLopp.SelectedIndex = -1 Then
-                    cBoxPeriood.Text = "Valige aja algus ja lopp"
+                    lblError.Text = "Valige perioodi algus ja lopp ajad"
+                    Exit Sub
+                End If
+                If cboxAlgus.SelectedIndex >= cboxLopp.SelectedIndex Then
+                    lblError.Text = "Perioodi lõpp aeg ei saa olla enne" +
+                    Environment.NewLine +
+                    "perioodi algus aega või sama."
                     Exit Sub
                 End If
                 GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
@@ -70,11 +78,9 @@ Public Class FormPakettideVordlus
                 GInfo = GetInfo.GetAasta(StructBors.ID, pktTypeB)
                 GInfo2 = GetInfo.GetAasta(StructFix.ID, pktTypeF)
             Case Else
-                cBoxPeriood.Text = "Valige periood!"
+                lblError.Text = "Valige periood!"
                 Exit Sub
         End Select
-        GInfo1Madal = GInfo.Item(Index).Yval
-
         If periood = 0 Then
             While Index < GInfo.Count And Index < GInfo2.Count
                 If Index >= cboxAlgus.SelectedIndex And Index <= cboxLopp.SelectedIndex Then
@@ -93,6 +99,7 @@ Public Class FormPakettideVordlus
                     If GInfo.Item(Index).Yval > GInfo2.Item(Index).Yval Then
                         ajaperioodKallim += 1
                     End If
+                    ajavahemik += 1
                 End If
                 Index += 1
             End While
@@ -114,10 +121,15 @@ Public Class FormPakettideVordlus
                     ajaperioodKallim += 1
                 End If
                 Index += 1
-        End While
+            End While
         End If
-        GInfo1Kesk = GInfo1Kesk / GInfo.Count
-        GInfo2Kesk = GInfo2Kesk / GInfo2.Count
+        If periood = 0 Then
+            GInfo1Kesk /= ajavahemik
+            GInfo2Kesk /= ajavahemik
+        Else
+            GInfo1Kesk /= GInfo.Count
+            GInfo2Kesk /= GInfo2.Count
+        End If
         ajaperioodKallim = Math.Round((ajaperioodKallim / GInfo.Count) * 100, 2)
         ajaperioodOdavam = Math.Round(100 - ajaperioodKallim, 2)
 
@@ -146,6 +158,7 @@ Public Class FormPakettideVordlus
         lblProtsentOdavam.Text += " s/kWh"
         lblProtsentKallim.BackColor = Color.Red
         lblProtsentOdavam.BackColor = Color.Green
+        lblError.Visible = False
     End Sub
     Private Sub joonistaGraafikBU(pktTypeB As IAndmebaas.PaketiTyyp, pktTypeU As IAndmebaas.PaketiTyyp, AegAlgus As Integer, AegLopp As Integer)
         Dim GInfo As List(Of (Xval As String, Yval As Decimal))
@@ -153,18 +166,18 @@ Public Class FormPakettideVordlus
         Dim GetInfo As GraafikControl.IGraafikInfo
         GetInfo = New GraafikControl.CGraafikInfo
         Dim Index As Integer = 0
-        lblError2.Visible = True
         Dim StructTemp As New PrjAndmebaas.IAndmebaas.PkBors
         Dim StructTemp2 As New PrjAndmebaas.IAndmebaas.PkFix
         Dim StructTemp3 As New PrjAndmebaas.IAndmebaas.PkUniv
         Dim PktType As Integer
         Dim Sum1 As Decimal
         Dim Sum2 As Decimal
+        lblError2.Visible = True
 
-        If cboxAlgus2.SelectedIndex > cboxLopp2.SelectedIndex Then
+        If cboxAlgus2.SelectedIndex >= cboxLopp2.SelectedIndex Then
             lblError2.Text = "Perioodi lõpp aeg ei tohi olla" +
                 Environment.NewLine +
-                "enne perioodi algus aega."
+                "enne perioodi algus aega või sama."
             Exit Sub
         End If
 
@@ -245,8 +258,11 @@ Public Class FormPakettideVordlus
 
         Graafik1.ClearPoints()
 
-        If Not IsNumeric(txtFixP.Text) And Not IsNumeric(txtFixO.Text) Then
-            cboxAlgus2.Text = "Sisestage ainult numbrid päeva ja öö tariifidesse"
+        If Not IsNumeric(txtFixP.Text) Or Not IsNumeric(txtFixO.Text) Then
+            lblError.Visible = True
+            lblError.Text = "Sisestage päeva ja öö tariifid" +
+                Environment.NewLine +
+                "(ainult nubritena)."
             Exit Sub
         End If
 
