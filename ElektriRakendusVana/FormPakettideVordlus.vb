@@ -2,14 +2,15 @@
 Imports PrjAndmebaas
 Public Class FormPakettideVordlus
     Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
-    Dim ConnectDb As New CAndmebaas
+    ReadOnly ConnectDb As New CAndmebaas
     Public StructBors As New PrjAndmebaas.IAndmebaas.PkBors
     Public StructFix As New PrjAndmebaas.IAndmebaas.PkFix
     Public StructUniv As New PrjAndmebaas.IAndmebaas.PkUniv
     Private Sub FormPakettideVordlus_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim Index As Integer
         cboxPakett.Items.Clear()
         Paketid = ConnectDb.LoePakettideNimekiri 'load paketid to combobox
-        Dim Index As Integer
+        cboxPakett.Items.Add("Börsihind")
         For Index = 0 To Paketid.Count - 1
             cboxPakett.Items.Add(Paketid(Index).Nimi)
         Next
@@ -39,6 +40,15 @@ Public Class FormPakettideVordlus
         Dim GInfo2 As List(Of (Xval As String, Yval As Decimal))
         Dim GetInfo As GraafikControl.IGraafikInfo
         GetInfo = New GraafikControl.CGraafikInfo
+        Dim Index As Integer = 0
+        Dim GInfo1Kesk As Decimal
+        Dim GInfo2Kesk As Decimal
+        Dim GInfo1Korge As Decimal = 0
+        Dim GInfo1Madal As Decimal
+        Dim kellaaegKorge As String
+        Dim kellaaegMadal As String
+        Dim ajaperioodKallim As Decimal = 0
+        Dim ajaperioodOdavam As Decimal
 
         Select Case periood
             Case 0
@@ -61,15 +71,7 @@ Public Class FormPakettideVordlus
                 cBoxPeriood.Text = "Valige periood!"
                 Exit Sub
         End Select
-        Dim Index As Integer = 0
-        Dim GInfo1Kesk As Decimal
-        Dim GInfo2Kesk As Decimal
-        Dim GInfo1Korge As Decimal = 0
-        Dim GInfo1Madal As Decimal = GInfo.Item(Index).Yval
-        Dim kellaaegKorge As String
-        Dim kellaaegMadal As String
-        Dim ajaperioodKallim As Decimal = 0
-        Dim ajaperioodOdavam As Decimal
+        GInfo1Madal = GInfo.Item(Index).Yval
 
         If periood = 0 Then
             While Index < GInfo.Count And Index < GInfo2.Count
@@ -150,6 +152,10 @@ Public Class FormPakettideVordlus
         GetInfo = New GraafikControl.CGraafikInfo
         Dim Index As Integer = 0
         lblError2.Visible = True
+        Dim StructTemp As New PrjAndmebaas.IAndmebaas.PkBors
+        Dim StructTemp2 As New PrjAndmebaas.IAndmebaas.PkFix
+        Dim StructTemp3 As New PrjAndmebaas.IAndmebaas.PkUniv
+        Dim PktType As Integer
 
         If cboxAlgus2.SelectedIndex > cboxLopp2.SelectedIndex Then
             lblError2.Text = "Perioodi lõpp aeg ei tohi olla" +
@@ -158,15 +164,6 @@ Public Class FormPakettideVordlus
             Exit Sub
         End If
 
-        If cboxAlgus2.SelectedIndex <> -1 And cboxLopp2.SelectedIndex <> -1 Then
-            GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
-            GInfo2 = GetInfo.GetPaev(StructUniv.ID, pktTypeU)
-        Else
-            lblError2.Text = "Valige perioodi algus ja lopp ajad!"
-            Exit Sub
-        End If
-
-        Dim PktType As Integer
         PktType = -1
         For Index = 0 To Paketid.Count - 1 'loop selleks et leida cboxPakett1 valitud paketti indexi listist
             If Paketid(Index).ID <> Nothing Then
@@ -177,6 +174,31 @@ Public Class FormPakettideVordlus
             End If
         Next
 
+        If PktType <> -1 Then
+            Select Case PktType
+                Case 0
+                    StructTemp = ConnectDb.LoePakettBors(Paketid(Index).ID) 'Leitud indexiga paketi salvestatakse(olenevalt paketti tüübist) struckti ID, NIMI, JUURDETASU ja KUUTASU
+                    GInfo = GetInfo.GetPaev(StructTemp.ID, PktType)
+                    GInfo2 = GetInfo.GetPaev(StructUniv.ID, pktTypeU)
+                Case 1
+                    StructTemp2 = ConnectDb.LoePakettFix(Paketid(Index).ID)
+                    GInfo = GetInfo.GetPaev(StructTemp2.ID, PktType)
+                    GInfo2 = GetInfo.GetPaev(StructUniv.ID, pktTypeU)
+                Case 2
+                    StructTemp3 = ConnectDb.LoePakettUniv(Paketid(Index).ID)
+                    GInfo = GetInfo.GetPaev(StructTemp3.ID, PktType)
+                    GInfo2 = GetInfo.GetPaev(StructUniv.ID, pktTypeU)
+            End Select
+        Else
+            If cboxAlgus2.SelectedIndex <> -1 And cboxLopp2.SelectedIndex <> -1 Then
+                GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
+                GInfo2 = GetInfo.GetPaev(StructUniv.ID, pktTypeU)
+            Else
+                lblError2.Text = "Valige perioodi algus ja lopp ajad ja/või pakett!"
+                Exit Sub
+            End If
+        End If
+        Index = 0
         While Index < GInfo.Count And Index < GInfo2.Count
             If Index >= cboxAlgus2.SelectedIndex And Index <= cboxLopp2.SelectedIndex Then
                 Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
@@ -188,7 +210,6 @@ Public Class FormPakettideVordlus
     End Sub
     'Börsi- ja fikseeritud hinna võrdlus graafikul
     Private Sub btnArvuta_Click(sender As Object, e As EventArgs) Handles btnArvuta.Click
-        Graafik1.ClearPoints()
         Me.StructBors.Nimi = "Temp"
         Me.StructBors.Juurdetasu = 0
         Me.StructBors.Kuutasu = 0
@@ -196,6 +217,14 @@ Public Class FormPakettideVordlus
         Me.StructFix.PTariif = CDec(Val(txtFixP.Text))
         Me.StructFix.OTariif = CDec(Val(txtFixO.Text))
         Me.StructFix.Kuutasu = 0
+        Dim nimekiri As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
+        Dim pktTypeB As IAndmebaas.PaketiTyyp
+        Dim pktTypeF As IAndmebaas.PaketiTyyp
+        Dim index As Integer
+        Dim I As Integer
+        Dim periood As Integer
+
+        Graafik1.ClearPoints()
 
         If Not IsNumeric(txtFixP.Text) And Not IsNumeric(txtFixO.Text) Then
             cboxAlgus2.Text = "Sisestage ainult numbrid päeva ja öö tariifidesse"
@@ -204,12 +233,7 @@ Public Class FormPakettideVordlus
 
         ConnectDb.LisaPakettBors(StructBors.Nimi, StructBors.Juurdetasu, StructBors.Kuutasu)
         ConnectDb.LisaPakettFix(StructFix.Nimi, StructFix.PTariif, StructFix.OTariif, StructFix.Kuutasu)
-        Dim nimekiri As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         nimekiri = ConnectDb.LoePakettideNimekiri()
-        Dim pktTypeB As IAndmebaas.PaketiTyyp
-        Dim pktTypeF As IAndmebaas.PaketiTyyp
-        Dim index As Integer
-        Dim I As Integer
         For index = 0 To nimekiri.Count - 1
             If nimekiri(index).Tyyp = IAndmebaas.PaketiTyyp.PAKETT_BORS Then
                 Me.StructBors.ID = nimekiri(index).ID
@@ -224,7 +248,6 @@ Public Class FormPakettideVordlus
                 I = index
             End If
         Next
-        Dim periood As Integer
         periood = cBoxPeriood.SelectedIndex
         joonistaGraafikBF(pktTypeB, pktTypeF, periood)
         ConnectDb.KustutaPakettBors(StructBors.ID)
@@ -232,7 +255,6 @@ Public Class FormPakettideVordlus
     End Sub
     'börsi ja univ pakettide võrdlus
     Private Sub btnArvuta2_Click(sender As Object, e As EventArgs) Handles btnArvuta2.Click
-        Graafik1.ClearPoints()
         Me.StructBors.Nimi = "Temp"
         Me.StructBors.Juurdetasu = 0
         Me.StructBors.Kuutasu = 0
@@ -240,6 +262,14 @@ Public Class FormPakettideVordlus
         Me.StructUniv.Baas = CDec(Val(txtBaas.Text))
         Me.StructUniv.Marginaal = 0
         Me.StructUniv.Kuutasu = 0
+        Dim pktTypeB As IAndmebaas.PaketiTyyp
+        Dim pktTypeU As IAndmebaas.PaketiTyyp
+        Dim index As Integer
+        Dim I As Integer
+        Dim nimekiri As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
+        Dim AegAlgus As Integer
+        Dim AegLopp As Integer
+        Graafik1.ClearPoints()
 
         If Not IsNumeric(txtBaas.Text) Then
             lblError2.Visible = True
@@ -249,12 +279,7 @@ Public Class FormPakettideVordlus
 
         ConnectDb.LisaPakettBors(StructBors.Nimi, StructBors.Juurdetasu, StructBors.Kuutasu)
         ConnectDb.LisaPakettUniv(StructUniv.Nimi, StructUniv.Baas, StructUniv.Marginaal, StructUniv.Kuutasu)
-        Dim nimekiri As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         nimekiri = ConnectDb.LoePakettideNimekiri()
-        Dim pktTypeB As IAndmebaas.PaketiTyyp
-        Dim pktTypeU As IAndmebaas.PaketiTyyp
-        Dim index As Integer
-        Dim I As Integer
         For index = 0 To nimekiri.Count - 1
             If nimekiri(index).Tyyp = IAndmebaas.PaketiTyyp.PAKETT_BORS Then
                 Me.StructBors.ID = nimekiri(index).ID
@@ -269,9 +294,7 @@ Public Class FormPakettideVordlus
                 I = index
             End If
         Next
-        Dim AegAlgus As Integer
         AegAlgus = cboxAlgus2.SelectedIndex
-        Dim AegLopp As Integer
         AegLopp = cboxLopp2.SelectedIndex
         joonistaGraafikBU(pktTypeB, pktTypeU, AegAlgus, AegLopp)
         ConnectDb.KustutaPakettBors(StructBors.ID)
