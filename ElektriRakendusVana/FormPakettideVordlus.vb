@@ -7,6 +7,12 @@ Public Class FormPakettideVordlus
     Public StructFix As New PrjAndmebaas.IAndmebaas.PkFix
     Public StructUniv As New PrjAndmebaas.IAndmebaas.PkUniv
     Private Sub FormPakettideVordlus_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        cboxPakett.Items.Clear()
+        Paketid = ConnectDb.LoePakettideNimekiri 'load paketid to combobox
+        Dim Index As Integer
+        For Index = 0 To Paketid.Count - 1
+            cboxPakett.Items.Add(Paketid(Index).Nimi)
+        Next
         cboxAlgus.Visible = False
         cboxLopp.Visible = False
         lblAlgus.Visible = False
@@ -142,16 +148,35 @@ Public Class FormPakettideVordlus
         Dim GInfo2 As List(Of (Xval As String, Yval As Decimal))
         Dim GetInfo As GraafikControl.IGraafikInfo
         GetInfo = New GraafikControl.CGraafikInfo
+        Dim Index As Integer = 0
+        lblError2.Visible = True
+
+        If cboxAlgus2.SelectedIndex > cboxLopp2.SelectedIndex Then
+            lblError2.Text = "Perioodi lõpp aeg ei tohi olla" +
+                Environment.NewLine +
+                "enne perioodi algus aega."
+            Exit Sub
+        End If
 
         If cboxAlgus2.SelectedIndex <> -1 And cboxLopp2.SelectedIndex <> -1 Then
             GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
             GInfo2 = GetInfo.GetPaev(StructUniv.ID, pktTypeU)
         Else
-            cboxAlgus2.Text = "Valige perioodi algus ja lopp ajad!"
+            lblError2.Text = "Valige perioodi algus ja lopp ajad!"
             Exit Sub
         End If
 
-        Dim Index As Integer = 0
+        Dim PktType As Integer
+        PktType = -1
+        For Index = 0 To Paketid.Count - 1 'loop selleks et leida cboxPakett1 valitud paketti indexi listist
+            If Paketid(Index).ID <> Nothing Then
+                If cboxPakett.Text = Paketid(Index).Nimi Then
+                    PktType = Paketid(Index).Tyyp
+                    Exit For
+                End If
+            End If
+        Next
+
         While Index < GInfo.Count And Index < GInfo2.Count
             If Index >= cboxAlgus2.SelectedIndex And Index <= cboxLopp2.SelectedIndex Then
                 Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
@@ -159,6 +184,7 @@ Public Class FormPakettideVordlus
             End If
             Index += 1
         End While
+        lblError2.Visible = False
     End Sub
     'Börsi- ja fikseeritud hinna võrdlus graafikul
     Private Sub btnArvuta_Click(sender As Object, e As EventArgs) Handles btnArvuta.Click
@@ -216,7 +242,8 @@ Public Class FormPakettideVordlus
         Me.StructUniv.Kuutasu = 0
 
         If Not IsNumeric(txtBaas.Text) Then
-            cBoxPeriood.Text = "Sisestage baas hind ainult numbrina"
+            lblError2.Visible = True
+            lblError2.Text = "Sisestage baas hind (ainult numbrina)."
             Exit Sub
         End If
 

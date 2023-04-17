@@ -63,6 +63,8 @@ Partial Class FormPakettideVordlus
         Me.Label15 = New System.Windows.Forms.Label()
         Me.lblProK = New System.Windows.Forms.Label()
         Me.lblProO = New System.Windows.Forms.Label()
+        Me.cboxPakett = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -209,6 +211,8 @@ Partial Class FormPakettideVordlus
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.cboxPakett)
         Me.GroupBox2.Controls.Add(Me.lblError2)
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.Label1)
@@ -219,7 +223,7 @@ Partial Class FormPakettideVordlus
         Me.GroupBox2.Controls.Add(Me.txtBaas)
         Me.GroupBox2.Controls.Add(Me.lblBaas)
         Me.GroupBox2.Controls.Add(Me.btnArvuta2)
-        Me.GroupBox2.Location = New System.Drawing.Point(950, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(705, 12)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(300, 290)
         Me.GroupBox2.TabIndex = 54
@@ -229,7 +233,7 @@ Partial Class FormPakettideVordlus
         'lblError2
         '
         Me.lblError2.AutoSize = True
-        Me.lblError2.Location = New System.Drawing.Point(8, 239)
+        Me.lblError2.Location = New System.Drawing.Point(11, 239)
         Me.lblError2.Name = "lblError2"
         Me.lblError2.Size = New System.Drawing.Size(73, 16)
         Me.lblError2.TabIndex = 57
@@ -310,7 +314,7 @@ Partial Class FormPakettideVordlus
         '
         'btnArvuta2
         '
-        Me.btnArvuta2.Location = New System.Drawing.Point(6, 213)
+        Me.btnArvuta2.Location = New System.Drawing.Point(9, 213)
         Me.btnArvuta2.Name = "btnArvuta2"
         Me.btnArvuta2.Size = New System.Drawing.Size(75, 23)
         Me.btnArvuta2.TabIndex = 47
@@ -451,6 +455,25 @@ Partial Class FormPakettideVordlus
         Me.lblProO.TabIndex = 69
         Me.lblProO.Text = "Odavam"
         '
+        'cboxPakett
+        '
+        Me.cboxPakett.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboxPakett.FormattingEnabled = True
+        Me.cboxPakett.Items.AddRange(New Object() {"Börsihind", "Fikseeritud hind", "Universaalteenus", "Universaalteenusega seotud pakett"})
+        Me.cboxPakett.Location = New System.Drawing.Point(9, 183)
+        Me.cboxPakett.Name = "cboxPakett"
+        Me.cboxPakett.Size = New System.Drawing.Size(121, 24)
+        Me.cboxPakett.TabIndex = 58
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(8, 164)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(45, 16)
+        Me.Label4.TabIndex = 59
+        Me.Label4.Text = "Pakett"
+        '
         'FormPakettideVordlus
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -526,4 +549,6 @@ Partial Class FormPakettideVordlus
     Friend WithEvents Label15 As Label
     Friend WithEvents lblProK As Label
     Friend WithEvents lblProO As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents cboxPakett As ComboBox
 End Class
