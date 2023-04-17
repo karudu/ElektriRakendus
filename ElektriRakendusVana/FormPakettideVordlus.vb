@@ -20,6 +20,8 @@ Public Class FormPakettideVordlus
         lblLopp.Visible = False
         lblError.Visible = False
         lblError2.Visible = False
+        lblKoguSum1.Visible = False
+        lblKoguSum2.Visible = False
     End Sub
     Private Sub cBoxPeriood_DropDownClosed(sender As Object, e As EventArgs) Handles cBoxPeriood.DropDownClosed
         Select Case cBoxPeriood.SelectedIndex
@@ -156,6 +158,8 @@ Public Class FormPakettideVordlus
         Dim StructTemp2 As New PrjAndmebaas.IAndmebaas.PkFix
         Dim StructTemp3 As New PrjAndmebaas.IAndmebaas.PkUniv
         Dim PktType As Integer
+        Dim Sum1 As Decimal
+        Dim Sum2 As Decimal
 
         If cboxAlgus2.SelectedIndex > cboxLopp2.SelectedIndex Then
             lblError2.Text = "Perioodi lõpp aeg ei tohi olla" +
@@ -203,10 +207,25 @@ Public Class FormPakettideVordlus
             If Index >= cboxAlgus2.SelectedIndex And Index <= cboxLopp2.SelectedIndex Then
                 Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
                 Graafik1.setPoint2(GInfo2.Item(Index).Xval, GInfo2.Item(Index).Yval)
+                Sum1 += GInfo.Item(Index).Yval
+                Sum2 += GInfo2.Item(Index).Yval
             End If
             Index += 1
         End While
         lblError2.Visible = False
+        lblKoguSum1.Text = Math.Round(Sum1)
+        lblKoguSum1.Text += " s/kWh"
+        lblKoguSum2.Text = Math.Round(Sum2)
+        lblKoguSum2.Text += " s/kWh"
+        If Sum1 < Sum2 Then
+            lblKoguSum1.BackColor = Color.Green
+            lblKoguSum2.BackColor = Color.Red
+        Else
+            lblKoguSum1.BackColor = Color.Red
+            lblKoguSum2.BackColor = Color.Green
+        End If
+        lblKoguSum1.Visible = True
+        lblKoguSum2.Visible = True
     End Sub
     'Börsi- ja fikseeritud hinna võrdlus graafikul
     Private Sub btnArvuta_Click(sender As Object, e As EventArgs) Handles btnArvuta.Click

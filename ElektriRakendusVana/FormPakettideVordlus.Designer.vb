@@ -37,6 +37,8 @@ Partial Class FormPakettideVordlus
         Me.lblPeriood1 = New System.Windows.Forms.Label()
         Me.cBoxPeriood = New System.Windows.Forms.ComboBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cboxPakett = New System.Windows.Forms.ComboBox()
         Me.lblError2 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -63,8 +65,10 @@ Partial Class FormPakettideVordlus
         Me.Label15 = New System.Windows.Forms.Label()
         Me.lblProK = New System.Windows.Forms.Label()
         Me.lblProO = New System.Windows.Forms.Label()
-        Me.cboxPakett = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblKoguSum1 = New System.Windows.Forms.Label()
+        Me.lblKoguSum2 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -229,6 +233,25 @@ Partial Class FormPakettideVordlus
         Me.GroupBox2.TabIndex = 54
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Börsi- ja universaalhinna võrdlus"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(8, 164)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(45, 16)
+        Me.Label4.TabIndex = 59
+        Me.Label4.Text = "Pakett"
+        '
+        'cboxPakett
+        '
+        Me.cboxPakett.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboxPakett.FormattingEnabled = True
+        Me.cboxPakett.Items.AddRange(New Object() {"Börsihind", "Fikseeritud hind", "Universaalteenus", "Universaalteenusega seotud pakett"})
+        Me.cboxPakett.Location = New System.Drawing.Point(9, 183)
+        Me.cboxPakett.Name = "cboxPakett"
+        Me.cboxPakett.Size = New System.Drawing.Size(121, 24)
+        Me.cboxPakett.TabIndex = 58
         '
         'lblError2
         '
@@ -455,30 +478,51 @@ Partial Class FormPakettideVordlus
         Me.lblProO.TabIndex = 69
         Me.lblProO.Text = "Odavam"
         '
-        'cboxPakett
+        'Label5
         '
-        Me.cboxPakett.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboxPakett.FormattingEnabled = True
-        Me.cboxPakett.Items.AddRange(New Object() {"Börsihind", "Fikseeritud hind", "Universaalteenus", "Universaalteenusega seotud pakett"})
-        Me.cboxPakett.Location = New System.Drawing.Point(9, 183)
-        Me.cboxPakett.Name = "cboxPakett"
-        Me.cboxPakett.Size = New System.Drawing.Size(121, 24)
-        Me.cboxPakett.TabIndex = 58
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(1011, 176)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(132, 16)
+        Me.Label5.TabIndex = 60
+        Me.Label5.Text = "Pakett1 kogu summa"
         '
-        'Label4
+        'Label7
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(8, 164)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(45, 16)
-        Me.Label4.TabIndex = 59
-        Me.Label4.Text = "Pakett"
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(1011, 232)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(132, 16)
+        Me.Label7.TabIndex = 61
+        Me.Label7.Text = "Pakett2 kogu summa"
+        '
+        'lblKoguSum1
+        '
+        Me.lblKoguSum1.AutoSize = True
+        Me.lblKoguSum1.Location = New System.Drawing.Point(1011, 203)
+        Me.lblKoguSum1.Name = "lblKoguSum1"
+        Me.lblKoguSum1.Size = New System.Drawing.Size(86, 16)
+        Me.lblKoguSum1.TabIndex = 70
+        Me.lblKoguSum1.Text = "lblKoguSum1"
+        '
+        'lblKoguSum2
+        '
+        Me.lblKoguSum2.AutoSize = True
+        Me.lblKoguSum2.Location = New System.Drawing.Point(1011, 263)
+        Me.lblKoguSum2.Name = "lblKoguSum2"
+        Me.lblKoguSum2.Size = New System.Drawing.Size(86, 16)
+        Me.lblKoguSum2.TabIndex = 71
+        Me.lblKoguSum2.Text = "lblKoguSum1"
         '
         'FormPakettideVordlus
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1262, 673)
+        Me.Controls.Add(Me.lblKoguSum2)
+        Me.Controls.Add(Me.lblKoguSum1)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.lblProO)
         Me.Controls.Add(Me.lblProK)
         Me.Controls.Add(Me.Label15)
@@ -551,4 +595,8 @@ Partial Class FormPakettideVordlus
     Friend WithEvents lblProO As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents cboxPakett As ComboBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents lblKoguSum1 As Label
+    Friend WithEvents lblKoguSum2 As Label
 End Class
