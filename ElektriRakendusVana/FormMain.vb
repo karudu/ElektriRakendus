@@ -255,22 +255,5 @@ Public Class FormMain
         Return ID
     End Function
 
-    Private Sub BtnPaketid_Click(sender As Object, e As EventArgs) Handles BtnPaketid.Click
-        Dim Form As New PrjAndmebaasTestForm.FormRedaktorPaketid
-        Form.Show()
-    End Sub
 
-    Private Sub BtnMasinad_Click(sender As Object, e As EventArgs) Handles BtnMasinad.Click
-        Dim Form As New PrjAndmebaasTestForm.FormRedaktorKodumasinad
-        Form.Show()
-    End Sub
-
-    Private Sub btnLoppHind_Click(sender As Object, e As EventArgs) Handles btnLoppHind.Click
-        Dim Form As New FormLopphind
-        Form.Show()
-    End Sub
-
-    Private Sub Graafik1_Load(sender As Object, e As EventArgs) Handles Graafik1.Load
-
-    End Sub
 End Class
