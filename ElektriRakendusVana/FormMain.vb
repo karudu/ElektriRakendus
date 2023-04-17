@@ -63,7 +63,6 @@ Public Class FormMain
             Case 1
                 If PakettID1 <> Nothing Then
                     GInfo1 = GraafikConnect.GetKuu(PakettID1, cmbPkt1Tyyp.SelectedIndex)
-                    Console.WriteLine(GInfo1.Count)
                     For I = 0 To GInfo1.Count - 1
                         Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
                         GInfo1Kesk += GInfo1.Item(I).Yval
@@ -73,7 +72,6 @@ Public Class FormMain
                 End If
                 If PakettID2 <> Nothing Then
                     GInfo2 = GraafikConnect.GetKuu(PakettID2, cmbPkt2Tyyp.SelectedIndex)
-                    Console.WriteLine(GInfo2.Count)
                     For I = 0 To GInfo2.Count - 1
                         Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
                         GInfo2Kesk += GInfo2.Item(I).Yval
@@ -170,7 +168,6 @@ Public Class FormMain
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         Dim Andmebaas As New CAndmebaas
         Paketid = Andmebaas.LoePakettideNimekiri
-        Console.WriteLine(Tyyp)
         Select Case Tyyp
             Case IAndmebaas.PaketiTyyp.PAKETT_BORS
                 For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid

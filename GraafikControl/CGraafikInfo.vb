@@ -187,13 +187,8 @@ Public Class CGraafikInfo
             AlgAeg = New DateTime(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day, 0, 0, 0)
             LoppAeg = New DateTime(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day + 1, 0, 0, 0)
         End If
-        'Console.WriteLine("AJAD")
-        'Console.WriteLine(AlgAeg)
-        'Console.WriteLine(LoppAeg)
         TS = LoppAeg.Subtract(AlgAeg)
         Dim Tunnid As Integer = TS.TotalHours
-        'Console.WriteLine("TUNNID")
-        'Console.WriteLine(Tunnid)
         If Tunnid = 24 Then
             If PaketiTyyp = 0 Then
                 Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
@@ -226,6 +221,42 @@ Public Class CGraafikInfo
                     Info.Hind = StructUniv.Baas + StructUniv.Marginaal
                     InfoList.Add(Info)
                     AlgAeg = AlgAeg.AddHours(1)
+                Next
+            End If
+        Else
+            If PaketiTyyp = 0 Then
+                Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
+                Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
+                While I < Tunnid - 1
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("M")
+                    While J < 24
+                        Info.Hind += (Hinnad.Item(I) / 10) + StructBors.Juurdetasu
+                        I += 1
+                        J += 1
+                        AlgAeg = AlgAeg.AddHours(1)
+                    End While
+                    J = 0
+                    Info.Hind = Info.Hind / 24
+                    InfoList.Add(Info)
+                End While
+            ElseIf PaketiTyyp = 1 Then
+                Me.StructFix = AndmedConnect.LoePakettFix(PakettID)
+                For I = 0 To Tunnid - 1 Step 24
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("M")
+                    Info.Hind = ((8 * StructFix.OTariif) + (16 * StructFix.PTariif)) / 24
+                    AlgAeg = AlgAeg.AddDays(1)
+                    InfoList.Add(Info)
+                Next
+            Else
+                Me.StructUniv = AndmedConnect.LoePakettUniv(PakettID)
+                For I = 0 To Tunnid - 1 Step 24
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("M")
+                    Info.Hind = StructUniv.Baas + StructUniv.Marginaal
+                    AlgAeg = AlgAeg.AddDays(1)
+                    InfoList.Add(Info)
                 Next
             End If
         End If

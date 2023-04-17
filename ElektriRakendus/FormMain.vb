@@ -63,7 +63,6 @@ Public Class FormMain
             Case 1
                 If PakettID1 <> Nothing Then
                     GInfo1 = GraafikConnect.GetKuu(PakettID1, cmbPkt1Tyyp.SelectedIndex)
-                    Console.WriteLine(GInfo1.Count)
                     For I = 0 To GInfo1.Count - 1
                         Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
                         GInfo1Kesk += GInfo1.Item(I).Yval
@@ -73,7 +72,6 @@ Public Class FormMain
                 End If
                 If PakettID2 <> Nothing Then
                     GInfo2 = GraafikConnect.GetKuu(PakettID2, cmbPkt2Tyyp.SelectedIndex)
-                    Console.WriteLine(GInfo2.Count)
                     For I = 0 To GInfo2.Count - 1
                         Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
                         GInfo2Kesk += GInfo2.Item(I).Yval
@@ -101,9 +99,12 @@ Public Class FormMain
                     lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " s/kWh"
                 End If
             Case 3
+                If DateTime.Compare(dtpAlgus.Value, dtpLopp.Value) > 0 Then
+                    MessageBox.Show("Alguskuupäev peab olema enne lõppkuupäeva!")
+                    Return
+                End If
                 If PakettID1 <> Nothing Then
                     GInfo1 = GraafikConnect.GetCustom(PakettID1, cmbPkt1Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value)
-                    Console.WriteLine(GInfo1.Count)
                     For I = 0 To GInfo1.Count - 1
                         Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
                         GInfo1Kesk += GInfo1.Item(I).Yval
@@ -113,7 +114,6 @@ Public Class FormMain
                 End If
                 If PakettID2 <> Nothing Then
                     GInfo2 = GraafikConnect.GetCustom(PakettID2, cmbPkt2Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value)
-                    Console.WriteLine(GInfo2.Count)
                     For I = 0 To GInfo2.Count - 1
                         Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
                         GInfo2Kesk += GInfo2.Item(I).Yval
@@ -191,7 +191,6 @@ Public Class FormMain
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         Dim Andmebaas As New CAndmebaas
         Paketid = Andmebaas.LoePakettideNimekiri
-        Console.WriteLine(Tyyp)
         Select Case Tyyp
             Case IAndmebaas.PaketiTyyp.PAKETT_BORS
                 For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
@@ -236,7 +235,6 @@ Public Class FormMain
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         Dim Andmebaas As New CAndmebaas
         Paketid = Andmebaas.LoePakettideNimekiri
-        Console.WriteLine(Tyyp)
         Select Case Tyyp
             Case IAndmebaas.PaketiTyyp.PAKETT_BORS
                 For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
@@ -312,8 +310,9 @@ Public Class FormMain
     End Sub
 
     Private Sub cmbPkt1Pkt_DropDownClosed(sender As Object, e As EventArgs) Handles cmbPkt1Pkt.DropDownClosed
-        If String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) Or String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Or
-                String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
+        If String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
+            Return
+        ElseIf String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) And String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Then
             Return
         Else
             Uuenda_Graafik()
@@ -331,8 +330,9 @@ Public Class FormMain
             lblDtpVahe.Hide()
         End If
 
-        If String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) Or String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Or
-                String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
+        If String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
+            Return
+        ElseIf String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) And String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Then
             Return
         Else
             Uuenda_Graafik()
@@ -340,8 +340,29 @@ Public Class FormMain
     End Sub
 
     Private Sub cmbPkt2Pkt_DropDownClosed(sender As Object, e As EventArgs) Handles cmbPkt2Pkt.DropDownClosed
-        If String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) Or String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Or
-              String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
+        If String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
+            Return
+        ElseIf String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) And String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Then
+            Return
+        Else
+            Uuenda_Graafik()
+        End If
+    End Sub
+
+    Private Sub dtpAlgus_ValueChanged(sender As Object, e As EventArgs) Handles dtpAlgus.ValueChanged
+        If String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
+            Return
+        ElseIf String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) And String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Then
+            Return
+        Else
+            Uuenda_Graafik()
+        End If
+    End Sub
+
+    Private Sub dtpLopp_ValueChanged(sender As Object, e As EventArgs) Handles dtpLopp.ValueChanged
+        If String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
+            Return
+        ElseIf String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) And String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Then
             Return
         Else
             Uuenda_Graafik()
