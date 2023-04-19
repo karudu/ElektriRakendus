@@ -278,6 +278,38 @@ Public Class CAndmebaas
 
         Return Hinnad
     End Function
+    'Public Function LoeBorsKuuKeskmine(AlgusAeg As Date, Kuud As Integer) As List(Of Decimal) Implements IAndmebaas.LoeBorsKuuKeskmine
+    '    Dim Ajad As New List(Of Decimal)
+
+    '    ' Ümarda aeg kuu algusesse ja teisenda UTC'sse
+    '    Dim Aeg As Date = AlgusAeg
+    '    Aeg = Aeg.ToUniversalTime()
+    '    Aeg = New Date(Aeg.Year, Aeg.Month, 0, 0, 0, 0)
+
+    '    ' Loe keskmised hinnad
+    '    GConnection = New OleDbConnection
+    '    With GConnection
+    '        .ConnectionString = LoeConnectionString()
+    '        .Open()
+
+    '        For i As Integer = 0 To Kuud - 1
+    '            Dim Hind As Decimal = LoeKuuKeskmineHind(Aeg, Kuud - i) * KAIBEMAKS
+    '            Ajad.Add(Hind)
+    '            Aeg = Aeg.AddMonths(1)
+    '            If Hind = 0 And LugemineOK = False Then ' Kui hindasid pole, siis ära neid edasi küsi
+    '                For j As Integer = 0 To Kuud - i - 2
+    '                    Ajad.Add(0)
+    '                Next
+    '                Exit For
+    '            End If
+    '        Next
+
+    '        .Close()
+    '    End With
+    '    GConnection.Dispose()
+
+    '    Return Ajad
+    'End Function
     Private Class JsonJuur
         Public data As JsonHinnad
     End Class
@@ -289,8 +321,8 @@ Public Class CAndmebaas
         Public Price As Decimal
     End Class
     Private Function LoeBorsihind(Aeg As Date, Tunnid As Integer) As Decimal
-        Dim Timestamp As String
-        Timestamp = (Aeg - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString
+        Dim Timestamp As Integer
+        Timestamp = (Aeg - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds
 
         ' Vaata, kas selle tunni hind on juba andmebaasis olemas
         Try
@@ -302,9 +334,7 @@ Public Class CAndmebaas
                 .CommandType = CommandType.Text
                 .CommandText = "SELECT * FROM borsihinnad " &
                                "WHERE [timestamp] = " &
-                               """" &
-                               Timestamp &
-                               """" &
+                               Timestamp.ToString &
                                ";"
                 Reader = .ExecuteReader
             End With
@@ -336,9 +366,8 @@ Public Class CAndmebaas
                     .CommandType = CommandType.Text
                     .CommandText = "SELECT * FROM borsihinnad " &
                                "WHERE [timestamp] = " &
-                               """" &
-                               TimestampKontroll &
-                               """;"
+                               TimestampKontroll.ToString &
+                               ";"
                     Reader = .ExecuteReader
                 End With
                 Cmd.Dispose()
@@ -389,7 +418,7 @@ Public Class CAndmebaas
                                        "([timestamp], hind) " &
                                        "VALUES (@p1, @p2);"
 
-                    .Parameters.Add(New OleDbParameter("@p1", OleDbType.VarChar, 255)).Value = Hinnad(i).Timestamp
+                    .Parameters.Add(New OleDbParameter("@p1", OleDbType.Integer)).Value = Hinnad(i).Timestamp
                     .Parameters.Add(New OleDbParameter("@p2", OleDbType.Currency)).Value = Hinnad(i).Price
 
                     .ExecuteNonQuery()
@@ -403,6 +432,133 @@ Public Class CAndmebaas
         LugemineOK = True
         Return Hinnad(0).Price
     End Function
+    'Private Function LoeKuuKeskmineHind(Aeg As Date, Kuud As Integer) As Decimal
+    '    ' Leia, mitu börsihinda lugeda tuleb
+    '    Dim NHinnad = Date.DaysInMonth(Aeg.Year, Aeg.Month) * 24
+
+    '    ' Loe börsihinnad
+    '    Dim Hinnad As New List(Of Decimal)
+    '    Hinnad = LoeBorsihind(Aeg, NHinnad)
+
+    '    ' Loe hinnad
+    '    For i As Integer = 0 To NHinnad - 1
+    '        Dim Hind = LoeBorsihind(Aeg, NHinnad)
+    '    Next
+
+    '    Dim Timestamp As String
+    '    Timestamp = (Aeg - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString
+
+    '    ' Vaata, kas selle tunni hind on juba andmebaasis olemas
+    '    Try
+    '        Dim Cmd As New OleDbCommand
+    '        Dim Reader As OleDbDataReader
+
+    '        With Cmd
+    '            .Connection = GConnection
+    '            .CommandType = CommandType.Text
+    '            .CommandText = "SELECT * FROM borsihinnad " &
+    '                           "WHERE [timestamp] = " &
+    '                           """" &
+    '                           Timestamp &
+    '                           """" &
+    '                           ";"
+    '            Reader = .ExecuteReader
+    '        End With
+    '        Cmd.Dispose()
+
+    '        Reader.Read()
+    '        If Reader.HasRows Then
+    '            ' Andmebaasis olemas
+    '            Dim HindReturn As Decimal = Reader("hind")
+    '            Reader.Close()
+    '            LugemineOK = True
+    '            Return HindReturn
+    '        End If
+    '        Reader.Close()
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message, MsgBoxStyle.Critical)
+    '    End Try
+
+    '    ' Ei ole, otsusta, mitu tundi tuleb lugeda
+    '    For i As Integer = 1 To Tunnid - 1
+    '        Dim TimestampKontroll As String
+    '        TimestampKontroll = (Aeg.AddHours(i) - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString
+    '        Try
+    '            Dim Cmd As New OleDbCommand
+    '            Dim Reader As OleDbDataReader
+
+    '            With Cmd
+    '                .Connection = GConnection
+    '                .CommandType = CommandType.Text
+    '                .CommandText = "SELECT * FROM borsihinnad " &
+    '                           "WHERE [timestamp] = " &
+    '                           """" &
+    '                           TimestampKontroll &
+    '                           """;"
+    '                Reader = .ExecuteReader
+    '            End With
+    '            Cmd.Dispose()
+
+    '            Reader.Read()
+    '            If Reader.HasRows Then
+    '                Reader.Close()
+    '                Tunnid = i
+    '                Exit For
+    '            End If
+    '            Reader.Close()
+    '        Catch ex As Exception
+    '            MsgBox(ex.Message, MsgBoxStyle.Critical)
+    '        End Try
+    '    Next
+
+    '    ' Loe andmed API kaudu
+    '    Dim TimeString As String
+    '    TimeString = Aeg.AddMilliseconds(-1).ToString("yyyy-MM-ddTHH\:mm\:ss.fff") & "Z"
+    '    Dim TimeStringLopp As String
+    '    TimeStringLopp = Aeg.AddHours(Tunnid).AddMilliseconds(-1).ToString("yyyy-MM-ddTHH\:mm\:ss.fff") & "Z"
+
+    '    Dim JsonStr As String
+    '    Dim RequestStr As String = "https://dashboard.elering.ee/api/nps/price?start=" &
+    '                               TimeString &
+    '                               "&end=" &
+    '                               TimeStringLopp
+    '    Using WebClient As New WebClient
+    '        JsonStr = WebClient.DownloadString(RequestStr)
+    '    End Using
+    '    Dim Andmed = JsonConvert.DeserializeObject(Of JsonJuur)(JsonStr)
+    '    Dim Hinnad = Andmed.data.ee
+
+    '    ' Kui andmed puuduvad (küsiti tulevikust), siis tagasta 0
+    '    If Hinnad.Length = 0 Then
+    '        LugemineOK = False
+    '        Return 0
+    '    End If
+
+    '    ' Lisa loetud hinnad andmebaasi
+    '    For i As Integer = 0 To Hinnad.Length - 1
+    '        Try
+    '            Dim Cmd As New OleDbCommand
+    '            With Cmd
+    '                .Connection = GConnection
+    '                .CommandType = CommandType.Text
+    '                .CommandText = "INSERT INTO borsihinnad " &
+    '                                   "([timestamp], hind) " &
+    '                                   "VALUES (@p1, @p2);"
+
+    '                .Parameters.Add(New OleDbParameter("@p1", OleDbType.VarChar, 255)).Value = Hinnad(i).Timestamp
+    '                .Parameters.Add(New OleDbParameter("@p2", OleDbType.Currency)).Value = Hinnad(i).Price
+
+    '                .ExecuteNonQuery()
+    '            End With
+    '            Cmd.Dispose()
+    '        Catch ex As Exception
+    '            MsgBox(ex.Message, MsgBoxStyle.Critical)
+    '        End Try
+    '    Next
+
+    '    LugemineOK = True
+    '    Return Hinnad(0).Price
+    'End Function
 
     Public Sub LisaPakettBors(Nimi As String, JuurdeTasu As Decimal, Kuutasu As Decimal) Implements IAndmebaas.LisaPakettBors
         Try
