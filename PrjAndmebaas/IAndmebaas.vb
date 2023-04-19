@@ -6,7 +6,6 @@
     Function LoeKodumasinad() As List(Of Kodumasin)
     Function LoeBorsihinnad(AlgusAeg As Date, Tunnid As Integer) As List(Of Decimal)
     Function LoeBorsihinnadSentkWh(AlgusAeg As Date, Tunnid As Integer) As List(Of Decimal)
-    'Function LoeBorsKuuKeskmine(AlgusAeg As Date, Kuud As Integer) As List(Of Decimal)
     Sub LisaPakettBors(Nimi As String, JuurdeTasu As Decimal, Kuutasu As Decimal)
     Sub LisaPakettFix(Nimi As String, PTariif As Decimal, OTariif As Decimal, Kuutasu As Decimal)
     Sub LisaPakettUniv(Nimi As String, Baashind As Decimal, Marginaal As Decimal, Kuutasu As Decimal)
