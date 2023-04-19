@@ -49,6 +49,7 @@ Partial Class Graafik
         Series1.ChartArea = "ChartArea1"
         Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine
         Series1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Series1.CustomProperties = "EmptyPointValue="""""
         Series1.IsXValueIndexed = True
         Series1.Legend = "Hind(s/kWh)"
         Series1.Name = "Pakett 1"
@@ -57,6 +58,7 @@ Partial Class Graafik
         Series2.ChartArea = "ChartArea1"
         Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine
         Series2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Series2.CustomProperties = "EmptyPointValue="""""
         Series2.IsXValueIndexed = True
         Series2.Legend = "Hind(s/kWh)"
         Series2.Name = "Pakett 2"

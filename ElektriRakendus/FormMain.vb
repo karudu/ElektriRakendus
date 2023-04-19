@@ -105,19 +105,41 @@ Public Class FormMain
                 End If
                 If PakettID1 <> Nothing Then
                     GInfo1 = GraafikConnect.GetCustom(PakettID1, cmbPkt1Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value)
-                    For I = 0 To GInfo1.Count - 1
-                        Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
-                        GInfo1Kesk += GInfo1.Item(I).Yval
-                    Next
+                    If GInfo1.Count > 50 Then
+                        For I = 0 To GInfo1.Count - 1
+                            If I Mod 5 = 0 Then
+                                Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                            Else
+                                Graafik1.setPoint1(" ", GInfo1.Item(I).Yval)
+                            End If
+                            GInfo1Kesk += GInfo1.Item(I).Yval
+                        Next
+                    Else
+                        For I = 0 To GInfo1.Count - 1
+                            Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                            GInfo1Kesk += GInfo1.Item(I).Yval
+                        Next
+                    End If
                     GInfo1Kesk = GInfo1Kesk / GInfo1.Count
                     lblPkt1Kesk.Text = GInfo1Kesk.ToString("N2") + " s/kWh"
                 End If
                 If PakettID2 <> Nothing Then
                     GInfo2 = GraafikConnect.GetCustom(PakettID2, cmbPkt2Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value)
-                    For I = 0 To GInfo2.Count - 1
-                        Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
-                        GInfo2Kesk += GInfo2.Item(I).Yval
-                    Next
+                    If GInfo2.Count > 50 Then
+                        For I = 0 To GInfo2.Count - 1
+                            If I Mod 5 = 0 Then
+                                Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                            Else
+                                Graafik1.setPoint2(" ", GInfo2.Item(I).Yval)
+                            End If
+                            GInfo2Kesk += GInfo2.Item(I).Yval
+                        Next
+                    Else
+                        For I = 0 To GInfo2.Count - 1
+                            Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                            GInfo2Kesk += GInfo2.Item(I).Yval
+                        Next
+                    End If
                     GInfo2Kesk = GInfo2Kesk / GInfo2.Count
                     lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " s/kWh"
                 End If
@@ -349,7 +371,7 @@ Public Class FormMain
         End If
     End Sub
 
-    Private Sub dtpAlgus_ValueChanged(sender As Object, e As EventArgs) Handles dtpAlgus.ValueChanged
+    Private Sub dtpAlgus_CloseUp(sender As Object, e As EventArgs) Handles dtpAlgus.CloseUp
         If String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
             Return
         ElseIf String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) And String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Then
@@ -359,7 +381,7 @@ Public Class FormMain
         End If
     End Sub
 
-    Private Sub dtpLopp_ValueChanged(sender As Object, e As EventArgs) Handles dtpLopp.ValueChanged
+    Private Sub dtpLopp_CloseUp(sender As Object, e As EventArgs) Handles dtpLopp.CloseUp
         If String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then
             Return
         ElseIf String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) And String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Then

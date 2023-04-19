@@ -43,7 +43,6 @@ Partial Class FormMain
         Me.BtnVordleja = New System.Windows.Forms.Button()
         Me.BtnLopphind = New System.Windows.Forms.Button()
         Me.BtnKalkKodumasinad = New System.Windows.Forms.Button()
-        Me.Graafik1 = New GraafikControl.Graafik()
         Me.lblPkt2Kesk = New System.Windows.Forms.Label()
         Me.lblPkt1Kesk = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -51,6 +50,7 @@ Partial Class FormMain
         Me.dtpAlgus = New System.Windows.Forms.DateTimePicker()
         Me.dtpLopp = New System.Windows.Forms.DateTimePicker()
         Me.lblDtpVahe = New System.Windows.Forms.Label()
+        Me.Graafik1 = New GraafikControl.Graafik()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -261,15 +261,6 @@ Partial Class FormMain
         Me.BtnKalkKodumasinad.Text = "Arvuta kodumasina tarbimise hind"
         Me.BtnKalkKodumasinad.UseVisualStyleBackColor = True
         '
-        'Graafik1
-        '
-        Me.Graafik1.AutoSize = True
-        Me.Graafik1.Location = New System.Drawing.Point(-16, 311)
-        Me.Graafik1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Graafik1.Name = "Graafik1"
-        Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
-        Me.Graafik1.TabIndex = 0
-        '
         'lblPkt2Kesk
         '
         Me.lblPkt2Kesk.AutoSize = True
@@ -333,6 +324,15 @@ Partial Class FormMain
         Me.lblDtpVahe.TabIndex = 17
         Me.lblDtpVahe.Text = "-"
         Me.lblDtpVahe.Visible = False
+        '
+        'Graafik1
+        '
+        Me.Graafik1.AutoSize = True
+        Me.Graafik1.Location = New System.Drawing.Point(-16, 311)
+        Me.Graafik1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Graafik1.Name = "Graafik1"
+        Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
+        Me.Graafik1.TabIndex = 0
         '
         'FormMain
         '
