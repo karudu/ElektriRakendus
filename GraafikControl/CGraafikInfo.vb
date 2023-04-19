@@ -186,6 +186,9 @@ Public Class CGraafikInfo
         If AlgAeg = LoppAeg Then
             AlgAeg = New DateTime(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day, 0, 0, 0)
             LoppAeg = New DateTime(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day + 1, 0, 0, 0)
+        Else
+            AlgAeg = New DateTime(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day, 0, 0, 0)
+            LoppAeg = New DateTime(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
         End If
         TS = LoppAeg.Subtract(AlgAeg)
         Dim Tunnid As Integer = TS.TotalHours
