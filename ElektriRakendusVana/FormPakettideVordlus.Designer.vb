@@ -38,10 +38,9 @@ Partial Class FormPakettideVordlus
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cboxPakett = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblLopp2 = New System.Windows.Forms.Label()
+        Me.lblAlgus2 = New System.Windows.Forms.Label()
         Me.cboxLopp2 = New System.Windows.Forms.ComboBox()
-        Me.lblPeriood2 = New System.Windows.Forms.Label()
         Me.cboxAlgus2 = New System.Windows.Forms.ComboBox()
         Me.lblUniText = New System.Windows.Forms.Label()
         Me.txtBaas = New System.Windows.Forms.TextBox()
@@ -69,6 +68,8 @@ Partial Class FormPakettideVordlus
         Me.lblKoguSum2 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cBoxPeriood2 = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -76,7 +77,7 @@ Partial Class FormPakettideVordlus
         'txtFixP
         '
         Me.txtFixP.Location = New System.Drawing.Point(7, 70)
-        Me.txtFixP.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtFixP.Margin = New System.Windows.Forms.Padding(2)
         Me.txtFixP.Name = "txtFixP"
         Me.txtFixP.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
         Me.txtFixP.Size = New System.Drawing.Size(88, 20)
@@ -95,7 +96,7 @@ Partial Class FormPakettideVordlus
         'btnArvuta
         '
         Me.btnArvuta.Location = New System.Drawing.Point(4, 173)
-        Me.btnArvuta.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnArvuta.Margin = New System.Windows.Forms.Padding(2)
         Me.btnArvuta.Name = "btnArvuta"
         Me.btnArvuta.Size = New System.Drawing.Size(56, 19)
         Me.btnArvuta.TabIndex = 47
@@ -105,7 +106,7 @@ Partial Class FormPakettideVordlus
         'txtFixO
         '
         Me.txtFixO.Location = New System.Drawing.Point(124, 70)
-        Me.txtFixO.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtFixO.Margin = New System.Windows.Forms.Padding(2)
         Me.txtFixO.Name = "txtFixO"
         Me.txtFixO.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
         Me.txtFixO.Size = New System.Drawing.Size(88, 20)
@@ -146,9 +147,9 @@ Partial Class FormPakettideVordlus
         Me.GroupBox1.Controls.Add(Me.btnArvuta)
         Me.GroupBox1.Controls.Add(Me.txtFixO)
         Me.GroupBox1.Location = New System.Drawing.Point(9, 10)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Size = New System.Drawing.Size(225, 236)
         Me.GroupBox1.TabIndex = 52
         Me.GroupBox1.TabStop = False
@@ -180,7 +181,7 @@ Partial Class FormPakettideVordlus
         Me.cboxLopp.FormattingEnabled = True
         Me.cboxLopp.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
         Me.cboxLopp.Location = New System.Drawing.Point(102, 149)
-        Me.cboxLopp.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cboxLopp.Margin = New System.Windows.Forms.Padding(2)
         Me.cboxLopp.Name = "cboxLopp"
         Me.cboxLopp.Size = New System.Drawing.Size(92, 21)
         Me.cboxLopp.TabIndex = 56
@@ -191,7 +192,7 @@ Partial Class FormPakettideVordlus
         Me.cboxAlgus.FormattingEnabled = True
         Me.cboxAlgus.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
         Me.cboxAlgus.Location = New System.Drawing.Point(7, 149)
-        Me.cboxAlgus.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cboxAlgus.Margin = New System.Windows.Forms.Padding(2)
         Me.cboxAlgus.Name = "cboxAlgus"
         Me.cboxAlgus.Size = New System.Drawing.Size(92, 21)
         Me.cboxAlgus.TabIndex = 55
@@ -212,28 +213,29 @@ Partial Class FormPakettideVordlus
         Me.cBoxPeriood.FormattingEnabled = True
         Me.cBoxPeriood.Items.AddRange(New Object() {"Tund", "Päev", "Kuu", "Aasta"})
         Me.cBoxPeriood.Location = New System.Drawing.Point(7, 111)
-        Me.cBoxPeriood.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cBoxPeriood.Margin = New System.Windows.Forms.Padding(2)
         Me.cBoxPeriood.Name = "cBoxPeriood"
         Me.cBoxPeriood.Size = New System.Drawing.Size(92, 21)
         Me.cBoxPeriood.TabIndex = 52
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Label11)
         Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.cBoxPeriood2)
         Me.GroupBox2.Controls.Add(Me.cboxPakett)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Controls.Add(Me.lblLopp2)
+        Me.GroupBox2.Controls.Add(Me.lblAlgus2)
         Me.GroupBox2.Controls.Add(Me.cboxLopp2)
-        Me.GroupBox2.Controls.Add(Me.lblPeriood2)
         Me.GroupBox2.Controls.Add(Me.cboxAlgus2)
         Me.GroupBox2.Controls.Add(Me.lblUniText)
         Me.GroupBox2.Controls.Add(Me.txtBaas)
         Me.GroupBox2.Controls.Add(Me.lblBaas)
         Me.GroupBox2.Controls.Add(Me.btnArvuta2)
         Me.GroupBox2.Location = New System.Drawing.Point(529, 10)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox2.Size = New System.Drawing.Size(225, 236)
         Me.GroupBox2.TabIndex = 54
         Me.GroupBox2.TabStop = False
@@ -242,7 +244,7 @@ Partial Class FormPakettideVordlus
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 133)
+        Me.Label4.Location = New System.Drawing.Point(6, 170)
         Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(38, 13)
@@ -254,60 +256,50 @@ Partial Class FormPakettideVordlus
         Me.cboxPakett.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboxPakett.FormattingEnabled = True
         Me.cboxPakett.Items.AddRange(New Object() {"Börsihind", "Fikseeritud hind", "Universaalteenus", "Universaalteenusega seotud pakett"})
-        Me.cboxPakett.Location = New System.Drawing.Point(7, 149)
-        Me.cboxPakett.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cboxPakett.Location = New System.Drawing.Point(7, 186)
+        Me.cboxPakett.Margin = New System.Windows.Forms.Padding(2)
         Me.cboxPakett.Name = "cboxPakett"
         Me.cboxPakett.Size = New System.Drawing.Size(92, 21)
         Me.cboxPakett.TabIndex = 58
         '
-        'Label2
+        'lblLopp2
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(164, 96)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(31, 13)
-        Me.Label2.TabIndex = 56
-        Me.Label2.Text = "Lopp"
+        Me.lblLopp2.AutoSize = True
+        Me.lblLopp2.Location = New System.Drawing.Point(103, 133)
+        Me.lblLopp2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblLopp2.Name = "lblLopp2"
+        Me.lblLopp2.Size = New System.Drawing.Size(31, 13)
+        Me.lblLopp2.TabIndex = 56
+        Me.lblLopp2.Text = "Lopp"
         '
-        'Label1
+        'lblAlgus2
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(67, 96)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(33, 13)
-        Me.Label1.TabIndex = 55
-        Me.Label1.Text = "Algus"
+        Me.lblAlgus2.AutoSize = True
+        Me.lblAlgus2.Location = New System.Drawing.Point(4, 134)
+        Me.lblAlgus2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblAlgus2.Name = "lblAlgus2"
+        Me.lblAlgus2.Size = New System.Drawing.Size(33, 13)
+        Me.lblAlgus2.TabIndex = 55
+        Me.lblAlgus2.Text = "Algus"
         '
         'cboxLopp2
         '
         Me.cboxLopp2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboxLopp2.FormattingEnabled = True
         Me.cboxLopp2.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.cboxLopp2.Location = New System.Drawing.Point(102, 111)
-        Me.cboxLopp2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cboxLopp2.Location = New System.Drawing.Point(102, 148)
+        Me.cboxLopp2.Margin = New System.Windows.Forms.Padding(2)
         Me.cboxLopp2.Name = "cboxLopp2"
         Me.cboxLopp2.Size = New System.Drawing.Size(92, 21)
         Me.cboxLopp2.TabIndex = 54
-        '
-        'lblPeriood2
-        '
-        Me.lblPeriood2.AutoSize = True
-        Me.lblPeriood2.Location = New System.Drawing.Point(4, 96)
-        Me.lblPeriood2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblPeriood2.Name = "lblPeriood2"
-        Me.lblPeriood2.Size = New System.Drawing.Size(43, 13)
-        Me.lblPeriood2.TabIndex = 53
-        Me.lblPeriood2.Text = "Periood"
         '
         'cboxAlgus2
         '
         Me.cboxAlgus2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboxAlgus2.FormattingEnabled = True
         Me.cboxAlgus2.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.cboxAlgus2.Location = New System.Drawing.Point(7, 111)
-        Me.cboxAlgus2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cboxAlgus2.Location = New System.Drawing.Point(7, 148)
+        Me.cboxAlgus2.Margin = New System.Windows.Forms.Padding(2)
         Me.cboxAlgus2.Name = "cboxAlgus2"
         Me.cboxAlgus2.Size = New System.Drawing.Size(92, 21)
         Me.cboxAlgus2.TabIndex = 52
@@ -325,7 +317,7 @@ Partial Class FormPakettideVordlus
         'txtBaas
         '
         Me.txtBaas.Location = New System.Drawing.Point(7, 70)
-        Me.txtBaas.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtBaas.Margin = New System.Windows.Forms.Padding(2)
         Me.txtBaas.Name = "txtBaas"
         Me.txtBaas.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
         Me.txtBaas.Size = New System.Drawing.Size(88, 20)
@@ -343,8 +335,8 @@ Partial Class FormPakettideVordlus
         '
         'btnArvuta2
         '
-        Me.btnArvuta2.Location = New System.Drawing.Point(7, 173)
-        Me.btnArvuta2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnArvuta2.Location = New System.Drawing.Point(7, 210)
+        Me.btnArvuta2.Margin = New System.Windows.Forms.Padding(2)
         Me.btnArvuta2.Name = "btnArvuta2"
         Me.btnArvuta2.Size = New System.Drawing.Size(56, 19)
         Me.btnArvuta2.TabIndex = 47
@@ -561,6 +553,27 @@ Partial Class FormPakettideVordlus
         Me.Label10.TabIndex = 73
         Me.Label10.Text = "Madalaim hind:"
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(4, 96)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(43, 13)
+        Me.Label11.TabIndex = 60
+        Me.Label11.Text = "Periood"
+        '
+        'cBoxPeriood2
+        '
+        Me.cBoxPeriood2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cBoxPeriood2.FormattingEnabled = True
+        Me.cBoxPeriood2.Items.AddRange(New Object() {"Tund", "Päev", "Kuu", "Aasta"})
+        Me.cBoxPeriood2.Location = New System.Drawing.Point(7, 111)
+        Me.cBoxPeriood2.Margin = New System.Windows.Forms.Padding(2)
+        Me.cBoxPeriood2.Name = "cBoxPeriood2"
+        Me.cBoxPeriood2.Size = New System.Drawing.Size(92, 21)
+        Me.cBoxPeriood2.TabIndex = 59
+        '
         'FormPakettideVordlus
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -590,7 +603,7 @@ Partial Class FormPakettideVordlus
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Graafik1)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "FormPakettideVordlus"
         Me.Text = "Hinna võrdleja"
         Me.GroupBox1.ResumeLayout(False)
@@ -613,15 +626,14 @@ Partial Class FormPakettideVordlus
     Friend WithEvents lblPeriood1 As Label
     Friend WithEvents cBoxPeriood As ComboBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents lblPeriood2 As Label
     Friend WithEvents cboxAlgus2 As ComboBox
     Friend WithEvents lblUniText As Label
     Friend WithEvents txtBaas As TextBox
     Friend WithEvents lblBaas As Label
     Friend WithEvents btnArvuta2 As Button
     Friend WithEvents cboxLopp2 As ComboBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblLopp2 As Label
+    Friend WithEvents lblAlgus2 As Label
     Friend WithEvents lblLopp As Label
     Friend WithEvents lblAlgus As Label
     Friend WithEvents cboxLopp As ComboBox
@@ -649,4 +661,6 @@ Partial Class FormPakettideVordlus
     Friend WithEvents lblKoguSum2 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label10 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents cBoxPeriood2 As ComboBox
 End Class

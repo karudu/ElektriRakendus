@@ -1,5 +1,4 @@
-﻿Imports System.Security.Cryptography
-Imports PrjAndmebaas
+﻿Imports PrjAndmebaas
 
 Public Class FormLopphind
     Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
