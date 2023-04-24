@@ -31,18 +31,20 @@ Public Class FormMain
         Graafik1.ClearPoints()
         Dim PakettID1 As Integer
         Dim PakettID2 As Integer
+        'kontrollime kas pakett 1 on valitud
         If String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) Then
             PakettID1 = Nothing
         Else
             PakettID1 = GetPakettInfo(cmbPkt1Pkt.SelectedItem.ToString, cmbPkt1Tyyp.SelectedIndex)
         End If
+        'kontrollime kas pakett 2 on valitud
         If String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Then
             PakettID2 = Nothing
         Else
             PakettID2 = GetPakettInfo(cmbPkt2Pkt.SelectedItem.ToString, cmbPkt2Tyyp.SelectedIndex)
         End If
         Dim I As Integer
-        Select Case cmbPeriood.SelectedIndex
+        Select Case cmbPeriood.SelectedIndex 'paketitüübi valik(0=börs, 1=fix, 2=universaal)
             Case 0
                 If PakettID1 <> Nothing Then
                     GInfo1 = GraafikConnect.GetPaev(PakettID1, cmbPkt1Tyyp.SelectedIndex)
@@ -101,7 +103,7 @@ Public Class FormMain
                     lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " s/kWh"
                 End If
             Case 3
-                If DateTime.Compare(dtpAlgus.Value, dtpLopp.Value) > 0 Then
+                If DateTime.Compare(dtpAlgus.Value, dtpLopp.Value) > 0 Then 'kas alguskuupäev on ikka enne lõppkuupäeva
                     MessageBox.Show("Alguskuupäev peab olema enne lõppkuupäeva!")
                     Return
                 End If
@@ -146,6 +148,7 @@ Public Class FormMain
                     lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " s/kWh"
                 End If
         End Select
+        'Toome parema keskmise hinna esile värviga
         If PakettID1 <> Nothing And PakettID2 <> Nothing Then
             If GInfo1Kesk < GInfo2Kesk Then
                 lblPkt1Kesk.BackColor = Color.Green

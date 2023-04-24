@@ -19,6 +19,7 @@ Public Class CGraafikInfo
         Dim TS As New TimeSpan
         TS = EndTime.Subtract(BeginTime)
         Dim Tunnid As Integer = TS.TotalHours
+        'paketitüübi valik(0=börs, 1=fix, 2=universaal)
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
             Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
@@ -67,6 +68,7 @@ Public Class CGraafikInfo
         Dim TS As New TimeSpan
         TS = EndTime.Subtract(BeginTime)
         Dim Tunnid As Integer = TS.TotalHours
+        'paketitüübi valik(0=börs, 1=fix, 2=universaal)
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
             Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
@@ -118,6 +120,7 @@ Public Class CGraafikInfo
         Dim TS As New TimeSpan
         TS = EndTime.Subtract(BeginTime)
         Dim Tunnid As Integer = TS.TotalHours
+        'paketitüübi valik(0=börs, 1=fix, 2=universaal)
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
             Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
@@ -183,11 +186,25 @@ Public Class CGraafikInfo
         Dim I As Integer = 0
         Dim J As Integer = 0
         Dim TS As New TimeSpan
+        'kontrollime kas algkuupäev on sama mis lõppkuupäev
+        If AlgAeg = LoppAeg Then
+            If DaysInMonth(LoppAeg.Year, LoppAeg.Month) = LoppAeg.Day Then
+                If LoppAeg.Month = 12 Then
+                    LoppAeg = New Date(LoppAeg.Year + 1, 1, 1, 0, 0, 0)
+                Else
+                    LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month + 1, 1, 0, 0, 0)
+                End If
+            End If
+            LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
+        Else
+            LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day, 0, 0, 0)
+        End If
         AlgAeg = New Date(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day, 0, 0, 0)
-        LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
         TS = LoppAeg.Subtract(AlgAeg)
         Dim Tunnid As Integer = TS.TotalHours
+        'kui on ainult 24 tundi vahet siis anname tundide lõikes andmed
         If Tunnid = 24 Then
+            'paketitüübi valik(0=börs, 1=fix, 2=universaal)
             If PaketiTyyp = 0 Then
                 Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
                 Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
@@ -221,7 +238,8 @@ Public Class CGraafikInfo
                     AlgAeg = AlgAeg.AddHours(1)
                 Next
             End If
-        Else
+        Else 'kui on rohkem kui 24 tundi anname päevade lõikes
+            'paketitüübi valik(0=börs, 1=fix, 2=universaal)
             If PaketiTyyp = 0 Then
                 Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
                 Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
