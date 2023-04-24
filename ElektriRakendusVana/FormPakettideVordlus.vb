@@ -153,9 +153,9 @@ Public Class FormPakettideVordlus
         lblKorgeHind.BackColor = Color.Red
         lblMadalHind.BackColor = Color.Green
         lblProtsentKallim.Text = ajaperioodKallim
-        lblProtsentKallim.Text += " s/kWh"
+        lblProtsentKallim.Text += "%"
         lblProtsentOdavam.Text = ajaperioodOdavam
-        lblProtsentOdavam.Text += " s/kWh"
+        lblProtsentOdavam.Text += "%"
         lblProtsentKallim.BackColor = Color.Red
         lblProtsentOdavam.BackColor = Color.Green
         lblError.Visible = False
