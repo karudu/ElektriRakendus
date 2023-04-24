@@ -302,7 +302,7 @@ Partial Class FormMain
         Me.dtpAlgus.Name = "dtpAlgus"
         Me.dtpAlgus.Size = New System.Drawing.Size(110, 22)
         Me.dtpAlgus.TabIndex = 13
-        Me.dtpAlgus.Value = New Date(2023, 4, 17, 10, 39, 15, 0)
+        Me.dtpAlgus.Value = New Date.Now()
         Me.dtpAlgus.Visible = False
         '
         'dtpLopp
@@ -312,7 +312,7 @@ Partial Class FormMain
         Me.dtpLopp.Name = "dtpLopp"
         Me.dtpLopp.Size = New System.Drawing.Size(110, 22)
         Me.dtpLopp.TabIndex = 16
-        Me.dtpLopp.Value = New Date(2023, 4, 17, 10, 39, 15, 0)
+        Me.dtpLopp.Value = Date.Now()
         Me.dtpLopp.Visible = False
         '
         'lblDtpVahe
