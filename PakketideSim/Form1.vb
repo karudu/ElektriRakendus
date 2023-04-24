@@ -27,12 +27,12 @@ Public Class Form1
                 Dim isValidDate As Boolean = IsDate(data(0))
                 If isValidDate = False Then
                     MessageBox.Show("CSV failis pole on vigane kuupäev ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    MessageBox.Show("Vigane osa" + data(0) + "viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show(" Vigane osa " + data(0) + " viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     Exit Sub
                 End If
                 If IsNumeric(data(1)) = False Then
                     MessageBox.Show("CSV failis pole on vigane võimsus ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    MessageBox.Show(" Vigane osa" + data(1) + "viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show(" Vigane osa " + data(1) + " viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     Exit Sub
                 End If
 
