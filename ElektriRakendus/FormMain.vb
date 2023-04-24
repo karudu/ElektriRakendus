@@ -6,6 +6,8 @@ Public Class FormMain
         cmbPeriood.Items.Add("Kuu")
         cmbPeriood.Items.Add("Aasta")
         cmbPeriood.Items.Add("Otsi")
+        dtpAlgus.Value = Date.Now()
+        dtpLopp.Value = Date.Now()
         AddPaketiTyybid()
         Graafik1.InitGraph()
     End Sub
