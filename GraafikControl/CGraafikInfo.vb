@@ -183,8 +183,8 @@ Public Class CGraafikInfo
         Dim I As Integer = 0
         Dim J As Integer = 0
         Dim TS As New TimeSpan
-        AlgAeg = New DateTime(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day, 0, 0, 0)
-        LoppAeg = New DateTime(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
+        AlgAeg = New Date(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day, 0, 0, 0)
+        LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
         TS = LoppAeg.Subtract(AlgAeg)
         Dim Tunnid As Integer = TS.TotalHours
         If Tunnid = 24 Then
