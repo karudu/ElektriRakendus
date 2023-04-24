@@ -71,7 +71,6 @@ Public Class FormLopphind
                         txtLoppHind.Text = GInfo.Item(cboxALTund.SelectedIndex).Yval
                         txtLoppHind.Text += " senti/kWh"
                     End If
-
             End Select
             If cboxALTund.Items.Count < 24 Then 'lisab comboboxi graafikul olevad kellaajad
                 For Index = 0 To GInfo.Count - 1

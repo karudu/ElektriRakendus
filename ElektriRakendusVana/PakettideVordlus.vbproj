@@ -83,13 +83,6 @@
     <Compile Include="FormLopphind.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMain.Designer.vb">
-      <DependentUpon>FormMain.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FormPakettideVordlus.Designer.vb">
       <DependentUpon>FormPakettideVordlus.vb</DependentUpon>
     </Compile>
@@ -116,9 +109,6 @@
   <ItemGroup>
     <EmbeddedResource Include="FormLopphind.resx">
       <DependentUpon>FormLopphind.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPakettideVordlus.resx">
       <DependentUpon>FormPakettideVordlus.vb</DependentUpon>
