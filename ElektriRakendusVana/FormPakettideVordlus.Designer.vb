@@ -29,7 +29,6 @@ Partial Class FormPakettideVordlus
         Me.lblPTariif = New System.Windows.Forms.Label()
         Me.lblOTariif = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblError = New System.Windows.Forms.Label()
         Me.lblLopp = New System.Windows.Forms.Label()
         Me.lblAlgus = New System.Windows.Forms.Label()
         Me.cboxLopp = New System.Windows.Forms.ComboBox()
@@ -39,7 +38,6 @@ Partial Class FormPakettideVordlus
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cboxPakett = New System.Windows.Forms.ComboBox()
-        Me.lblError2 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboxLopp2 = New System.Windows.Forms.ComboBox()
@@ -135,7 +133,6 @@ Partial Class FormPakettideVordlus
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.lblError)
         Me.GroupBox1.Controls.Add(Me.lblLopp)
         Me.GroupBox1.Controls.Add(Me.lblAlgus)
         Me.GroupBox1.Controls.Add(Me.cboxLopp)
@@ -156,16 +153,6 @@ Partial Class FormPakettideVordlus
         Me.GroupBox1.TabIndex = 52
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Börsi- ja fikseeritudhinna võrdlus"
-        '
-        'lblError
-        '
-        Me.lblError.AutoSize = True
-        Me.lblError.Location = New System.Drawing.Point(6, 194)
-        Me.lblError.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblError.Name = "lblError"
-        Me.lblError.Size = New System.Drawing.Size(58, 13)
-        Me.lblError.TabIndex = 59
-        Me.lblError.Text = "Error Label"
         '
         'lblLopp
         '
@@ -234,7 +221,6 @@ Partial Class FormPakettideVordlus
         '
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.cboxPakett)
-        Me.GroupBox2.Controls.Add(Me.lblError2)
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Controls.Add(Me.cboxLopp2)
@@ -273,16 +259,6 @@ Partial Class FormPakettideVordlus
         Me.cboxPakett.Name = "cboxPakett"
         Me.cboxPakett.Size = New System.Drawing.Size(92, 21)
         Me.cboxPakett.TabIndex = 58
-        '
-        'lblError2
-        '
-        Me.lblError2.AutoSize = True
-        Me.lblError2.Location = New System.Drawing.Point(8, 194)
-        Me.lblError2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblError2.Name = "lblError2"
-        Me.lblError2.Size = New System.Drawing.Size(58, 13)
-        Me.lblError2.TabIndex = 57
-        Me.lblError2.Text = "Error Label"
         '
         'Label2
         '
@@ -650,8 +626,6 @@ Partial Class FormPakettideVordlus
     Friend WithEvents lblAlgus As Label
     Friend WithEvents cboxLopp As ComboBox
     Friend WithEvents cboxAlgus As ComboBox
-    Friend WithEvents lblError As Label
-    Friend WithEvents lblError2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents lblKeskHindB As Label
     Friend WithEvents lblKeskHindF As Label

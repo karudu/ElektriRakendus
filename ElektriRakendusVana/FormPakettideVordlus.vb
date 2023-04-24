@@ -18,8 +18,6 @@ Public Class FormPakettideVordlus
         cboxLopp.Visible = False
         lblAlgus.Visible = False
         lblLopp.Visible = False
-        lblError.Visible = False
-        lblError2.Visible = False
         lblKoguSum1.Visible = False
         lblKoguSum2.Visible = False
     End Sub
@@ -52,18 +50,17 @@ Public Class FormPakettideVordlus
         Dim ajaperioodKallim As Decimal = 0
         Dim ajaperioodOdavam As Decimal
         Dim ajavahemik As Integer
-        lblError.Visible = True
 
         Select Case periood
             Case 0
                 If cboxAlgus.SelectedIndex = -1 And cboxLopp.SelectedIndex = -1 Then
-                    lblError.Text = "Valige perioodi algus ja lopp ajad"
+                    MsgBox("Valige perioodi algus ja lopp ajad")
                     Exit Sub
                 End If
                 If cboxAlgus.SelectedIndex >= cboxLopp.SelectedIndex Then
-                    lblError.Text = "Perioodi lõpp aeg ei saa olla enne" +
+                    MsgBox("Perioodi lõpp aeg ei saa olla enne" +
                     Environment.NewLine +
-                    "perioodi algus aega või sama."
+                    "perioodi algus aega või sama.")
                     Exit Sub
                 End If
                 GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
@@ -78,7 +75,7 @@ Public Class FormPakettideVordlus
                 GInfo = GetInfo.GetAasta(StructBors.ID, pktTypeB)
                 GInfo2 = GetInfo.GetAasta(StructFix.ID, pktTypeF)
             Case Else
-                lblError.Text = "Valige periood!"
+                MsgBox("Valige periood!")
                 Exit Sub
         End Select
         If periood = 0 Then
@@ -158,7 +155,6 @@ Public Class FormPakettideVordlus
         lblProtsentOdavam.Text += "%"
         lblProtsentKallim.BackColor = Color.Red
         lblProtsentOdavam.BackColor = Color.Green
-        lblError.Visible = False
     End Sub
     Private Sub joonistaGraafikBU(pktTypeB As IAndmebaas.PaketiTyyp, pktTypeU As IAndmebaas.PaketiTyyp, AegAlgus As Integer, AegLopp As Integer)
         Dim GInfo As List(Of (Xval As String, Yval As Decimal))
@@ -172,12 +168,11 @@ Public Class FormPakettideVordlus
         Dim PktType As Integer
         Dim Sum1 As Decimal
         Dim Sum2 As Decimal
-        lblError2.Visible = True
 
         If cboxAlgus2.SelectedIndex >= cboxLopp2.SelectedIndex Then
-            lblError2.Text = "Perioodi lõpp aeg ei tohi olla" +
+            MsgBox("Perioodi lõpp aeg ei tohi olla" +
                 Environment.NewLine +
-                "enne perioodi algus aega või sama."
+                "enne perioodi algus aega või sama.")
             Exit Sub
         End If
 
@@ -211,7 +206,7 @@ Public Class FormPakettideVordlus
                 GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
                 GInfo2 = GetInfo.GetPaev(StructUniv.ID, pktTypeU)
             Else
-                lblError2.Text = "Valige perioodi algus ja lopp ajad ja/või pakett!"
+                MsgBox("Valige perioodi algus ja lopp ajad ja/või pakett!")
                 Exit Sub
             End If
         End If
@@ -225,7 +220,6 @@ Public Class FormPakettideVordlus
             End If
             Index += 1
         End While
-        lblError2.Visible = False
         lblKoguSum1.Text = Math.Round(Sum1)
         lblKoguSum1.Text += " s/kWh"
         lblKoguSum2.Text = Math.Round(Sum2)
@@ -259,10 +253,9 @@ Public Class FormPakettideVordlus
         Graafik1.ClearPoints()
 
         If Not IsNumeric(txtFixP.Text) Or Not IsNumeric(txtFixO.Text) Then
-            lblError.Visible = True
-            lblError.Text = "Sisestage päeva ja öö tariifid" +
+            MsgBox("Sisestage päeva ja öö tariifid" +
                 Environment.NewLine +
-                "(ainult nubritena)."
+                "(ainult nubritena).")
             Exit Sub
         End If
 
@@ -307,8 +300,7 @@ Public Class FormPakettideVordlus
         Graafik1.ClearPoints()
 
         If Not IsNumeric(txtBaas.Text) Then
-            lblError2.Visible = True
-            lblError2.Text = "Sisestage baas hind (ainult numbrina)."
+            MsgBox("Sisestage baas hind (ainult numbrina).")
             Exit Sub
         End If
 
