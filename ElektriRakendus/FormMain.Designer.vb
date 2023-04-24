@@ -43,11 +43,14 @@ Partial Class FormMain
         Me.BtnVordleja = New System.Windows.Forms.Button()
         Me.BtnLopphind = New System.Windows.Forms.Button()
         Me.BtnKalkKodumasinad = New System.Windows.Forms.Button()
-        Me.Graafik1 = New GraafikControl.Graafik()
         Me.lblPkt2Kesk = New System.Windows.Forms.Label()
         Me.lblPkt1Kesk = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.dtpAlgus = New System.Windows.Forms.DateTimePicker()
+        Me.dtpLopp = New System.Windows.Forms.DateTimePicker()
+        Me.lblDtpVahe = New System.Windows.Forms.Label()
+        Me.Graafik1 = New GraafikControl.Graafik()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -258,15 +261,6 @@ Partial Class FormMain
         Me.BtnKalkKodumasinad.Text = "Arvuta kodumasina tarbimise hind"
         Me.BtnKalkKodumasinad.UseVisualStyleBackColor = True
         '
-        'Graafik1
-        '
-        Me.Graafik1.AutoSize = True
-        Me.Graafik1.Location = New System.Drawing.Point(-16, 311)
-        Me.Graafik1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Graafik1.Name = "Graafik1"
-        Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
-        Me.Graafik1.TabIndex = 0
-        '
         'lblPkt2Kesk
         '
         Me.lblPkt2Kesk.AutoSize = True
@@ -301,11 +295,53 @@ Partial Class FormMain
         Me.Label6.TabIndex = 12
         Me.Label6.Text = "Pakett 1 keskmine hind:"
         '
+        'dtpAlgus
+        '
+        Me.dtpAlgus.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpAlgus.Location = New System.Drawing.Point(12, 277)
+        Me.dtpAlgus.Name = "dtpAlgus"
+        Me.dtpAlgus.Size = New System.Drawing.Size(110, 22)
+        Me.dtpAlgus.TabIndex = 13
+        Me.dtpAlgus.Value = New Date(2023, 4, 17, 10, 39, 15, 0)
+        Me.dtpAlgus.Visible = False
+        '
+        'dtpLopp
+        '
+        Me.dtpLopp.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpLopp.Location = New System.Drawing.Point(145, 277)
+        Me.dtpLopp.Name = "dtpLopp"
+        Me.dtpLopp.Size = New System.Drawing.Size(110, 22)
+        Me.dtpLopp.TabIndex = 16
+        Me.dtpLopp.Value = New Date(2023, 4, 17, 10, 39, 15, 0)
+        Me.dtpLopp.Visible = False
+        '
+        'lblDtpVahe
+        '
+        Me.lblDtpVahe.AutoSize = True
+        Me.lblDtpVahe.Location = New System.Drawing.Point(128, 282)
+        Me.lblDtpVahe.Name = "lblDtpVahe"
+        Me.lblDtpVahe.Size = New System.Drawing.Size(11, 16)
+        Me.lblDtpVahe.TabIndex = 17
+        Me.lblDtpVahe.Text = "-"
+        Me.lblDtpVahe.Visible = False
+        '
+        'Graafik1
+        '
+        Me.Graafik1.AutoSize = True
+        Me.Graafik1.Location = New System.Drawing.Point(-16, 311)
+        Me.Graafik1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Graafik1.Name = "Graafik1"
+        Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
+        Me.Graafik1.TabIndex = 0
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1262, 673)
+        Me.Controls.Add(Me.lblDtpVahe)
+        Me.Controls.Add(Me.dtpLopp)
+        Me.Controls.Add(Me.dtpAlgus)
         Me.Controls.Add(Me.lblPkt2Kesk)
         Me.Controls.Add(Me.lblPkt1Kesk)
         Me.Controls.Add(Me.Label7)
@@ -356,4 +392,7 @@ Partial Class FormMain
     Friend WithEvents Label6 As Label
     Friend WithEvents BtnElektriauto As Button
     Friend WithEvents BtnHinnaKalkulaator As Button
+    Friend WithEvents dtpAlgus As DateTimePicker
+    Friend WithEvents dtpLopp As DateTimePicker
+    Friend WithEvents lblDtpVahe As Label
 End Class
