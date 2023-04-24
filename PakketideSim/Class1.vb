@@ -1,5 +1,5 @@
 ﻿Public Class Class1
-    Public Property dateS As String
-    Public Property Voimsus As Double
+    Public Property Kuupäev As String
+    Public Property Voimsus_kWh As Double
 
 End Class

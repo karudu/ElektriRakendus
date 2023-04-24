@@ -3,6 +3,10 @@
     Public Sub InitGraph()
         HinnaGraafik.ChartAreas("ChartArea1").AxisY.Title = "Hind(s/kWh)"
     End Sub
+
+    Public Sub InitGraph1()
+        HinnaGraafik.ChartAreas("ChartArea1").AxisY.Title = "Hind(€/kWh)"
+    End Sub
     Public Sub ClearPoints()
         HinnaGraafik.Series("Pakett 1").Points.Clear()
         HinnaGraafik.Series("Pakett 2").Points.Clear()

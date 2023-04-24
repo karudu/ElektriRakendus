@@ -35,86 +35,91 @@ Partial Class FormMuudaPakettUniv
         '
         'TxtMarginaal
         '
-        Me.TxtMarginaal.Location = New System.Drawing.Point(258, 138)
+        Me.TxtMarginaal.Location = New System.Drawing.Point(229, 110)
+        Me.TxtMarginaal.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtMarginaal.Name = "TxtMarginaal"
-        Me.TxtMarginaal.Size = New System.Drawing.Size(245, 26)
+        Me.TxtMarginaal.Size = New System.Drawing.Size(218, 22)
         Me.TxtMarginaal.TabIndex = 33
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(30, 141)
+        Me.Label4.Location = New System.Drawing.Point(27, 113)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(222, 20)
+        Me.Label4.Size = New System.Drawing.Size(189, 16)
         Me.Label4.TabIndex = 32
         Me.Label4.Text = "Pakkuja marginaal (senti/kWh)"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TxtNimi
         '
-        Me.TxtNimi.Location = New System.Drawing.Point(258, 38)
+        Me.TxtNimi.Location = New System.Drawing.Point(229, 30)
+        Me.TxtNimi.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtNimi.Name = "TxtNimi"
-        Me.TxtNimi.Size = New System.Drawing.Size(245, 26)
+        Me.TxtNimi.Size = New System.Drawing.Size(218, 22)
         Me.TxtNimi.TabIndex = 31
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(213, 41)
+        Me.Label3.Location = New System.Drawing.Point(189, 33)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(39, 20)
+        Me.Label3.Size = New System.Drawing.Size(34, 16)
         Me.Label3.TabIndex = 30
         Me.Label3.Text = "Nimi"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TxtKuutasu
         '
-        Me.TxtKuutasu.Location = New System.Drawing.Point(258, 188)
+        Me.TxtKuutasu.Location = New System.Drawing.Point(229, 150)
+        Me.TxtKuutasu.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtKuutasu.Name = "TxtKuutasu"
-        Me.TxtKuutasu.Size = New System.Drawing.Size(245, 26)
+        Me.TxtKuutasu.Size = New System.Drawing.Size(218, 22)
         Me.TxtKuutasu.TabIndex = 29
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(161, 191)
+        Me.Label2.Location = New System.Drawing.Point(143, 153)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(91, 20)
+        Me.Label2.Size = New System.Drawing.Size(72, 16)
         Me.Label2.TabIndex = 28
         Me.Label2.Text = "Kuutasu (€)"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TxtBaas
         '
-        Me.TxtBaas.Location = New System.Drawing.Point(258, 88)
+        Me.TxtBaas.Location = New System.Drawing.Point(229, 70)
+        Me.TxtBaas.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtBaas.Name = "TxtBaas"
-        Me.TxtBaas.Size = New System.Drawing.Size(245, 26)
+        Me.TxtBaas.Size = New System.Drawing.Size(218, 22)
         Me.TxtBaas.TabIndex = 27
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(92, 91)
+        Me.Label1.Location = New System.Drawing.Point(82, 73)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(160, 20)
+        Me.Label1.Size = New System.Drawing.Size(134, 16)
         Me.Label1.TabIndex = 26
         Me.Label1.Text = "Baashind (senti/kWh)"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'BtnLisa
         '
-        Me.BtnLisa.Location = New System.Drawing.Point(184, 239)
+        Me.BtnLisa.Location = New System.Drawing.Point(164, 191)
+        Me.BtnLisa.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnLisa.Name = "BtnLisa"
-        Me.BtnLisa.Size = New System.Drawing.Size(164, 33)
+        Me.BtnLisa.Size = New System.Drawing.Size(146, 26)
         Me.BtnLisa.TabIndex = 25
         Me.BtnLisa.Text = "Muuda paketti"
         Me.BtnLisa.UseVisualStyleBackColor = True
         '
         'FormMuudaPakettUniv
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(532, 298)
+        Me.ClientSize = New System.Drawing.Size(473, 238)
         Me.Controls.Add(Me.TxtMarginaal)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.TxtNimi)
@@ -124,6 +129,7 @@ Partial Class FormMuudaPakettUniv
         Me.Controls.Add(Me.TxtBaas)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnLisa)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "FormMuudaPakettUniv"
         Me.Text = "Muuda universaalpaketti"
         Me.ResumeLayout(False)

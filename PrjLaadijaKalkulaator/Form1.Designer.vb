@@ -28,29 +28,32 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(354, 85)
+        Me.Button2.Location = New System.Drawing.Point(315, 68)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(213, 86)
+        Me.Button2.Size = New System.Drawing.Size(189, 69)
         Me.Button2.TabIndex = 1
         Me.Button2.Text = "Leia odavaimad ajavahemikud"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(73, 85)
+        Me.Button1.Location = New System.Drawing.Point(65, 68)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(213, 86)
+        Me.Button1.Size = New System.Drawing.Size(189, 69)
         Me.Button1.TabIndex = 2
         Me.Button1.Text = "Leia odavaim pakett"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(630, 261)
+        Me.ClientSize = New System.Drawing.Size(560, 209)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "Form1"
         Me.Text = "Elektriauto laadimise kalkulaator"
         Me.ResumeLayout(False)

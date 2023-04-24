@@ -3,30 +3,45 @@ Imports PrjAndmebaas
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Security.Cryptography
+Imports System.Windows.Forms.LinkLabel
 
 Public Class Form1
 
     Dim lopp As Date
     Dim Algus As Date
-    Dim ofd As OpenFileDialog = New OpenFileDialog() With {.Filter = "Text file|*.CSV"}
+    Dim nupp As Boolean
+
+
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-
+        Dim ofd As OpenFileDialog = New OpenFileDialog() With {.Filter = "Text file|*.CSV"}
         If ofd.ShowDialog() = DialogResult.OK Then
+            Dim CSV As List(Of Class1) = New List(Of Class1)
             Dim lines As List(Of String) = File.ReadAllLines(ofd.FileName).ToList
             Dim h As Integer = 1
-            Dim j As Integer = lines.Count
-            Dim CSV As List(Of Class1) = New List(Of Class1)
+            Dim c As Integer
+            nupp = True
             For i As Integer = 1 To lines.Count - 1
 
                 Dim data As String() = lines(i).Split(",")
+                Dim isValidDate As Boolean = IsDate(data(0))
+                If isValidDate = False Then
+                    MessageBox.Show("CSV failis pole on vigane kuupäev ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show("Vigane osa" + data(0) + "viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Exit Sub
+                End If
+                If IsNumeric(data(1)) = False Then
+                    MessageBox.Show("CSV failis pole on vigane võimsus ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show(" Vigane osa" + data(1) + "viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Exit Sub
+                End If
+
                 CSV.Add(New Class1() With {
-                    .dateS = data(0),
-                    .Voimsus = data(1)
+                   .Kuupäev = data(0),
+                    .Voimsus_kWh = data(1)
                 })
                 If i = h Then
                     lopp = data(0)
-
                 End If
                 If h = 1 Then
                     Algus = data(0)
@@ -36,9 +51,7 @@ Public Class Form1
             Next
             DataGridView1.DataSource = CSV
 
-
         End If
-        TextBox1.Text = Algus
 
 
 
@@ -46,7 +59,8 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         AddPaketiTyybid()
-        Graafik1.InitGraph()
+        Graafik1.InitGraph1()
+        UuendaPaketid()
     End Sub
 
     Private Sub cmbPkt1Tyyp_DropDownClosed(sender As Object, e As EventArgs) Handles cmbPkt1Tyyp.DropDownClosed
@@ -65,6 +79,71 @@ Public Class Form1
         cmbPkt2Tyyp.Items.Add("Börsi")
         cmbPkt2Tyyp.Items.Add("Fikseeritud")
         cmbPkt2Tyyp.Items.Add("Universaal")
+    End Sub
+
+    Private Sub UuendaPaketid()
+        Dim GInfo1 As List(Of (Xval As String, Yval As Decimal))
+        Dim GInfo2 As List(Of (Xval As String, Yval As Decimal))
+        Dim GraafikConnect As GraafikControl.IGraafikInfo
+        GraafikConnect = New GraafikControl.CGraafikInfo
+        Dim GInfo1Kesk As Decimal
+        Dim GInfo2Kesk As Decimal
+        Graafik1.ClearPoints()
+        Dim PakettID1 As Integer
+        Dim PakettID2 As Integer
+        If String.IsNullOrEmpty(cmbPkt1Pkt.SelectedItem) Then
+            PakettID1 = Nothing
+        Else
+            PakettID1 = GetPakettInfo(cmbPkt1Pkt.SelectedItem.ToString, cmbPkt1Tyyp.SelectedIndex)
+        End If
+        If String.IsNullOrEmpty(cmbPkt2Pkt.SelectedItem) Then
+            PakettID2 = Nothing
+        Else
+            PakettID2 = GetPakettInfo(cmbPkt2Pkt.SelectedItem.ToString, cmbPkt2Tyyp.SelectedIndex)
+        End If
+        Dim h As Integer = 1
+
+
+
+        Dim I As Integer
+
+
+        If PakettID1 <> Nothing Then
+            GInfo1 = GraafikConnect.GetCustom(PakettID1, cmbPkt1Tyyp.SelectedIndex, Algus, lopp)
+            Console.WriteLine(GInfo1.Count)
+            For I = 0 To GInfo1.Count - 1
+                Console.WriteLine(GInfo1.Item(I).Xval)
+                Console.WriteLine(GInfo1.Item(I).Yval)
+                Graafik1.setPoint1(GInfo1.Item(I).Xval, (GInfo1.Item(I).Yval * CDec(DataGridView1.Rows(I).Cells(1).Value.ToString()) / 100))
+                GInfo1Kesk += GInfo1.Item(I).Yval * CDec(DataGridView1.Rows(I).Cells(1).Value.ToString()) / 100
+            Next
+            GInfo1Kesk = GInfo1Kesk / GInfo1.Count
+            lblPkt1Kesk.Text = GInfo1Kesk.ToString("N2") + " €/kWh"
+        End If
+
+
+        If PakettID2 <> Nothing Then
+            GInfo2 = GraafikConnect.GetCustom(PakettID2, cmbPkt2Tyyp.SelectedIndex, Algus, lopp)
+            Console.WriteLine(GInfo2.Count)
+            For I = 0 To GInfo2.Count - 1
+
+                Graafik1.setPoint2(GInfo2.Item(I).Xval, (GInfo2.Item(I).Yval * CDec(DataGridView1.Rows(I).Cells(1).Value.ToString()) / 100))
+                GInfo2Kesk += (GInfo2.Item(I).Yval * CDec(DataGridView1.Rows(I).Cells(1).Value.ToString()) / 100)
+            Next
+            GInfo2Kesk = GInfo2Kesk / GInfo2.Count
+            lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " €/kWh"
+        End If
+
+
+        If PakettID1 <> Nothing And PakettID2 <> Nothing Then
+            If GInfo1Kesk < GInfo2Kesk Then
+                lblPkt1Kesk.BackColor = Color.Green
+                lblPkt2Kesk.BackColor = Color.Red
+            Else
+                lblPkt2Kesk.BackColor = Color.Green
+                lblPkt1Kesk.BackColor = Color.Red
+            End If
+        End If
     End Sub
 
     Private Sub AddPaketid1(ByVal Tyyp As Integer)
@@ -206,6 +285,36 @@ Public Class Form1
 
 
     End Function
+
+    Private Sub Graafik1_Load(sender As Object, e As EventArgs) Handles Graafik1.Load
+
+    End Sub
+
+    Private Sub cmbPkt1Pkt_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPkt1Pkt.SelectedIndexChanged
+        If nupp = True Then
+            UuendaPaketid()
+        Else
+            MessageBox.Show("Pole sisestatud CSV fail", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+
+
+    End Sub
+
+    Private Sub cmbPkt2Pkt_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPkt2Pkt.SelectedIndexChanged
+        If nupp = True Then
+            UuendaPaketid()
+        Else
+            MessageBox.Show("Pole sisestatud CSV fail", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
 End Class
 
 

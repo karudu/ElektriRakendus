@@ -57,4 +57,8 @@ Public Class FormOdavadAjad
                                   ")" & Environment.NewLine)
         Next
     End Sub
+
+    Private Sub FormOdavadAjad_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

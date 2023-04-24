@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +20,10 @@ Partial Class Form1
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Graafik1 = New GraafikControl.Graafik()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -35,9 +34,11 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cmbPkt1Pkt = New System.Windows.Forms.ComboBox()
         Me.cmbPkt1Tyyp = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmbPeriood = New System.Windows.Forms.ComboBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.lblPkt2Kesk = New System.Windows.Forms.Label()
+        Me.lblPkt1Kesk = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Graafik1 = New GraafikControl.Graafik()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -55,21 +56,12 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(314, 204)
+        Me.Button1.Location = New System.Drawing.Point(63, 204)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.Size = New System.Drawing.Size(170, 23)
         Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Button1"
+        Me.Button1.Text = "Sisesta CSV fail"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Graafik1
-        '
-        Me.Graafik1.AutoSize = True
-        Me.Graafik1.Location = New System.Drawing.Point(-8, 277)
-        Me.Graafik1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Graafik1.Name = "Graafik1"
-        Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
-        Me.Graafik1.TabIndex = 2
         '
         'GroupBox2
         '
@@ -169,39 +161,58 @@ Partial Class Form1
         Me.cmbPkt1Tyyp.Size = New System.Drawing.Size(121, 24)
         Me.cmbPkt1Tyyp.TabIndex = 3
         '
-        'Label1
+        'lblPkt2Kesk
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(1029, 249)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(58, 16)
-        Me.Label1.TabIndex = 11
-        Me.Label1.Text = "Periood:"
+        Me.lblPkt2Kesk.AutoSize = True
+        Me.lblPkt2Kesk.Location = New System.Drawing.Point(816, 281)
+        Me.lblPkt2Kesk.Name = "lblPkt2Kesk"
+        Me.lblPkt2Kesk.Size = New System.Drawing.Size(0, 16)
+        Me.lblPkt2Kesk.TabIndex = 16
         '
-        'cmbPeriood
+        'lblPkt1Kesk
         '
-        Me.cmbPeriood.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbPeriood.FormattingEnabled = True
-        Me.cmbPeriood.Location = New System.Drawing.Point(1090, 246)
-        Me.cmbPeriood.Name = "cmbPeriood"
-        Me.cmbPeriood.Size = New System.Drawing.Size(121, 24)
-        Me.cmbPeriood.TabIndex = 10
+        Me.lblPkt1Kesk.AutoSize = True
+        Me.lblPkt1Kesk.Location = New System.Drawing.Point(815, 240)
+        Me.lblPkt1Kesk.Name = "lblPkt1Kesk"
+        Me.lblPkt1Kesk.Size = New System.Drawing.Size(0, 16)
+        Me.lblPkt1Kesk.TabIndex = 15
         '
-        'TextBox1
+        'Label7
         '
-        Me.TextBox1.Location = New System.Drawing.Point(207, 234)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(252, 22)
-        Me.TextBox1.TabIndex = 12
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(661, 271)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(147, 16)
+        Me.Label7.TabIndex = 14
+        Me.Label7.Text = "Pakett 2 keskmine hind:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(661, 240)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(147, 16)
+        Me.Label6.TabIndex = 13
+        Me.Label6.Text = "Pakett 1 keskmine hind:"
+        '
+        'Graafik1
+        '
+        Me.Graafik1.AutoSize = True
+        Me.Graafik1.Location = New System.Drawing.Point(12, 291)
+        Me.Graafik1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Graafik1.Name = "Graafik1"
+        Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
+        Me.Graafik1.TabIndex = 2
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1267, 625)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.cmbPeriood)
+        Me.ClientSize = New System.Drawing.Size(1309, 665)
+        Me.Controls.Add(Me.lblPkt2Kesk)
+        Me.Controls.Add(Me.lblPkt1Kesk)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Graafik1)
@@ -232,7 +243,8 @@ Partial Class Form1
     Friend WithEvents Label2 As Label
     Friend WithEvents cmbPkt1Pkt As ComboBox
     Friend WithEvents cmbPkt1Tyyp As ComboBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents cmbPeriood As ComboBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents lblPkt2Kesk As Label
+    Friend WithEvents lblPkt1Kesk As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label6 As Label
 End Class

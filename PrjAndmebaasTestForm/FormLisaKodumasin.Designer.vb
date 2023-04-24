@@ -33,69 +33,73 @@ Partial Class FormLisaKodumasin
         '
         'TxtNimi
         '
-        Me.TxtNimi.Location = New System.Drawing.Point(168, 29)
+        Me.TxtNimi.Location = New System.Drawing.Point(149, 23)
+        Me.TxtNimi.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtNimi.Name = "TxtNimi"
-        Me.TxtNimi.Size = New System.Drawing.Size(245, 26)
+        Me.TxtNimi.Size = New System.Drawing.Size(218, 22)
         Me.TxtNimi.TabIndex = 13
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(119, 32)
+        Me.Label3.Location = New System.Drawing.Point(106, 26)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(39, 20)
+        Me.Label3.Size = New System.Drawing.Size(34, 16)
         Me.Label3.TabIndex = 12
         Me.Label3.Text = "Nimi"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TxtAeg
         '
-        Me.TxtAeg.Location = New System.Drawing.Point(168, 130)
+        Me.TxtAeg.Location = New System.Drawing.Point(149, 104)
+        Me.TxtAeg.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtAeg.Name = "TxtAeg"
-        Me.TxtAeg.Size = New System.Drawing.Size(245, 26)
+        Me.TxtAeg.Size = New System.Drawing.Size(218, 22)
         Me.TxtAeg.TabIndex = 11
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(16, 133)
+        Me.Label2.Location = New System.Drawing.Point(14, 106)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(146, 20)
+        Me.Label2.Size = New System.Drawing.Size(121, 16)
         Me.Label2.TabIndex = 10
         Me.Label2.Text = "Kasutuse aeg (min)"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TxtVoimsus
         '
-        Me.TxtVoimsus.Location = New System.Drawing.Point(168, 79)
+        Me.TxtVoimsus.Location = New System.Drawing.Point(149, 63)
+        Me.TxtVoimsus.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtVoimsus.Name = "TxtVoimsus"
-        Me.TxtVoimsus.Size = New System.Drawing.Size(245, 26)
+        Me.TxtVoimsus.Size = New System.Drawing.Size(218, 22)
         Me.TxtVoimsus.TabIndex = 9
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(63, 82)
+        Me.Label1.Location = New System.Drawing.Point(56, 66)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(99, 20)
+        Me.Label1.Size = New System.Drawing.Size(83, 16)
         Me.Label1.TabIndex = 8
         Me.Label1.Text = "Võimsus (W)"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'BtnLisa
         '
-        Me.BtnLisa.Location = New System.Drawing.Point(137, 189)
+        Me.BtnLisa.Location = New System.Drawing.Point(122, 151)
+        Me.BtnLisa.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnLisa.Name = "BtnLisa"
-        Me.BtnLisa.Size = New System.Drawing.Size(164, 33)
+        Me.BtnLisa.Size = New System.Drawing.Size(146, 26)
         Me.BtnLisa.TabIndex = 7
         Me.BtnLisa.Text = "Lisa uus kodumasin"
         Me.BtnLisa.UseVisualStyleBackColor = True
         '
         'FormLisaKodumasin
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(435, 248)
+        Me.ClientSize = New System.Drawing.Size(387, 198)
         Me.Controls.Add(Me.TxtNimi)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.TxtAeg)
@@ -103,6 +107,7 @@ Partial Class FormLisaKodumasin
         Me.Controls.Add(Me.TxtVoimsus)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnLisa)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "FormLisaKodumasin"
         Me.Text = "Lisa kodumasin"
         Me.ResumeLayout(False)

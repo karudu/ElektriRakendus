@@ -33,9 +33,10 @@ Partial Class FormLisaPakettBors
         '
         'BtnLisa
         '
-        Me.BtnLisa.Location = New System.Drawing.Point(178, 211)
+        Me.BtnLisa.Location = New System.Drawing.Point(158, 169)
+        Me.BtnLisa.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnLisa.Name = "BtnLisa"
-        Me.BtnLisa.Size = New System.Drawing.Size(164, 33)
+        Me.BtnLisa.Size = New System.Drawing.Size(146, 26)
         Me.BtnLisa.TabIndex = 0
         Me.BtnLisa.Text = "Lisa uus pakett"
         Me.BtnLisa.UseVisualStyleBackColor = True
@@ -43,59 +44,62 @@ Partial Class FormLisaPakettBors
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(27, 93)
+        Me.Label1.Location = New System.Drawing.Point(24, 74)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(247, 20)
+        Me.Label1.Size = New System.Drawing.Size(205, 16)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Börsihinna juurdetasu (senti/kWh)"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TxtJuurdetasu
         '
-        Me.TxtJuurdetasu.Location = New System.Drawing.Point(284, 90)
+        Me.TxtJuurdetasu.Location = New System.Drawing.Point(252, 72)
+        Me.TxtJuurdetasu.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtJuurdetasu.Name = "TxtJuurdetasu"
-        Me.TxtJuurdetasu.Size = New System.Drawing.Size(245, 26)
+        Me.TxtJuurdetasu.Size = New System.Drawing.Size(218, 22)
         Me.TxtJuurdetasu.TabIndex = 2
         '
         'TxtKuutasu
         '
-        Me.TxtKuutasu.Location = New System.Drawing.Point(284, 141)
+        Me.TxtKuutasu.Location = New System.Drawing.Point(252, 113)
+        Me.TxtKuutasu.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtKuutasu.Name = "TxtKuutasu"
-        Me.TxtKuutasu.Size = New System.Drawing.Size(245, 26)
+        Me.TxtKuutasu.Size = New System.Drawing.Size(218, 22)
         Me.TxtKuutasu.TabIndex = 4
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(183, 144)
+        Me.Label2.Location = New System.Drawing.Point(163, 115)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(91, 20)
+        Me.Label2.Size = New System.Drawing.Size(72, 16)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Kuutasu (€)"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TxtNimi
         '
-        Me.TxtNimi.Location = New System.Drawing.Point(284, 40)
+        Me.TxtNimi.Location = New System.Drawing.Point(252, 32)
+        Me.TxtNimi.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtNimi.Name = "TxtNimi"
-        Me.TxtNimi.Size = New System.Drawing.Size(245, 26)
+        Me.TxtNimi.Size = New System.Drawing.Size(218, 22)
         Me.TxtNimi.TabIndex = 6
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(235, 43)
+        Me.Label3.Location = New System.Drawing.Point(209, 34)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(39, 20)
+        Me.Label3.Size = New System.Drawing.Size(34, 16)
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "Nimi"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'FormLisaPakettBors
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(582, 278)
+        Me.ClientSize = New System.Drawing.Size(517, 222)
         Me.Controls.Add(Me.TxtNimi)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.TxtKuutasu)
@@ -103,6 +107,7 @@ Partial Class FormLisaPakettBors
         Me.Controls.Add(Me.TxtJuurdetasu)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnLisa)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "FormLisaPakettBors"
         Me.Text = "Lisa börsipakett"
         Me.ResumeLayout(False)
