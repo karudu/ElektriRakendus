@@ -1,4 +1,4 @@
-﻿Imports System.Security.Cryptography
+﻿
 Imports PrjAndmebaas
 
 Public Class FormLopphind
@@ -14,10 +14,19 @@ Public Class FormLopphind
         cboxALTund.Items.Clear()
         cboxPakett1.Items.Clear()
         'load pakettid to combobox
-        Paketid = ConnectDb.LoePakettideNimekiri
-        Dim Index As Integer
-        For Index = 0 To Paketid.Count - 1
-            cboxPakett1.Items.Add(Paketid(Index).Nimi)
+        Dim Andmebaas As New CAndmebaas
+        Paketid = Andmebaas.LoePakettideNimekiri
+        'Dim Index As Integer
+        For Each Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp) In Paketid
+            If Pakett.Tyyp = IAndmebaas.PaketiTyyp.PAKETT_BORS Then
+                Dim PakettBors As New IAndmebaas.PkBors
+                PakettBors = Andmebaas.LoePakettBors(Pakett.ID)
+                If String.IsNullOrEmpty(PakettBors.Nimi) Then
+                    Continue For
+                Else
+                    cboxPakett1.Items.Add(PakettBors.Nimi)
+                End If
+            End If
         Next
     End Sub
     Private Sub btnArvuta_Click(sender As Object, e As EventArgs) Handles btnArvuta.Click
