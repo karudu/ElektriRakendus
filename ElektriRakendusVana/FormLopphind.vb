@@ -13,6 +13,9 @@ Public Class FormLopphind
         cboxALTund.Visible = False
         cboxALTund.Items.Clear()
         cboxPakett1.Items.Clear()
+        'initseerime kalendri
+        dtpTrendAlgus.Value = Date.Now()
+        dtpTrendLopp.Value = Date.Now()
         'load pakettid to combobox
         Dim Andmebaas As New CAndmebaas
         Paketid = Andmebaas.LoePakettideNimekiri
@@ -25,11 +28,14 @@ Public Class FormLopphind
                     Continue For
                 Else
                     cboxPakett1.Items.Add(PakettBors.Nimi)
+                    cmbTrendPkt.Items.Add(PakettBors.Nimi)
                 End If
             End If
         Next
     End Sub
-    Private Sub btnArvuta_Click(sender As Object, e As EventArgs) Handles btnArvuta.Click
+
+
+    Private Sub Arvuta(ByVal flag As Integer)
         PktType = -1
         Dim Index As Integer
         For Index = 0 To Paketid.Count - 1 'loop selleks et leida cboxPakett1 valitud paketti indexi listist
@@ -45,58 +51,49 @@ Public Class FormLopphind
         GetInfo = New GraafikControl.CGraafikInfo
         Graafik1.ClearPoints()
         txtLoppHind.Text = Nothing
-        If PktType <> -1 Then
-            Select Case PktType
-                Case 0
-                    Me.StructBors = ConnectDb.LoePakettBors(Paketid(Index).ID) 'Leitud indexiga paketi salvestatakse(olenevalt paketti tüübist) struckti ID, NIMI, JUURDETASU ja KUUTASU
-                    GInfo = GetInfo.GetPaev(StructBors.ID, PktType)
-                    For Index = 0 To GInfo.Count - 1
-                        Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
-                    Next
-                    txtLoppHind.Text += "Börsihinna pakett"
-                    If cboxALTund.SelectedIndex <> -1 Then 'if lause selleks, et saaks vaadata kindla kellaaja hind txtLopphind textboxis
-                        txtLoppHind.Text = GInfo.Item(cboxALTund.SelectedIndex).Yval
-                        txtLoppHind.Text += " senti/kWh"
-                    End If
-                Case 1
-                    Me.StructFix = ConnectDb.LoePakettFix(Paketid(Index).ID)
-                    GInfo = GetInfo.GetPaev(StructFix.ID, PktType)
-                    For Index = 0 To GInfo.Count - 1
-                        Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
-                    Next
-                    txtLoppHind.Text += "Fikseeritud pakett"
-                    If cboxALTund.SelectedIndex <> -1 Then
-                        txtLoppHind.Text = GInfo.Item(cboxALTund.SelectedIndex).Yval
-                        txtLoppHind.Text += " senti/kWh"
-                    End If
-                Case 2
-                    Me.StructUniv = ConnectDb.LoePakettUniv(Paketid(Index).ID)
-                    GInfo = GetInfo.GetPaev(StructUniv.ID, PktType)
-                    For Index = 0 To GInfo.Count - 1
-                        Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
-                    Next
-                    txtLoppHind.Text += "Universaal pakett"
-                    If cboxALTund.SelectedIndex <> -1 Then
-                        txtLoppHind.Text = GInfo.Item(cboxALTund.SelectedIndex).Yval
-                        txtLoppHind.Text += " senti/kWh"
-                    End If
-            End Select
-            If cboxALTund.Items.Count < 24 Then 'lisab comboboxi graafikul olevad kellaajad
+        If flag = 0 Then
+            If PktType <> -1 Then
+                Me.StructBors = ConnectDb.LoePakettBors(Paketid(Index).ID) 'Leitud indexiga paketi salvestatakse(olenevalt paketti tüübist) struckti ID, NIMI, JUURDETASU ja KUUTASU
+                GInfo = GetInfo.GetPaev(StructBors.ID, PktType)
                 For Index = 0 To GInfo.Count - 1
-                    cboxALTund.Items.Add(GInfo.Item(Index).Xval)
-                    cboxALTund.Visible = True
-                    lblAjavLopp.Visible = True
+                    Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
                 Next
+                txtLoppHind.Text += "Börsihinna pakett"
+                If cboxALTund.SelectedIndex <> -1 Then 'if lause selleks, et saaks vaadata kindla kellaaja hind txtLopphind textboxis
+                    txtLoppHind.Text = GInfo.Item(cboxALTund.SelectedIndex).Yval
+                    txtLoppHind.Text += " senti/kWh"
+                End If
+                If cboxALTund.Items.Count < 24 Then 'lisab comboboxi graafikul olevad kellaajad
+                    For Index = 0 To GInfo.Count - 1
+                        cboxALTund.Items.Add(GInfo.Item(Index).Xval)
+                        cboxALTund.Visible = True
+                        lblAjavLopp.Visible = True
+                    Next
+                End If
+            Else
+                txtLoppHind.Text = "Valige pakett"
+                Exit Sub
             End If
         Else
-            txtLoppHind.Text = "Valige pakett"
-            Exit Sub
+            If PktType <> -1 Then
+                Me.StructBors = ConnectDb.LoePakettBors(Paketid(Index).ID) 'Leitud indexiga paketi salvestatakse(olenevalt paketti tüübist) struckti ID, NIMI, JUURDETASU ja KUUTASU
+                GInfo = GetInfo.GetCustom(StructBors.ID, PktType, dtpTrendAlgus.Value, dtpTrendLopp.Value)
+                For Index = 0 To GInfo.Count - 1
+                    Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
+                Next
+            End If
         End If
     End Sub
-
+    Private Sub btnArvuta_Click(sender As Object, e As EventArgs) Handles btnArvuta.Click
+        Arvuta(0)
+    End Sub
+    Private Sub btnTrendArvuta_Click(sender As Object, e As EventArgs) Handles btnTrendArvuta.Click
+        Arvuta(1)
+    End Sub
     Private Sub btnVordlus_Click(sender As Object, e As EventArgs)
         Dim FormVordlus As New FormPakettideVordlus
         FormVordlus.ShowDialog()
     End Sub
+
 End Class
 

@@ -31,7 +31,16 @@ Partial Class FormLopphind
         Me.lblLoppHind = New System.Windows.Forms.Label()
         Me.txtLoppHind = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblDtpVahe = New System.Windows.Forms.Label()
+        Me.dtpTrendLopp = New System.Windows.Forms.DateTimePicker()
+        Me.dtpTrendAlgus = New System.Windows.Forms.DateTimePicker()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cmbTrendPkt = New System.Windows.Forms.ComboBox()
+        Me.btnTrendArvuta = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Graafik1
@@ -83,9 +92,9 @@ Partial Class FormLopphind
         Me.lblPakett1.AutoSize = True
         Me.lblPakett1.Location = New System.Drawing.Point(17, 28)
         Me.lblPakett1.Name = "lblPakett1"
-        Me.lblPakett1.Size = New System.Drawing.Size(55, 16)
+        Me.lblPakett1.Size = New System.Drawing.Size(45, 16)
         Me.lblPakett1.TabIndex = 48
-        Me.lblPakett1.Text = "Pakett 1"
+        Me.lblPakett1.Text = "Pakett"
         '
         'lblLoppHind
         '
@@ -122,17 +131,100 @@ Partial Class FormLopphind
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Lõpphinna kalkulaator"
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.btnTrendArvuta)
+        Me.GroupBox2.Controls.Add(Me.Label2)
+        Me.GroupBox2.Controls.Add(Me.lblDtpVahe)
+        Me.GroupBox2.Controls.Add(Me.dtpTrendLopp)
+        Me.GroupBox2.Controls.Add(Me.dtpTrendAlgus)
+        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Controls.Add(Me.cmbTrendPkt)
+        Me.GroupBox2.Location = New System.Drawing.Point(414, 16)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(331, 190)
+        Me.GroupBox2.TabIndex = 56
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Börsihinna trendid"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(26, 90)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(78, 16)
+        Me.Label2.TabIndex = 57
+        Me.Label2.Text = "Ajavahemik"
+        '
+        'lblDtpVahe
+        '
+        Me.lblDtpVahe.AutoSize = True
+        Me.lblDtpVahe.Location = New System.Drawing.Point(142, 117)
+        Me.lblDtpVahe.Name = "lblDtpVahe"
+        Me.lblDtpVahe.Size = New System.Drawing.Size(11, 16)
+        Me.lblDtpVahe.TabIndex = 56
+        Me.lblDtpVahe.Text = "-"
+        Me.lblDtpVahe.Visible = False
+        '
+        'dtpTrendLopp
+        '
+        Me.dtpTrendLopp.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpTrendLopp.Location = New System.Drawing.Point(159, 112)
+        Me.dtpTrendLopp.Name = "dtpTrendLopp"
+        Me.dtpTrendLopp.Size = New System.Drawing.Size(110, 22)
+        Me.dtpTrendLopp.TabIndex = 55
+        Me.dtpTrendLopp.Value = New Date(2023, 4, 17, 10, 39, 15, 0)
+        '
+        'dtpTrendAlgus
+        '
+        Me.dtpTrendAlgus.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpTrendAlgus.Location = New System.Drawing.Point(26, 112)
+        Me.dtpTrendAlgus.Name = "dtpTrendAlgus"
+        Me.dtpTrendAlgus.Size = New System.Drawing.Size(110, 22)
+        Me.dtpTrendAlgus.TabIndex = 54
+        Me.dtpTrendAlgus.Value = New Date(2023, 4, 17, 10, 39, 15, 0)
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(23, 28)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(45, 16)
+        Me.Label1.TabIndex = 53
+        Me.Label1.Text = "Pakett"
+        '
+        'cmbTrendPkt
+        '
+        Me.cmbTrendPkt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbTrendPkt.FormattingEnabled = True
+        Me.cmbTrendPkt.Location = New System.Drawing.Point(26, 47)
+        Me.cmbTrendPkt.Name = "cmbTrendPkt"
+        Me.cmbTrendPkt.Size = New System.Drawing.Size(121, 24)
+        Me.cmbTrendPkt.TabIndex = 0
+        '
+        'btnTrendArvuta
+        '
+        Me.btnTrendArvuta.Location = New System.Drawing.Point(26, 150)
+        Me.btnTrendArvuta.Name = "btnTrendArvuta"
+        Me.btnTrendArvuta.Size = New System.Drawing.Size(75, 23)
+        Me.btnTrendArvuta.TabIndex = 58
+        Me.btnTrendArvuta.Text = "Arvuta"
+        Me.btnTrendArvuta.UseVisualStyleBackColor = True
+        '
         'FormLopphind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1262, 673)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Graafik1)
         Me.Name = "FormLopphind"
         Me.Text = "Lõpphinna kakulaator"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -145,4 +237,12 @@ Partial Class FormLopphind
     Friend WithEvents lblLoppHind As Label
     Friend WithEvents txtLoppHind As TextBox
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents cmbTrendPkt As ComboBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents lblDtpVahe As Label
+    Friend WithEvents dtpTrendLopp As DateTimePicker
+    Friend WithEvents dtpTrendAlgus As DateTimePicker
+    Friend WithEvents btnTrendArvuta As Button
 End Class
