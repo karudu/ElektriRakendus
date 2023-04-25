@@ -259,17 +259,17 @@ Public Class FormPakettideVordlus
                             StructTemp = ConnectDb.LoePakettBors(Paketid(Index).ID) 'Leitud indexiga paketi salvestatakse(olenevalt paketti tüübist) struckti ID, NIMI, JUURDETASU ja KUUTASU
                             GInfo = GetInfo.GetKuu(StructTemp.ID, PktType)
                             GInfo2 = GetInfo.GetKuu(StructUniv.ID, pktTypeU)
-                            Ginfo3 = GetInfo.GetPaev(StructBors.ID, pktTypeB)
+                            Ginfo3 = GetInfo.GetKuu(StructBors.ID, pktTypeB)
                         Case 1
                             StructTemp2 = ConnectDb.LoePakettFix(Paketid(Index).ID)
                             GInfo = GetInfo.GetKuu(StructTemp2.ID, PktType)
                             GInfo2 = GetInfo.GetKuu(StructUniv.ID, pktTypeU)
-                            Ginfo3 = GetInfo.GetPaev(StructBors.ID, pktTypeB)
+                            Ginfo3 = GetInfo.GetKuu(StructBors.ID, pktTypeB)
                         Case 2
                             StructTemp3 = ConnectDb.LoePakettUniv(Paketid(Index).ID)
                             GInfo = GetInfo.GetKuu(StructTemp3.ID, PktType)
                             GInfo2 = GetInfo.GetKuu(StructUniv.ID, pktTypeU)
-                            Ginfo3 = GetInfo.GetPaev(StructBors.ID, pktTypeB)
+                            Ginfo3 = GetInfo.GetKuu(StructBors.ID, pktTypeB)
                     End Select
                 Case 3
                     Select Case PktType
@@ -277,17 +277,17 @@ Public Class FormPakettideVordlus
                             StructTemp = ConnectDb.LoePakettBors(Paketid(Index).ID) 'Leitud indexiga paketi salvestatakse(olenevalt paketti tüübist) struckti ID, NIMI, JUURDETASU ja KUUTASU
                             GInfo = GetInfo.GetAasta(StructTemp.ID, PktType)
                             GInfo2 = GetInfo.GetAasta(StructUniv.ID, pktTypeU)
-                            Ginfo3 = GetInfo.GetPaev(StructBors.ID, pktTypeB)
+                            Ginfo3 = GetInfo.GetAasta(StructBors.ID, pktTypeB)
                         Case 1
                             StructTemp2 = ConnectDb.LoePakettFix(Paketid(Index).ID)
                             GInfo = GetInfo.GetAasta(StructTemp2.ID, PktType)
                             GInfo2 = GetInfo.GetAasta(StructUniv.ID, pktTypeU)
-                            Ginfo3 = GetInfo.GetPaev(StructBors.ID, pktTypeB)
+                            Ginfo3 = GetInfo.GetAasta(StructBors.ID, pktTypeB)
                         Case 2
                             StructTemp3 = ConnectDb.LoePakettUniv(Paketid(Index).ID)
                             GInfo = GetInfo.GetAasta(StructTemp3.ID, PktType)
                             GInfo2 = GetInfo.GetAasta(StructUniv.ID, pktTypeU)
-                            Ginfo3 = GetInfo.GetPaev(StructBors.ID, pktTypeB)
+                            Ginfo3 = GetInfo.GetAasta(StructBors.ID, pktTypeB)
                     End Select
                 Case Else
                     MsgBox("Valige periood!")
