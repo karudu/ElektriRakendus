@@ -11,7 +11,6 @@ Public Class FormPakettideVordlus
         Dim Index As Integer
         cboxPakett.Items.Clear()
         Paketid = ConnectDb.LoePakettideNimekiri 'load paketid to combobox
-        cboxPakett.Items.Add("Börsihind")
         For Index = 0 To Paketid.Count - 1
             cboxPakett.Items.Add(Paketid(Index).Nimi)
         Next
