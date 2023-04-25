@@ -28,7 +28,6 @@ Public Class FormLopphind
                     Continue For
                 Else
                     cboxPakett1.Items.Add(PakettBors.Nimi)
-                    cmbTrendPkt.Items.Add(PakettBors.Nimi)
                 End If
             End If
         Next
@@ -36,6 +35,9 @@ Public Class FormLopphind
 
 
     Private Sub Arvuta(ByVal flag As Integer)
+        Dim OdavaimAeg(23) As Integer
+        Dim KalleimAeg(23) As Integer
+        Dim GInfoKesk As Decimal
         PktType = -1
         Dim Index As Integer
         For Index = 0 To Paketid.Count - 1 'loop selleks et leida cboxPakett1 valitud paketti indexi listist
@@ -75,13 +77,29 @@ Public Class FormLopphind
                 Exit Sub
             End If
         Else
-            If PktType <> -1 Then
-                Me.StructBors = ConnectDb.LoePakettBors(Paketid(Index).ID) 'Leitud indexiga paketi salvestatakse(olenevalt paketti tüübist) struckti ID, NIMI, JUURDETASU ja KUUTASU
-                GInfo = GetInfo.GetCustom(StructBors.ID, PktType, dtpTrendAlgus.Value, dtpTrendLopp.Value)
+            If DateTime.Compare(dtpTrendAlgus.Value, dtpTrendLopp.Value) > 0 Then 'kas alguskuupäev on ikka enne lõppkuupäeva
+                MessageBox.Show("Alguskuupäev peab olema enne lõppkuupäeva!")
+                Return
+            End If
+            GInfo = GetInfo.GetCustom(StructBors.ID, PktType, dtpTrendAlgus.Value, dtpTrendLopp.Value, 1)
+            If GInfo.Count > 50 Then
+                For Index = 0 To GInfo.Count - 1
+                    If Index Mod 5 = 0 Then
+                        Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
+                    Else
+                        Graafik1.setPoint1(" ", GInfo.Item(Index).Yval)
+                    End If
+                    GInfoKesk += GInfo.Item(Index).Yval
+                Next
+            Else
                 For Index = 0 To GInfo.Count - 1
                     Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
+                    GInfoKesk += GInfo.Item(Index).Yval
                 Next
             End If
+            GInfoKesk /= GInfo.Count
+            lblTrendKesk.Text = GInfoKesk.ToString("N2") + (" s/kWh")
+
         End If
     End Sub
     Private Sub btnArvuta_Click(sender As Object, e As EventArgs) Handles btnArvuta.Click

@@ -178,7 +178,7 @@ Public Class CGraafikInfo
         Return InfoList
     End Function
 
-    Public Function GetCustom(PakettID As Integer, PaketiTyyp As Integer, AlgAeg As Date, LoppAeg As Date) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetCustom
+    Public Function GetCustom(PakettID As Integer, PaketiTyyp As Integer, AlgAeg As Date, LoppAeg As Date, Flag As Integer) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetCustom
         Dim InfoList As New List(Of (Aeg As String, Hind As Decimal))
         Dim Hinnad As New List(Of Decimal)
         Dim AndmedConnect As PrjAndmebaas.IAndmebaas
@@ -207,31 +207,37 @@ Public Class CGraafikInfo
         'kui on ainult 24 tundi vahet siis anname tundide lõikes andmed
         If Tunnid = 24 Then
             'paketitüübi valik(0=börs, 1=fix, 2=universaal)
-            If PaketiTyyp = 0 Then
-                Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
+            If PaketiTyyp = 0 Or Flag = 1 Then
+                If Flag = 0 Then
+                    Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
+                End If
                 Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
                 For I = 0 To 23
                     Dim Info As (Aeg As String, Hind As Decimal)
                     Info.Aeg = AlgAeg.ToString("HH")
-                    Info.Hind = (Hinnad.Item(I) / 10) + (StructBors.Juurdetasu)
-                    InfoList.Add(Info)
-                    AlgAeg = AlgAeg.AddHours(1)
-                Next
-            ElseIf PaketiTyyp = 1 Then
-                Me.StructFix = AndmedConnect.LoePakettFix(PakettID)
-                For I = 0 To 23
-                    Dim Info As (Aeg As String, Hind As Decimal)
-                    Info.Aeg = AlgAeg.ToString("HH")
-                    If AlgAeg.Hour > 22 Or AlgAeg.Hour < 7 Then
-                        Info.Hind = StructFix.OTariif
+                    If Flag = 1 Then
+                        Info.Hind = (Hinnad.Item(I) / 10) + (StructBors.Juurdetasu)
                     Else
-                        Info.Hind = StructFix.PTariif
+                        Info.Hind = Hinnad.Item(I)
                     End If
                     InfoList.Add(Info)
                     AlgAeg = AlgAeg.AddHours(1)
                 Next
-            Else
-                Me.StructUniv = AndmedConnect.LoePakettUniv(PakettID)
+            ElseIf PaketiTyyp = 1 Then
+                    Me.StructFix = AndmedConnect.LoePakettFix(PakettID)
+                    For I = 0 To 23
+                        Dim Info As (Aeg As String, Hind As Decimal)
+                        Info.Aeg = AlgAeg.ToString("HH")
+                        If AlgAeg.Hour > 22 Or AlgAeg.Hour < 7 Then
+                            Info.Hind = StructFix.OTariif
+                        Else
+                            Info.Hind = StructFix.PTariif
+                        End If
+                        InfoList.Add(Info)
+                        AlgAeg = AlgAeg.AddHours(1)
+                    Next
+                Else
+                    Me.StructUniv = AndmedConnect.LoePakettUniv(PakettID)
                 For I = 0 To 23
                     Dim Info As (Aeg As String, Hind As Decimal)
                     Info.Aeg = AlgAeg.ToString("HH")
@@ -242,8 +248,10 @@ Public Class CGraafikInfo
             End If
         Else 'kui on rohkem kui 24 tundi anname päevade lõikes
             'paketitüübi valik(0=börs, 1=fix, 2=universaal)
-            If PaketiTyyp = 0 Then
-                Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
+            If PaketiTyyp = 0 Or Flag = 1 Then
+                If Flag = 0 Then
+                    Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
+                End If
                 Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
                 While I < Tunnid - 1
                     Dim Info As (Aeg As String, Hind As Decimal)

@@ -32,13 +32,13 @@ Partial Class FormLopphind
         Me.txtLoppHind = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnTrendArvuta = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lblDtpVahe = New System.Windows.Forms.Label()
         Me.dtpTrendLopp = New System.Windows.Forms.DateTimePicker()
         Me.dtpTrendAlgus = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmbTrendPkt = New System.Windows.Forms.ComboBox()
-        Me.btnTrendArvuta = New System.Windows.Forms.Button()
+        Me.lblTrendKesk = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -138,8 +138,6 @@ Partial Class FormLopphind
         Me.GroupBox2.Controls.Add(Me.lblDtpVahe)
         Me.GroupBox2.Controls.Add(Me.dtpTrendLopp)
         Me.GroupBox2.Controls.Add(Me.dtpTrendAlgus)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.cmbTrendPkt)
         Me.GroupBox2.Location = New System.Drawing.Point(414, 16)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(331, 190)
@@ -147,10 +145,19 @@ Partial Class FormLopphind
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Börsihinna trendid"
         '
+        'btnTrendArvuta
+        '
+        Me.btnTrendArvuta.Location = New System.Drawing.Point(26, 89)
+        Me.btnTrendArvuta.Name = "btnTrendArvuta"
+        Me.btnTrendArvuta.Size = New System.Drawing.Size(75, 23)
+        Me.btnTrendArvuta.TabIndex = 58
+        Me.btnTrendArvuta.Text = "Arvuta"
+        Me.btnTrendArvuta.UseVisualStyleBackColor = True
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(26, 90)
+        Me.Label2.Location = New System.Drawing.Point(23, 28)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(78, 16)
         Me.Label2.TabIndex = 57
@@ -159,7 +166,7 @@ Partial Class FormLopphind
         'lblDtpVahe
         '
         Me.lblDtpVahe.AutoSize = True
-        Me.lblDtpVahe.Location = New System.Drawing.Point(142, 117)
+        Me.lblDtpVahe.Location = New System.Drawing.Point(142, 66)
         Me.lblDtpVahe.Name = "lblDtpVahe"
         Me.lblDtpVahe.Size = New System.Drawing.Size(11, 16)
         Me.lblDtpVahe.TabIndex = 56
@@ -169,7 +176,7 @@ Partial Class FormLopphind
         'dtpTrendLopp
         '
         Me.dtpTrendLopp.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpTrendLopp.Location = New System.Drawing.Point(159, 112)
+        Me.dtpTrendLopp.Location = New System.Drawing.Point(159, 61)
         Me.dtpTrendLopp.Name = "dtpTrendLopp"
         Me.dtpTrendLopp.Size = New System.Drawing.Size(110, 22)
         Me.dtpTrendLopp.TabIndex = 55
@@ -178,7 +185,7 @@ Partial Class FormLopphind
         'dtpTrendAlgus
         '
         Me.dtpTrendAlgus.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpTrendAlgus.Location = New System.Drawing.Point(26, 112)
+        Me.dtpTrendAlgus.Location = New System.Drawing.Point(26, 61)
         Me.dtpTrendAlgus.Name = "dtpTrendAlgus"
         Me.dtpTrendAlgus.Size = New System.Drawing.Size(110, 22)
         Me.dtpTrendAlgus.TabIndex = 54
@@ -187,35 +194,27 @@ Partial Class FormLopphind
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(23, 28)
+        Me.Label1.Location = New System.Drawing.Point(765, 44)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(45, 16)
-        Me.Label1.TabIndex = 53
-        Me.Label1.Text = "Pakett"
+        Me.Label1.Size = New System.Drawing.Size(97, 16)
+        Me.Label1.TabIndex = 57
+        Me.Label1.Text = "Keskmine hind:"
         '
-        'cmbTrendPkt
+        'lblTrendKesk
         '
-        Me.cmbTrendPkt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTrendPkt.FormattingEnabled = True
-        Me.cmbTrendPkt.Location = New System.Drawing.Point(26, 47)
-        Me.cmbTrendPkt.Name = "cmbTrendPkt"
-        Me.cmbTrendPkt.Size = New System.Drawing.Size(121, 24)
-        Me.cmbTrendPkt.TabIndex = 0
-        '
-        'btnTrendArvuta
-        '
-        Me.btnTrendArvuta.Location = New System.Drawing.Point(26, 150)
-        Me.btnTrendArvuta.Name = "btnTrendArvuta"
-        Me.btnTrendArvuta.Size = New System.Drawing.Size(75, 23)
-        Me.btnTrendArvuta.TabIndex = 58
-        Me.btnTrendArvuta.Text = "Arvuta"
-        Me.btnTrendArvuta.UseVisualStyleBackColor = True
+        Me.lblTrendKesk.AutoSize = True
+        Me.lblTrendKesk.Location = New System.Drawing.Point(869, 44)
+        Me.lblTrendKesk.Name = "lblTrendKesk"
+        Me.lblTrendKesk.Size = New System.Drawing.Size(0, 16)
+        Me.lblTrendKesk.TabIndex = 58
         '
         'FormLopphind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1262, 673)
+        Me.Controls.Add(Me.lblTrendKesk)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Graafik1)
@@ -226,6 +225,7 @@ Partial Class FormLopphind
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Graafik1 As GraafikControl.Graafik
@@ -238,11 +238,11 @@ Partial Class FormLopphind
     Friend WithEvents txtLoppHind As TextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents cmbTrendPkt As ComboBox
     Friend WithEvents Label2 As Label
     Friend WithEvents lblDtpVahe As Label
     Friend WithEvents dtpTrendLopp As DateTimePicker
     Friend WithEvents dtpTrendAlgus As DateTimePicker
     Friend WithEvents btnTrendArvuta As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblTrendKesk As Label
 End Class
