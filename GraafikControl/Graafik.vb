@@ -19,4 +19,7 @@
         HinnaGraafik.Series("Pakett 2").Points.AddXY(Time, hind)
     End Sub
 
+    Private Sub HinnaGraafik_Click(sender As Object, e As EventArgs) Handles HinnaGraafik.Click
+
+    End Sub
 End Class

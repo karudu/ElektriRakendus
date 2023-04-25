@@ -4,6 +4,7 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Security.Cryptography
 Imports System.Windows.Forms.LinkLabel
+Imports System.Net.Security
 
 Public Class Form1
 
@@ -19,26 +20,29 @@ Public Class Form1
             Dim CSV As List(Of Class1) = New List(Of Class1)
             Dim lines As List(Of String) = File.ReadAllLines(ofd.FileName).ToList
             Dim h As Integer = 1
-            Dim c As Integer
+
+
             nupp = True
             For i As Integer = 1 To lines.Count - 1
 
                 Dim data As String() = lines(i).Split(",")
                 Dim isValidDate As Boolean = IsDate(data(0))
-                If isValidDate = False Then
-                    MessageBox.Show("CSV failis pole on vigane kuupäev ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                If isValidDate = False Then 'kontroll kas kuupäeval on korektne forormaat'
+
+                    MessageBox.Show("CSV failis on vigane kuupäev ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     MessageBox.Show(" Vigane osa " + data(0) + " viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     Exit Sub
                 End If
-                If IsNumeric(data(1)) = False Then
-                    MessageBox.Show("CSV failis pole on vigane võimsus ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                If IsNumeric(data(1)) = False Then 'kontroll kas võõimsuses on numbrid ikka'
+                    MessageBox.Show("CSV failis on vigane võimsus ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     MessageBox.Show(" Vigane osa " + data(1) + " viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     Exit Sub
                 End If
 
-                CSV.Add(New Class1() With {
-                   .Kuupäev = data(0),
-                    .Voimsus_kWh = data(1)
+
+                CSV.Add(New Class1() With {'lisab andmed  DataGridView1'
+                .Kuupäev = data(0),'lisab kuupaeva  DataGridView1'
+                    .Voimsus_kWh = data(1)'lisab voimsuse  DataGridView1'
                 })
                 If i = h Then
                     lopp = data(0)
@@ -73,6 +77,7 @@ Public Class Form1
     End Sub
 
     Private Sub AddPaketiTyybid()
+        'comboboxi varjandi lisamine
         cmbPkt1Tyyp.Items.Add("Börsi")
         cmbPkt1Tyyp.Items.Add("Fikseeritud")
         cmbPkt1Tyyp.Items.Add("Universaal")
@@ -108,10 +113,23 @@ Public Class Form1
         Dim I As Integer
 
 
-        If PakettID1 <> Nothing Then
+        If PakettID1 <> Nothing Then 'vormistab pakett 1 graafiku
             GInfo1 = GraafikConnect.GetCustom(PakettID1, cmbPkt1Tyyp.SelectedIndex, Algus, lopp)
             Console.WriteLine(GInfo1.Count)
             For I = 0 To GInfo1.Count - 1
+
+                Dim kuupaev1 As Date = DataGridView1.Rows(I).Cells(0).Value.ToString()
+                Dim kuupaev2 As Date
+
+
+                If Not (DateTime.Compare(kuupaev1, kuupaev2.AddDays(1)) = 0) And Not I = 0 Then
+
+                    TextBox1.Text = kuupaev1
+                    MessageBox.Show("CSV failis kuupaevad pole jarjestiku  ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show("viga asub real " + (I).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Exit Sub
+                End If
+                kuupaev2 = kuupaev1
                 Console.WriteLine(GInfo1.Item(I).Xval)
                 Console.WriteLine(GInfo1.Item(I).Yval)
                 Graafik1.setPoint1(GInfo1.Item(I).Xval, (GInfo1.Item(I).Yval * CDec(DataGridView1.Rows(I).Cells(1).Value.ToString()) / 100))
@@ -122,10 +140,16 @@ Public Class Form1
         End If
 
 
-        If PakettID2 <> Nothing Then
+        If PakettID2 <> Nothing Then 'vormistab pakett 2 graafiku
             GInfo2 = GraafikConnect.GetCustom(PakettID2, cmbPkt2Tyyp.SelectedIndex, Algus, lopp)
             Console.WriteLine(GInfo2.Count)
             For I = 0 To GInfo2.Count - 1
+                Dim kuupaev1 As Date = DataGridView1.Rows(I).Cells(0).Value.ToString()
+                Dim kuupaev2 As Date
+                If Not (DateTime.Compare(kuupaev1, kuupaev2.AddDays(1)) = 0) And Not I = 0 Then
+                    Exit Sub
+                End If
+                kuupaev2 = kuupaev1
 
                 Graafik1.setPoint2(GInfo2.Item(I).Xval, (GInfo2.Item(I).Yval * CDec(DataGridView1.Rows(I).Cells(1).Value.ToString()) / 100))
                 GInfo2Kesk += (GInfo2.Item(I).Yval * CDec(DataGridView1.Rows(I).Cells(1).Value.ToString()) / 100)
@@ -146,7 +170,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub AddPaketid1(ByVal Tyyp As Integer)
+    Private Sub AddPaketid1(ByVal Tyyp As Integer) 'vormistab pakett 1 comboboxi koik paketid valitud elemendi puhul
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
         Dim Andmebaas As New CAndmebaas
         Paketid = Andmebaas.LoePakettideNimekiri
@@ -313,6 +337,10 @@ Public Class Form1
     End Sub
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged_1(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
 
     End Sub
 End Class

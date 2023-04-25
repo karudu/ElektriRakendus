@@ -39,6 +39,7 @@ Partial Class Form1
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Graafik1 = New GraafikControl.Graafik()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -204,11 +205,19 @@ Partial Class Form1
         Me.Graafik1.Size = New System.Drawing.Size(1283, 363)
         Me.Graafik1.TabIndex = 2
         '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(277, 233)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(100, 22)
+        Me.TextBox1.TabIndex = 17
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1309, 665)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.lblPkt2Kesk)
         Me.Controls.Add(Me.lblPkt1Kesk)
         Me.Controls.Add(Me.Label7)
@@ -247,4 +256,5 @@ Partial Class Form1
     Friend WithEvents lblPkt1Kesk As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents TextBox1 As TextBox
 End Class
