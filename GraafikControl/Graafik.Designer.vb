@@ -26,6 +26,7 @@ Partial Class Graafik
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.HinnaGraafik = New System.Windows.Forms.DataVisualization.Charting.Chart()
         CType(Me.HinnaGraafik, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -43,13 +44,13 @@ Partial Class Graafik
         Legend1.Name = "Hind(s/kWh)"
         Me.HinnaGraafik.Legends.Add(Legend1)
         Me.HinnaGraafik.Location = New System.Drawing.Point(3, 0)
+        Me.HinnaGraafik.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.HinnaGraafik.Name = "HinnaGraafik"
         Me.HinnaGraafik.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Series1.BorderWidth = 3
         Series1.ChartArea = "ChartArea1"
         Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine
         Series1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Series1.CustomProperties = "EmptyPointValue="""""
         Series1.IsXValueIndexed = True
         Series1.Legend = "Hind(s/kWh)"
         Series1.Name = "Pakett 1"
@@ -58,13 +59,20 @@ Partial Class Graafik
         Series2.ChartArea = "ChartArea1"
         Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine
         Series2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Series2.CustomProperties = "EmptyPointValue="""""
         Series2.IsXValueIndexed = True
         Series2.Legend = "Hind(s/kWh)"
         Series2.Name = "Pakett 2"
+        Series3.BorderWidth = 3
+        Series3.ChartArea = "ChartArea1"
+        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine
+        Series3.Color = System.Drawing.Color.Purple
+        Series3.IsXValueIndexed = True
+        Series3.Legend = "Hind(s/kWh)"
+        Series3.Name = "Pakett 3"
         Me.HinnaGraafik.Series.Add(Series1)
         Me.HinnaGraafik.Series.Add(Series2)
-        Me.HinnaGraafik.Size = New System.Drawing.Size(1277, 360)
+        Me.HinnaGraafik.Series.Add(Series3)
+        Me.HinnaGraafik.Size = New System.Drawing.Size(1277, 359)
         Me.HinnaGraafik.TabIndex = 0
         Me.HinnaGraafik.Text = "Chart1"
         '
@@ -73,8 +81,9 @@ Partial Class Graafik
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.HinnaGraafik)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "Graafik"
-        Me.Size = New System.Drawing.Size(1280, 360)
+        Me.Size = New System.Drawing.Size(1280, 359)
         CType(Me.HinnaGraafik, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
