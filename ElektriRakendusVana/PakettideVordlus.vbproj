@@ -51,6 +51,9 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PrjFaces">
+      <HintPath>..\..\PrjFaces\PrjFaces\bin\Debug\PrjFaces.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -77,6 +80,13 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.vb" />
+    <Compile Include="Component1.Designer.vb">
+      <DependentUpon>Component1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Component1.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FormLopphind.Designer.vb">
       <DependentUpon>FormLopphind.vb</DependentUpon>
     </Compile>
@@ -89,6 +99,7 @@
     <Compile Include="FormPakettideVordlus.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Interface1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -107,6 +118,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Component1.resx">
+      <DependentUpon>Component1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormLopphind.resx">
       <DependentUpon>FormLopphind.vb</DependentUpon>
     </EmbeddedResource>
