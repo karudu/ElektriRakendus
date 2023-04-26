@@ -80,6 +80,12 @@
     <Compile Include="FormKodumasinKalkulaator.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormHinnaKalkulaator.Designer.vb">
+      <DependentUpon>FormHinnaKalkulaator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormHinnaKalkulaator.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Hinnakalkulaator.vb" />
     <Compile Include="Kalkulaator.vb" />
     <Compile Include="KodumasinaKasutus.vb" />
@@ -102,6 +108,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FormKodumasinKalkulaator.resx">
       <DependentUpon>FormKodumasinKalkulaator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHinnaKalkulaator.resx">
+      <DependentUpon>FormHinnaKalkulaator.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

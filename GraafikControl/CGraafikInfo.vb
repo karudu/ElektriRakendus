@@ -19,6 +19,7 @@ Public Class CGraafikInfo
         Dim TS As New TimeSpan
         TS = EndTime.Subtract(BeginTime)
         Dim Tunnid As Integer = TS.TotalHours
+        'paketitüübi valik(0=börs, 1=fix, 2=universaal)
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
             Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
@@ -67,6 +68,7 @@ Public Class CGraafikInfo
         Dim TS As New TimeSpan
         TS = EndTime.Subtract(BeginTime)
         Dim Tunnid As Integer = TS.TotalHours
+        'paketitüübi valik(0=börs, 1=fix, 2=universaal)
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
             Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
@@ -118,6 +120,7 @@ Public Class CGraafikInfo
         Dim TS As New TimeSpan
         TS = EndTime.Subtract(BeginTime)
         Dim Tunnid As Integer = TS.TotalHours
+        'paketitüübi valik(0=börs, 1=fix, 2=universaal)
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
             Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
@@ -171,6 +174,109 @@ Public Class CGraafikInfo
                 Info.Hind = (Info.Hind / (PaevaArvKuus * 24)) + StructUniv.Kuutasu
                 InfoList.Add(Info)
             End While
+        End If
+        Return InfoList
+    End Function
+
+    Public Function GetCustom(PakettID As Integer, PaketiTyyp As Integer, AlgAeg As Date, LoppAeg As Date) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetCustom
+        Dim InfoList As New List(Of (Aeg As String, Hind As Decimal))
+        Dim Hinnad As New List(Of Decimal)
+        Dim AndmedConnect As PrjAndmebaas.IAndmebaas
+        AndmedConnect = New PrjAndmebaas.CAndmebaas
+        Dim I As Integer = 0
+        Dim J As Integer = 0
+        Dim TS As New TimeSpan
+        'kontrollime kas algkuupäev on sama mis lõppkuupäev
+        AlgAeg = New Date(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day, 0, 0, 0)
+        LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day, 0, 0, 0)
+        If AlgAeg = LoppAeg Then
+            If DaysInMonth(LoppAeg.Year, LoppAeg.Month) = LoppAeg.Day Then
+                If LoppAeg.Month = 12 Then
+                    LoppAeg = New Date(LoppAeg.Year + 1, 1, 1, 0, 0, 0)
+                Else
+                    LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month + 1, 1, 0, 0, 0)
+                End If
+            Else
+                LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
+            End If
+        Else
+            LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day, 0, 0, 0)
+        End If
+        TS = LoppAeg.Subtract(AlgAeg)
+        Dim Tunnid As Integer = TS.TotalHours
+        'kui on ainult 24 tundi vahet siis anname tundide lõikes andmed
+        If Tunnid = 24 Then
+            'paketitüübi valik(0=börs, 1=fix, 2=universaal)
+            If PaketiTyyp = 0 Then
+                Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
+                Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
+                For I = 0 To 23
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("HH")
+                    Info.Hind = (Hinnad.Item(I) / 10) + (StructBors.Juurdetasu)
+                    InfoList.Add(Info)
+                    AlgAeg = AlgAeg.AddHours(1)
+                Next
+            ElseIf PaketiTyyp = 1 Then
+                Me.StructFix = AndmedConnect.LoePakettFix(PakettID)
+                For I = 0 To 23
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("HH")
+                    If AlgAeg.Hour > 22 Or AlgAeg.Hour < 7 Then
+                        Info.Hind = StructFix.OTariif
+                    Else
+                        Info.Hind = StructFix.PTariif
+                    End If
+                    InfoList.Add(Info)
+                    AlgAeg = AlgAeg.AddHours(1)
+                Next
+            Else
+                Me.StructUniv = AndmedConnect.LoePakettUniv(PakettID)
+                For I = 0 To 23
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("HH")
+                    Info.Hind = StructUniv.Baas + StructUniv.Marginaal
+                    InfoList.Add(Info)
+                    AlgAeg = AlgAeg.AddHours(1)
+                Next
+            End If
+        Else 'kui on rohkem kui 24 tundi anname päevade lõikes
+            'paketitüübi valik(0=börs, 1=fix, 2=universaal)
+            If PaketiTyyp = 0 Then
+                Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
+                Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
+                While I < Tunnid - 1
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("M")
+                    While J < 24
+                        Info.Hind += (Hinnad.Item(I) / 10) + StructBors.Juurdetasu
+                        I += 1
+                        J += 1
+                        AlgAeg = AlgAeg.AddHours(1)
+                    End While
+                    J = 0
+                    Info.Hind = Info.Hind / 24
+                    InfoList.Add(Info)
+                End While
+            ElseIf PaketiTyyp = 1 Then
+                Me.StructFix = AndmedConnect.LoePakettFix(PakettID)
+                For I = 0 To Tunnid - 1 Step 24
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("M")
+                    Info.Hind = ((8 * StructFix.OTariif) + (16 * StructFix.PTariif)) / 24
+                    AlgAeg = AlgAeg.AddDays(1)
+                    InfoList.Add(Info)
+                Next
+            Else
+                Me.StructUniv = AndmedConnect.LoePakettUniv(PakettID)
+                For I = 0 To Tunnid - 1 Step 24
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("M")
+                    Info.Hind = StructUniv.Baas + StructUniv.Marginaal
+                    AlgAeg = AlgAeg.AddDays(1)
+                    InfoList.Add(Info)
+                Next
+            End If
         End If
         Return InfoList
     End Function

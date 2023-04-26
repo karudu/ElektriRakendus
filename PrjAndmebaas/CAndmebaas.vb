@@ -6,6 +6,7 @@ Public Class CAndmebaas
     Implements IAndmebaas
 
     Private GConnection As OleDbConnection
+    Private FormLoading As FormLoading
 
     Public Function LoePakettideNimekiri() As List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)) Implements IAndmebaas.LoePakettideNimekiri
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
@@ -237,41 +238,50 @@ Public Class CAndmebaas
 
     Private Const KAIBEMAKS = 1.2 ' 20%
     Private LugemineOK As Boolean
+    ' Loe alates mingist ajast N tunni jagu börsihindu
     Public Function LoeBorsihinnad(AlgusAeg As Date, Tunnid As Integer) As List(Of Decimal) Implements IAndmebaas.LoeBorsihinnad
-        Dim Ajad As New List(Of Decimal)
+        Dim Hinnad As New List(Of Decimal)
 
+        ' Ümarda aeg tunni peale ja teisenda see UTC'sse
         Dim Aeg As Date = AlgusAeg
         Aeg = Aeg.ToUniversalTime()
         Aeg = New Date(Aeg.Year, Aeg.Month, Aeg.Day, Aeg.Hour, 0, 0)
 
         GConnection = New OleDbConnection
         With GConnection
+            ' Loo ühendus andmebaasiga
             .ConnectionString = LoeConnectionString()
             .Open()
 
-            For i As Integer = 0 To Tunnid - 1
-                Dim Hind As Decimal = LoeBorsihind(Aeg, Tunnid - i) * KAIBEMAKS
-                Ajad.Add(Hind)
-                Aeg = Aeg.AddHours(1)
-                If Hind = 0 And LugemineOK = False Then ' Kui hindasid pole, siis ära neid edasi küsi
-                    For j As Integer = 0 To Tunnid - i - 2
-                        Ajad.Add(0)
-                    Next
-                    Exit For
-                End If
+            ' Kui ajavahemik on pikem kui aasta, siis loe hinnad
+            ' aasta kaupa, vastasel juhul ei tagasta API sellest suuremat vahemikku
+            While Tunnid >= 365 * 24
+                Hinnad.AddRange(LoeBorsihind(Aeg, 365 * 24))
+                Aeg = Aeg.AddHours(365 * 24)
+                Tunnid -= 365 * 24
+            End While
+
+            ' Loe ülejäänud hinnad
+            If Tunnid <> 0 Then Hinnad.AddRange(LoeBorsihind(Aeg, Tunnid))
+
+            ' Lisa hindadele käibemaks
+            For i As Integer = 0 To Hinnad.Count - 1
+                Hinnad(i) *= KAIBEMAKS
             Next
 
+            ' Lõpeta ühendus
             .Close()
         End With
         GConnection.Dispose()
 
-        Return Ajad
+        Return Hinnad
     End Function
-    ' Loe alates mingist ajast N tunni jagu börsihindasid
+    ' Loe alates mingist ajast N tunni jagu börsihindu
     ' Hindade ühik on sent/kWh
     Public Function LoeBorsihinnadSentkWh(AlgusAeg As Date, Tunnid As Integer) As List(Of Decimal) Implements IAndmebaas.LoeBorsihinnadSentkWh
         Dim Hinnad As List(Of Decimal) = LoeBorsihinnad(AlgusAeg, Tunnid)
 
+        ' Teisenda EUR/MWh->sent/kWh
         For i As Integer = 0 To Hinnad.Count - 1
             Hinnad(i) *= 0.1
         Next
@@ -288,94 +298,40 @@ Public Class CAndmebaas
         Public Timestamp As Integer
         Public Price As Decimal
     End Class
-    Private Function LoeBorsihind(Aeg As Date, Tunnid As Integer) As Decimal
-        Dim Timestamp As String
-        Timestamp = (Aeg - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString
 
-        ' Vaata, kas selle tunni hind on juba andmebaasis olemas
-        Try
-            Dim Cmd As New OleDbCommand
-            Dim Reader As OleDbDataReader
+    Private Function LoeBorsihindAPI(Aeg As Date, Tunnid As Integer) As List(Of Decimal)
+        Dim ReturnHinnad As New List(Of Decimal)
 
-            With Cmd
-                .Connection = GConnection
-                .CommandType = CommandType.Text
-                .CommandText = "SELECT * FROM borsihinnad " &
-                               "WHERE [timestamp] = " &
-                               """" &
-                               Timestamp &
-                               """" &
-                               ";"
-                Reader = .ExecuteReader
-            End With
-            Cmd.Dispose()
-
-            Reader.Read()
-            If Reader.HasRows Then
-                ' Andmebaasis olemas
-                Dim HindReturn As Decimal = Reader("hind")
-                Reader.Close()
-                LugemineOK = True
-                Return HindReturn
-            End If
-            Reader.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical)
-        End Try
-
-        ' Ei ole, otsusta, mitu tundi tuleb lugeda
-        For i As Integer = 1 To Tunnid - 1
-            Dim TimestampKontroll As String
-            TimestampKontroll = (Aeg.AddHours(i) - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString
-            Try
-                Dim Cmd As New OleDbCommand
-                Dim Reader As OleDbDataReader
-
-                With Cmd
-                    .Connection = GConnection
-                    .CommandType = CommandType.Text
-                    .CommandText = "SELECT * FROM borsihinnad " &
-                               "WHERE [timestamp] = " &
-                               """" &
-                               TimestampKontroll &
-                               """;"
-                    Reader = .ExecuteReader
-                End With
-                Cmd.Dispose()
-
-                Reader.Read()
-                If Reader.HasRows Then
-                    Reader.Close()
-                    Tunnid = i
-                    Exit For
-                End If
-                Reader.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, MsgBoxStyle.Critical)
-            End Try
-        Next
-
-        ' Loe andmed API kaudu
+        ' Börsihinnad loetakse Unix timestamp'ide kaudu, leia lugemise vahemiku
+        ' alguse ja lõpu aeg
         Dim TimeString As String
         TimeString = Aeg.AddMilliseconds(-1).ToString("yyyy-MM-ddTHH\:mm\:ss.fff") & "Z"
         Dim TimeStringLopp As String
         TimeStringLopp = Aeg.AddHours(Tunnid).AddMilliseconds(-1).ToString("yyyy-MM-ddTHH\:mm\:ss.fff") & "Z"
 
         Dim JsonStr As String
+        ' API päringu URL
         Dim RequestStr As String = "https://dashboard.elering.ee/api/nps/price?start=" &
                                    TimeString &
                                    "&end=" &
                                    TimeStringLopp
+        ' Tee GET päring ja loe vastu võetud tekst
         Using WebClient As New WebClient
             JsonStr = WebClient.DownloadString(RequestStr)
         End Using
+        ' Loe välja JSON'ist andmed
         Dim Andmed = JsonConvert.DeserializeObject(Of JsonJuur)(JsonStr)
         Dim Hinnad = Andmed.data.ee
 
-        ' Kui andmed puuduvad (küsiti tulevikust), siis tagasta 0
+        ' Kui andmed puuduvad (küsiti tulevikust), siis tagasta kõik hinnad 0
         If Hinnad.Length = 0 Then
             LugemineOK = False
-            Return 0
+
+            For i As Integer = 0 To Tunnid - 1
+                ReturnHinnad.Add(0)
+            Next
+
+            Return ReturnHinnad
         End If
 
         ' Lisa loetud hinnad andmebaasi
@@ -389,10 +345,12 @@ Public Class CAndmebaas
                                        "([timestamp], hind) " &
                                        "VALUES (@p1, @p2);"
 
-                    .Parameters.Add(New OleDbParameter("@p1", OleDbType.VarChar, 255)).Value = Hinnad(i).Timestamp
+                    .Parameters.Add(New OleDbParameter("@p1", OleDbType.Integer)).Value = Hinnad(i).Timestamp
                     .Parameters.Add(New OleDbParameter("@p2", OleDbType.Currency)).Value = Hinnad(i).Price
 
                     .ExecuteNonQuery()
+
+                    ReturnHinnad.Add(Hinnad(i).Price)
                 End With
                 Cmd.Dispose()
             Catch ex As Exception
@@ -400,10 +358,113 @@ Public Class CAndmebaas
             End Try
         Next
 
-        LugemineOK = True
-        Return Hinnad(0).Price
+        Return ReturnHinnad
     End Function
+    ' debug
+    'Private Function Sorteeritud(Ajad As List(Of Integer)) As Boolean
+    '    Dim Eelmine = 0
+    '    For Each Aeg In Ajad
+    '        If Aeg <= Eelmine Then Return False
+    '        Eelmine = Aeg
+    '    Next
+    '    Return True
+    'End Function
+    Private Function LoeBorsihind(Aeg As Date, Tunnid As Integer) As List(Of Decimal)
+        Debug.Assert(Tunnid > 0)
 
+        ' Börsihinnad loetakse Unix timestamp'ide kaudu, leia lugemise vahemiku
+        ' alguse ja lõpu aeg
+        Dim TimestampAlgus As Integer
+        TimestampAlgus = (Aeg - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds
+        Dim TimestampLopp As Integer
+        TimestampLopp = TimestampAlgus + (Tunnid * 3600) - 1 ' 3600 sec/tund
+
+        ' Vaata, kas vaja minevad hinnad on juba andmebaasis olemas
+        Dim LoetudHinnad As New List(Of Decimal)
+        Dim LoetudAjad As New List(Of Integer)
+        Try
+            Dim Cmd As New OleDbCommand
+            Dim Reader As OleDbDataReader
+
+            With Cmd
+                .Connection = GConnection
+                .CommandType = CommandType.Text
+                .CommandText = "SELECT * FROM borsihinnad " &
+                               "WHERE [timestamp] BETWEEN " &
+                               TimestampAlgus.ToString &
+                               " AND " &
+                               TimestampLopp.ToString &
+                               " ORDER BY [timestamp];"
+                Reader = .ExecuteReader
+            End With
+            Cmd.Dispose()
+
+            If Reader.HasRows Then
+                ' Kopeeri andmebaasist saadud hinnad nimekirja
+                While Reader.Read()
+                    LoetudHinnad.Add(Reader("hind"))
+                    LoetudAjad.Add(Reader("timestamp"))
+                End While
+                Reader.Close()
+
+                ' Kui kõik vajalikud hinnad on olemas, siis tagasta need
+                If LoetudHinnad.Count = Tunnid Then Return LoetudHinnad
+            End If
+            ' Kui jõudsime siia, siis tuleb hindu juurde pärida
+            Reader.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+
+        ' Näita kasutajale laadimise akent
+        FormLoading = New PrjAndmebaas.FormLoading
+        FormLoading.Show()
+        FormLoading.Refresh()
+
+        Dim ReturnHinnad As New List(Of Decimal)
+        Dim i = 0
+        Dim Offset = 0
+        ' Loe vajaminevad hinnad API kaudu
+        While i <> Tunnid
+            ' Otsime hindade vahemikke, mis on andmebaasis olemas ja mida ei pea lugema
+            Dim TimestampKontroll As Integer
+            TimestampKontroll = (Aeg.AddHours(i) - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds
+
+            If LoetudAjad.Contains(TimestampKontroll) Then
+                ' Olemasolev hind leitud, loe API'st kõik enne seda tulevad hinnad
+                Dim TunnidLugeda = i - Offset
+                If TunnidLugeda <> 0 Then
+                    Dim APIHinnad As New List(Of Decimal)
+                    APIHinnad = LoeBorsihindAPI(Aeg.AddHours(Offset), TunnidLugeda)
+                    LoetudHinnad.InsertRange(Offset, APIHinnad)
+                End If
+                Offset = i + 1
+                ' Vaata, kas peale seda on veel hindu, mida saab vahele jätta
+                For j As Integer = i + 1 To Tunnid - 1
+                    TimestampKontroll = (Aeg.AddHours(j) - New Date(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds
+
+                    If LoetudAjad.Contains(TimestampKontroll) Then
+                        Offset += 1
+                        i += 1
+                    Else
+                        Exit For
+                    End If
+                Next
+            End If
+
+            i += 1
+        End While
+
+        ' Enam olemasolevaid hindu ees ei ole, loe kõik ülejäänud
+        Dim APIHinnad_ = LoeBorsihindAPI(Aeg.AddHours(Offset), Tunnid - Offset)
+        LoetudHinnad.InsertRange(Offset, APIHinnad_)
+
+        LugemineOK = True
+        FormLoading.Close()
+        FormLoading.Dispose()
+        'Debug.Assert(LoetudHinnad.Count = Tunnid)
+        Return LoetudHinnad
+    End Function
     Public Sub LisaPakettBors(Nimi As String, JuurdeTasu As Decimal, Kuutasu As Decimal) Implements IAndmebaas.LisaPakettBors
         Try
             Dim Connection As New OleDbConnection
