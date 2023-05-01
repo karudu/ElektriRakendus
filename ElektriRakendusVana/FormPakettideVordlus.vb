@@ -2,12 +2,27 @@
 Imports PrjAndmebaas
 Imports GraafikControl
 Public Class FormPakettideVordlus
+    'FAILINIMI: FormPakettideVordlus.vb
+    'AUTOR: Carl Strömberg
+    'LOODUD: 05.04.2023
+    'MUUDETUD: 01.05.2023
+    '
+    'KIRJELDUS: See klass on loodud kui formina UserStoryde US004 ja US017 jaoks.
+    '           See klass võrdleb börsi ja fikseeritud hindasid ning kuvab
+    '           võrdluse tulemust kasutajale. Samuti võrdleb klass börsi hinda,
+    '           universaalteenuse hinda(ilma marginaalita) ja kasutajalt valitud
+    '           paketi hinda ja kuvab kasutajale võrdluse tulemused.
+
+    'EELTINGIMUSED: On olemas ühendus andmebaasiga ja andmebaasist on loetud kõik olevad paketid.
+    '
     Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
     ReadOnly ConnectDb As New CAndmebaas
     Public StructBors As New PrjAndmebaas.IAndmebaas.PkBors
     Public StructFix As New PrjAndmebaas.IAndmebaas.PkFix
     Public StructUniv As New PrjAndmebaas.IAndmebaas.PkUniv
 
+    'Muudab konkreetsed Label-id ja ComboBox-id nähtamatuks kasutajale
+    'Sisendparameetrid: -
     Private Sub LabelInvis()
         cboxAlgus.Visible = False
         cboxLopp.Visible = False
@@ -21,22 +36,48 @@ Public Class FormPakettideVordlus
         lblKoguSum2.Visible = False
         lblKoguSum3.Visible = False
     End Sub
+
+    'Formi load sub. Laeb ComboBox-i andmebaasis olevad paketid. 
+    'Sisendparameetrid:
+    '   sender: Object
+    '   e: Event arguments
     Private Sub FormPakettideVordlus_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim Index As Integer
+
+        'Kustutab ComboBox-ist kõik itemid
         cboxPakett.Items.Clear()
-        Paketid = ConnectDb.LoePakettideNimekiri 'load paketid to combobox
+
+        'Laeb kõik paketid andmebaasist lisit
+        'Funktsioon LoePakettideNimekiri võetud CAndmebaas.vb-st
+        Paketid = ConnectDb.LoePakettideNimekiri
+
+        'Laeb kõik listis olevad paketid ComboBox-i
         For Index = 0 To Paketid.Count - 1
             cboxPakett.Items.Add(Paketid(Index).Nimi)
         Next
+
+        'Konkreetsed labelid nähtamatuks
         LabelInvis()
     End Sub
+
+    'Börsi ja fix hinna võrdluses ajavahemiku ComboBox-id ja Label-ite
+    'nähtavuse muutmine.
+    'Sisendparameetrid:
+    '   sender: Object
+    '   e: Event arguments
     Private Sub cBoxPeriood_DropDownClosed(sender As Object, e As EventArgs) Handles cBoxPeriood.DropDownClosed
+
+        'Select Case perioodi ComboBox-i jaoks
         Select Case cBoxPeriood.SelectedIndex
+
+            'Kui on valitud ComboBox-ist "tund"
             Case 0
                 cboxAlgus.Visible = True
                 cboxLopp.Visible = True
                 lblAlgus.Visible = True
                 lblLopp.Visible = True
+
+                'Kui ComboBox-ist ei ole valitud "tund"
             Case Else
                 cboxAlgus.Visible = False
                 cboxLopp.Visible = False
@@ -44,13 +85,25 @@ Public Class FormPakettideVordlus
                 lblLopp.Visible = False
         End Select
     End Sub
+
+    'Börsi ja univ hinna võrdluses ajavahemiku ComboBox-id ja Label-ite
+    'nähtavuse muutmine.
+    'Sisendparameetrid:
+    '   sender: Object
+    '   e: Event arguments
     Private Sub cboxPeriood2_DropDownClosed(sender As Object, e As EventArgs) Handles cBoxPeriood2.DropDownClosed
+
+        'Select Case perioodi ComboBox-i jaoks
         Select Case cBoxPeriood2.SelectedIndex
+
+            'Kui on valitud ComboBox-ist "tund"
             Case 0
                 cboxAlgus2.Visible = True
                 cboxLopp2.Visible = True
                 lblAlgus2.Visible = True
                 lblLopp2.Visible = True
+
+                'Kui ei ole valitud ComboBox-ist "tund"
             Case Else
                 cboxAlgus2.Visible = False
                 cboxLopp2.Visible = False
@@ -58,6 +111,12 @@ Public Class FormPakettideVordlus
                 lblLopp2.Visible = False
         End Select
     End Sub
+
+    'Joonistab börsi ja fix hinnad graafikule ning kuvab võrdluse tulemused kasutajale.
+    'Sisendparameetrid:
+    '   pktTypeB: Paketi tüüp börss
+    '   pktTypeF: Paketi tüüp fix
+    '   periood: Perioodi ComboBox-ist valitud periood (tund, päev, kuu, aasta)
     Private Sub joonistaGraafikBF(pktTypeB As IAndmebaas.PaketiTyyp, pktTypeF As IAndmebaas.PaketiTyyp, periood As Integer)
         Dim GInfo As List(Of (Xval As String, Yval As Decimal))
         Dim GInfo2 As List(Of (Xval As String, Yval As Decimal))
@@ -74,54 +133,100 @@ Public Class FormPakettideVordlus
         Dim ajaperioodOdavam As Decimal
         Dim ajavahemik As Integer
 
-
+        'Konkreetsed labelid nähtamatuks
         LabelInvis()
 
-
+        'Select Case perioodi ComboBox-i jaoks
         Select Case periood
+
+            'ComboBox-ist valitud "tund"
             Case 0
+
+                'If lause, et kontrolliga kas ajavahemik on valitud
                 If cboxAlgus.SelectedIndex = -1 And cboxLopp.SelectedIndex = -1 Then
                     MsgBox("Valige perioodi algus ja lopp ajad")
                     Exit Sub
                 End If
+
+                'kontroll selleks, et ajavahemik oleks õigesti valitud.
+                'Ajavahemiku algus aeg ei oleks hiljem kui lopp aeg.
                 If cboxAlgus.SelectedIndex >= cboxLopp.SelectedIndex Then
                     MsgBox("Perioodi lõpp aeg ei saa olla enne" +
                     Environment.NewLine +
                     "perioodi algus aega või sama.")
                     Exit Sub
                 End If
+
+                'GInfo-sse salvestatakse börsi hinnad ja nendele vastavad ajad
+                'GInfo2-te salvestatakse fix hinnad ja nendele vastavad ajad
+                'Funktioon GetPaev on võetud CGraafikInfo.vb-st
                 GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
                 GInfo2 = GetInfo.GetPaev(StructFix.ID, pktTypeF)
+
+                'ComboBox-ist valitud "päev"
             Case 1
+
+                'GInfo-sse salvestatakse börsi hinnad ja nendele vastavad ajad
+                'GInfo2-te salvestatakse fix hinnad ja nendele vastavad ajad
+                'Funktioon GetPaev on võetud CGraafikInfo.vb-st
                 GInfo = GetInfo.GetPaev(StructBors.ID, pktTypeB)
                 GInfo2 = GetInfo.GetPaev(StructFix.ID, pktTypeF)
+
+                'ComboBox-ist valitud "kuu"
             Case 2
+
+                'GInfo-sse salvestatakse börsi hinnad ja nendele vastavad ajad
+                'GInfo2-te salvestatakse fix hinnad ja nendele vastavad ajad
+                'Funktioon GetKuu on võetud CGraafikInfo.vb-st
                 GInfo = GetInfo.GetKuu(StructBors.ID, pktTypeB)
                 GInfo2 = GetInfo.GetKuu(StructFix.ID, pktTypeF)
+
+                'ComboBox-ist valitud "aasta"
             Case 3
+
+                'GInfo-sse salvestatakse börsi hinnad ja nendele vastavad ajad
+                'GInfo2-te salvestatakse fix hinnad ja nendele vastavad ajad
+                'Funktioon GetAasta on võetud CGraafikInfo.vb-st
                 GInfo = GetInfo.GetAasta(StructBors.ID, pktTypeB)
                 GInfo2 = GetInfo.GetAasta(StructFix.ID, pktTypeF)
+
+                'Pole midagi ComboBox-ist valitud
             Case Else
                 MsgBox("Valige periood!")
                 Exit Sub
         End Select
 
-
+        'kontroll selleks, et leida kas perioodi ComboBox-ist on valitud "tund"
         If periood = 0 Then
+
+            'tsükkel, mis ei ületa ajavahemiku aegade arvu 
             While Index < GInfo.Count And Index < GInfo2.Count
+
+                'kontroll selleks, et leida kas index asub ajavahemiku vahel
                 If Index >= cboxAlgus.SelectedIndex And Index <= cboxLopp.SelectedIndex Then
+
+                    'Graafikule joonistatakse börsi ja fix hinnad vastavatele kellaaegadele
+                    'funktsioonid setPoint1 ja setPoint2 võetud Graafik.vb-st
                     Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
                     Graafik1.setPoint2(GInfo2.Item(Index).Xval, GInfo2.Item(Index).Yval)
+
+                    'keskmise hinna muutujatele hinna lisamine
                     GInfo1Kesk += GInfo.Item(Index).Yval
                     GInfo2Kesk += GInfo2.Item(Index).Yval
+
+                    'kontroll et leida, mis kell on börsi hind kõrgeim
                     If GInfo1Korge < GInfo.Item(Index).Yval Then
                         GInfo1Korge = Math.Round(GInfo.Item(Index).Yval, 2)
                         kellaaegKorge = GInfo.Item(Index).Xval
                     End If
+
+                    'kontroll et leida, mis kell on bärsi hind madalaim
                     If GInfo1Madal > GInfo.Item(Index).Yval Then
                         GInfo1Madal = Math.Round(GInfo.Item(Index).Yval, 2)
                         kellaaegMadal = GInfo.Item(Index).Xval
                     End If
+
+                    'kontroll et leida, mitu tundi on börsi hind kallim kui fix hind
                     If GInfo.Item(Index).Yval > GInfo2.Item(Index).Yval Then
                         ajaperioodKallim += 1
                     End If

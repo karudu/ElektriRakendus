@@ -22,7 +22,9 @@ Public Class FormLopphind
     'Laeb kõik paketid andmebaasist ComboBox-i ning algselt
     'kustutab samast ComboBox-ist kõik Item-id ja paneb ajavahemiku
     'ComboBox-i ja Labeli nähtavuse vääraks.
-    'Sisendparameetrid: sender, e
+    'Sisendparameetrid:
+    '   sender: Object
+    '   e: Event arguments
     Private Sub FormLopphind_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim Index As Integer
 
