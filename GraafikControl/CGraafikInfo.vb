@@ -1,4 +1,18 @@
-﻿Imports System.DateTime
+﻿'FAILINIMI: CGraafikInfo.vb
+'AUTOR:     HERMAN ÕUNAS
+'LOODUD:    16.03.2023
+'MUUDETUD:  01.05.2023
+'
+'KIRJELDUS: Klassis on erinevad funktsioonid mis tagastavad
+'           etteantud ajavahemikus paketi hinna ning aja millal
+'           hind selline oli
+'EELTINGIMUSED: Igale funktsioonile on vaja anda paketi ID ja 
+'               paketi tüüp, Lisaks on vaja GetCustom funktsioonile
+'               anda ka ajavahemik ning flag(0 = paketi hind, 1 = lihtsalt
+'               börsihind)
+
+
+Imports System.DateTime
 
 Public Class CGraafikInfo
     Implements IGraafikInfo
@@ -7,6 +21,7 @@ Public Class CGraafikInfo
     Public StructFix As New PrjAndmebaas.IAndmebaas.PkFix
     Public StructUniv As New PrjAndmebaas.IAndmebaas.PkUniv
 
+    'tagastab päeva vältel iga tunni hinna koos selle ajaga
     Private Function GetPaev(PakettID As Integer, PaketiTyyp As Integer) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetPaev
         Dim InfoList As New List(Of (Aeg As String, Hind As Decimal))
         Dim Hinnad As New List(Of Decimal)
@@ -55,6 +70,8 @@ Public Class CGraafikInfo
         End If
         Return InfoList
     End Function
+
+    'tagastab eelneva kuu 
     Public Function GetKuu(PakettID As Integer, PaketiTyyp As Integer) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetKuu
         Dim InfoList As New List(Of (Aeg As String, Hind As Decimal))
         Dim Hinnad As New List(Of Decimal)
@@ -107,6 +124,7 @@ Public Class CGraafikInfo
         Return InfoList
     End Function
 
+    'tagastab eelneva aasta paketi hinnad kuude iga kuu hinnana
     Public Function GetAasta(PakettID As Integer, PaketiTyyp As Integer) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetAasta
         Dim InfoList As New List(Of (Aeg As String, Hind As Decimal))
         Dim Hinnad As New List(Of Decimal)
@@ -178,6 +196,8 @@ Public Class CGraafikInfo
         Return InfoList
     End Function
 
+
+    'tagastab etteantud ajavahemiku hinnad, kui alla 24h siis tundidena, kui üle siis päevadena
     Public Function GetCustom(PakettID As Integer, PaketiTyyp As Integer, AlgAeg As Date, LoppAeg As Date, Flag As Integer) As List(Of (Aeg As String, Hind As Decimal)) Implements IGraafikInfo.GetCustom
         Dim InfoList As New List(Of (Aeg As String, Hind As Decimal))
         Dim Hinnad As New List(Of Decimal)
