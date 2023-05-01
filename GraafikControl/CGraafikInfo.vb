@@ -189,15 +189,11 @@ Public Class CGraafikInfo
         'kontrollime kas algkuupäev on sama mis lõppkuupäev
         AlgAeg = New Date(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day, 0, 0, 0)
         LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day, 0, 0, 0)
-        If AlgAeg = LoppAeg Then
-            If DaysInMonth(LoppAeg.Year, LoppAeg.Month) = LoppAeg.Day Then
-                If LoppAeg.Month = 12 Then
-                    LoppAeg = New Date(LoppAeg.Year + 1, 1, 1, 0, 0, 0)
-                Else
-                    LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month + 1, 1, 0, 0, 0)
-                End If
+        If DaysInMonth(LoppAeg.Year, LoppAeg.Month) = LoppAeg.Day Then
+            If LoppAeg.Month = 12 Then
+                LoppAeg = New Date(LoppAeg.Year + 1, 1, 1, 0, 0, 0)
             Else
-                LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
+                LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month + 1, 1, 0, 0, 0)
             End If
         Else
             LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
