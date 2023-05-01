@@ -1,5 +1,6 @@
 ﻿
 Imports PrjAndmebaas
+Imports System.DateTime
 
 Public Class FormLopphind
     Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
@@ -33,13 +34,10 @@ Public Class FormLopphind
         Next
     End Sub
 
-
     Private Sub Arvuta(ByVal flag As Integer)
-        Dim OdavaimAeg(23) As Integer
-        Dim KalleimAeg(23) As Integer
+        Dim Index As Integer
         Dim GInfoKesk As Decimal
         PktType = -1
-        Dim Index As Integer
         For Index = 0 To Paketid.Count - 1 'loop selleks et leida cboxPakett1 valitud paketti indexi listist
             If Paketid(Index).ID <> Nothing Then
                 If cboxPakett1.Text = Paketid(Index).Nimi Then
@@ -53,8 +51,8 @@ Public Class FormLopphind
         GetInfo = New GraafikControl.CGraafikInfo
         Graafik1.ClearPoints()
         txtLoppHind.Text = Nothing
-        If flag = 0 Then
-            If PktType <> -1 Then
+        If flag = 0 Then 'on valitud lopphinna leidja
+            If PktType <> -1 Then 'kui pakett on leitud
                 Me.StructBors = ConnectDb.LoePakettBors(Paketid(Index).ID) 'Leitud indexiga paketi salvestatakse(olenevalt paketti tüübist) struckti ID, NIMI, JUURDETASU ja KUUTASU
                 GInfo = GetInfo.GetPaev(StructBors.ID, PktType)
                 For Index = 0 To GInfo.Count - 1
@@ -76,7 +74,7 @@ Public Class FormLopphind
                 txtLoppHind.Text = "Valige pakett"
                 Exit Sub
             End If
-        Else
+        Else 'on valitud borsihinna trendid
             If DateTime.Compare(dtpTrendAlgus.Value, dtpTrendLopp.Value) > 0 Then 'kas alguskuupäev on ikka enne lõppkuupäeva
                 MessageBox.Show("Alguskuupäev peab olema enne lõppkuupäeva!")
                 Return
@@ -99,9 +97,76 @@ Public Class FormLopphind
             End If
             GInfoKesk /= GInfo.Count
             lblTrendKesk.Text = GInfoKesk.ToString("N2") + (" s/kWh")
-
+            LeiaKalleimJaOdavaim()
         End If
     End Sub
+
+    Private Sub LeiaKalleimJaOdavaim()
+        Dim Index As Integer
+        Dim OdavaimAeg(24) As Integer
+        Dim KalleimAeg(24) As Integer
+        For Index = 0 To 23 'algvaartustame massiivi
+            OdavaimAeg(Index) = 0
+            KalleimAeg(Index) = 0
+        Next
+        Dim AlgAeg = New Date(dtpTrendAlgus.Value.Year, dtpTrendAlgus.Value.Month, dtpTrendAlgus.Value.Day, 0, 0, 0)
+        Dim LoppAeg = New Date(dtpTrendLopp.Value.Year, dtpTrendLopp.Value.Month, dtpTrendLopp.Value.Day, 0, 0, 0)
+        If AlgAeg = LoppAeg Then
+            If DaysInMonth(LoppAeg.Year, LoppAeg.Month) = LoppAeg.Day Then
+                If LoppAeg.Month = 12 Then
+                    LoppAeg = New Date(LoppAeg.Year + 1, 1, 1, 0, 0, 0)
+                Else
+                    LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month + 1, 1, 0, 0, 0)
+                End If
+            Else
+                LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
+            End If
+        Else
+            LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day, 0, 0, 0)
+        End If
+        Dim TS As New TimeSpan
+        TS = LoppAeg.Subtract(AlgAeg)
+        Dim Tunnid As Integer = TS.TotalHours
+        Dim Hinnad As New List(Of Decimal)
+        Dim J As Integer
+        For Index = 0 To Tunnid - 1 Step 24
+            Dim OdavaimH As Integer = 0
+            Dim KalleimH As Integer = 0
+            Hinnad = ConnectDb.LoeBorsihinnadSentkWh(AlgAeg, 24) 'loeme borshinnad andmebaasist
+            Dim OdavaimHind As Decimal = Hinnad.Item(0)
+            Dim KalleimHind As Decimal = Hinnad.Item(0)
+            For J = 0 To 23 'leiame antud paeval koige odavama ja kalleima kellaaja
+                If Hinnad.Item(J) < OdavaimHind Then
+                    OdavaimHind = Hinnad.Item(J)
+                    OdavaimH = J
+                End If
+                If Hinnad.Item(J) > KalleimHind Then
+                    KalleimHind = Hinnad.Item(J)
+                    KalleimH = J
+                End If
+            Next
+            OdavaimAeg(OdavaimH) += 1
+            KalleimAeg(KalleimH) += 1
+            AlgAeg = AlgAeg.AddDays(1)
+        Next
+        Dim OdavaimTundVal As Integer = OdavaimAeg(0)
+        Dim KalleimTundVal As Integer = KalleimAeg(0)
+        Dim OdavaimTund As Integer = 0
+        Dim KalleimTund As Integer = 0
+        For Index = 0 To 23
+            If OdavaimAeg(Index) > OdavaimTundVal Then
+                OdavaimTundVal = OdavaimAeg(Index)
+                OdavaimTund = Index
+            End If
+            If KalleimAeg(Index) > KalleimTundVal Then
+                KalleimTundVal = KalleimAeg(Index)
+                KalleimTund = Index
+            End If
+        Next
+        lblOdavaim.Text = OdavaimTund.ToString + (":00")
+        lblKalleim.Text = KalleimTund.ToString + (":00")
+    End Sub
+
     Private Sub btnArvuta_Click(sender As Object, e As EventArgs) Handles btnArvuta.Click
         Arvuta(0)
     End Sub

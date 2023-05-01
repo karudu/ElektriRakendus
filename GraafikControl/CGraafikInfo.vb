@@ -200,7 +200,7 @@ Public Class CGraafikInfo
                 LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
             End If
         Else
-            LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day, 0, 0, 0)
+            LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
         End If
         TS = LoppAeg.Subtract(AlgAeg)
         Dim Tunnid As Integer = TS.TotalHours
@@ -215,10 +215,10 @@ Public Class CGraafikInfo
                 For I = 0 To 23
                     Dim Info As (Aeg As String, Hind As Decimal)
                     Info.Aeg = AlgAeg.ToString("HH")
-                    If Flag = 1 Then
+                    If Flag = 0 Then
                         Info.Hind = (Hinnad.Item(I) / 10) + (StructBors.Juurdetasu)
                     Else
-                        Info.Hind = Hinnad.Item(I)
+                        Info.Hind = Hinnad.Item(I) / 10
                     End If
                     InfoList.Add(Info)
                     AlgAeg = AlgAeg.AddHours(1)
@@ -257,7 +257,11 @@ Public Class CGraafikInfo
                     Dim Info As (Aeg As String, Hind As Decimal)
                     Info.Aeg = AlgAeg.ToString("M")
                     While J < 24
-                        Info.Hind += (Hinnad.Item(I) / 10) + StructBors.Juurdetasu
+                        If Flag = 0 Then
+                            Info.Hind += (Hinnad.Item(I) / 10) + StructBors.Juurdetasu
+                        Else
+                            Info.Hind += Hinnad.Item(I) / 10
+                        End If
                         I += 1
                         J += 1
                         AlgAeg = AlgAeg.AddHours(1)

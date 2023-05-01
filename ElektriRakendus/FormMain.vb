@@ -108,7 +108,7 @@ Public Class FormMain
                     Return
                 End If
                 If PakettID1 <> Nothing Then
-                    GInfo1 = GraafikConnect.GetCustom(PakettID1, cmbPkt1Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value, 1)
+                    GInfo1 = GraafikConnect.GetCustom(PakettID1, cmbPkt1Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value, 0)
                     If GInfo1.Count > 50 Then
                         For I = 0 To GInfo1.Count - 1
                             If I Mod 5 = 0 Then
@@ -128,7 +128,7 @@ Public Class FormMain
                     lblPkt1Kesk.Text = GInfo1Kesk.ToString("N2") + " s/kWh"
                 End If
                 If PakettID2 <> Nothing Then
-                    GInfo2 = GraafikConnect.GetCustom(PakettID2, cmbPkt2Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value, 1)
+                    GInfo2 = GraafikConnect.GetCustom(PakettID2, cmbPkt2Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value, 0)
                     If GInfo2.Count > 50 Then
                         For I = 0 To GInfo2.Count - 1
                             If I Mod 5 = 0 Then
