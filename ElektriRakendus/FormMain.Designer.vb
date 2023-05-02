@@ -269,7 +269,7 @@ Partial Class FormMain
         Me.BtnLopphind.Name = "BtnLopphind"
         Me.BtnLopphind.Size = New System.Drawing.Size(322, 35)
         Me.BtnLopphind.TabIndex = 11
-        Me.BtnLopphind.Text = "Lõpphinna leidja"
+        Me.BtnLopphind.Text = "Lõpphinna leidja ja börsi trendid"
         Me.BtnLopphind.UseVisualStyleBackColor = True
         '
         'BtnKalkKodumasinad
