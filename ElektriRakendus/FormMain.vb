@@ -108,44 +108,48 @@ Public Class FormMain
                     Return
                 End If
                 If PakettID1 <> Nothing Then
-                    GInfo1 = GraafikConnect.GetCustom(PakettID1, cmbPkt1Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value)
-                    If GInfo1.Count > 50 Then
-                        For I = 0 To GInfo1.Count - 1
-                            If I Mod 5 = 0 Then
+                    GInfo1 = GraafikConnect.GetCustom(PakettID1, cmbPkt1Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value, 0)
+                    If GInfo1 IsNot Nothing Then
+                        If GInfo1.Count > 50 Then
+                            For I = 0 To GInfo1.Count - 1
+                                If I Mod 5 = 0 Then
+                                    Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                                Else
+                                    Graafik1.setPoint1(" ", GInfo1.Item(I).Yval)
+                                End If
+                                GInfo1Kesk += GInfo1.Item(I).Yval
+                            Next
+                        Else
+                            For I = 0 To GInfo1.Count - 1
                                 Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
-                            Else
-                                Graafik1.setPoint1(" ", GInfo1.Item(I).Yval)
-                            End If
-                            GInfo1Kesk += GInfo1.Item(I).Yval
-                        Next
-                    Else
-                        For I = 0 To GInfo1.Count - 1
-                            Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
-                            GInfo1Kesk += GInfo1.Item(I).Yval
-                        Next
+                                GInfo1Kesk += GInfo1.Item(I).Yval
+                            Next
+                        End If
+                        GInfo1Kesk = GInfo1Kesk / GInfo1.Count
+                        lblPkt1Kesk.Text = GInfo1Kesk.ToString("N2") + " s/kWh"
                     End If
-                    GInfo1Kesk = GInfo1Kesk / GInfo1.Count
-                    lblPkt1Kesk.Text = GInfo1Kesk.ToString("N2") + " s/kWh"
                 End If
                 If PakettID2 <> Nothing Then
-                    GInfo2 = GraafikConnect.GetCustom(PakettID2, cmbPkt2Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value)
-                    If GInfo2.Count > 50 Then
-                        For I = 0 To GInfo2.Count - 1
-                            If I Mod 5 = 0 Then
+                    GInfo2 = GraafikConnect.GetCustom(PakettID2, cmbPkt2Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value, 0)
+                    If GInfo2 IsNot Nothing Then
+                        If GInfo2.Count > 50 Then
+                            For I = 0 To GInfo2.Count - 1
+                                If I Mod 5 = 0 Then
+                                    Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                                Else
+                                    Graafik1.setPoint2(" ", GInfo2.Item(I).Yval)
+                                End If
+                                GInfo2Kesk += GInfo2.Item(I).Yval
+                            Next
+                        Else
+                            For I = 0 To GInfo2.Count - 1
                                 Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
-                            Else
-                                Graafik1.setPoint2(" ", GInfo2.Item(I).Yval)
-                            End If
-                            GInfo2Kesk += GInfo2.Item(I).Yval
-                        Next
-                    Else
-                        For I = 0 To GInfo2.Count - 1
-                            Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
-                            GInfo2Kesk += GInfo2.Item(I).Yval
-                        Next
+                                GInfo2Kesk += GInfo2.Item(I).Yval
+                            Next
+                        End If
+                        GInfo2Kesk = GInfo2Kesk / GInfo2.Count
+                        lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " s/kWh"
                     End If
-                    GInfo2Kesk = GInfo2Kesk / GInfo2.Count
-                    lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " s/kWh"
                 End If
         End Select
         'Toome parema keskmise hinna esile värviga

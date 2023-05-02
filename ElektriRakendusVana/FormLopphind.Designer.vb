@@ -22,7 +22,6 @@ Partial Class FormLopphind
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Graafik1 = New GraafikControl.Graafik()
         Me.btnArvuta = New System.Windows.Forms.Button()
         Me.lblAjavLopp = New System.Windows.Forms.Label()
         Me.cboxALTund = New System.Windows.Forms.ComboBox()
@@ -31,15 +30,22 @@ Partial Class FormLopphind
         Me.lblLoppHind = New System.Windows.Forms.Label()
         Me.txtLoppHind = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnTrendArvuta = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblDtpVahe = New System.Windows.Forms.Label()
+        Me.dtpTrendLopp = New System.Windows.Forms.DateTimePicker()
+        Me.dtpTrendAlgus = New System.Windows.Forms.DateTimePicker()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblTrendKesk = New System.Windows.Forms.Label()
+        Me.Graafik1 = New GraafikControl.Graafik()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblOdavaim = New System.Windows.Forms.Label()
+        Me.lblKalleim = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'Graafik1
-        '
-        Me.Graafik1.Location = New System.Drawing.Point(1, 243)
-        Me.Graafik1.Name = "Graafik1"
-        Me.Graafik1.Size = New System.Drawing.Size(1262, 363)
-        Me.Graafik1.TabIndex = 53
         '
         'btnArvuta
         '
@@ -83,9 +89,9 @@ Partial Class FormLopphind
         Me.lblPakett1.AutoSize = True
         Me.lblPakett1.Location = New System.Drawing.Point(17, 28)
         Me.lblPakett1.Name = "lblPakett1"
-        Me.lblPakett1.Size = New System.Drawing.Size(55, 16)
+        Me.lblPakett1.Size = New System.Drawing.Size(45, 16)
         Me.lblPakett1.TabIndex = 48
-        Me.lblPakett1.Text = "Pakett 1"
+        Me.lblPakett1.Text = "Pakett"
         '
         'lblLoppHind
         '
@@ -122,18 +128,146 @@ Partial Class FormLopphind
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Lõpphinna kalkulaator"
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.btnTrendArvuta)
+        Me.GroupBox2.Controls.Add(Me.Label2)
+        Me.GroupBox2.Controls.Add(Me.lblDtpVahe)
+        Me.GroupBox2.Controls.Add(Me.dtpTrendLopp)
+        Me.GroupBox2.Controls.Add(Me.dtpTrendAlgus)
+        Me.GroupBox2.Location = New System.Drawing.Point(414, 16)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(331, 190)
+        Me.GroupBox2.TabIndex = 56
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Börsihinna trendid"
+        '
+        'btnTrendArvuta
+        '
+        Me.btnTrendArvuta.Location = New System.Drawing.Point(26, 89)
+        Me.btnTrendArvuta.Name = "btnTrendArvuta"
+        Me.btnTrendArvuta.Size = New System.Drawing.Size(75, 23)
+        Me.btnTrendArvuta.TabIndex = 58
+        Me.btnTrendArvuta.Text = "Arvuta"
+        Me.btnTrendArvuta.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(23, 28)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(78, 16)
+        Me.Label2.TabIndex = 57
+        Me.Label2.Text = "Ajavahemik"
+        '
+        'lblDtpVahe
+        '
+        Me.lblDtpVahe.AutoSize = True
+        Me.lblDtpVahe.Location = New System.Drawing.Point(142, 66)
+        Me.lblDtpVahe.Name = "lblDtpVahe"
+        Me.lblDtpVahe.Size = New System.Drawing.Size(11, 16)
+        Me.lblDtpVahe.TabIndex = 56
+        Me.lblDtpVahe.Text = "-"
+        Me.lblDtpVahe.Visible = False
+        '
+        'dtpTrendLopp
+        '
+        Me.dtpTrendLopp.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpTrendLopp.Location = New System.Drawing.Point(159, 61)
+        Me.dtpTrendLopp.Name = "dtpTrendLopp"
+        Me.dtpTrendLopp.Size = New System.Drawing.Size(110, 22)
+        Me.dtpTrendLopp.TabIndex = 55
+        Me.dtpTrendLopp.Value = New Date(2023, 4, 17, 10, 39, 15, 0)
+        '
+        'dtpTrendAlgus
+        '
+        Me.dtpTrendAlgus.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpTrendAlgus.Location = New System.Drawing.Point(26, 61)
+        Me.dtpTrendAlgus.Name = "dtpTrendAlgus"
+        Me.dtpTrendAlgus.Size = New System.Drawing.Size(110, 22)
+        Me.dtpTrendAlgus.TabIndex = 54
+        Me.dtpTrendAlgus.Value = New Date(2023, 4, 17, 10, 39, 15, 0)
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(765, 44)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(97, 16)
+        Me.Label1.TabIndex = 57
+        Me.Label1.Text = "Keskmine hind:"
+        '
+        'lblTrendKesk
+        '
+        Me.lblTrendKesk.AutoSize = True
+        Me.lblTrendKesk.Location = New System.Drawing.Point(869, 44)
+        Me.lblTrendKesk.Name = "lblTrendKesk"
+        Me.lblTrendKesk.Size = New System.Drawing.Size(0, 16)
+        Me.lblTrendKesk.TabIndex = 58
+        '
+        'Graafik1
+        '
+        Me.Graafik1.Location = New System.Drawing.Point(1, 243)
+        Me.Graafik1.Name = "Graafik1"
+        Me.Graafik1.Size = New System.Drawing.Size(1262, 363)
+        Me.Graafik1.TabIndex = 53
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(765, 71)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(121, 16)
+        Me.Label3.TabIndex = 59
+        Me.Label3.Text = "Odavaim kellaaeg:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(765, 98)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(110, 16)
+        Me.Label4.TabIndex = 60
+        Me.Label4.Text = "Kalleim kellaaeg:"
+        '
+        'lblOdavaim
+        '
+        Me.lblOdavaim.AutoSize = True
+        Me.lblOdavaim.Location = New System.Drawing.Point(893, 71)
+        Me.lblOdavaim.Name = "lblOdavaim"
+        Me.lblOdavaim.Size = New System.Drawing.Size(0, 16)
+        Me.lblOdavaim.TabIndex = 61
+        '
+        'lblKalleim
+        '
+        Me.lblKalleim.AutoSize = True
+        Me.lblKalleim.Location = New System.Drawing.Point(893, 98)
+        Me.lblKalleim.Name = "lblKalleim"
+        Me.lblKalleim.Size = New System.Drawing.Size(0, 16)
+        Me.lblKalleim.TabIndex = 62
+        '
         'FormLopphind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1262, 673)
+        Me.Controls.Add(Me.lblKalleim)
+        Me.Controls.Add(Me.lblOdavaim)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.lblTrendKesk)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Graafik1)
         Me.Name = "FormLopphind"
         Me.Text = "Lõpphinna kakulaator"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Graafik1 As GraafikControl.Graafik
@@ -145,4 +279,16 @@ Partial Class FormLopphind
     Friend WithEvents lblLoppHind As Label
     Friend WithEvents txtLoppHind As TextBox
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents lblDtpVahe As Label
+    Friend WithEvents dtpTrendLopp As DateTimePicker
+    Friend WithEvents dtpTrendAlgus As DateTimePicker
+    Friend WithEvents btnTrendArvuta As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblTrendKesk As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents lblOdavaim As Label
+    Friend WithEvents lblKalleim As Label
 End Class
