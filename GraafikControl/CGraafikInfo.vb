@@ -209,6 +209,10 @@ Public Class CGraafikInfo
         'kontrollime kas algkuupäev on sama mis lõppkuupäev
         AlgAeg = New Date(AlgAeg.Year, AlgAeg.Month, AlgAeg.Day, 0, 0, 0)
         LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day, 0, 0, 0)
+        If DateTime.Compare(AlgAeg, LoppAeg) > 0 Then 'kas alguskuupäev on ikka enne lõppkuupäeva
+            MessageBox.Show("Alguskuupäev peab olema enne lõppkuupäeva!")
+            Return Nothing
+        End If
         If DaysInMonth(LoppAeg.Year, LoppAeg.Month) = LoppAeg.Day Then
             If LoppAeg.Month = 12 Then
                 LoppAeg = New Date(LoppAeg.Year + 1, 1, 1, 0, 0, 0)

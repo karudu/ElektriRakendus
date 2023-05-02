@@ -75,10 +75,6 @@ Public Class FormLopphind
                 Exit Sub
             End If
         Else 'on valitud borsihinna trendid
-            If DateTime.Compare(dtpTrendAlgus.Value, dtpTrendLopp.Value) > 0 Then 'kas alguskuupäev on ikka enne lõppkuupäeva
-                MessageBox.Show("Alguskuupäev peab olema enne lõppkuupäeva!")
-                Return
-            End If
             GInfo = GetInfo.GetCustom(StructBors.ID, PktType, dtpTrendAlgus.Value, dtpTrendLopp.Value, 1)
             If GInfo IsNot Nothing Then
                 If GInfo.Count > 50 Then

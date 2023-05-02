@@ -103,10 +103,10 @@ Public Class FormMain
                     lblPkt2Kesk.Text = GInfo2Kesk.ToString("N2") + " s/kWh"
                 End If
             Case 3
-                If DateTime.Compare(dtpAlgus.Value, dtpLopp.Value) > 0 Then 'kas alguskuupäev on ikka enne lõppkuupäeva
-                    MessageBox.Show("Alguskuupäev peab olema enne lõppkuupäeva!")
-                    Return
-                End If
+                'If DateTime.Compare(dtpAlgus.Value, dtpLopp.Value) > 0 Then 'kas alguskuupäev on ikka enne lõppkuupäeva
+                '    MessageBox.Show("Alguskuupäev peab olema enne lõppkuupäeva!")
+                '    Return
+                'End If
                 If PakettID1 <> Nothing Then
                     GInfo1 = GraafikConnect.GetCustom(PakettID1, cmbPkt1Tyyp.SelectedIndex, dtpAlgus.Value, dtpLopp.Value, 0)
                     If GInfo1 IsNot Nothing Then
@@ -301,7 +301,6 @@ Public Class FormMain
                     End If
                 Next
         End Select
-
         Return ID
     End Function
 
