@@ -218,6 +218,10 @@ Public Class CGraafikInfo
         Else
             LoppAeg = New Date(LoppAeg.Year, LoppAeg.Month, LoppAeg.Day + 1, 0, 0, 0)
         End If
+        If LoppAeg > Date.Now().AddDays(2) Then
+            MessageBox.Show("Lõppkuupäev liiga kaugel tulevikus!")
+            Return Nothing
+        End If
         TS = LoppAeg.Subtract(AlgAeg)
         Dim Tunnid As Integer = TS.TotalHours
         'kui on ainult 24 tundi vahet siis anname tundide lõikes andmed

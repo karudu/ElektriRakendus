@@ -80,24 +80,26 @@ Public Class FormLopphind
                 Return
             End If
             GInfo = GetInfo.GetCustom(StructBors.ID, PktType, dtpTrendAlgus.Value, dtpTrendLopp.Value, 1)
-            If GInfo.Count > 50 Then
-                For Index = 0 To GInfo.Count - 1
-                    If Index Mod 5 = 0 Then
+            If GInfo IsNot Nothing Then
+                If GInfo.Count > 50 Then
+                    For Index = 0 To GInfo.Count - 1
+                        If Index Mod 5 = 0 Then
+                            Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
+                        Else
+                            Graafik1.setPoint1(" ", GInfo.Item(Index).Yval)
+                        End If
+                        GInfoKesk += GInfo.Item(Index).Yval
+                    Next
+                Else
+                    For Index = 0 To GInfo.Count - 1
                         Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
-                    Else
-                        Graafik1.setPoint1(" ", GInfo.Item(Index).Yval)
-                    End If
-                    GInfoKesk += GInfo.Item(Index).Yval
-                Next
-            Else
-                For Index = 0 To GInfo.Count - 1
-                    Graafik1.setPoint1(GInfo.Item(Index).Xval, GInfo.Item(Index).Yval)
-                    GInfoKesk += GInfo.Item(Index).Yval
-                Next
+                        GInfoKesk += GInfo.Item(Index).Yval
+                    Next
+                End If
+                GInfoKesk /= GInfo.Count
+                lblTrendKesk.Text = GInfoKesk.ToString("N2") + (" s/kWh")
+                LeiaKalleimJaOdavaim()
             End If
-            GInfoKesk /= GInfo.Count
-            lblTrendKesk.Text = GInfoKesk.ToString("N2") + (" s/kWh")
-            LeiaKalleimJaOdavaim()
         End If
     End Sub
 
