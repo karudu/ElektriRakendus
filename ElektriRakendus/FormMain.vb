@@ -113,15 +113,15 @@ Public Class FormMain
                         If GInfo1.Count > 50 Then
                             For I = 0 To GInfo1.Count - 1
                                 If I Mod 5 = 0 Then
-                                    Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                                    Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval, GInfo1.Item(I).Xval)
                                 Else
-                                    Graafik1.setPoint1(" ", GInfo1.Item(I).Yval)
+                                    Graafik1.setPoint1(" ", GInfo1.Item(I).Yval, GInfo1.Item(I).Xval)
                                 End If
                                 GInfo1Kesk += GInfo1.Item(I).Yval
                             Next
                         Else
                             For I = 0 To GInfo1.Count - 1
-                                Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval)
+                                Graafik1.setPoint1(GInfo1.Item(I).Xval, GInfo1.Item(I).Yval, GInfo1.Item(I).Xval)
                                 GInfo1Kesk += GInfo1.Item(I).Yval
                             Next
                         End If
@@ -135,15 +135,15 @@ Public Class FormMain
                         If GInfo2.Count > 50 Then
                             For I = 0 To GInfo2.Count - 1
                                 If I Mod 5 = 0 Then
-                                    Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                                    Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval, GInfo2.Item(I).Xval)
                                 Else
-                                    Graafik1.setPoint2(" ", GInfo2.Item(I).Yval)
+                                    Graafik1.setPoint2(" ", GInfo2.Item(I).Yval, GInfo2.Item(I).Xval)
                                 End If
                                 GInfo2Kesk += GInfo2.Item(I).Yval
                             Next
                         Else
                             For I = 0 To GInfo2.Count - 1
-                                Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval)
+                                Graafik1.setPoint2(GInfo2.Item(I).Xval, GInfo2.Item(I).Yval, GInfo2.Item(I).Xval)
                                 GInfo2Kesk += GInfo2.Item(I).Yval
                             Next
                         End If
@@ -397,5 +397,18 @@ Public Class FormMain
         Else
             Uuenda_Graafik()
         End If
+    End Sub
+
+    ' Salvestab kõik graafikul olevad andmed CSV faili
+    Private Sub BtnSalvestaCsv_Click(sender As Object, e As EventArgs) Handles BtnSalvestaCsv.Click
+        ' Kontrolli, kas graafikul on midagi
+        If Graafik1.HasPoints = False Then
+            MessageBox.Show("Graafikul pole andmeid", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        ' Kuva salvestamise aken
+        Dim Form As New ElektriRakendus.FormSalvestaCsv
+        Form.Show()
     End Sub
 End Class

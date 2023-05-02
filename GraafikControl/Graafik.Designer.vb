@@ -72,18 +72,18 @@ Partial Class Graafik
         Me.HinnaGraafik.Series.Add(Series1)
         Me.HinnaGraafik.Series.Add(Series2)
         Me.HinnaGraafik.Series.Add(Series3)
-        Me.HinnaGraafik.Size = New System.Drawing.Size(1277, 359)
+        Me.HinnaGraafik.Size = New System.Drawing.Size(1437, 449)
         Me.HinnaGraafik.TabIndex = 0
         Me.HinnaGraafik.Text = "Chart1"
         '
         'Graafik
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.HinnaGraafik)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "Graafik"
-        Me.Size = New System.Drawing.Size(1280, 359)
+        Me.Size = New System.Drawing.Size(1440, 449)
         CType(Me.HinnaGraafik, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
