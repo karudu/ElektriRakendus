@@ -22,6 +22,7 @@ Partial Class FormRedaktorKodumasinad
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormRedaktorKodumasinad))
         Me.BtnKustutaMasin = New System.Windows.Forms.Button()
         Me.BtnMuudaMasin = New System.Windows.Forms.Button()
         Me.ListMasinad = New System.Windows.Forms.ListView()
@@ -94,6 +95,9 @@ Partial Class FormRedaktorKodumasinad
         Me.Controls.Add(Me.BtnMuudaMasin)
         Me.Controls.Add(Me.ListMasinad)
         Me.Controls.Add(Me.BtnLisaMasin)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormRedaktorKodumasinad"
         Me.Text = "Kodumasinad"
         Me.ResumeLayout(False)

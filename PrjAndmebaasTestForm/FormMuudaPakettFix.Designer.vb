@@ -93,7 +93,10 @@ Partial Class FormMuudaPakettFix
         Me.Controls.Add(Me.TxtPTariif)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnLisa)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormMuudaPakettFix"
+        Me.ShowIcon = False
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -22,6 +22,7 @@ Partial Class FormKodumasinKalkulaator
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormKodumasinKalkulaator))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LblAeg = New System.Windows.Forms.Label()
@@ -47,9 +48,9 @@ Partial Class FormKodumasinKalkulaator
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(13, 41)
+        Me.Label1.Location = New System.Drawing.Point(15, 51)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(74, 16)
+        Me.Label1.Size = New System.Drawing.Size(88, 20)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Kodumasin"
         '
@@ -66,9 +67,11 @@ Partial Class FormKodumasinKalkulaator
         Me.GroupBox1.Controls.Add(Me.ComboBox2)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(22, 35)
+        Me.GroupBox1.Location = New System.Drawing.Point(25, 44)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(371, 319)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GroupBox1.Size = New System.Drawing.Size(417, 399)
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Valikud"
@@ -76,18 +79,18 @@ Partial Class FormKodumasinKalkulaator
         'LblAeg
         '
         Me.LblAeg.AutoSize = True
-        Me.LblAeg.Location = New System.Drawing.Point(215, 75)
+        Me.LblAeg.Location = New System.Drawing.Point(242, 94)
         Me.LblAeg.Name = "LblAeg"
-        Me.LblAeg.Size = New System.Drawing.Size(38, 16)
+        Me.LblAeg.Size = New System.Drawing.Size(47, 20)
         Me.LblAeg.TabIndex = 17
         Me.LblAeg.Text = "0 min"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(171, 75)
+        Me.Label7.Location = New System.Drawing.Point(192, 94)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(32, 20)
+        Me.Label7.Size = New System.Drawing.Size(40, 24)
         Me.Label7.TabIndex = 16
         Me.Label7.Text = "Aeg:"
         Me.Label7.UseCompatibleTextRendering = True
@@ -95,18 +98,18 @@ Partial Class FormKodumasinKalkulaator
         'LblVoimsus
         '
         Me.LblVoimsus.AutoSize = True
-        Me.LblVoimsus.Location = New System.Drawing.Point(81, 75)
+        Me.LblVoimsus.Location = New System.Drawing.Point(91, 94)
         Me.LblVoimsus.Name = "LblVoimsus"
-        Me.LblVoimsus.Size = New System.Drawing.Size(30, 16)
+        Me.LblVoimsus.Size = New System.Drawing.Size(37, 20)
         Me.LblVoimsus.TabIndex = 15
         Me.LblVoimsus.Text = "0 W"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(13, 75)
+        Me.Label2.Location = New System.Drawing.Point(15, 94)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(62, 16)
+        Me.Label2.Size = New System.Drawing.Size(74, 20)
         Me.Label2.TabIndex = 14
         Me.Label2.Text = "Võimsus:"
         '
@@ -114,16 +117,18 @@ Partial Class FormKodumasinKalkulaator
         '
         Me.comboMasin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.comboMasin.FormattingEnabled = True
-        Me.comboMasin.Location = New System.Drawing.Point(178, 33)
+        Me.comboMasin.Location = New System.Drawing.Point(200, 41)
+        Me.comboMasin.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.comboMasin.Name = "comboMasin"
-        Me.comboMasin.Size = New System.Drawing.Size(155, 24)
+        Me.comboMasin.Size = New System.Drawing.Size(174, 28)
         Me.comboMasin.TabIndex = 13
         '
         'Arvuta
         '
-        Me.Arvuta.Location = New System.Drawing.Point(258, 268)
+        Me.Arvuta.Location = New System.Drawing.Point(290, 335)
+        Me.Arvuta.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Arvuta.Name = "Arvuta"
-        Me.Arvuta.Size = New System.Drawing.Size(75, 23)
+        Me.Arvuta.Size = New System.Drawing.Size(84, 29)
         Me.Arvuta.TabIndex = 9
         Me.Arvuta.Text = "Arvuta"
         Me.Arvuta.UseVisualStyleBackColor = True
@@ -132,11 +137,11 @@ Partial Class FormKodumasinKalkulaator
         '
         Me.ListBors.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Nimi})
         Me.ListBors.HideSelection = False
-        Me.ListBors.Location = New System.Drawing.Point(6, 182)
+        Me.ListBors.Location = New System.Drawing.Point(7, 228)
         Me.ListBors.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListBors.MultiSelect = False
         Me.ListBors.Name = "ListBors"
-        Me.ListBors.Size = New System.Drawing.Size(203, 109)
+        Me.ListBors.Size = New System.Drawing.Size(228, 135)
         Me.ListBors.TabIndex = 12
         Me.ListBors.UseCompatibleStateImageBehavior = False
         Me.ListBors.View = System.Windows.Forms.View.Details
@@ -149,9 +154,9 @@ Partial Class FormKodumasinKalkulaator
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(13, 115)
+        Me.Label6.Location = New System.Drawing.Point(15, 144)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(109, 16)
+        Me.Label6.Size = New System.Drawing.Size(132, 20)
         Me.Label6.TabIndex = 8
         Me.Label6.Text = "Elektripaketi tüüp"
         '
@@ -160,34 +165,36 @@ Partial Class FormKodumasinKalkulaator
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Items.AddRange(New Object() {"Börsipakett", "Fikseeritud", "Universaalteenus"})
-        Me.ComboBox2.Location = New System.Drawing.Point(178, 107)
+        Me.ComboBox2.Location = New System.Drawing.Point(200, 134)
+        Me.ComboBox2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(155, 24)
+        Me.ComboBox2.Size = New System.Drawing.Size(174, 28)
         Me.ComboBox2.TabIndex = 7
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 150)
+        Me.Label4.Location = New System.Drawing.Point(7, 188)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(56, 16)
+        Me.Label4.Size = New System.Drawing.Size(66, 20)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Paketid:"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(89, 38)
+        Me.Label5.Location = New System.Drawing.Point(100, 48)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(63, 16)
+        Me.Label5.Size = New System.Drawing.Size(75, 20)
         Me.Label5.TabIndex = 8
         Me.Label5.Text = "Lõpphind"
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(171, 32)
+        Me.TextBox4.Location = New System.Drawing.Point(192, 40)
+        Me.TextBox4.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(100, 22)
+        Me.TextBox4.Size = New System.Drawing.Size(112, 26)
         Me.TextBox4.TabIndex = 7
         '
         'GroupBox2
@@ -196,38 +203,45 @@ Partial Class FormKodumasinKalkulaator
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.TextBox4)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Location = New System.Drawing.Point(22, 360)
+        Me.GroupBox2.Location = New System.Drawing.Point(25, 450)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(371, 114)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GroupBox2.Size = New System.Drawing.Size(417, 142)
         Me.GroupBox2.TabIndex = 10
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Tulemus"
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(171, 69)
+        Me.TextBox1.Location = New System.Drawing.Point(192, 86)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 22)
+        Me.TextBox1.Size = New System.Drawing.Size(112, 26)
         Me.TextBox1.TabIndex = 9
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(31, 75)
+        Me.Label3.Location = New System.Drawing.Point(35, 94)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(121, 16)
+        Me.Label3.Size = New System.Drawing.Size(146, 20)
         Me.Label3.TabIndex = 10
         Me.Label3.Text = "Kuuhind (30 päeva)"
         '
-        'Form2
+        'FormKodumasinKalkulaator
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(403, 478)
+        Me.ClientSize = New System.Drawing.Size(453, 598)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Name = "Form2"
-        Me.Text = "Form2"
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "FormKodumasinKalkulaator"
+        Me.Text = "Kodumasina tarbimine"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)

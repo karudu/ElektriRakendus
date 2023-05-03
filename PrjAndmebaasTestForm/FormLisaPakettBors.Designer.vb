@@ -103,7 +103,10 @@ Partial Class FormLisaPakettBors
         Me.Controls.Add(Me.TxtJuurdetasu)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnLisa)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormLisaPakettBors"
+        Me.ShowIcon = False
         Me.Text = "Lisa börsipakett"
         Me.ResumeLayout(False)
         Me.PerformLayout()

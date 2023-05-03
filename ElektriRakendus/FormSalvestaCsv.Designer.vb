@@ -168,7 +168,10 @@ Partial Class FormSalvestaCsv
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TxtEraldaja)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormSalvestaCsv"
+        Me.ShowIcon = False
         Me.Text = "Salvesta andmed CSV faili..."
         Me.ResumeLayout(False)
         Me.PerformLayout()

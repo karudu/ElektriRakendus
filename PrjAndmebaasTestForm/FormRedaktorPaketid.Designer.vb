@@ -22,6 +22,7 @@ Partial Class FormRedaktorPaketid
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormRedaktorPaketid))
         Me.BtnLisaBors = New System.Windows.Forms.Button()
         Me.BtnLisaUniv = New System.Windows.Forms.Button()
         Me.BtnLisaFix = New System.Windows.Forms.Button()
@@ -107,7 +108,6 @@ Partial Class FormRedaktorPaketid
         'ListFix
         '
         Me.ListFix.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader7})
-        Me.ListFix.Enabled = False
         Me.ListFix.HideSelection = False
         Me.ListFix.Location = New System.Drawing.Point(28, 226)
         Me.ListFix.MultiSelect = False
@@ -268,6 +268,9 @@ Partial Class FormRedaktorPaketid
         Me.Controls.Add(Me.BtnLisaFix)
         Me.Controls.Add(Me.BtnLisaUniv)
         Me.Controls.Add(Me.BtnLisaBors)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormRedaktorPaketid"
         Me.Text = "Elektripaketid"
         Me.ResumeLayout(False)

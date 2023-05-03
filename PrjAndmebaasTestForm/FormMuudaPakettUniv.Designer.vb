@@ -124,7 +124,10 @@ Partial Class FormMuudaPakettUniv
         Me.Controls.Add(Me.TxtBaas)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnLisa)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormMuudaPakettUniv"
+        Me.ShowIcon = False
         Me.Text = "Muuda universaalpaketti"
         Me.ResumeLayout(False)
         Me.PerformLayout()

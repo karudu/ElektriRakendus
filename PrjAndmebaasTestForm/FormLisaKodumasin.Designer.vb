@@ -103,7 +103,10 @@ Partial Class FormLisaKodumasin
         Me.Controls.Add(Me.TxtVoimsus)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnLisa)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormLisaKodumasin"
+        Me.ShowIcon = False
         Me.Text = "Lisa kodumasin"
         Me.ResumeLayout(False)
         Me.PerformLayout()

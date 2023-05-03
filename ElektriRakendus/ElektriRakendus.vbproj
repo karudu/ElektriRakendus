@@ -47,6 +47,9 @@
   <PropertyGroup>
     <OptionInfer>Off</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSVExporterDNF">
       <HintPath>..\CSVExporterDNF.dll</HintPath>
@@ -160,6 +163,9 @@
       <Project>{775C52B3-03C0-4D8F-A6C2-3D4B9301E579}</Project>
       <Name>GraafikControl</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

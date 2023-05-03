@@ -124,7 +124,10 @@ Partial Class FormLisaPakettUniv
         Me.Controls.Add(Me.TxtBaas)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnLisa)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormLisaPakettUniv"
+        Me.ShowIcon = False
         Me.Text = "Lisa universaalpakett"
         Me.ResumeLayout(False)
         Me.PerformLayout()

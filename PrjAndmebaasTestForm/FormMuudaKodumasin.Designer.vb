@@ -103,7 +103,10 @@ Partial Class FormMuudaKodumasin
         Me.Controls.Add(Me.TxtVoimsus)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnMuuda)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormMuudaKodumasin"
+        Me.ShowIcon = False
         Me.Text = "Muuda kodumasinat"
         Me.ResumeLayout(False)
         Me.PerformLayout()

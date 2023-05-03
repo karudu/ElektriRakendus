@@ -103,7 +103,10 @@ Partial Class FormMuudaPakettBors
         Me.Controls.Add(Me.TxtJuurdetasu)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnLisa)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormMuudaPakettBors"
+        Me.ShowIcon = False
         Me.Text = "Muuda börsipaketti"
         Me.ResumeLayout(False)
         Me.PerformLayout()
