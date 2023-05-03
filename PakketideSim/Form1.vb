@@ -15,49 +15,65 @@ Public Class Form1
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim CSV As PakketideSim.Interface1
+        CSV = New PakketideSim.Class1
+        Dim GInfo1 As List(Of (Kuupäev As String, algAeg As String, loppAeg As String, Voimsus_kWh As Decimal))
         Dim ofd As OpenFileDialog = New OpenFileDialog() With {.Filter = "Text file|*.CSV"}
+
+        'If ofd.ShowDialog() = DialogResult.OK Then
+        '    Dim CS As List(Of Class1) = New List(Of Class1)
+        '    Dim lines As List(Of String) = File.ReadAllLines(ofd.FileName).ToList
+        '    Dim h As Integer = 1
+
+        '    nupp = True
+        '    For i As Integer = 1 To lines.Count - 1
+
+        '        Dim data As String() = lines(i).Split(",")
+        '        Dim isValidDate As Boolean = IsDate(data(0))
+        '        If isValidDate = False Then 'kontroll kas kuupäeval on korektne forormaat'
+
+        '            MessageBox.Show("CSV failis on vigane kuupäev ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        '            MessageBox.Show(" Vigane osa " + data(0) + " viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        '            Exit Sub
+        '        End If
+        '        If IsNumeric(data(1)) = False Then 'kontroll kas võõimsuses on numbrid ikka'
+        '            MessageBox.Show("CSV failis on vigane võimsus ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        '            MessageBox.Show(" Vigane osa " + data(1) + " viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        '            Exit Sub
+        '        End If
+
+
+        '        CS.Add(New Class1() With {'lisab andmed  DataGridView1'
+        '        .Kuupäev = data(0),'lisab kuupaeva  DataGridView1'
+        '            .Voimsus_kWh = data(1)'lisab voimsuse  DataGridView1'
+        '        })
+        '        If i = h Then
+        '            lopp = data(0)
+        '        End If
+        '        If h = 1 Then
+        '            Algus = data(0)
+
+        '        End If
+        '        h = h + 1
+        '    Next
+        '    ''DataGridView1.DataSource = CS
+
+
+        'End If
+
         If ofd.ShowDialog() = DialogResult.OK Then
-            Dim CSV As List(Of Class1) = New List(Of Class1)
             Dim lines As List(Of String) = File.ReadAllLines(ofd.FileName).ToList
-            Dim h As Integer = 1
+            GInfo1 = CSV.LoeCSV(lines, ofd)
+            If GInfo1.Count < 0 Then
 
-
-            nupp = True
-            For i As Integer = 1 To lines.Count - 1
-
-                Dim data As String() = lines(i).Split(",")
-                Dim isValidDate As Boolean = IsDate(data(0))
-                If isValidDate = False Then 'kontroll kas kuupäeval on korektne forormaat'
-
-                    MessageBox.Show("CSV failis on vigane kuupäev ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    MessageBox.Show(" Vigane osa " + data(0) + " viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Exit Sub
-                End If
-                If IsNumeric(data(1)) = False Then 'kontroll kas võõimsuses on numbrid ikka'
-                    MessageBox.Show("CSV failis on vigane võimsus ", "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    MessageBox.Show(" Vigane osa " + data(1) + " viga asub real" + (i + 1).ToString, "Viga", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Exit Sub
-                End If
-
-
-                CSV.Add(New Class1() With {'lisab andmed  DataGridView1'
-                .Kuupäev = data(0),'lisab kuupaeva  DataGridView1'
-                    .Voimsus_kWh = data(1)'lisab voimsuse  DataGridView1'
-                })
-                If i = h Then
-                    lopp = data(0)
-                End If
-                If h = 1 Then
-                    Algus = data(0)
-
-                End If
-                h = h + 1
+                Exit Sub
+            End If
+            For i As Integer = 1 To GInfo1.Count - 1
+                TextBox1.Text = "viga" & i
+                DataGridView1.DataSource = GInfo1
             Next
-            DataGridView1.DataSource = CSV
 
         End If
-
-
 
     End Sub
 
