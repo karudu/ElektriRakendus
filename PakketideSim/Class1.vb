@@ -5,11 +5,10 @@ Public Class Class1
     'Public Property Kuupäev As String
     ' Public Property Voimsus_kWh As Decimal
 
-    Public Function LoeCSV(Lines As List(Of String), ofd As OpenFileDialog) As List(Of (Kuupäev As String, algAeg As String, loppAeg As String, Voimsus_kWh As Decimal)) Implements Interface1.LoeCSV
+    Public Function LoeCSV(Lines As List(Of String), ofd As OpenFileDialog) As List(Of (Kuupäev As String, Voimsus_kWh As Decimal)) Implements Interface1.LoeCSV
 
-        Dim CSVinfo As New List(Of (Kuupäev As String, algAeg As String, loppAeg As String, Voimsus_kWh As Decimal))
-        Dim Info As (Kuupäev As String, algAeg As String, loppAeg As String, Voimsus_kWh As Decimal)
-        Dim h As Integer = 1
+        Dim CSVinfo As New List(Of (Kuupäev As String, Voimsus_kWh As Decimal))
+        Dim Info As (Kuupäev As String, Voimsus_kWh As Decimal)
 
 
 
@@ -32,14 +31,6 @@ Public Class Class1
             Info.Kuupäev = data(0) 'lisab kuupaeva  DataGridView1'
             Info.Voimsus_kWh = data(1) 'lisab voimsuse  DataGridView1'
 
-            If i = h Then
-                Info.loppAeg = data(0)
-            End If
-            If h = 1 Then
-                Info.algAeg = data(0)
-
-            End If
-            h = h + 1
             CSVinfo.Add(Info)
         Next
 

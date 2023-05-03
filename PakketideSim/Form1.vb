@@ -5,6 +5,7 @@ Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Security.Cryptography
 Imports System.Windows.Forms.LinkLabel
 Imports System.Net.Security
+Imports System.Reflection
 
 Public Class Form1
 
@@ -17,15 +18,19 @@ Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim CSV As PakketideSim.Interface1
         CSV = New PakketideSim.Class1
-        Dim GInfo1 As List(Of (Kuupäev As String, algAeg As String, loppAeg As String, Voimsus_kWh As Decimal))
+        Dim Gcsv1 As List(Of (Kuupäev As String, Voimsus_kWh As Decimal))
         Dim ofd As OpenFileDialog = New OpenFileDialog() With {.Filter = "Text file|*.CSV"}
+        Dim table As New DataTable()
+        table.Columns.Add("FirstName", GetType(String))
+        table.Columns.Add("Voimsus", GetType(Decimal))
+        nupp = True
 
         'If ofd.ShowDialog() = DialogResult.OK Then
         '    Dim CS As List(Of Class1) = New List(Of Class1)
         '    Dim lines As List(Of String) = File.ReadAllLines(ofd.FileName).ToList
         '    Dim h As Integer = 1
 
-        '    nupp = True
+        '   
         '    For i As Integer = 1 To lines.Count - 1
 
         '        Dim data As String() = lines(i).Split(",")
@@ -63,16 +68,20 @@ Public Class Form1
 
         If ofd.ShowDialog() = DialogResult.OK Then
             Dim lines As List(Of String) = File.ReadAllLines(ofd.FileName).ToList
-            GInfo1 = CSV.LoeCSV(lines, ofd)
-            If GInfo1.Count < 0 Then
+            Gcsv1 = CSV.LoeCSV(lines, ofd)
+            For i As Integer = 1 To Gcsv1.Count - 1
+                table.Rows.Add({Gcsv1.Item(i).Kuupäev, Gcsv1.Item(i).Voimsus_kWh})
+                If i = 1 Then
+                    Algus = Gcsv1.Item(i).Kuupäev
+                End If
+                If i = Gcsv1.Count - 1 Then
+                    lopp = Gcsv1.Item(i).Kuupäev
+                End If
 
-                Exit Sub
-            End If
-            For i As Integer = 1 To GInfo1.Count - 1
-                TextBox1.Text = "viga" & i
-                DataGridView1.DataSource = GInfo1
+
             Next
-
+            DataGridView1.DataSource = table
+            Console.WriteLine(lopp)
         End If
 
     End Sub
@@ -136,7 +145,7 @@ Public Class Form1
 
                 Dim kuupaev1 As Date = DataGridView1.Rows(I).Cells(0).Value.ToString()
                 Dim kuupaev2 As Date
-
+                Console.WriteLine(DataGridView1.Rows(I).Cells(0).Value.ToString())
 
                 If Not (DateTime.Compare(kuupaev1, kuupaev2.AddDays(1)) = 0) And Not I = 0 Then
 
@@ -151,6 +160,7 @@ Public Class Form1
                 Graafik1.setPoint1(GInfo1.Item(I).Xval, (GInfo1.Item(I).Yval * CDec(DataGridView1.Rows(I).Cells(1).Value.ToString()) / 100))
                 GInfo1Kesk += GInfo1.Item(I).Yval * CDec(DataGridView1.Rows(I).Cells(1).Value.ToString()) / 100
             Next
+
             GInfo1Kesk = GInfo1Kesk / GInfo1.Count
             lblPkt1Kesk.Text = GInfo1Kesk.ToString("N2") + " €/kWh"
         End If
@@ -349,14 +359,6 @@ Public Class Form1
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
-
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub TextBox1_TextChanged_1(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
 
     End Sub
 End Class
