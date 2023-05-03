@@ -303,37 +303,37 @@ Public Class FormMain
         End Select
         Return ID
     End Function
-
+    ' Ava elektripakettide redaktor
     Private Sub BtnPaketid_Click(sender As Object, e As EventArgs) Handles BtnPaketid.Click
         Dim Form As New PrjAndmebaasTestForm.FormRedaktorPaketid
         Form.Show()
     End Sub
-
+    ' Ava kodumasinate redaktor
     Private Sub BtnMasinad_Click(sender As Object, e As EventArgs) Handles BtnMasinad.Click
         Dim Form As New PrjAndmebaasTestForm.FormRedaktorKodumasinad
         Form.Show()
     End Sub
-
+    ' Ava kodumasinate kalkulaatori aken
     Private Sub BtnKalkKodumasinad_Click(sender As Object, e As EventArgs) Handles BtnKalkKodumasinad.Click
         Dim Form As New KodumasinKalkulaator.FormKodumasinKalkulaator
         Form.Show()
     End Sub
-
+    ' Ava lõpphinna leidja ja trendide aken
     Private Sub BtnLopphind_Click(sender As Object, e As EventArgs) Handles BtnLopphind.Click
         Dim Form As New PakettideVordlus.FormLopphind
         Form.Show()
     End Sub
-
+    ' Ava hindade võrdleja aken
     Private Sub BtnVordleja_Click(sender As Object, e As EventArgs) Handles BtnVordleja.Click
         Dim Form As New PakettideVordlus.FormPakettideVordlus
         Form.Show()
     End Sub
-
+    ' Ava elektriauto kalkulaatorite aken
     Private Sub BtnElektriauto_Click(sender As Object, e As EventArgs) Handles BtnElektriauto.Click
         Dim Form As New PrjLaadijaKalkulaator.Form1
         Form.Show()
     End Sub
-
+    ' Ava tarbimise hinna kalkulaatori aken
     Private Sub BtnHinnaKalkulaator_Click(sender As Object, e As EventArgs) Handles BtnHinnaKalkulaator.Click
         Dim Form As New KodumasinKalkulaator.FormHinnaKalkulaator
         Form.Show()

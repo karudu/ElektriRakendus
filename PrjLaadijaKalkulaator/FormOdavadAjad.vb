@@ -31,7 +31,11 @@ Public Class FormOdavadAjad
         End If
 
         Dim Borsihinnad As New List(Of Decimal)
-        Borsihinnad = Andmebaas.LoeBorsihinnadSentkWh(Kuupaev, 24)
+        Try
+            Borsihinnad = Andmebaas.LoeBorsihinnadSentkWh(Kuupaev, 24)
+        Catch ex As Exception
+            Exit Sub
+        End Try
 
         Dim Aeg As Date = AlgusAeg
         Dim Ajad As New List(Of (Nimi As String, Hind As Decimal))

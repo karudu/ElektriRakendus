@@ -84,7 +84,11 @@ Public Class FormHinnaKalkulaator
 
         ' Loe börsihinnad
         Dim HindI = 0
-        Hinnad = Andmebaas.LoeBorsihinnadSentkWh(AlgusAeg, NHinnad)
+        Try
+            Hinnad = Andmebaas.LoeBorsihinnadSentkWh(AlgusAeg, NHinnad)
+        Catch ex As Exception
+            Return 0
+        End Try
 
         ' Arvuta koguhind
         If Not ETund = 0 Then

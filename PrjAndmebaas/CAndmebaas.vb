@@ -1,5 +1,18 @@
-﻿Imports System.Data.OleDb
+﻿'FAILINIMI: CAndmebaas.vb
+'AUTOR:     Karl Udu
+'LOODUD:    20.03.2023
+'MUUDETUD:  03.05.2023
+'
+'KIRJELDUS: Klass andmebaasiga liidestamiseks, võimalik on
+'           lisada, muuta ja kustutada elektripakette ja kodumasinaid.
+'           Lisaks on meetodid Elering'i API kaudu börsihindade lugemiseks.
+'EELTINGIMUSED: Andmebaasi objektide (paketid, kodumasinad) poole pöördumiseks
+'               on vaja teada ID'sid, nende lugemiseks on meetodid olemas.
+
+Imports System.Data.OleDb
 Imports System.Net
+Imports System.Security.Cryptography
+Imports System.Windows.Forms
 Imports Microsoft.VisualBasic.FileIO
 Imports Newtonsoft.Json
 Public Class CAndmebaas
@@ -8,17 +21,21 @@ Public Class CAndmebaas
     Private GConnection As OleDbConnection
     Private FormLoading As FormLoading
 
+    ' Loe nimekiri kõikidest andmebaasis olevatest elektripakettidest
     Public Function LoePakettideNimekiri() As List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)) Implements IAndmebaas.LoePakettideNimekiri
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
+
         Try
             Dim Connection As New OleDbConnection
             With Connection
+                ' Andmebaasist lugemise käsk
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
                 Dim Cmd As New OleDbCommand
                 Dim Reader As OleDbDataReader
 
+                ' Loe kõik börsipaketid
                 With Cmd
                     .Connection = Connection
                     .CommandType = CommandType.Text
@@ -26,6 +43,8 @@ Public Class CAndmebaas
                     Reader = .ExecuteReader
                 End With
                 Cmd.Dispose()
+
+                ' Loe tagastatud paketid ja lisa need nimekirja
                 While Reader.Read()
                     Dim Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)
                     Pakett.ID = Reader("ID")
@@ -35,6 +54,7 @@ Public Class CAndmebaas
                 End While
                 Reader.Close()
 
+                ' Loe kõik fikseeritud paketid
                 With Cmd
                     .Connection = Connection
                     .CommandType = CommandType.Text
@@ -42,6 +62,8 @@ Public Class CAndmebaas
                     Reader = .ExecuteReader
                 End With
                 Cmd.Dispose()
+
+                ' Loe tagastatud paketid ja lisa need nimekirja
                 While Reader.Read()
                     Dim Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)
                     Pakett.ID = Reader("ID")
@@ -51,6 +73,7 @@ Public Class CAndmebaas
                 End While
                 Reader.Close()
 
+                ' Loe kõik universaalpaketid
                 With Cmd
                     .Connection = Connection
                     .CommandType = CommandType.Text
@@ -58,6 +81,8 @@ Public Class CAndmebaas
                     Reader = .ExecuteReader
                 End With
                 Cmd.Dispose()
+
+                ' Loe tagastatud paketid ja lisa need nimekirja
                 While Reader.Read()
                     Dim Pakett As (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp)
                     Pakett.ID = Reader("ID")
@@ -77,7 +102,7 @@ Public Class CAndmebaas
             Return Paketid
         End Try
     End Function
-
+    ' Loe andmebaasist ühe börsipaketi andmed
     Function LoePakettBors(ID As Integer) As IAndmebaas.PkBors Implements IAndmebaas.LoePakettBors
         Dim Pakett As New IAndmebaas.PkBors
         Try
@@ -86,9 +111,11 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Paketi lugemise käsk
                 Dim Cmd As New OleDbCommand
                 Dim Reader As OleDbDataReader
 
+                ' Loe antud börsipakett
                 With Cmd
                     .Connection = Connection
                     .CommandType = CommandType.Text
@@ -99,6 +126,7 @@ Public Class CAndmebaas
                 End With
                 Cmd.Dispose()
 
+                ' Loe tagastatud väärtused
                 Reader.Read()
                 Pakett.ID = Reader("ID")
                 Pakett.Nimi = Reader("nimi").ToString
@@ -116,7 +144,7 @@ Public Class CAndmebaas
             Return Pakett
         End Try
     End Function
-
+    ' Loe andmebaasist ühe fikseeritud paketi andmed
     Public Function LoePakettFix(ID As Integer) As IAndmebaas.PkFix Implements IAndmebaas.LoePakettFix
         Dim Pakett As New IAndmebaas.PkFix
         Try
@@ -125,9 +153,11 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Paketi lugemise käsk
                 Dim Cmd As New OleDbCommand
                 Dim Reader As OleDbDataReader
 
+                ' Loe antud fikseeritud pakett
                 With Cmd
                     .Connection = Connection
                     .CommandType = CommandType.Text
@@ -138,6 +168,7 @@ Public Class CAndmebaas
                 End With
                 Cmd.Dispose()
 
+                ' Loe tagastatud väärtused
                 Reader.Read()
                 Pakett.ID = Reader("ID")
                 Pakett.Nimi = Reader("nimi").ToString
@@ -156,7 +187,7 @@ Public Class CAndmebaas
             Return Pakett
         End Try
     End Function
-
+    ' Loe andmebaasist ühe universaalpaketi andmed
     Public Function LoePakettUniv(ID As Integer) As IAndmebaas.PkUniv Implements IAndmebaas.LoePakettUniv
         Dim Pakett As New IAndmebaas.PkUniv
         Try
@@ -165,9 +196,11 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Paketi lugemise käsk
                 Dim Cmd As New OleDbCommand
                 Dim Reader As OleDbDataReader
 
+                ' Loe antud universaalpakett
                 With Cmd
                     .Connection = Connection
                     .CommandType = CommandType.Text
@@ -178,6 +211,7 @@ Public Class CAndmebaas
                 End With
                 Cmd.Dispose()
 
+                ' Loe tagastatud väärtused
                 Reader.Read()
                 Pakett.ID = Reader("ID")
                 Pakett.Nimi = Reader("nimi").ToString
@@ -196,18 +230,19 @@ Public Class CAndmebaas
             Return Pakett
         End Try
     End Function
-
+    ' Loe nimekiri kõikidest andmebaasis olevatest kodumasinatest ja nende andmetest
     Public Function LoeKodumasinad() As List(Of IAndmebaas.Kodumasin) Implements IAndmebaas.LoeKodumasinad
         Dim Kodumasinad As New List(Of IAndmebaas.Kodumasin)
         Try
             Dim Connection As New OleDbConnection
             With Connection
+                ' Andmebaasist lugemise käsk
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
                 Dim Cmd As New OleDbCommand
                 Dim Reader As OleDbDataReader
-
+                ' Loe kõik kodumasinad
                 With Cmd
                     .Connection = Connection
                     .CommandType = CommandType.Text
@@ -215,6 +250,8 @@ Public Class CAndmebaas
                     Reader = .ExecuteReader
                 End With
                 Cmd.Dispose()
+
+                ' Loe tagastatud kodumasinad ja lisa need nimekirja
                 While Reader.Read()
                     Dim Kodumasin As IAndmebaas.Kodumasin
                     Kodumasin.ID = Reader("ID")
@@ -239,6 +276,7 @@ Public Class CAndmebaas
     Private Const KAIBEMAKS = 1.2 ' 20%
     Private LugemineOK As Boolean
     ' Loe alates mingist ajast N tunni jagu börsihindu
+    ' Kui hindade lugemine ebaõnnestus (internetiühendus puudub), siis tagastatakse exception
     Public Function LoeBorsihinnad(AlgusAeg As Date, Tunnid As Integer) As List(Of Decimal) Implements IAndmebaas.LoeBorsihinnad
         Dim Hinnad As New List(Of Decimal)
 
@@ -253,16 +291,21 @@ Public Class CAndmebaas
             .ConnectionString = LoeConnectionString()
             .Open()
 
-            ' Kui ajavahemik on pikem kui aasta, siis loe hinnad
-            ' aasta kaupa, vastasel juhul ei tagasta API sellest suuremat vahemikku
-            While Tunnid >= 365 * 24
-                Hinnad.AddRange(LoeBorsihind(Aeg, 365 * 24))
-                Aeg = Aeg.AddHours(365 * 24)
-                Tunnid -= 365 * 24
-            End While
+            Try
+                ' Kui ajavahemik on pikem kui aasta, siis loe hinnad
+                ' aasta kaupa, vastasel juhul ei tagasta API sellest suuremat vahemikku
+                While Tunnid >= 365 * 24
+                    Hinnad.AddRange(LoeBorsihind(Aeg, 365 * 24))
+                    Aeg = Aeg.AddHours(365 * 24)
+                    Tunnid -= 365 * 24
+                End While
 
-            ' Loe ülejäänud hinnad
-            If Tunnid <> 0 Then Hinnad.AddRange(LoeBorsihind(Aeg, Tunnid))
+                ' Loe ülejäänud hinnad
+                If Tunnid <> 0 Then Hinnad.AddRange(LoeBorsihind(Aeg, Tunnid))
+            Catch ex As Exception
+                Throw New Exception
+                Exit Function
+            End Try
 
             ' Lisa hindadele käibemaks
             For i As Integer = 0 To Hinnad.Count - 1
@@ -278,8 +321,15 @@ Public Class CAndmebaas
     End Function
     ' Loe alates mingist ajast N tunni jagu börsihindu
     ' Hindade ühik on sent/kWh
+    ' Kui hindade lugemine ebaõnnestus (internetiühendus puudub), siis tagastatakse exception
     Public Function LoeBorsihinnadSentkWh(AlgusAeg As Date, Tunnid As Integer) As List(Of Decimal) Implements IAndmebaas.LoeBorsihinnadSentkWh
-        Dim Hinnad As List(Of Decimal) = LoeBorsihinnad(AlgusAeg, Tunnid)
+        Dim Hinnad As List(Of Decimal)
+        Try
+            Hinnad = LoeBorsihinnad(AlgusAeg, Tunnid)
+        Catch ex As Exception
+            Throw New Exception
+            Exit Function
+        End Try
 
         ' Teisenda EUR/MWh->sent/kWh
         For i As Integer = 0 To Hinnad.Count - 1
@@ -298,7 +348,9 @@ Public Class CAndmebaas
         Public Timestamp As Integer
         Public Price As Decimal
     End Class
-
+    ' Loo ühendus serveriga ja proovi lugeda alates mingist ajast N tunni jagu börsihindu
+    ' Kui kõiki hindu ei tagastatud, siis LugemineOK väärtuseks seatakse False
+    ' Kui hindade lugemine ebaõnnestus (internetiühendus puudub), siis tagastatakse exception
     Private Function LoeBorsihindAPI(Aeg As Date, Tunnid As Integer) As List(Of Decimal)
         Dim ReturnHinnad As New List(Of Decimal)
 
@@ -316,9 +368,15 @@ Public Class CAndmebaas
                                    "&end=" &
                                    TimeStringLopp
         ' Tee GET päring ja loe vastu võetud tekst
-        Using WebClient As New WebClient
-            JsonStr = WebClient.DownloadString(RequestStr)
-        End Using
+        Try
+            Using WebClient As New WebClient
+                JsonStr = WebClient.DownloadString(RequestStr)
+            End Using
+        Catch ex As Exception
+            Throw New Exception
+            Exit Function
+        End Try
+
         ' Loe välja JSON'ist andmed
         Dim Andmed = JsonConvert.DeserializeObject(Of JsonJuur)(JsonStr)
         Dim Hinnad = Andmed.data.ee
@@ -360,15 +418,9 @@ Public Class CAndmebaas
 
         Return ReturnHinnad
     End Function
-    ' debug
-    'Private Function Sorteeritud(Ajad As List(Of Integer)) As Boolean
-    '    Dim Eelmine = 0
-    '    For Each Aeg In Ajad
-    '        If Aeg <= Eelmine Then Return False
-    '        Eelmine = Aeg
-    '    Next
-    '    Return True
-    'End Function
+    ' Proovi lugeda alates mingist ajast N tunni jagu börsihindu, kas andmebaasi või API kaudu
+    ' Kui kõiki hindu ei tagastatud, siis LugemineOK väärtuseks seatakse False
+    ' Kui hindade lugemine ebaõnnestus (internetiühendus puudub), siis tagastatakse exception
     Private Function LoeBorsihind(Aeg As Date, Tunnid As Integer) As List(Of Decimal)
         Debug.Assert(Tunnid > 0)
 
@@ -456,7 +508,20 @@ Public Class CAndmebaas
         End While
 
         ' Enam olemasolevaid hindu ees ei ole, loe kõik ülejäänud
-        Dim APIHinnad_ = LoeBorsihindAPI(Aeg.AddHours(Offset), Tunnid - Offset)
+        Dim APIHinnad_ As List(Of Decimal)
+        Try
+            APIHinnad_ = LoeBorsihindAPI(Aeg.AddHours(Offset), Tunnid - Offset)
+        Catch ex As Exception
+            FormLoading.Close()
+            FormLoading.Dispose()
+            MessageBox.Show("Börsihindade saamiseks on vaja internetiühendust," &
+                            Environment.NewLine &
+                            "veendu, et see on olemas ja proovi uuesti",
+                            "Internetiühendus puudub", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Throw New Exception
+            Exit Function
+        End Try
+
         LoetudHinnad.InsertRange(Offset, APIHinnad_)
 
         LugemineOK = True
@@ -465,6 +530,7 @@ Public Class CAndmebaas
         'Debug.Assert(LoetudHinnad.Count = Tunnid)
         Return LoetudHinnad
     End Function
+    ' Lisa andmebaasi uus börsipakett
     Public Sub LisaPakettBors(Nimi As String, JuurdeTasu As Decimal, Kuutasu As Decimal) Implements IAndmebaas.LisaPakettBors
         Try
             Dim Connection As New OleDbConnection
@@ -472,6 +538,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Sisesta andmebaasi antud parameetritega börsipakett
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -495,7 +562,7 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Lisa andmebaasi uus fikseeritud pakett
     Public Sub LisaPakettFix(Nimi As String, PTariif As Decimal, OTariif As Decimal, Kuutasu As Decimal) Implements IAndmebaas.LisaPakettFix
         Try
             Dim Connection As New OleDbConnection
@@ -503,6 +570,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Sisesta andmebaasi antud parameetritega fikseeritud pakett
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -527,7 +595,7 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Lisa andmebaasi uus universaalpakett
     Public Sub LisaPakettUniv(Nimi As String, Baashind As Decimal, Marginaal As Decimal, Kuutasu As Decimal) Implements IAndmebaas.LisaPakettUniv
         Try
             Dim Connection As New OleDbConnection
@@ -535,6 +603,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Sisesta andmebaasi antud parameetritega universaalpakett
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -559,7 +628,7 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Lisa andmebaasi uus kodumasin
     Public Sub LisaKodumasin(Nimi As String, Voimsus As Double, Aeg As Double) Implements IAndmebaas.LisaKodumasin
         Try
             Dim Connection As New OleDbConnection
@@ -567,6 +636,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Sisesta andmebaasi antud parameetritega kodumasin
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -590,7 +660,7 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Muuda andmebaasis oleva antud börsipaketi parameetreid
     Public Sub MuudaPakettBors(ID As Integer, Nimi As String, JuurdeTasu As Decimal, Kuutasu As Decimal) Implements IAndmebaas.MuudaPakettBors
         Try
             Dim Connection As New OleDbConnection
@@ -598,6 +668,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Kirjuta antud börsipaketi parameetrid üle
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -625,7 +696,7 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Muuda andmebaasis oleva antud fikseeritud paketi parameetreid
     Public Sub MuudaPakettFix(ID As Integer, Nimi As String, PTariif As Decimal, OTariif As Decimal, Kuutasu As Decimal) Implements IAndmebaas.MuudaPakettFix
         Try
             Dim Connection As New OleDbConnection
@@ -633,6 +704,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Kirjuta antud fikseeritud paketi parameetrid üle
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -662,7 +734,7 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Muuda andmebaasis oleva antud universaalpaketi parameetreid
     Public Sub MuudaPakettUniv(ID As Integer, Nimi As String, Baashind As Decimal, Marginaal As Decimal, Kuutasu As Decimal) Implements IAndmebaas.MuudaPakettUniv
         Try
             Dim Connection As New OleDbConnection
@@ -670,6 +742,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Kirjuta antud universaalpaketi parameetrid üle
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -699,7 +772,7 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Muuda andmebaasis oleva antud kodumasina parameetreid
     Public Sub MuudaKodumasin(ID As Integer, Nimi As String, Voimsus As Double, Aeg As Double) Implements IAndmebaas.MuudaKodumasin
         Try
             Dim Connection As New OleDbConnection
@@ -707,6 +780,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Kirjuta antud kodumasina parameetrid üle
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -734,7 +808,7 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Kustuta andmebaasis olev börsipakett
     Public Sub KustutaPakettBors(ID As Integer) Implements IAndmebaas.KustutaPakettBors
         Try
             Dim Connection As New OleDbConnection
@@ -742,6 +816,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Kustuta antud börsipakett
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -762,7 +837,7 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Kustuta andmebaasis olev fikseeritud pakett
     Public Sub KustutaPakettFix(ID As Integer) Implements IAndmebaas.KustutaPakettFix
         Try
             Dim Connection As New OleDbConnection
@@ -770,6 +845,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Kustuta antud fikseeritud pakett
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -790,7 +866,7 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Kustuta andmebaasis olev universaalpakett
     Public Sub KustutaPakettUniv(ID As Integer) Implements IAndmebaas.KustutaPakettUniv
         Try
             Dim Connection As New OleDbConnection
@@ -798,6 +874,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Kustuta antud universaalpakett
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -818,7 +895,7 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Kustuta andmebaasis olev kodumasin
     Public Sub KustutaKodumasin(ID As Integer) Implements IAndmebaas.KustutaKodumasin
         Try
             Dim Connection As New OleDbConnection
@@ -826,6 +903,7 @@ Public Class CAndmebaas
                 .ConnectionString = LoeConnectionString()
                 .Open()
 
+                ' Kustuta antud kodumasin
                 Dim Cmd As New OleDbCommand
                 With Cmd
                     .Connection = Connection
@@ -846,10 +924,10 @@ Public Class CAndmebaas
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
-
+    ' Andmebaasiga ühenduse loomiseks vajalik string
+    ' Andmebaas on fail, mis asub programmi kaustas
     Private Function LoeConnectionString() As String
         'Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Environment.CurrentDirectory & "\andmebaas.accdb"
         Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SpecialDirectories.Desktop & "\andmebaas.accdb"
     End Function
-
 End Class

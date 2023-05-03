@@ -1,5 +1,5 @@
 ﻿Public Class FormSalvestaCsv
-    ' Globaalsed staatilised muutujad
+    ' Staatilised muutujad
     Shared FailiNimi As String = Nothing
     Shared FailiPath As String = Nothing
     Shared Exporter As CSVExporterDNF.IExporter = New CSVExporterDNF.CExporter

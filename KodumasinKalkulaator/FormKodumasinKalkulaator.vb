@@ -5,7 +5,6 @@ Imports PrjAndmebaas
 Public Class FormKodumasinKalkulaator
     Private GMasinad As New List(Of IAndmebaas.Kodumasin)
 
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UuendaPaketid()
         UuendaPaketid2()
@@ -23,12 +22,8 @@ Public Class FormKodumasinKalkulaator
         For Each Masin In Masinad
             comboMasin.Items.Add(Masin.Nimi)
             GMasinad.Add(Masin)
-
             i += 1
-
-
         Next
-
     End Sub
     Private Sub UuendaPaketid()
         Dim Paketid As New List(Of (ID As Integer, Nimi As String, Tyyp As IAndmebaas.PaketiTyyp))
@@ -85,7 +80,6 @@ Public Class FormKodumasinKalkulaator
 
     End Sub
 
-
     Private Sub tootle(ByRef Kalkulaator As Kalkulaator)
         TextBox4.Text = Math.Round(Kalkulaator.Rahalinekulu, 2) & " €"
         TextBox1.Text = Math.Round(Kalkulaator.Rahalinekulu * 30, 2) & " €"
@@ -103,9 +97,7 @@ Public Class FormKodumasinKalkulaator
         Dim energia As Double
         Dim aeg As Double
 
-
         For Each Masin In Masinad  'loop selleks et leida cboxPakett1 valitud paketti indexi listist
-
             If comboMasin.Text = Masin.Nimi Then
                 energia = Masin.Voimsus
                 aeg = Masin.Aeg / 60 'muudame minutid tundideks
@@ -113,13 +105,9 @@ Public Class FormKodumasinKalkulaator
             End If
         Next
 
-
-
-
         If ListBors.SelectedItems.Count = 0 Then
             Exit Sub
         End If
-
 
         Select Case ComboBox2.SelectedIndex
 
@@ -136,7 +124,11 @@ Public Class FormKodumasinKalkulaator
 
                 ID = CInt(ListBors.SelectedItems(0).SubItems(4).Text) ' ID on subitem 4
                 Pakett = Andmebaas.LoePakettBors(ID)
-                Borsihinnad = Andmebaas.LoeBorsihinnad(Kuupaev, 24)
+                Try
+                    Borsihinnad = Andmebaas.LoeBorsihinnad(Kuupaev, 24)
+                Catch ex As Exception
+                    Exit Sub
+                End Try
 
                 Dim Keskmine As Decimal = 0
                 For j As Integer = 0 To 23

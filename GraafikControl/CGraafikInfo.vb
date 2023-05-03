@@ -37,7 +37,13 @@ Public Class CGraafikInfo
         'paketitüübi valik(0=börs, 1=fix, 2=universaal)
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
-            Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
+
+            Try
+                Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
+            Catch ex As Exception
+                Exit Function
+            End Try
+
             For I = 0 To 23
                 Dim Info As (Aeg As String, Hind As Decimal)
                 Info.Aeg = BeginTime.ToString("HH")
@@ -88,7 +94,13 @@ Public Class CGraafikInfo
         'paketitüübi valik(0=börs, 1=fix, 2=universaal)
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
-            Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
+
+            Try
+                Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
+            Catch ex As Exception
+                Exit Function
+            End Try
+
             While I < Tunnid - 1
                 Dim Info As (Aeg As String, Hind As Decimal)
                 Info.Aeg = BeginTime.ToString("M")
@@ -141,7 +153,13 @@ Public Class CGraafikInfo
         'paketitüübi valik(0=börs, 1=fix, 2=universaal)
         If PaketiTyyp = 0 Then
             Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
-            Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
+
+            Try
+                Hinnad = AndmedConnect.LoeBorsihinnad(BeginTime, Tunnid)
+            Catch ex As Exception
+                Exit Function
+            End Try
+
             While I < Hinnad.Count - 1
                 Dim Info As (Aeg As String, Hind As Decimal)
                 Info.Aeg = BeginTime.ToString("y")
@@ -235,7 +253,13 @@ Public Class CGraafikInfo
                 If Flag = 0 Then
                     Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
                 End If
-                Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
+
+                Try
+                    Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
+                Catch ex As Exception
+                    Exit Function
+                End Try
+
                 For I = 0 To 23
                     Dim Info As (Aeg As String, Hind As Decimal)
                     Info.Aeg = AlgAeg.ToString("HH")
@@ -248,19 +272,19 @@ Public Class CGraafikInfo
                     AlgAeg = AlgAeg.AddHours(1)
                 Next
             ElseIf PaketiTyyp = 1 Then
-                    Me.StructFix = AndmedConnect.LoePakettFix(PakettID)
-                    For I = 0 To 23
-                        Dim Info As (Aeg As String, Hind As Decimal)
-                        Info.Aeg = AlgAeg.ToString("HH")
-                        If AlgAeg.Hour > 22 Or AlgAeg.Hour < 7 Then
-                            Info.Hind = StructFix.OTariif
-                        Else
-                            Info.Hind = StructFix.PTariif
-                        End If
-                        InfoList.Add(Info)
-                        AlgAeg = AlgAeg.AddHours(1)
-                    Next
-                Else
+                Me.StructFix = AndmedConnect.LoePakettFix(PakettID)
+                For I = 0 To 23
+                    Dim Info As (Aeg As String, Hind As Decimal)
+                    Info.Aeg = AlgAeg.ToString("HH")
+                    If AlgAeg.Hour > 22 Or AlgAeg.Hour < 7 Then
+                        Info.Hind = StructFix.OTariif
+                    Else
+                        Info.Hind = StructFix.PTariif
+                    End If
+                    InfoList.Add(Info)
+                    AlgAeg = AlgAeg.AddHours(1)
+                Next
+            Else
                     Me.StructUniv = AndmedConnect.LoePakettUniv(PakettID)
                 For I = 0 To 23
                     Dim Info As (Aeg As String, Hind As Decimal)
@@ -276,7 +300,13 @@ Public Class CGraafikInfo
                 If Flag = 0 Then
                     Me.StructBors = AndmedConnect.LoePakettBors(PakettID)
                 End If
-                Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
+
+                Try
+                    Hinnad = AndmedConnect.LoeBorsihinnad(AlgAeg, Tunnid)
+                Catch ex As Exception
+                    Exit Function
+                End Try
+
                 While I < Tunnid - 1
                     Dim Info As (Aeg As String, Hind As Decimal)
                     Info.Aeg = AlgAeg.ToString("M")
