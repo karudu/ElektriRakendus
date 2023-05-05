@@ -338,6 +338,11 @@ Public Class FormMain
         Dim Form As New KodumasinKalkulaator.FormHinnaKalkulaator
         Form.Show()
     End Sub
+    ' Ava tarbimise simulaatori aken
+    Private Sub BtnTarbimiseSim_Click(sender As Object, e As EventArgs) Handles BtnTarbimiseSim.Click
+        Dim Form As New PakketideSim.FormPakettideSim
+        Form.Show()
+    End Sub
 
     Private Sub cmbPkt1Pkt_DropDownClosed(sender As Object, e As EventArgs) Handles cmbPkt1Pkt.DropDownClosed
         If String.IsNullOrEmpty(cmbPeriood.SelectedItem) Then

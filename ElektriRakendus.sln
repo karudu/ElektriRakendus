@@ -17,6 +17,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PakettideVordlus", "Elektri
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "LaadijaKalkulaatorForm", "PrjLaadijaKalkulaator\LaadijaKalkulaatorForm.vbproj", "{3E7D6DDA-BECD-43B9-A5CE-A7E808FD3203}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PakettideSim", "PakketideSim\PakettideSim.vbproj", "{1A910732-5E52-4D95-B497-E0AE67320FCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{3E7D6DDA-BECD-43B9-A5CE-A7E808FD3203}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E7D6DDA-BECD-43B9-A5CE-A7E808FD3203}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E7D6DDA-BECD-43B9-A5CE-A7E808FD3203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A910732-5E52-4D95-B497-E0AE67320FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A910732-5E52-4D95-B497-E0AE67320FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A910732-5E52-4D95-B497-E0AE67320FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A910732-5E52-4D95-B497-E0AE67320FCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

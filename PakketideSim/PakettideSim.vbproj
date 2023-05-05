@@ -4,16 +4,31 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ABDEA896-3C52-419E-A769-E829D22ED393}</ProjectGuid>
+    <ProjectGuid>{1A910732-5E52-4D95-B497-E0AE67320FCF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>ElektriRakendus.My.MyApplication</StartupObject>
-    <RootNamespace>ElektriRakendus</RootNamespace>
-    <AssemblyName>ElektriRakendus</AssemblyName>
+    <StartupObject>PakketideSim.My.MyApplication</StartupObject>
+    <RootNamespace>PakketideSim</RootNamespace>
+    <AssemblyName>PakketideSim</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -22,7 +37,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>ElektriRakendus.xml</DocumentationFile>
+    <DocumentationFile>PakketideSim.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,7 +47,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>ElektriRakendus.xml</DocumentationFile>
+    <DocumentationFile>PakketideSim.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -45,14 +60,11 @@
     <OptionStrict>Off</OptionStrict>
   </PropertyGroup>
   <PropertyGroup>
-    <OptionInfer>Off</OptionInfer>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CSVExporterDNF">
-      <HintPath>..\CSVExporterDNF.dll</HintPath>
+    <Reference Include="PrjAndmebaas">
+      <HintPath>..\PrjAndmebaas\bin\Debug\PrjAndmebaas.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -80,19 +92,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormMain.vb">
+    <Compile Include="CTarbimiseCSVLugeja.vb" />
+    <Compile Include="FormPakettideSim.Designer.vb">
+      <DependentUpon>FormPakettideSim.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPakettideSim.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.Designer.vb">
-      <DependentUpon>FormMain.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSalvestaCsv.Designer.vb">
-      <DependentUpon>FormSalvestaCsv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormSalvestaCsv.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="ITarbimiseCSVLugeja.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -111,11 +118,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormSalvestaCsv.resx">
-      <DependentUpon>FormSalvestaCsv.vb</DependentUpon>
+    <EmbeddedResource Include="FormPakettideSim.resx">
+      <DependentUpon>FormPakettideSim.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -137,39 +141,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ElektriRakendusVana\PakettideVordlus.vbproj">
-      <Project>{cadd79c8-6880-4998-bd5a-97cceb617f0b}</Project>
-      <Name>PakettideVordlus</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KodumasinKalkulaator\KodumasinKalkulaator.vbproj">
-      <Project>{3b50051f-1966-40f3-83f5-c5261c48e558}</Project>
-      <Name>KodumasinKalkulaator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PakketideSim\PakettideSim.vbproj">
-      <Project>{1a910732-5e52-4d95-b497-e0ae67320fcf}</Project>
-      <Name>PakettideSim</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PrjAndmebaasTestForm\AndmebaasFormid.vbproj">
-      <Project>{bba7bc69-f601-47e6-aced-5cb7c2bb9981}</Project>
-      <Name>AndmebaasFormid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PrjAndmebaas\Andmebaas.vbproj">
-      <Project>{8c256670-32e2-4aa1-8452-cb5af3f5d5bc}</Project>
-      <Name>Andmebaas</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PrjLaadijaKalkulaator\LaadijaKalkulaatorForm.vbproj">
-      <Project>{3e7d6dda-becd-43b9-a5ce-a7e808fd3203}</Project>
-      <Name>LaadijaKalkulaatorForm</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\GraafikControl\GraafikControl.vbproj">
       <Project>{775C52B3-03C0-4D8F-A6C2-3D4B9301E579}</Project>
       <Name>GraafikControl</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="favicon.ico" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
