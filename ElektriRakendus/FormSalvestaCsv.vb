@@ -38,14 +38,10 @@
         If Pakett2Olemas Then Pakett2Nimi = FormMain.cmbPkt2Pkt.Text
 
         ' Andmete massiiv
-        Dim Andmed(RidadeArv, 2) As String ' (read, väljad)
-        ' CSV päis: aeg, pakett, hind (on vaja?)
-        Andmed(0, 0) = "aeg"
-        Andmed(0, 1) = "pakett"
-        Andmed(0, 2) = "hind"
+        Dim Andmed(RidadeArv - 1, 2) As String ' (read, väljad)
 
         ' Loe graafiku andmed
-        Dim HindIndex = 1
+        Dim HindIndex = 0
         For Hind As Integer = 1 To HindadeArv
             ' Esimene pakett
             If Pakett1Olemas Then

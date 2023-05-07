@@ -927,7 +927,6 @@ Public Class CAndmebaas
     ' Andmebaasiga ühenduse loomiseks vajalik string
     ' Andmebaas on fail, mis asub programmi kaustas
     Private Function LoeConnectionString() As String
-        'Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Environment.CurrentDirectory & "\andmebaas.accdb"
-        Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SpecialDirectories.Desktop & "\andmebaas.accdb"
+        Return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Environment.CurrentDirectory & "\andmebaas.accdb"
     End Function
 End Class

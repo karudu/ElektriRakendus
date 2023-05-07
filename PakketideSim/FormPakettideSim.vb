@@ -13,8 +13,8 @@ Public Class FormPakettideSim
     Dim nupp As Boolean
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim CSV As PakketideSim.ITarbimiseCSVLugeja
-        CSV = New PakketideSim.CTarbimiseCSVLugeja
+        Dim CSV As TarbimiseCSVLugeja.ITarbimiseCSVLugeja
+        CSV = New TarbimiseCSVLugeja.CTarbimiseCSVLugeja
         Dim Gcsv1 As List(Of (Kuupäev As String, Voimsus_kWh As Decimal))
         Dim ofd As OpenFileDialog = New OpenFileDialog() With {.Filter = "Text file|*.CSV"}
         Dim table As New DataTable()
@@ -65,7 +65,7 @@ Public Class FormPakettideSim
 
         If ofd.ShowDialog() = DialogResult.OK Then
             Dim lines As List(Of String) = File.ReadAllLines(ofd.FileName).ToList
-            Gcsv1 = CSV.LoeCSV(lines, ofd)
+            Gcsv1 = CSV.LoeCSV(lines)
             For i As Integer = 1 To Gcsv1.Count - 1
                 table.Rows.Add({Gcsv1.Item(i).Kuupäev, Gcsv1.Item(i).Voimsus_kWh})
                 If i = 1 Then
