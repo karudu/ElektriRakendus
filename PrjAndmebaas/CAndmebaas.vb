@@ -403,6 +403,8 @@ Public Class CAndmebaas
                                        "([timestamp], hind) " &
                                        "VALUES (@p1, @p2);"
 
+                    Dim Hind = Hinnad(i).Price
+                    If Hind = 0 Then Hind = 0.000001
                     .Parameters.Add(New OleDbParameter("@p1", OleDbType.Integer)).Value = Hinnad(i).Timestamp
                     .Parameters.Add(New OleDbParameter("@p2", OleDbType.Currency)).Value = Hinnad(i).Price
 
