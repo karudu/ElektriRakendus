@@ -6,6 +6,8 @@ Public Class FormMain
         cmbPeriood.Items.Add("Kuu")
         cmbPeriood.Items.Add("Aasta")
         cmbPeriood.Items.Add("Otsi")
+        cmbVarv1.Items.Add("Oranz")
+        cmbVarv1.Items.Add("Must")
         dtpAlgus.Value = Date.Now()
         dtpLopp.Value = Date.Now()
         AddPaketiTyybid()
@@ -415,5 +417,11 @@ Public Class FormMain
         ' Kuva salvestamise aken
         Dim Form As New ElektriRakendus.FormSalvestaCsv
         Form.Show()
+    End Sub
+
+    Private Sub cmbVarv1_DropDownClosed(sender As Object, e As EventArgs) Handles cmbVarv1.DropDownClosed
+        If cmbVarv1.SelectedItem IsNot Nothing Then
+            Graafik1.ChangeColor(cmbVarv1.SelectedItem.ToString)
+        End If
     End Sub
 End Class

@@ -3,6 +3,14 @@
     Public Sub InitGraph()
         HinnaGraafik.ChartAreas("ChartArea1").AxisY.Title = "Hind(s/kWh)"
     End Sub
+
+    Public Sub ChangeColor(ByVal varv As String)
+        If varv = "Oranz" Then
+            HinnaGraafik.Series("Pakett 1").Color = Color.Orange
+        ElseIf varv = "Must" Then
+            HinnaGraafik.Series("Pakett 1").Color = Color.Black
+        End If
+    End Sub
     ' Kustuta kõik graafikul olevad punktid
     Public Sub ClearPoints()
         HinnaGraafik.Series("Pakett 1").Points.Clear()

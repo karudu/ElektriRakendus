@@ -28,6 +28,8 @@ Partial Class FormMain
         Me.cmbPkt1Tyyp = New System.Windows.Forms.ComboBox()
         Me.cmbPkt1Pkt = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.cmbVarv1 = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -39,6 +41,7 @@ Partial Class FormMain
         Me.BtnMasinad = New System.Windows.Forms.Button()
         Me.BtnPaketid = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.BtnTarbimiseSim = New System.Windows.Forms.Button()
         Me.BtnHinnaKalkulaator = New System.Windows.Forms.Button()
         Me.BtnElektriauto = New System.Windows.Forms.Button()
         Me.BtnVordleja = New System.Windows.Forms.Button()
@@ -53,7 +56,6 @@ Partial Class FormMain
         Me.lblDtpVahe = New System.Windows.Forms.Label()
         Me.Graafik1 = New GraafikControl.Graafik()
         Me.BtnSalvestaCsv = New System.Windows.Forms.Button()
-        Me.BtnTarbimiseSim = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -98,6 +100,8 @@ Partial Class FormMain
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label8)
+        Me.GroupBox1.Controls.Add(Me.cmbVarv1)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.cmbPkt1Pkt)
@@ -108,6 +112,24 @@ Partial Class FormMain
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Pakett 1"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(78, 133)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(38, 16)
+        Me.Label8.TabIndex = 8
+        Me.Label8.Text = "Värv:"
+        '
+        'cmbVarv1
+        '
+        Me.cmbVarv1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbVarv1.FormattingEnabled = True
+        Me.cmbVarv1.Location = New System.Drawing.Point(133, 130)
+        Me.cmbVarv1.Name = "cmbVarv1"
+        Me.cmbVarv1.Size = New System.Drawing.Size(121, 24)
+        Me.cmbVarv1.TabIndex = 7
         '
         'Label3
         '
@@ -219,6 +241,15 @@ Partial Class FormMain
         Me.GroupBox4.TabIndex = 10
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Kalkulaatorid"
+        '
+        'BtnTarbimiseSim
+        '
+        Me.BtnTarbimiseSim.Location = New System.Drawing.Point(6, 201)
+        Me.BtnTarbimiseSim.Name = "BtnTarbimiseSim"
+        Me.BtnTarbimiseSim.Size = New System.Drawing.Size(286, 28)
+        Me.BtnTarbimiseSim.TabIndex = 15
+        Me.BtnTarbimiseSim.Text = "Tarbimise ajaloo simulaator"
+        Me.BtnTarbimiseSim.UseVisualStyleBackColor = True
         '
         'BtnHinnaKalkulaator
         '
@@ -348,15 +379,6 @@ Partial Class FormMain
         Me.BtnSalvestaCsv.Text = "Salvesta andmed CSV faili"
         Me.BtnSalvestaCsv.UseVisualStyleBackColor = True
         '
-        'BtnTarbimiseSim
-        '
-        Me.BtnTarbimiseSim.Location = New System.Drawing.Point(6, 201)
-        Me.BtnTarbimiseSim.Name = "BtnTarbimiseSim"
-        Me.BtnTarbimiseSim.Size = New System.Drawing.Size(286, 28)
-        Me.BtnTarbimiseSim.TabIndex = 15
-        Me.BtnTarbimiseSim.Text = "Tarbimise ajaloo simulaator"
-        Me.BtnTarbimiseSim.UseVisualStyleBackColor = True
-        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -422,4 +444,6 @@ Partial Class FormMain
     Friend WithEvents lblDtpVahe As Label
     Friend WithEvents BtnSalvestaCsv As Button
     Friend WithEvents BtnTarbimiseSim As Button
+    Friend WithEvents Label8 As Label
+    Friend WithEvents cmbVarv1 As ComboBox
 End Class
